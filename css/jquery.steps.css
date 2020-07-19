@@ -140,7 +140,7 @@
 .wizard > .content
 {
     background: #eee;
-    background-image: url('../assets/Lawsuit-Analysis-Logo.png');
+    /*background-image: url('../assets/Lawsuit-Analysis-Logo.png');*/
     background-repeat:no-repeat;
     background-position: top center;
     background-size: 150px 150px;
