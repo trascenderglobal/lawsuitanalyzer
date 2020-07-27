@@ -95,7 +95,7 @@
     display: block;
     width: auto;
     margin: 0 0.5em 0.5em;
-    padding: 1em 1em;
+    padding: 0.5em 0.5em;
     text-decoration: none;
 
     -webkit-border-radius: 5px;
@@ -116,7 +116,7 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #2184be;
+    background: #9E2D2D;
     color: #fff;
     cursor: default;
 }
@@ -125,7 +125,8 @@
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: #9dc8e2;
+    background: #345B99;
+    opacity: 50%;
     color: #fff;
 }
 
@@ -140,10 +141,6 @@
 .wizard > .content
 {
     background: #eee;
-    /*background-image: url('../assets/Lawsuit-Analysis-Logo.png');*/
-    background-repeat:no-repeat;
-    background-position: top center;
-    background-size: 150px 150px;
     display: block;
     margin: 0.5em;
     min-height: 35em;

@@ -1,0 +1,272 @@
+{
+    "States": [
+        {
+            "Abrev": "AL",
+            "State": "Alabama",
+            "Dollar Limit": "6000"
+        },
+        {
+            "Abrev": "AK",
+            "State": "Alaska",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "AZ",
+            "State": "Arizona",
+            "Dollar Limit": "3500"
+        },
+        {
+            "Abrev": "AR",
+            "State": "Arkansas",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "CA",
+            "State": "California",
+            "Dollar Limit": "10000",
+            "Additional Information": "Limit for Businesses (except sole proprietors) and public entities is $5,000. You can only file 2 claims in a calendar year seeking more than $2,500. See CA Small Claims Court for more exceptions related to actions against guarantors. "
+        },
+        {
+            "Abrev": "CO",
+            "State": "Colorado",
+            "Dollar Limit": "7500"
+        },
+        {
+            "Abrev": "CT",
+            "State": "Connecticut",
+            "Dollar Limit": "5000",
+            "Additional Information": "Except in landlord-tenant security deposit claims"
+        },
+        {
+            "Abrev": "DE",
+            "State": "Delaware",
+            "Dollar Limit": "15000"
+        },
+        {
+            "Abrev": "DC",
+            "State": "District of Columbia",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "FL",
+            "State": "Florida",
+            "Dollar Limit": "8000"
+        },
+        {
+            "Abrev": "GA",
+            "State": "Georgia",
+            "Dollar Limit": "15000",
+            "Additional Information": "No limit in eviction cases."
+        },
+        {
+            "Abrev": "HI",
+            "State": "Hawaii",
+            "Dollar Limit": "5000",
+            "Additional Information": "No limit on landlord-tenant residential security deposit cases. For the return of leased or rented personal property, the property must not be worth more than $5,000."
+        },
+        {
+            "Abrev": "ID",
+            "State": "Idaho",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "IL",
+            "State": "Illinois",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "IN",
+            "State": "Indiana",
+            "Dollar Limit": "6000",
+            "Additional Information": "$8,000 in Marion County"
+        },
+        {
+            "Abrev": "IA",
+            "State": "Iowa",
+            "Dollar Limit": "6500"
+        },
+        {
+            "Abrev": "KS",
+            "State": "Kansas",
+            "Dollar Limit": "4000"
+        },
+        {
+            "Abrev": "KY",
+            "State": "Kentucky",
+            "Dollar Limit": "2500"
+        },
+        {
+            "Abrev": "LA",
+            "State": "Louisiana",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "ME",
+            "State": "Maine",
+            "Dollar Limit": "6000"
+        },
+        {
+            "Abrev": "MD",
+            "State": "Maryland",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "MA",
+            "State": "Massachusetts",
+            "Dollar Limit": "7000",
+            "Additional Information": "No limit for property damage caused by a motor vehicle."
+        },
+        {
+            "Abrev": "MI",
+            "State": "Michigan",
+            "Dollar Limit": "6000"
+        },
+        {
+            "Abrev": "MN",
+            "State": "Minnesota",
+            "Dollar Limit": "15000",
+            "Additional Information": "$4,000 for claims involving consumer credit transactions"
+        },
+        {
+            "Abrev": "MS",
+            "State": "Mississippi",
+            "Dollar Limit": "3500"
+        },
+        {
+            "Abrev": "MO",
+            "State": "Missouri",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "MT",
+            "State": "Montana",
+            "Dollar Limit": "7000"
+        },
+        {
+            "Abrev": "NE",
+            "State": "Nebraska",
+            "Dollar Limit": "3600",
+            "Additional Information": "Through June 30, 2020 (adjusted every five years based on the Consumer Price Index"
+        },
+        {
+            "Abrev": "NV",
+            "State": "Nevada",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "NH",
+            "State": "New Hampshire",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "NJ",
+            "State": "New Jersey",
+            "Dollar Limit": "3000",
+            "Additional Information": "For claims relating to security deposits; certain landlord-tenant suits cannot be brought"
+        },
+        {
+            "Abrev": "NM",
+            "State": "New Mexico",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "NY",
+            "State": "New York",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "NC",
+            "State": "North Carolina",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "ND",
+            "State": "North Dakota",
+            "Dollar Limit": "15000"
+        },
+        {
+            "Abrev": "OH",
+            "State": "Ohio",
+            "Dollar Limit": "6000"
+        },
+        {
+            "Abrev": "OK",
+            "State": "Oklahoma",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "OR",
+            "State": "Oregon",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "PA",
+            "State": "Pennsylvania",
+            "Dollar Limit": "12000"
+        },
+        {
+            "Abrev": "RI",
+            "State": "Rhode Island",
+            "Dollar Limit": "2500"
+        },
+        {
+            "Abrev": "SC",
+            "State": "South Carolina",
+            "Dollar Limit": "7500"
+        },
+        {
+            "Abrev": "SD",
+            "State": "South Dakota",
+            "Dollar Limit": "12000"
+        },
+        {
+            "Abrev": "TN",
+            "State": "Tennessee",
+            "Dollar Limit": "25000",
+            "Additional Information": "No limit in eviction suits or suits to recover personal property"
+        },
+        {
+            "Abrev": "TX",
+            "State": "Texas",
+            "Dollar Limit": "10000",
+            "Additional Information": "Until August 31, 2020; $20,000 effective September 1, 2020"
+        },
+        {
+            "Abrev": "UT",
+            "State": "Utah",
+            "Dollar Limit": "11000"
+        },
+        {
+            "Abrev": "VT",
+            "State": "Vermont",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "VA",
+            "State": "Virginia",
+            "Dollar Limit": "5000"
+        },
+        {
+            "Abrev": "WA",
+            "State": "Washington",
+            "Dollar Limit": "10000",
+            "Additional Information": "If brought by natural person; $5,000 all other cases"
+        },
+        {
+            "Abrev": "WV",
+            "State": "West Virginia",
+            "Dollar Limit": "10000"
+        },
+        {
+            "Abrev": "WI",
+            "State": "Wisconsin",
+            "Dollar Limit": "10000",
+            "Additional Information": "No limit in eviction suits"
+        },
+        {
+            "Abrev": "WY",
+            "State": "Wyoming",
+            "Dollar Limit": "6000"
+        }
+    ]
+}
