@@ -439,7 +439,7 @@
                         </div>
                     </section>
 
-                    <h2>Collectability</h2>
+                    <h2>Legal Options Assessment</h2>
                     <section>
                         <div class="container-fluid">
                             <div class="row">
@@ -504,7 +504,7 @@
                                                     </div>
                                                     <div id="BellowLimit"  >
                                                         <div class="form-group">
-                                                            <label for="select-3-16-3">16. Do you have a binding arbitration provision in a written agreement with your adversary?</label>
+                                                            <label for="select-3-16-3">16sc. Do you have a binding arbitration provision in a written agreement with your adversary?</label>
                                                             <sup class="text-danger">* </sup>
                                                             </label>
                                                             <select id="select-3-16-3" class="form-control" name="">
@@ -579,31 +579,197 @@
                         </div>
                     </section>
 
+                    <h2>Collectability Assessment</h2>
+                    <section>
+                        <div class="container-fluid">                            
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row" style="align-items: flex-end;">
+                                        <div class="col-lg-8 sm-6"> 
+                                            <h3>Collectability Assessment</h3>
+                                            <h6>What are your chances of collecting on your judgment?</h6>
+                                        </div>
+                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
+                                                <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="text-align: center;">
+                                            <form id="Step4">
+                                                <div id="Q21" class = "tab">                                        
+                                                    <div id = 'adversary_check' class="form-group" style="text-align: justify;">
+                                                        <h6 style="text-align: center;" >21. Select the first option that relates to your adversary:</h6>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-1" class="form-check-input" type="radio" name="adversary" value="value-1" style="width: auto;">
+                                                            <label for="radio-4-21-1" class="form-check-label" style="text-align: justify;">a corporation</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-2" class="form-check-input" type="radio" name="adversary" value="value-2" style="width: auto;">
+                                                            <label for="radio-4-21-2" class="form-check-label"style="text-align: justify;">represented by an insurance company</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-3" class="form-check-input" type="radio" name="adversary" value="value-3" style="width: auto;">
+                                                            <label for="radio-4-21-3" class="form-check-label"style="text-align: justify;">an operating business other than a corporation, like an LLC, or Sole Proprietorship</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-4" class="form-check-input" type="radio" name="adversary" value="value-4" style="width: auto;">
+                                                            <label for="radio-4-21-4" class="form-check-label"style="text-align: justify;">own real property</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-5" class="form-check-input" type="radio" name="adversary" value="value-5" style="width: auto;">
+                                                            <label for="radio-4-21-5" class="form-check-label"style="text-align: justify;">have assets and is salaried</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-6" class="form-check-input" type="radio" name="adversary" value="value-6" style="width: auto;">
+                                                            <label for="radio-4-21-6" class="form-check-label"style="text-align: justify;">have assets and works for self as sole proprietor</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-7" class="form-check-input" type="radio" name="adversary" value="value-7" style="width: auto;">
+                                                            <label for="radio-4-21-7" class="form-check-label"style="text-align: justify;">have assets and none of above apply</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-8" class="form-check-input" type="radio" name="adversary" value="value-8" style="width: auto;">
+                                                            <label for="radio-4-21-8" class="form-check-label"style="text-align: justify;">none of above or below apply</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-9" class="form-check-input" type="radio" name="adversary" value="value-9" style="width: auto;">
+                                                            <label for="radio-4-21-9" class="form-check-label"style="text-align: justify;">have judgments against them</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-10" class="form-check-input" type="radio" name="adversary" value="value-10" style="width: auto;">
+                                                            <label for="radio-4-21-10" class="form-check-label"style="text-align: justify;">have no assets or means of support</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input id="radio-4-21-11" class="form-check-input" type="radio" name="adversary" value="value-11" style="width: auto;">
+                                                            <label for="radio-4-21-11" class="form-check-label"style="text-align: justify;">have bankruptcy proceedings pending</label>
+                                                        </div>
+
+                                                    </div>   
+                                                </div>
+                                                <div style="overflow:auto; margin-top: 15px;">
+                                                    <div style="float:right;">
+                                                    <button type="button" id="prevBtn4" class="btn btn-secondary" onclick="nextPrev(-1,'Step4')">Previous</button>
+                                                    <button type="button" id="nextBtn4" class="btn btn-success" onclick="nextPrev(1,'Step4')">Next</button>
+                                                    </div>
+                                                </div>                                                
+                                            </form>
+                                            <div id="ResultStep4">
+                                                <h4 id="ResultStep4Text1"></h6> 
+                                                <h4 id="ResultStep4Text2"></h6>
+                                                <h4 id="ResultStep4Text3"></h6>                                            
+                                                <button class="btn btn-info" type="button" onclick="showTab(0,'Step4')">Edit answers</button>
+                                            </div>  
+                                        </div>                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <h2>Comprehensive Case Analysis</h2>
                     <section>
                         <div class="container-fluid">                            
                             <div class="row">
-                                <div class="col">
-                                    
+                            <div class="col">
+                                    <div class="row" style="align-items: flex-end;">
+                                        <div class="col-lg-8 sm-6"> 
+                                            <h3>Collectability Assessment</h3>
+                                            <h6>What are your chances of collecting on your judgment?</h6>
+                                        </div>
+                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
+                                                <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="text-align: center;">
+                                            <form id="Step5">
+                                                <div id="Q23" class = "tab">                                        
+                                                    <div class="table-responsive" style="text-align: initial;">
+                                                        <table class="table table-bordered table-sm">
+                                                            <thead class="thead-light">
+                                                                <tr>
+                                                                    <th scope="col">Q.</th>
+                                                                    <th scope="col">Item</th>
+                                                                    <th scope="col">Value</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>23</td>
+                                                                    <td>YOUR CASE VALUE</td>
+                                                                    <td id="tbl-row-1"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>24</td>
+                                                                    <td>YOUR CASE VALUE ASSESSMENT</td>
+                                                                    <td id="tbl-row-2"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>25</td>
+                                                                    <td>YOUR LEGAL EVALUATION</td>
+                                                                    <td id="tbl-row-3"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>26</td>
+                                                                    <td>YOUR LEGAL OPTIONS ASSESSMENT</td>
+                                                                    <td id="tbl-row-4"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>27</td>
+                                                                    <td>YOUR COLLECTABILITY ASSESSMENT</td>
+                                                                    <td id="tbl-row-5"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>28</td>
+                                                                    <td>TOTAL OF ABOVE ASSESSMENTS</td>
+                                                                    <td id="tbl-row-6"> 0 </td>   
+                                                                </tr>
+                                                                <tr id="To_Hide">
+                                                                    <td>29</td>
+                                                                    <td>HIDE ROW</td>
+                                                                    <td id="tbl-row-7"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>30</td>
+                                                                    <td>YOUR RECOVERABLE DAMAGES</td>
+                                                                    <td id="tbl-row-8"> 0 </td>   
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>31</td>
+                                                                    <td>YOUR SETTLEMENT AMOUNT</td>
+                                                                    <td id="tbl-row-9"> 0 </td>   
+                                                                </tr>
 
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th scope="row">32</th>
+                                                                    <th scope="row">YOUR CASE FEASIBILITY ASSESSMENT</th>
+                                                                    <th id="tbl-row-10" scope="row">0</th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div style="overflow:auto; margin-top: 15px;">
+                                                    <div style="float:right;">
+                                                    <button type="button" id="prevBtn4" class="btn btn-secondary" onclick="nextPrev(-1,'Step5')">Previous</button>
+                                                    <button type="button" id="nextBtn4" class="btn btn-success" onclick="nextPrev(1,'Step5')">Next</button>
+                                                    </div>
+                                                </div>                                                
+                                            </form>
+                                        </div>                                     
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
-                    <h2>Case Feasibility Assesment Chart</h2>
-                    <section>
-                        <div class="container-fluid">                            
-                            <div class="row">
-                                <div class="col">
-                                    
-
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <h2>Forth Step</h2>
+                    <h2>Case Feasibility Assessment Chart</h2>
                     <section>
                         <div class="container-fluid">                            
                             <div class="row">
@@ -671,7 +837,7 @@ $(document).ready(function () {
     //** Step 3 */
     $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
     //HidePreviousButton
-    $("#prevBtn,#prevBtn2,#prevBtn3").hide();
+    $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4").hide();
 
     $("#select-1-4").change(function(){
         if ($(this).val() == 'yes'){
@@ -744,7 +910,6 @@ $(document).ready(function () {
     $('#select-3-16-2').change(function () { 
         if ($(this).val() == 'yes'){
             $('#BellowLimit').show();
-            $('#select-3-16-4').hide();
             $('#select-3-16-3').val('');
             $('#select-3-16-4').val('');         
         }else {
@@ -757,11 +922,9 @@ $(document).ready(function () {
     $('#select-3-16-3').change(function () { 
         if ($(this).val() == 'yes'){
             $('#ExcludeSmallClaims').show();
-            $('#select-3-16-2').val('no');
             $('#select-3-16-4').val('');
         }else {
             $('#ExcludeSmallClaims').hide();
-            $('#select-3-16-2').val('no');
             $('#select-3-16-4').val('no');
         };
     });
@@ -1179,27 +1342,21 @@ var previousTab = 0;
 showTab(currentTab,'Step1'); 
 showTab(currentTab,'Step2'); 
 showTab(currentTab,'Step3');
+showTab(currentTab,'Step4');
+showTab(currentTab,'Step5');
 
 var DataForm;
-var result = '';
 
 function CheckStep1(){
     GetStepsData(); 
     console.log(DataForm);
-    if(DataForm[0]['Values']['Val_2'] == 'yes' || 
-        (DataForm[0]['Values']['Val_2'] == 'no' && DataForm[0]['Values']['Val_3'] == 'no') || 
-        (DataForm[0]['Values']['Val_2'] == 'no' && DataForm[0]['Values']['Val_3'] == 'no' && DataForm[0]['Values']['Val_4'] == 'no') ||
-        (DataForm[0]['Values']['Val_2'] == 'no' && DataForm[0]['Values']['Val_3'] == 'yes' && DataForm[0]['Values']['Val_4'] == 'yes' && DataForm[0]['Values']['Val_5'] == 'no' ) ){
-        result = 'Your Case is Weak';
-        $('#StepResult').modal({backdrop: 'static', keyboard: false});
-        $('#StepResultTitle').text('This is Your Legal Evaluation');
-        $('#StepResultText1').text(result);
-    }else {
-        result = 'Your Case is Feasible!';
-        $('#StepResult').modal({backdrop: 'static', keyboard: false});
-        $('#StepResultTitle').text('This is Your Legal Evaluation');
-        $('#StepResultText1').text(result);
-    };
+    $('#StepResult').modal({backdrop: 'static', keyboard: false});
+    $('#StepResultTitle').text('This is Your Legal Evaluation');
+    $('#StepResultText1').text(DataForm[0]['Values']['Val_6']);
+    $('#StepResultText2').text('')
+    $('#StepResultText3').text('')
+    $('#StepResultDetailsHeader').text('')
+    $('#StepResultDetailsText').text('')
 }
 var Result1, Result2, Result3;
 
@@ -1230,16 +1387,47 @@ function  CheckStep3 () {
     $('#StepResultText1').text( DataForm[2]['Values']['Val_20'])
     $('#StepResultText2').text('')
     $('#StepResultText3').text('')
+    $('#StepResultDetailsHeader').text('')
+    $('#StepResultDetailsText').text('')
     //ResultStep3Text1
 }
 
+function CheckStep4 (){
+    GetStepsData();
+    console.log(DataForm)
+    $('#StepResult').modal({backdrop: 'static', keyboard: false});
+    $('#StepResultTitle').text('This is your Collectability Assessment.');
+    $('#StepResultText1').text( DataForm[3]['Values']['Val_22'])
+    $('#StepResultText2').text('Because your adversary is or does ' + DataForm[3]['Values']['Val_21_Value'])
+    $('#StepResultText3').text('')
+    $('#StepResultDetailsHeader').text('')
+    $('#StepResultDetailsText').text('')
+}
 
-var Value_8, Value_9, Value_8_plus_9, 
-    Value_11, selectedVal, Value_13_2, Value_14_2, Value_15, 
-    Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value ;
+
+
+var Value_6,
+    Value_8, Value_9, Value_8_plus_9, 
+    Value_11, selectedVal_Step2, Value_13_2, Value_14_2, Value_15, 
+    Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value, 
+    selectedVal_Step4 , Value_21_Value , Value_22_Value,
+    Value_24, Value_25,Value_26,Value_28,Value_29,Value_31;
 
 function GetStepsData() {
-//** Step2Calculations**/
+//** Step 1 Calculations */
+    if($('#select-1-2').val() == 'yes' || 
+        ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no') || 
+        ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no' && $('#select-1-4').val() == 'no') ||
+        ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'yes' && $('#select-1-4').val() == 'yes' && $('#select-1-5').val() == 'no' ) ){
+        Value_6 = 'Your Case is Weak';
+    }else {
+        Value_6 = 'Your Case is Feasible!';
+    };
+    console.log(Value_6)
+
+
+//** Step 1 End */
+//** Step2 Calculations**/
     if (isNaN(parseInt($('#input-2-8-1').val().replace(",",""),10))){
         Value_8 = 0
     } else {
@@ -1273,14 +1461,14 @@ function GetStepsData() {
 
     var selected = $("input[type='radio'][name='attorney']:checked");
     if (selected.length > 0) {
-        selectedVal = selected.val();
+        selectedVal_Step2 = selected.val();
     }
     if ($('#select-2-12').val() == 'yes'){
-        if (selectedVal == 'value-1'){Value_13_2 = Value_11 };
-        if (selectedVal == 'value-2'){Value_13_2 = Value_11 * 0.9};
-        if (selectedVal == 'value-3'){Value_13_2 = Value_11 * 0.85};
-        if (selectedVal == 'value-4'){Value_13_2 = Value_11 * 0.65};
-        if (selectedVal == 'value-5'){Value_13_2 = Value_11 * 0.65};
+        if (selectedVal_Step2 == 'value-1'){Value_13_2 = Value_11 };
+        if (selectedVal_Step2 == 'value-2'){Value_13_2 = Value_11 * 0.9};
+        if (selectedVal_Step2 == 'value-3'){Value_13_2 = Value_11 * 0.85};
+        if (selectedVal_Step2 == 'value-4'){Value_13_2 = Value_11 * 0.65};
+        if (selectedVal_Step2 == 'value-5'){Value_13_2 = Value_11 * 0.65};
     }else {
         Value_13_2 = Value_11 * 0.8 ;
     };
@@ -1291,21 +1479,13 @@ function GetStepsData() {
         Value_14_2 = parseInt($('#input-2-14-1').val().replace(",","")  ,10) / 2
     }
     Value_14_2 = Math.round(Value_14_2)
-    var Value_15 = Value_13_2 - Value_14_2
+    Value_15 = Value_13_2 - Value_14_2
 //** Step 2 End **/
 
 //** Step 3 Calculations*/
-    $('#SmallClaimLimitResult').val();
-    $('#select-3-16-2').val();
-    $('#select-3-16-3').val();
-    $('#select-3-16-4').val();
-    
-    $('#select-3-17').val();
-    $('#select-3-18').val();
-    $('#select-3-19').val();
-
-
     var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
+    console.log(diff)
+    console.log($('#SmallClaimLimitResult').text().replace(",",""))
     var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
     if (diff <= 0) {
         Value_16_1 = 'Are Not Within'
@@ -1349,6 +1529,64 @@ function GetStepsData() {
 
 
 //** Step 3 End */
+   
+//** Step 4 Calculations*/
+    var adversary_value = [
+        {name: 'value-1',value: 150,description: 'a corporation'},
+        {name: 'value-2',value: 150,description: 'represented by an insurance company'},
+        {name: 'value-3',value: 140,description: 'an operating business other than a corporation, like an LLC, or Sole Proprietorship'},
+        {name: 'value-4',value: 130,description: 'own real property'},
+        {name: 'value-5',value: 120,description: 'have assets and is salaried'},
+        {name: 'value-6',value: 110,description: 'have assets and works for self as sole proprietor'},
+        {name: 'value-7',value: 90,description: 'have assets and none of above apply'},
+        {name: 'value-8',value: 75,description: 'none of above or below apply'},
+        {name: 'value-9',value: 50,description: 'have judgments against them'},
+        {name: 'value-10',value: 40,description: 'have no assets or means of support'},
+        {name: 'value-11',value: 20,description: 'have bankruptcy proceedings pending'}
+    ]
+
+    var selected = $("input[type='radio'][name='adversary']:checked");
+    if (selected.length > 0) {
+        selectedVal_Step4 = selected.val();
+        Value_21_Value = VLookUp(adversary_value, selectedVal_Step4,'name','description')
+        Value_22_Value = VLookUp(adversary_value, selectedVal_Step4,'name','value')
+    }
+
+ 
+
+//** Step 4 End*/
+
+//** Step 5 Calculations */
+    if ($('#select-3-16-2').val() == 'yes') {
+        Value_24 = 50
+    } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
+    } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
+    } else if (Value_15 >= 15001 && Value_15 <= 20000 ){ Value_24 = 15 
+    } else if (Value_15 >= 20001 && Value_15 <= 25000 ){ Value_24 = 20 
+    } else if (Value_15 >= 25001 && Value_15 <= 30000 ){ Value_24 = 25 
+    } else if (Value_15 >= 30001 && Value_15 <= 35000 ){ Value_24 = 30 
+    } else if (Value_15 >= 35000 && Value_15 <= 40000 ){ Value_24 = 35 
+    } else if (Value_15 >= 40001 && Value_15 <= 45000 ){ Value_24 = 40 
+    } else if (Value_15 >= 45001 && Value_15 <= 50000 ){ Value_24 = 45 
+    } else if (Value_15 >= 50001 ){ Value_24 = 50 
+    } else {Value_15 = 0}
+
+    if (Value_6 == 'Your Case is Weak') {
+        Value_25 = 0
+    } else { Value_25 = 350 }
+
+    Value_26 = Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value
+    Value_28 = Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value
+    Value_29 = (Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value) / 700
+
+    if (Value_29 < 0.92){
+        Value_31 = Value_11 * Value_29
+    } else {
+        Value_31 = Value_11 * 0.92
+    }
+    
+
+//** Step 5 End */
     DataForm = [
         {id: "Step1",
             Values: {
@@ -1359,7 +1597,7 @@ function GetStepsData() {
                 Val_4 : $('#select-1-4').val(),
                 Val_4_2: $('#textarea-1-4-1').val(),
                 Val_5 : $('#select-1-5').val(),
-                Val_6 : ''
+                Val_6 : Value_6
             }
         },
         {id: "Step2",
@@ -1376,7 +1614,7 @@ function GetStepsData() {
                 Val_10_2 :  parseInt($('#input-2-10-2').val().replace(",","")  ,10),
                 Val_11 :  Value_11,
                 Val_12 :  $('#select-2-12').val(),
-                Val_13_1 :  selectedVal,
+                Val_13_1 :  selectedVal_Step2,
                 Val_13_2 :  Value_13_2,
                 Val_14 :  $('#select-2-14').val(),
                 Val_14_1 :  parseInt($('#input-2-14-1').val().replace(",","")  ,10),
@@ -1387,7 +1625,7 @@ function GetStepsData() {
         {id:"Step3",
             Values: {
                 //Step3
-                Val_16: $('#SmallClaimLimitResult').val().replace(",",""),
+                Val_16: $('#SmallClaimLimitResult').text().replace(",",""),
                 Val_16_1: Value_16_1,
                 Val_16_2: $('#select-3-16-2').val(),
                 Val_16_3: $('#select-3-16-3').val(),
@@ -1400,6 +1638,30 @@ function GetStepsData() {
                 Val_19: $('#select-3-19').val(),
                 Val_19_Value: Value_19_Value,
                 Val_20: Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value 
+            }
+
+        },
+        {id: "Step4",
+            Values: {
+                //Step4
+                Val_21: selectedVal_Step4,
+                Val_21_Value: Value_21_Value,
+                Val_22: Value_22_Value
+            }
+
+        },
+        {id: "Step5",
+            Values: {
+                Val_23: Value_15,
+                Val_24: Value_24,
+                Val_25: Value_25,
+                Val_26: Value_26,
+                Val_27: Value_22_Value,
+                Val_28: Value_28,
+                Val_29: Value_29,
+                Val_30: Value_11,
+                Val_31: Value_31,
+                Val_32: Value_29
             }
 
         }
@@ -1419,9 +1681,7 @@ $('#btn-next-step-modal').click(function (e) {
 function showTab(n,step) {
     // This function will display the specified tab of the form...
     console.log(n + '  -  ' + step)
-    if (step == 'Step1'){var stp = document.getElementById("Step1") }
-    if (step == 'Step2'){var stp = document.getElementById("Step2") }
-    if (step == 'Step3'){var stp = document.getElementById("Step3") }
+    var stp = document.getElementById(step)
     var x = stp.getElementsByClassName("tab");
     x[n].style.display = "block";
     //... and fix the Previous/Next buttons:
@@ -1442,10 +1702,22 @@ function showTab(n,step) {
             $('#prevBtn3').hide();
             $('#nextBtn3').show();
             $('#ResultStep3').hide();
-        };    } else {
+        };    
+        if (step == 'Step4'){
+            $('#prevBtn4').hide();
+            $('#nextBtn4').show();
+            $('#ResultStep4').hide();
+        };    
+        if (step == 'Step5'){
+            $('#prevBtn5').hide();
+            $('#nextBtn5').show();
+        };        
+        } else {
         if (step == 'Step1'){$('#prevBtn').show()};
         if (step == 'Step2'){$('#prevBtn2').show()};
         if (step == 'Step3'){$('#prevBtn3').show()};
+        if (step == 'Step4'){$('#prevBtn4').show()};
+        if (step == 'Step5'){$('#prevBtn4').show()};
     }
     /*
     if (n == (x.length - 1)) {
@@ -1520,9 +1792,9 @@ function nextPrev(n,step) {
     }
 
     if (step == 'Step3' && n == 1){
+        var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
         if (x[currentTab].id == 'Q16-Prev') {
             $('#input-3-16-1').val(SeparadorMiles(Value_11));
-            var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
             if (diff <= 0) {
                 $('#WhitinEvaluation').html('<h5>Your Recoverable Damages <span class="badge badge-primary">Are Not Within</span> your state&#39s small claim limit.</h5>');
                 $('#BellowLimit').hide();
@@ -1535,7 +1807,7 @@ function nextPrev(n,step) {
             x[currentTab].style.display = "none";
             previousTab = currentTab
             currentTab = currentTab + n;                  
-        } else if (x[currentTab].id == 'Q17' &&  $('#select-3-16-2').val() == 'yes') {
+        } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0)) {
             x[currentTab].style.display = "none";
             previousTab = currentTab
             currentTab = currentTab + n + 1;             
@@ -1545,15 +1817,20 @@ function nextPrev(n,step) {
             currentTab = currentTab + n;  
         } 
     }
+    if (step == 'Step4' && n == 1) {
+        x[currentTab].style.display = "none";
+        previousTab = currentTab
+        currentTab = currentTab + n;         
+    }
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
         if (step == 'Step1'){ 
+            CheckStep1();
             $('#prevBtn').hide();
             $("#nextBtn").hide();
-            CheckStep1();
             //StepResults StepView
-            $('#ResultStep1Text1').text(result);
+            $('#ResultStep1Text1').text($('#StepResultText1').text());
             $('#ResultStep1').show();
         }
         if (step == 'Step2'){ 
@@ -1575,7 +1852,31 @@ function nextPrev(n,step) {
             $('#ResultStep3Text2').text($('#StepResultText2').text());
             $('#ResultStep3Text3').text($('#StepResultText3').text());
             $('#ResultStep3').show();            
-        }      
+        }
+        if (step == 'Step4'){
+            CheckStep4();
+            $("#prevBtn4").hide();
+            $("#nextBtn4").hide();
+            //StepResults StepView
+            $('#ResultStep4Text1').text($('#StepResultText1').text());
+            $('#ResultStep4Text2').text($('#StepResultText2').text());
+            $('#ResultStep4Text3').text($('#StepResultText3').text());
+            $('#ResultStep4').show();
+            console.log('aqui viene ' + DataForm)
+            //LoadTable Step5
+            $('#tbl-row-1').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
+            $('#tbl-row-2').text(DataForm[4]['Values']['Val_24']);
+            $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
+            $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
+            $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
+            $('#tbl-row-6').text(DataForm[4]['Values']['Val_28']);
+            $('#To_Hide').hide();
+            $('#tbl-row-7').text(DataForm[4]['Values']['Val_29']);
+            $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
+            $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
+            var num = DataForm[4]['Values']['Val_32']
+            $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+        }     
         previousTab = 0
         currentTab = 0//Reset Ordinal
         return false;
@@ -1618,6 +1919,13 @@ function validateForm(step) {
                 valid = false;
             }
         }
+        if (step == 'Step4' && x[currentTab].id == 'Q21' ){
+            var selected = $("input[type='radio'][name='adversary']:checked");
+            if (selected.length == 0) {
+                $('#adversary_check').css('background-color', '#ffdddd');;
+                valid = false;
+            }
+        }
     } catch (error) {
         valid = true
     }
@@ -1649,6 +1957,12 @@ function validateForm(step) {
                 s[i].className += " invalid";
                 // and set the current valid status to false
                 valid = false;
+                if (step == 'Step3' && x[currentTab].id == 'Q16'){
+                    if ($('#select-3-16-3').val() != '' && $('#select-3-16-4').val() ) {
+                        s[i].className += " valid";
+                        valid = true        
+                    }
+                }
             } else {
                 s[i].className += " valid";
             }
