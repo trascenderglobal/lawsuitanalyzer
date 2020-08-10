@@ -101,7 +101,7 @@
 
         <header>
             <h1 style="text-align: center;">Lawsuit Analyzer</h1>
-            <h2 style="text-align: center;"> Receive a professional legal analysis of your dispute</h2>
+            <h4 style="text-align: center;"> Receive a professional legal analysis of your dispute</h4>
         </header>
 
         <div class="content">
@@ -127,8 +127,8 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <div class="col-lg-8 sm-6"> 
-                                            <h3>Legal Evaluation</h3>
-                                            <h6>What is your likelihood of prevailing?</h6>
+                                            <h2>PHASE 1. LEGAL EVALUATION</h2>
+                                            <h3>What is your likelihood of prevailing?</h3>
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
@@ -143,24 +143,19 @@
                                                 <div id="Q1" class="tab">
                                                     <div class="form-group">
                                                         <label for="textarea-1-1" class="form-control-label">1. What obligations did your adversary owe you?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-
-                                                        <a href="https://drive.google.com/open?id=14zQvoL58mLD5Kj-QguRaNx0qErjD4ClW" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>
-
+                                                        <small id="HelpBlock-1-1" class="form-text text-muted">
+                                                            Enter below, and remember to access Help.
+                                                        </small>
                                                         <textarea id="textarea-1-1" name="textarea-1-1" required="required" class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                                 <div id="Q2" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-2">2. Did your adversary perform these obligations in a satisfactory manner?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"></sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1wfzBxuEvHaH4vFGfT5Ekjwn59TgULOlL" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>
                                                         <select id="select-1-2" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -171,11 +166,8 @@
                                                 <div id="Q3" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-3">3. Have you sustained legally recognized damages as a direct result of your adversary's conduct?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1YP037pam859jpZEyXO8bJ309iXCi1FfD" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>                                                
                                                         <select id="select-1-3" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -186,11 +178,8 @@
                                                 <div id="Q4" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-4">4. Did you have a prior obligation to your adversary?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1H9U8wvC0hZtWdrrcqp9H4ZGpXu-7iKao" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>                                                                                                
                                                         <select id="select-1-4" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -199,7 +188,7 @@
                                                     </div>
                                                     <div id = "PriorObligation_yes" class="form-group">
                                                         <label id="label-1-4-1" for="textarea-1-4-1">Please describe
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <textarea id="textarea-1-4-1" class="form-control" name="" rows="3"></textarea>
                                                     </div>                                            
@@ -207,11 +196,8 @@
                                                 <div id="Q5" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-5">5. Did you perform your obligation in a satisfactory manner?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>                                                                                                                                                
                                                         <select id="select-1-5" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -220,7 +206,7 @@
                                                     </div>
                                                     <div id="PerformSatisfactory_yes" class="form-group">
                                                         <label id="label-1-5-1" for="textarea-1-4-1">Please describe
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <textarea id="textarea-1-5-1" class="form-control" name="" rows="3"></textarea>
                                                     </div>                                                   
@@ -251,8 +237,8 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <div class="col-lg-8 sm-6"> 
-                                            <h3>Case Value Assessment</h3>
-                                            <h6>How much are you likely to recover?</h6>
+                                            <h2>PHASE 2. CASE VALUE ASSESSMENT</h2>
+                                            <h3>How much are you likely to recover?</h3>
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
@@ -266,20 +252,17 @@
                                                 <div id ="Q7" class="tab">
                                                     <div class="form-group">
                                                         <label for="input-2-7">7. What is the amount of your damages?</label>
-                                                        <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a> 
                                                         <input id="input-2-7" class="form-control" type="text" name="" placeholder="Enter $ amount">
+                                                        <small id="HelpBlock-2-7-1" class="form-text text-muted">
+                                                        Remember to access Help to guide you to your answer.
+                                                        </small>
                                                     </div>
                                                 </div>
                                                 <div id ="Q8" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-8">8. Were you a cause of the situation that caused your damages?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>
                                                         <select id="select-2-8" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -288,7 +271,7 @@
                                                     </div>
                                                     <div id="CauseOfSituation_yes" class="form-group">
                                                         <label id="label-2-8-1" for="input-2-8-1">Amount to be deducted from your damages
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <input id="input-2-8-1" class="form-control" type= "text" ></input>
                                                     </div>                                            
@@ -296,11 +279,8 @@
                                                 <div id ="Q9" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-9">9. Did you receive a substantial benefit from the situation?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>
                                                         <select id="select-2-9" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -309,36 +289,39 @@
                                                     </div>
                                                     <div id="RecieveBenefit_yes" class="form-group">
                                                         <label id="label-2-9-1" for="input-2-9-1">Enter the $ amount your conduct contributed to your damages (use half of your damages if unsure)
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <input id="input-2-9-1" class="form-control" type= "text" ></input>
+                                                        <small id="HelpBlock-2-9-1" class="form-text text-muted">
+                                                            Click on Help and enter the $ amount your conduct contributed to your damages.
+                                                        </small>
                                                     </div>     
                                                 </div>
                                                 <div id ="Q10" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-10">10. Is there a damage defining provision in a written agreement that pertains to this dispute?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>
                                                         <select id="select-2-10" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
                                                             <option value="no">No</option>
                                                         </select>
+                                                        <small id="HelpBlock-2-10" class="form-text text-muted">
+                                                            Click Help for information.
+                                                        </small>
                                                     </div>
                                                     <div id="DamageProvision_yes" class="form-group">
                                                         <label id="label-2-10-1" for="select-2-10-1">Liquidated Damages or Damage Limit ?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <select id="select-2-10-1" class="form-control" name="">
                                                             <option value="default" >Please choose an option</option>
                                                             <option value="Liquidated-Damages">Liquidated Damages</option>
                                                             <option value="Damage-Limit">Damage Limit</option>
                                                         </select>
-                                                        <label id="label-2-10-2" for="input-2-10-2">Enter the Liquidated Damages amount from your Agreement.
-                                                            <sup class="text-danger">* </sup>
+                                                        <label id="label-2-10-2" for="input-2-10-2">Please choose an option
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <input id="input-2-10-2" class="form-control" type= "text" ></input>
                                                     </div>  
@@ -354,11 +337,8 @@
                                                 <div id ="Q12" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-12">12. Will you be represented by an attorney?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
-                                                        <a href="https://drive.google.com/open?id=1YP037pam859jpZEyXO8bJ309iXCi1FfD" target="_blank">
-                                                            <img placement="top" src="assets/help-icon.png" alt="Help" style="height: 20px; width: 20px; position: relative; left: 8px;">
-                                                        </a>                                                
                                                         <select id="select-2-12" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
@@ -368,7 +348,7 @@
                                                 </div>
                                                 <div id ="Q13" class="tab">
                                                     <div id="attorney_yes" class="form-group" style="text-align: justify;">
-                                                        <h6 style="text-align: center;" >13A. Select ONE of the following options:</h6>
+                                                        <h6 style="text-align: center;" >13. Select ONE of the following options:</h6>
                                                         <div class="form-check form-check-inline">
                                                             <input id="radio-2-13-1" class="form-check-input" type="radio" name="attorney" value="value-1" style="width: auto;">
                                                             <label for="radio-2-13-1" class="form-check-label" style="text-align: justify;">Does the agreement signed by you and your adversary contain both an attorneys’ fee and binding arbitration provision?</label>
@@ -391,7 +371,7 @@
                                                         </div>
                                                     </div>
                                                     <div id="attorney_no" class="form-group">
-                                                        <label id="label-2-13" for="input-2-13">13B. Because you will not be represent by an Attorney we have deduct 20% as a margin of error from your Recoverable Damages.
+                                                        <label id="label-2-13" for="input-2-13">13. Because you will not be represented by an Attorney, we have deducted 20% as a margin of error from your Recoverable Damages.
                                                         </label>
                                                         <input id="input-2-13" class="form-control" type= "text"  value="0"  disabled></input>
                                                     </div>
@@ -399,7 +379,7 @@
                                                 <div id ="Q14" class="tab">
                                                     <div class="form-group">
                                                         <label id="label-2-14" for="select-2-14">14. Will you invest substantial time into your case?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <select id="select-2-14" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -409,12 +389,12 @@
                                                     </div>
                                                     <div id="moneytime_yes" class="form-group">
                                                         <label id="label-2-14-1" for="input-2-14-1">What is the approximate value of the time you will invest?
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <input id="input-2-14-1" class="form-control" type= "text" ></input>
                                                         
                                                         <label id="label-2-14-2" for="input-2-14-2">This amount is divided by two to reflect that this is time not money you are losing.
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <input id="input-2-14-2" class="form-control" type= "text" value="0" disabled></input>
                                                     </div>
@@ -446,8 +426,8 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <div class="col-lg-8 sm-6"> 
-                                            <h3>Legal Options Assessment</h3>
-                                            <h6>What are your legal options?</h6>
+                                            <h2>PHASE 3. LEGAL OPTIONS ASSESSMENT</h2>
+                                            <h3>What are your legal options?</h3>
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
@@ -461,7 +441,7 @@
                                                 <div id="Q16-Prev" class="tab">
                                                     <div class="form-group">
                                                         <label id="label-3-16" for="select-3-16">Select your state to look up your Small Claims Limit
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <select id="select-3-16" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -492,7 +472,7 @@
                                                         <div class="col-lg-12 col-md-12">
                                                             <div class="form-group">
                                                                 <label for="select-3-16-2">16. Are you willing to reduce your claim to fit the Small Claims Limit?</label>
-                                                                <sup class="text-danger">* </sup>
+                                                                <sup class="text-danger"> </sup>
                                                                 </label>
                                                                 <select id="select-3-16-2" class="form-control" name="">
                                                                     <option value="" >Please choose an option</option>
@@ -505,7 +485,7 @@
                                                     <div id="BellowLimit"  >
                                                         <div class="form-group">
                                                             <label for="select-3-16-3">16sc. Do you have a binding arbitration provision in a written agreement with your adversary?</label>
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                             </label>
                                                             <select id="select-3-16-3" class="form-control" name="">
                                                                 <option value="" >Please choose an option</option>
@@ -515,7 +495,7 @@
                                                         </div>                                
                                                         <div id="ExcludeSmallClaims" class="form-group">
                                                             <label for="select-3-16-4">Does it exclude Small Claims?</label>                                                            
-                                                            <sup class="text-danger">* </sup>
+                                                            <sup class="text-danger"> </sup>
                                                             </label>
                                                             <select id="select-3-16-4" class="form-control" name="">
                                                                 <option value="" >Please choose an option</option>
@@ -586,8 +566,8 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <div class="col-lg-8 sm-6"> 
-                                            <h3>Collectability Assessment</h3>
-                                            <h6>What are your chances of collecting on your judgment?</h6>
+                                            <h2>PHASE 4. COLLECTABILITY ASSESSMENT</h2>
+                                            <h3>What are your chances of collecting on your judgment?</h3>
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
@@ -672,11 +652,11 @@
                     <section>
                         <div class="container-fluid">                            
                             <div class="row">
-                            <div class="col">
+                                <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <div class="col-lg-8 sm-6"> 
-                                            <h3>Collectability Assessment</h3>
-                                            <h6>What are your chances of collecting on your judgment?</h6>
+                                            <h2>PHASE 5. COMPREHENSIVE CASE ANALYSIS</h2>
+                                            <h3>Analysis of Your Legal Evaluation, Case Value Assessment, Legal Options Assessment and Collectability Assessment</h3>
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
@@ -688,7 +668,7 @@
                                         <div class="col" style="text-align: center;">
                                             <form id="Step5">
                                                 <div id="Q23" class = "tab">                                        
-                                                    <div class="table-responsive" style="text-align: initial;">
+                                                    <div id="ResultStep5" class="table-responsive" style="text-align: initial;">
                                                         <table class="table table-bordered table-sm">
                                                             <thead class="thead-light">
                                                                 <tr>
@@ -757,8 +737,8 @@
                                                 </div>
                                                 <div style="overflow:auto; margin-top: 15px;">
                                                     <div style="float:right;">
-                                                    <button type="button" id="prevBtn4" class="btn btn-secondary" onclick="nextPrev(-1,'Step5')">Previous</button>
-                                                    <button type="button" id="nextBtn4" class="btn btn-success" onclick="nextPrev(1,'Step5')">Next</button>
+                                                    <button type="button" id="prevBtn5" class="btn btn-secondary" onclick="nextPrev(-1,'Step5')">Previous</button>
+                                                    <button type="button" id="nextBtn5" class="btn btn-success" onclick="nextPrev(1,'Step5')">Next</button>
                                                     </div>
                                                 </div>                                                
                                             </form>
@@ -771,11 +751,39 @@
 
                     <h2>Case Feasibility Assessment Chart</h2>
                     <section>
-                        <div class="container-fluid">                            
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
-                                    
-
+                                    <div class="row" style="align-items: flex-end;">
+                                        <div class="col-lg-8 sm-6"> 
+                                            <h2>PHASE 6. Case Feasibility Assessment Chart</h2>
+                                            <h3>How Feasible is your case to pursue?</h3>
+                                        </div>
+                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
+                                                <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
+                                            </a>
+                                        </div>
+                                    </div>                            
+                                    <div class="row">
+                                        <div class="col" style="text-align: center;">
+                                            <form id="Step6">
+                                                <div id="Q33Chart" class="tab">
+                                                    <p id="NoteStep6">Note: Always remember to exhaust all settlement possibilities before pursuing your case through legal channels. Remember also, the case value we’re talking about is the one at row 23 of step five's table.</p>
+                                                    <br>
+                                                    <div id="ResultStep6"> 
+                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
+                                                    </div>            
+                                                </div>
+                                                <div style="overflow:auto; margin-top: 15px;">
+                                                    <div style="float:right;">
+                                                        <button type="button" id="prevBtn6" class="btn btn-secondary" onclick="nextPrev(-1,'Step6')">Previous</button>
+                                                        <button type="button" id="nextBtn6" class="btn btn-success" onclick="nextPrev(1,'Step6')">Next</button>
+                                                    </div>
+                                                </div>                                                  
+                                            </form>
+                                        </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -783,11 +791,39 @@
 
                     <h2>Forum Assessment</h2>
                     <section>
-                        <div class="container-fluid">                            
+                    <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
-                                    
-
+                                    <div class="row" style="align-items: flex-end;">
+                                        <div class="col-lg-8 sm-6"> 
+                                            <h2>PHASE 7. Forum Assessment</h2>
+                                            <h3>Where will you pursue your dispute?</h3>
+                                        </div>
+                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
+                                                <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
+                                            </a>
+                                        </div>
+                                    </div>                            
+                                    <div class="row">
+                                        <div class="col" style="text-align: center;">
+                                            <form id="Step7">
+                                                <div id="Q33Chart" class="tab">
+                                                    <p id="NoteStep6">Note: Always remember to exhaust all settlement possibilities before pursuing your case through legal channels. Remember also, the case value we’re talking about is the one at row 23 of step five's table.</p>
+                                                    <br>
+                                                    <div id="ResultStep6"> 
+                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
+                                                    </div>            
+                                                </div>
+                                                <div style="overflow:auto; margin-top: 15px;">
+                                                    <div style="float:right;">
+                                                        <button type="button" id="prevBtn7" class="btn btn-info" onclick="">Download</button>
+                                                        <button type="button" id="nextBtn7" class="btn btn-success" onclick="">Submit</button>
+                                                    </div>
+                                                </div>                                                  
+                                            </form>
+                                        </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -805,15 +841,16 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col" > 
-                            <h4 style="text-align: left;" id="StepResultText1" ></h4>
-                            <h4 style="text-align: left;" id="StepResultText2" ></h4>
-                            <h4 style="text-align: left;" id="StepResultText3" ></h4>
+                            <h6 style="text-align: left;" id="StepResultText1" ></h6>
+                            <h6 style="text-align: left;" id="StepResultText2" ></h6>
+                            <h6 style="text-align: left;" id="StepResultText3" ></h6>
                             <h6 style="text-align: left; margin-top: 15px;" id="StepResultDetailsHeader"> </h6>
                             <p style="text-align: left;" id="StepResultDetailsText"> </p>
                         </div> 
                     </div>
                 </div>          
                 <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit answers</button>
                     <button type="button" class="btn btn-primary" id="btn-next-step-modal" >Continue</button>
                 </div>
                 </div>
@@ -837,7 +874,7 @@ $(document).ready(function () {
     //** Step 3 */
     $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
     //HidePreviousButton
-    $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4").hide();
+    $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6").hide();
 
     $("#select-1-4").change(function(){
         if ($(this).val() == 'yes'){
@@ -862,9 +899,12 @@ $(document).ready(function () {
     $('#select-2-8').change(function () { 
         if ($(this).val() == 'yes'){
             $('#CauseOfSituation_yes').show();          
-        }else {
+        }
+        if ($(this).val() == 'no') {
             $('#CauseOfSituation_yes').hide();
             $('#input-2-8-1').val(0);
+            validateForm('Step2'); //Easy advance included
+            nextPrev(1,'Step2'); //Easy advance included
         };
     });
 
@@ -874,18 +914,36 @@ $(document).ready(function () {
         }else {
             $('#RecieveBenefit_yes').hide();
             $('#input-2-9-1').val(0);
+            validateForm('Step2'); //Easy advance included
+            nextPrev(1,'Step2'); //Easy advance included
         };
     });
 
     $('#select-2-10').change(function () { 
         if ($(this).val() == 'yes'){
             $('#DamageProvision_yes').show();        
-        }else {
+        }
+        if ($(this).val() == 'no') {
             $('#DamageProvision_yes').hide();
             $('#select-2-10-1').val('default');
             $('#input-2-10-2').val(0); 
+            validateForm('Step2'); //Easy advance included
+            nextPrev(1,'Step2'); //Easy advance included
         };
     });
+
+    $('#select-2-10-1').change(function () { 
+        if ($(this).val() == 'Liquidated-Damages'){
+            $('#label-2-10-2').text('Enter the Liquidated Damages amount from your contract.');        
+        }
+        if ($(this).val() == 'Damage-Limit') {
+            $('#label-2-10-2').text('Enter the Damage-Limit amount from your contract.');        
+        };
+        if ($(this).val() == 'default') {
+            $('#label-2-10-2').text('Please choose an option.');        
+        };
+    });
+
 
     $('#select-2-12').change(function () { 
         if ($(this).val() == 'yes'){
@@ -904,6 +962,8 @@ $(document).ready(function () {
         }else {
             $('#moneytime_yes').hide();
             $('#input-2-14-1').val(0);
+            validateForm('Step2'); //Easy advance included
+            nextPrev(1,'Step2'); //Easy advance included
         };
     });
 
@@ -928,6 +988,17 @@ $(document).ready(function () {
             $('#select-3-16-4').val('no');
         };
     });
+
+    $('#select-3-17').change(function () { 
+        if ($(this).val() == 'yes'){
+            $('#ExcludeSmallClaims').show();
+            $('#select-3-16-4').val('');
+        }else {
+            $('#ExcludeSmallClaims').hide();
+            $('#select-3-16-4').val('no');
+        };        
+    });
+
 
 /*
     $("#input-2-7").on({
@@ -971,8 +1042,8 @@ $(document).ready(function () {
     });
 
     //Easy advance behaviour Step2
-    $('#select-2-8,#select-2-9,#select-2-10,#select-2-10-1,#select-2-12,#select-2-14').change(function () { 
-        validateForm('Step2')
+    $('#select-2-12').change(function () { 
+        validateForm('Step2');
         nextPrev(1,'Step2');
     });
 
@@ -1314,7 +1385,6 @@ $(document).ready(function () {
         }
     ]
 
-
     //Look for Small Claims Limit
     $('#select-3-16').change(function () { 
         if ($('#select-3-16').val() !== "" ) {
@@ -1333,8 +1403,6 @@ $(document).ready(function () {
     for (var i = 0; i <= SmallClaimsTable.length; i++) {
         $('#select-3-16').append('<option value="' + SmallClaimsTable[i]['Abrev'] + '">' + SmallClaimsTable[i]['State'] + '</option>');
     }
-
-
 });
 //Script For Step Behaviour
 var currentTab = 0; 
@@ -1344,8 +1412,48 @@ showTab(currentTab,'Step2');
 showTab(currentTab,'Step3');
 showTab(currentTab,'Step4');
 showTab(currentTab,'Step5');
+showTab(currentTab,'Step6');
 
 var DataForm;
+
+//Step6Table
+var Step6Table = [
+    {
+        Range: 6,
+        Title: "91% and above",
+        Text: "—Case feasibility is very good. You should proceed forward with your case."
+    },
+    {
+        Range: 5,
+        Title: "81% to 90%",
+        Text: "—Case feasibility is good. You should proceed forward with your case, but make best attempts to resolve your dispute through Last Chance Exercise and mediation first."
+    },
+    {
+        Range: 4,
+        Title: "71% to 80%",
+        Text: "—Case feasibility is reasonably good. If binding arbitration is your route, move forward but if there is an attorney fees provision, be aware that if you lose, you must pay your opponent’s attorney fees. If binding arbitration is not your route, you should proceed forward with your case only after proposing a Multi-Step ADR Agreement or Binding Arbitration Agreement to your adversary [See Appendix]. If consent is not obtained, pursue your case only after you have repeatedly attempted settlement. And remember: you may be in this category with a winning case and the best chances of collection, but since you have to travel the court maze, your feasibility is reduced."
+    },
+    {
+        Range: 3,
+        Title: "61% to 70%",
+        Text: "—Your case feasibility is mid-range.\r\nIf you have a Binding Arbitration Agreement but no attorney fee provision, proceed forward. The dispute will be determined soon and you won’t be paying your opponent’s attorney fees if you lose. But first, attempt settlement and mediation.\r\nIf you have a binding arbitration provision and an attorney fees provision:\r\n1.     If you are at the high end of this category, you should proceed forward with the reminder that if you lose you will pay your adversary’s attorney fees.\r\n2.     If you are at the low end of this category, you should carefully consider your risk of losing and being hit with your opponent’s attorney fee tab. Do everything you can to settle your case. Proceed cautiously if you must thereafter.\r\nIf there is an attorney fee provision and no binding arbitration provision, you should lean more in favor of pursuing your dispute only by settlement. It may not be worthwhile to take this case into the expensive court forum, especially considering your exposure with an attorney fee provision. Proceed cautiously if you must.\r\nIf there is no attorney fee provision or binding arbitration provision, proceed only if you are at the high end of this category. Otherwise, it may not be worthwhile to take this case into the expensive court forum. Proceed cautiously if you must."
+    },
+    {
+        Range: 2,
+        Title: "51% to 60%",
+        Text: "—Make every attempt to settle your dispute at the suggested settlement figure. Carefully review all phases of The Pocket Lawyer Analyzer before you proceed. Always remember: if there’s an attorney fee provision and you lose, you’ll have to pay your adversary’s attorney fees. If you have slim chances of collecting on a judgment, perhaps it doesn’t make sense to proceed. If your case value is low and you have to travel the demanding court system, you may very well not want to go the long haul. If you are on the low side of this range, your feasibility indicates you should not pursue your case. Otherwise, proceed very cautiously if you must."
+    },
+    {
+        Range: 1,
+        Title: "50% and below",
+        Text: "—You are discouraged from pursuing your case to judgment, but don’t let your opponent know that or you’ll never reach settlement. Encourage settlement again and again. After that, one mediation session is warranted. In view of mediation’s 85% success rate and your realistic attitude (given your low feasibility rating), the chances of success at mediated settlement are very high."
+    },
+    {
+        Range: 0,
+        Title: "Default Title",
+        Text: "Default Text"
+    }
+]
 
 function CheckStep1(){
     GetStepsData(); 
@@ -1372,11 +1480,11 @@ function CheckStep2(){
     if (!isNaN(DataForm[1]['Values']['Val_15'])) {
         var Result3 = DataForm[1]['Values']['Val_15']
     }        
-    $('#StepResultText1').text(SeparadorMiles(Result1) + ' is your Total Damages.');
-    $('#StepResultText2').text(SeparadorMiles(Result2) + '  is your Recoverable Damages based on answers above.');
-    $('#StepResultText3').text(SeparadorMiles(Result3) + ' is your Overall Case Value Assessment which includes answers to Questions above.');
-    $('#StepResultDetailsHeader').text('Whats does mean that amount?');
-    $('#StepResultDetailsText').text('This is the amount you are likely to recover.');
+    $('#StepResultText1').text('$ ' + SeparadorMiles(Result1) + ' is your Total Damages [Question 5].');
+    $('#StepResultText2').text('$ ' + SeparadorMiles(Result2) + ' is your Recoverable Damages based on answers to Questions 6-8.');
+    $('#StepResultText3').text('$ ' + SeparadorMiles(Result3) + ' is your Overall Case Value Assessment which includes answers to Questions 9-10. This is the amount you are likely to recover.');
+    //$('#StepResultDetailsHeader').text('Whats does mean that amount?');
+    //$('#StepResultDetailsText').text('This is the amount you are likely to recover.');
 }
 
 function  CheckStep3 () {
@@ -1385,7 +1493,7 @@ function  CheckStep3 () {
     $('#StepResult').modal({backdrop: 'static', keyboard: false});
     $('#StepResultTitle').text('This is your Legal Options Assessment');
     $('#StepResultText1').text( DataForm[2]['Values']['Val_20'])
-    $('#StepResultText2').text('')
+    $('#StepResultText2').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.')
     $('#StepResultText3').text('')
     $('#StepResultDetailsHeader').text('')
     $('#StepResultDetailsText').text('')
@@ -1404,6 +1512,11 @@ function CheckStep4 (){
     $('#StepResultDetailsText').text('')
 }
 
+function CheckStep5(){
+    GetStepsData();
+    console.log(DataForm);
+}
+
 
 
 var Value_6,
@@ -1411,182 +1524,203 @@ var Value_6,
     Value_11, selectedVal_Step2, Value_13_2, Value_14_2, Value_15, 
     Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value, 
     selectedVal_Step4 , Value_21_Value , Value_22_Value,
-    Value_24, Value_25,Value_26,Value_28,Value_29,Value_31;
+    Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
+    Value_33_Chart_Title,Value_33_Chart_Text;
 
 function GetStepsData() {
-//** Step 1 Calculations */
-    if($('#select-1-2').val() == 'yes' || 
-        ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no') || 
-        ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no' && $('#select-1-4').val() == 'no') ||
-        ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'yes' && $('#select-1-4').val() == 'yes' && $('#select-1-5').val() == 'no' ) ){
-        Value_6 = 'Your Case is Weak';
-    }else {
-        Value_6 = 'Your Case is Feasible!';
-    };
-    console.log(Value_6)
-
-
-//** Step 1 End */
-//** Step2 Calculations**/
-    if (isNaN(parseInt($('#input-2-8-1').val().replace(",",""),10))){
-        Value_8 = 0
-    } else {
-        Value_8 = parseInt($('#input-2-8-1').val().replace(",",""),10)
-    }
-
-    if (isNaN(parseInt($('#input-2-9-1').val().replace(",",""),10))){
-        Value_9 = 0
-    } else {
-        Value_9 = parseInt($('#input-2-9-1').val().replace(",",""),10)
-    }        
-    var Value_8_plus_9 = Value_8 +  Value_9
-    if ($('#select-2-10').val() == 'yes') {
-        //damageLimits
-        if ($('#select-2-10-1').val() == 'Liquidated-Damages') {
-            Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
+    //** Step 1 Calculations */
+        if($('#select-1-2').val() == 'yes' || 
+            ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no') || 
+            ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no' && $('#select-1-4').val() == 'no') ||
+            ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'yes' && $('#select-1-4').val() == 'yes' && $('#select-1-5').val() == 'no' ) ){
+            Value_6 = 'Your Case is Weak';
+        }else {
+            Value_6 = 'Your Case is Feasible!';
         };
-        if ($('#select-2-10-1').val() == 'Damage-Limit') {
-            var initialdamage = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
-            var diff =  parseInt($('#input-2-10-2').val().replace(",","")  ,10) - initialdamage
-            console.log(diff)
-            if (diff >= 0){
-                Value_11 = initialdamage
-            } else {
+        console.log(Value_6)
+
+
+    //** Step 1 End */
+    //** Step2 Calculations**/
+        if (isNaN(parseInt($('#input-2-8-1').val().replace(",",""),10))){
+            Value_8 = 0
+        } else {
+            Value_8 = parseInt($('#input-2-8-1').val().replace(",",""),10)
+        }
+
+        if (isNaN(parseInt($('#input-2-9-1').val().replace(",",""),10))){
+            Value_9 = 0
+        } else {
+            Value_9 = parseInt($('#input-2-9-1').val().replace(",",""),10)
+        }        
+        var Value_8_plus_9 = Value_8 +  Value_9
+        if ($('#select-2-10').val() == 'yes') {
+            //damageLimits
+            if ($('#select-2-10-1').val() == 'Liquidated-Damages') {
                 Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
-            }
+            };
+            if ($('#select-2-10-1').val() == 'Damage-Limit') {
+                var initialdamage = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
+                var diff =  parseInt($('#input-2-10-2').val().replace(",","")  ,10) - initialdamage
+                console.log(diff)
+                if (diff >= 0){
+                    Value_11 = initialdamage
+                } else {
+                    Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
+                }
+            };
+        } else {
+            Value_11 = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
+        }
+
+        var selected = $("input[type='radio'][name='attorney']:checked");
+        if (selected.length > 0) {
+            selectedVal_Step2 = selected.val();
+        }
+        if ($('#select-2-12').val() == 'yes'){
+            if (selectedVal_Step2 == 'value-1'){Value_13_2 = Value_11 };
+            if (selectedVal_Step2 == 'value-2'){Value_13_2 = Value_11 * 0.9};
+            if (selectedVal_Step2 == 'value-3'){Value_13_2 = Value_11 * 0.85};
+            if (selectedVal_Step2 == 'value-4'){Value_13_2 = Value_11 * 0.65};
+            if (selectedVal_Step2 == 'value-5'){Value_13_2 = Value_11 * 0.65};
+        }else {
+            Value_13_2 = Value_11 * 0.8 ;
         };
-    } else {
-        Value_11 = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
-    }
+        Value_13_2 = Math.round(Value_13_2)
+        if (isNaN(parseInt($('#input-2-14-1').val().replace(",","")  ,10))) {
+            Value_14_2 = 0
+        }else {
+            Value_14_2 = parseInt($('#input-2-14-1').val().replace(",","")  ,10) / 2
+        }
+        Value_14_2 = Math.round(Value_14_2)
+        Value_15 = Value_13_2 - Value_14_2
+    //** Step 2 End **/
 
-    var selected = $("input[type='radio'][name='attorney']:checked");
-    if (selected.length > 0) {
-        selectedVal_Step2 = selected.val();
-    }
-    if ($('#select-2-12').val() == 'yes'){
-        if (selectedVal_Step2 == 'value-1'){Value_13_2 = Value_11 };
-        if (selectedVal_Step2 == 'value-2'){Value_13_2 = Value_11 * 0.9};
-        if (selectedVal_Step2 == 'value-3'){Value_13_2 = Value_11 * 0.85};
-        if (selectedVal_Step2 == 'value-4'){Value_13_2 = Value_11 * 0.65};
-        if (selectedVal_Step2 == 'value-5'){Value_13_2 = Value_11 * 0.65};
-    }else {
-        Value_13_2 = Value_11 * 0.8 ;
-    };
-    Value_13_2 = Math.round(Value_13_2)
-    if (isNaN(parseInt($('#input-2-14-1').val().replace(",","")  ,10))) {
-        Value_14_2 = 0
-    }else {
-        Value_14_2 = parseInt($('#input-2-14-1').val().replace(",","")  ,10) / 2
-    }
-    Value_14_2 = Math.round(Value_14_2)
-    Value_15 = Value_13_2 - Value_14_2
-//** Step 2 End **/
-
-//** Step 3 Calculations*/
-    var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
-    console.log(diff)
-    console.log($('#SmallClaimLimitResult').text().replace(",",""))
-    var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
-    if (diff <= 0) {
-        Value_16_1 = 'Are Not Within'
-        if ($('#select-3-16-2').val() == 'yes') {
-            if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'no') {
+    //** Step 3 Calculations*/
+        var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
+        console.log(diff)
+        console.log($('#SmallClaimLimitResult').text().replace(",",""))
+        var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
+        if (diff <= 0) {
+            Value_16_1 = 'Are Not Within'
+            if ($('#select-3-16-2').val() == 'yes') {
+                if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'no') {
+                    Step3_16_Val_1 = 85
+                }
+                if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'yes') {
+                    Step3_16_Val_1 = 125
+                }
+                if ($('#select-3-16-3').val() == 'no'){
+                    Step3_16_Val_1 = 125
+                }                
+            }
+        }else{
+            Value_16_1 = 'Are Within'
+            if ($('#select-3-16-3').val() == 'no') {
+                Step3_16_Val_2 = 125
+            } else if ($('#select-3-16-4').val() == 'yes') {
+                Step3_16_Val_2 = 125
+            } else {
                 Step3_16_Val_1 = 85
             }
         }
-    }else{
-        Value_16_1 = 'Are Within'
+        Value_16_Value =  Step3_16_Val_1 + Step3_16_Val_2
+        Value_17_Value = 0
+        if ($('#select-3-17').val() == 'yes') {
+            if ($('#select-2-12').val() == 'yes') {
+                Value_17_Value = 50
+            } else {
+                Value_17_Value = 25
+            }
+        } else {
+            if ($('#select-2-12').val() == 'yes') {
+                Value_17_Value = 0
+            } else {
+                Value_17_Value = 25
+            }       
+        }
+        Value_18_Value = 0
         if ($('#select-3-16-3').val() == 'no') {
-            Step3_16_Val_2 = 125
-        } else if ($('#select-3-16-4').val() == 'yes') {
-            Step3_16_Val_2 = 125
-        } else {
-            Step3_16_Val_1 = 85
+            if ( $('#select-3-18').val() == 'yes' ) { Value_18_Value = 85 }
         }
-    }
-    Value_16_Value =  Step3_16_Val_1 + Step3_16_Val_2
-    Value_17_Value = 0
-    if ($('#select-3-17').val() == 'yes') {
-        if ($('#select-2-12').val() == 'yes') {
-            Value_17_Value = 50
-        } else {
-            Value_17_Value = 25
+        Value_19_Value = 0
+        if (  $('#select-3-19').val() == 'yes' ) { Value_19_Value = 15}
+
+
+
+    //** Step 3 End */
+    
+    //** Step 4 Calculations*/
+        var adversary_value = [
+            {name: 'value-1',value: 150,description: 'a corporation'},
+            {name: 'value-2',value: 150,description: 'represented by an insurance company'},
+            {name: 'value-3',value: 140,description: 'an operating business other than a corporation, like an LLC, or Sole Proprietorship'},
+            {name: 'value-4',value: 130,description: 'own real property'},
+            {name: 'value-5',value: 120,description: 'have assets and is salaried'},
+            {name: 'value-6',value: 110,description: 'have assets and works for self as sole proprietor'},
+            {name: 'value-7',value: 90,description: 'have assets and none of above apply'},
+            {name: 'value-8',value: 75,description: 'none of above or below apply'},
+            {name: 'value-9',value: 50,description: 'have judgments against them'},
+            {name: 'value-10',value: 40,description: 'have no assets or means of support'},
+            {name: 'value-11',value: 20,description: 'have bankruptcy proceedings pending'}
+        ]
+
+        var selected = $("input[type='radio'][name='adversary']:checked");
+        if (selected.length > 0) {
+            selectedVal_Step4 = selected.val();
+            Value_21_Value = VLookUp(adversary_value, selectedVal_Step4,'name','description')
+            Value_22_Value = VLookUp(adversary_value, selectedVal_Step4,'name','value')
         }
-    } else {
-        if ($('#select-2-12').val() == 'yes') {
-            Value_17_Value = 0
-        } else {
-            Value_17_Value = 25
-        }       
-    }
-    Value_18_Value = 0
-    if ($('#select-3-16-3').val() == 'no') {
-        if ( $('#select-3-18').val() == 'yes' ) { Value_18_Value = 85 }
-    }
-    Value_19_Value = 0
-    if (  $('#select-3-19').val() == 'yes' ) { Value_19_Value = 15}
 
-
-
-//** Step 3 End */
-   
-//** Step 4 Calculations*/
-    var adversary_value = [
-        {name: 'value-1',value: 150,description: 'a corporation'},
-        {name: 'value-2',value: 150,description: 'represented by an insurance company'},
-        {name: 'value-3',value: 140,description: 'an operating business other than a corporation, like an LLC, or Sole Proprietorship'},
-        {name: 'value-4',value: 130,description: 'own real property'},
-        {name: 'value-5',value: 120,description: 'have assets and is salaried'},
-        {name: 'value-6',value: 110,description: 'have assets and works for self as sole proprietor'},
-        {name: 'value-7',value: 90,description: 'have assets and none of above apply'},
-        {name: 'value-8',value: 75,description: 'none of above or below apply'},
-        {name: 'value-9',value: 50,description: 'have judgments against them'},
-        {name: 'value-10',value: 40,description: 'have no assets or means of support'},
-        {name: 'value-11',value: 20,description: 'have bankruptcy proceedings pending'}
-    ]
-
-    var selected = $("input[type='radio'][name='adversary']:checked");
-    if (selected.length > 0) {
-        selectedVal_Step4 = selected.val();
-        Value_21_Value = VLookUp(adversary_value, selectedVal_Step4,'name','description')
-        Value_22_Value = VLookUp(adversary_value, selectedVal_Step4,'name','value')
-    }
-
- 
-
-//** Step 4 End*/
-
-//** Step 5 Calculations */
-    if ($('#select-3-16-2').val() == 'yes') {
-        Value_24 = 50
-    } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
-    } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
-    } else if (Value_15 >= 15001 && Value_15 <= 20000 ){ Value_24 = 15 
-    } else if (Value_15 >= 20001 && Value_15 <= 25000 ){ Value_24 = 20 
-    } else if (Value_15 >= 25001 && Value_15 <= 30000 ){ Value_24 = 25 
-    } else if (Value_15 >= 30001 && Value_15 <= 35000 ){ Value_24 = 30 
-    } else if (Value_15 >= 35000 && Value_15 <= 40000 ){ Value_24 = 35 
-    } else if (Value_15 >= 40001 && Value_15 <= 45000 ){ Value_24 = 40 
-    } else if (Value_15 >= 45001 && Value_15 <= 50000 ){ Value_24 = 45 
-    } else if (Value_15 >= 50001 ){ Value_24 = 50 
-    } else {Value_15 = 0}
-
-    if (Value_6 == 'Your Case is Weak') {
-        Value_25 = 0
-    } else { Value_25 = 350 }
-
-    Value_26 = Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value
-    Value_28 = Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value
-    Value_29 = (Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value) / 700
-
-    if (Value_29 < 0.92){
-        Value_31 = Value_11 * Value_29
-    } else {
-        Value_31 = Value_11 * 0.92
-    }
     
 
-//** Step 5 End */
+    //** Step 4 End*/
+
+    //** Step 5 Calculations */
+        if ($('#select-3-16-2').val() == 'yes') {
+            Value_24 = 50
+        } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
+        } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
+        } else if (Value_15 >= 15001 && Value_15 <= 20000 ){ Value_24 = 15 
+        } else if (Value_15 >= 20001 && Value_15 <= 25000 ){ Value_24 = 20 
+        } else if (Value_15 >= 25001 && Value_15 <= 30000 ){ Value_24 = 25 
+        } else if (Value_15 >= 30001 && Value_15 <= 35000 ){ Value_24 = 30 
+        } else if (Value_15 >= 35000 && Value_15 <= 40000 ){ Value_24 = 35 
+        } else if (Value_15 >= 40001 && Value_15 <= 45000 ){ Value_24 = 40 
+        } else if (Value_15 >= 45001 && Value_15 <= 50000 ){ Value_24 = 45 
+        } else if (Value_15 >= 50001 ){ Value_24 = 50 
+        } else {Value_15 = 0}
+
+        if (Value_6 == 'Your Case is Weak') {
+            Value_25 = 0
+        } else { Value_25 = 350 }
+
+        Value_26 = Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value
+        Value_28 = Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value
+        Value_29 = (Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value) / 700
+
+        if (Value_29 < 0.92){
+            Value_31 = Value_11 * Value_29
+        } else {
+            Value_31 = Value_11 * 0.92
+        }
+        
+
+    //** Step 5 End */
+
+    //** Step 6 Calculations */
+        var range = 0;
+        if (Value_29 <= 0.5 ) {range = 1}
+        if (Value_29 >= 0.51 && Value_29 <= 0.6 ) {range = 2}
+        if (Value_29 >= 0.61 && Value_29 <= 0.7 ) {range = 3}
+        if (Value_29 >= 0.72 && Value_29 <= 0.8 ) {range = 4}
+        if (Value_29 >= 0.81 && Value_29 <= 0.9 ) {range = 5}
+        if (Value_29 >= 0.91) {range = 6}
+        Value_33_Chart_Title = VLookUp( Step6Table,range,'Range','Title' )
+        Value_33_Chart_Text = VLookUp( Step6Table,range,'Range','Text' )
+    //** Step 6 End */
+
+
     DataForm = [
         {id: "Step1",
             Values: {
@@ -1663,15 +1797,25 @@ function GetStepsData() {
                 Val_31: Value_31,
                 Val_32: Value_29
             }
-
+        },
+        {id: "Step6",
+            Values: {
+                Val_33_Chart_Title: Value_33_Chart_Title,
+                Val_33_Chart_Text: Value_33_Chart_Text
+            }
         }
     ]
     console.log(DataForm);
 }
 
-
 $('#btn-next-step-modal').click(function (e) { 
+    GetStepsData();
     $("#wizard").steps('next');
+    if ( $('#ResultStep1').is(':visible') ){ showTab(0,'Step2') };
+    if ( $('#ResultStep2').is(':visible') ){ showTab(0,'Step3') };
+    if ( $('#ResultStep3').is(':visible') ){ showTab(0,'Step4') };
+    if ( $('#ResultStep4').is(':visible') ){ showTab(0,'Step5') };
+
     $('#StepResult').modal('toggle');
 });
 
@@ -1686,6 +1830,10 @@ function showTab(n,step) {
     x[n].style.display = "block";
     //... and fix the Previous/Next buttons:
     if (n == 0) {
+        //Hide others TAB
+        for (let index = 0; index < x.length; index++) {
+            if (index > 0 ){ x[index].style.display = 'none'  };
+        }
         currentTab = 0
         previousTab = 0
         if (step == 'Step1'){
@@ -1711,13 +1859,17 @@ function showTab(n,step) {
         if (step == 'Step5'){
             $('#prevBtn5').hide();
             $('#nextBtn5').show();
+        }; 
+        if (step == 'Step5'){
+            $('#prevBtn6').hide();
+            $('#nextBtn6').show();
         };        
         } else {
         if (step == 'Step1'){$('#prevBtn').show()};
         if (step == 'Step2'){$('#prevBtn2').show()};
         if (step == 'Step3'){$('#prevBtn3').show()};
         if (step == 'Step4'){$('#prevBtn4').show()};
-        if (step == 'Step5'){$('#prevBtn4').show()};
+        if (step == 'Step5'){$('#prevBtn5').show()};
     }
     /*
     if (n == (x.length - 1)) {
@@ -1778,11 +1930,13 @@ function nextPrev(n,step) {
             previousTab = currentTab
             currentTab = 5; //Skip to Q12
         }else if (x[currentTab].id == 'Q12' &&  $('#select-2-12').val() == 'yes'){
+            $('#attorney_no').hide();
             $('#attorney_yes').show();
             x[currentTab].style.display = "none";
             previousTab = currentTab
             currentTab = currentTab + n; 
         } else {
+            $('#attorney_yes').hide();
             $('#attorney_no').show();
             $('#input-2-13').val(SeparadorMiles(Math.round(Value_11 * 0.8)));
             x[currentTab].style.display = "none";
@@ -1795,6 +1949,7 @@ function nextPrev(n,step) {
         var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
         if (x[currentTab].id == 'Q16-Prev') {
             $('#input-3-16-1').val(SeparadorMiles(Value_11));
+            $('#select-3-16-2').val('');
             if (diff <= 0) {
                 $('#WhitinEvaluation').html('<h5>Your Recoverable Damages <span class="badge badge-primary">Are Not Within</span> your state&#39s small claim limit.</h5>');
                 $('#BellowLimit').hide();
@@ -1802,6 +1957,7 @@ function nextPrev(n,step) {
             }else{
                 $('#WhitinEvaluation').html('<h5>Your Recoverable Damages <span class="badge badge-primary">Are Within</span> your state&#39s small claim limit.</h5>');                
                 $('#AboveLimit').hide();
+                $('#select-3-16-3').val('');
                 $('#BellowLimit').show();
             }
             x[currentTab].style.display = "none";
@@ -1810,7 +1966,8 @@ function nextPrev(n,step) {
         } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0)) {
             x[currentTab].style.display = "none";
             previousTab = currentTab
-            currentTab = currentTab + n + 1;             
+            currentTab = currentTab + n + 1;
+            $('#select-3-18').val('no');           
         }else {
             x[currentTab].style.display = "none";
             previousTab = currentTab
@@ -1822,6 +1979,13 @@ function nextPrev(n,step) {
         previousTab = currentTab
         currentTab = currentTab + n;         
     }
+
+    if (step == 'Step5' && n == 1) {
+        x[currentTab].style.display = "none";
+        previousTab = currentTab
+        currentTab = currentTab + n;         
+    }
+
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
@@ -1862,7 +2026,7 @@ function nextPrev(n,step) {
             $('#ResultStep4Text2').text($('#StepResultText2').text());
             $('#ResultStep4Text3').text($('#StepResultText3').text());
             $('#ResultStep4').show();
-            console.log('aqui viene ' + DataForm)
+            //console.log('aqui viene ' + DataForm)
             //LoadTable Step5
             $('#tbl-row-1').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
             $('#tbl-row-2').text(DataForm[4]['Values']['Val_24']);
@@ -1876,7 +2040,16 @@ function nextPrev(n,step) {
             $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
             var num = DataForm[4]['Values']['Val_32']
             $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
-        }     
+        }
+        
+        if (step == 'Step5'){
+            CheckStep5();
+            $("#prevBtn5").hide();
+            $("#nextBtn5").hide();
+            $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p>' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
+            $("#wizard").steps('next');
+        }
+        
         previousTab = 0
         currentTab = 0//Reset Ordinal
         return false;
@@ -1958,7 +2131,7 @@ function validateForm(step) {
                 // and set the current valid status to false
                 valid = false;
                 if (step == 'Step3' && x[currentTab].id == 'Q16'){
-                    if ($('#select-3-16-3').val() != '' && $('#select-3-16-4').val() ) {
+                    if ($('#select-3-16-3').val() != '' && $('#select-3-16-4').val() != '' && $('#select-3-16-2').is(':hidden') ) {
                         s[i].className += " valid";
                         valid = true        
                     }
@@ -1990,38 +2163,38 @@ function fixStepIndicator(n) {
 }
 */
 
-    function SeparadorMiles(valor){
-        if (Number.isInteger(valor)){
-            var texto = valor.toString();
-            var textoabs = texto.replace("-", "");
-        }
-        else {
-            var texto = valor ;
-            var textoabs = Math.round(valor);
-        };
-        if ( textoabs.length > 6 ){
-        var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
-        }
-        else if (textoabs.length <= 6 && textoabs.length > 3) {
-        var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
-        } else {
-        var textoFinal = texto ;
-        };
-        return textoFinal ;
-    };
-
-
-    function VLookUp(object,value,attSearch,attResult){
-        var TempArray = object
-        var result = 'Not Found'
-        for (var i = 0; i <= TempArray.length; i++) {
-            if (TempArray[i][attSearch] == value ) {
-                result = TempArray[i][attResult]
-                return result
-            }
-        }
-               
+function SeparadorMiles(valor){
+    if (Number.isInteger(valor)){
+        var texto = valor.toString();
+        var textoabs = texto.replace("-", "");
     }
+    else {
+        var texto = valor ;
+        var textoabs = Math.round(valor);
+    };
+    if ( textoabs.length > 6 ){
+    var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
+    }
+    else if (textoabs.length <= 6 && textoabs.length > 3) {
+    var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
+    } else {
+    var textoFinal = texto ;
+    };
+    return textoFinal ;
+};
+
+
+function VLookUp(object,value,attSearch,attResult){
+    var TempArray = object
+    var result = 'Not Found'
+    for (var i = 0; i <= TempArray.length; i++) {
+        if (TempArray[i][attSearch] == value ) {
+            result = TempArray[i][attResult]
+            return result
+        }
+    }
+            
+}
 
 
 </script>
