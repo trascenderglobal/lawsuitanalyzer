@@ -82,19 +82,19 @@
 
         @media (min-width: 576px) {
             html { font-size: 0.75rem; }
-            .wizard > .content {min-height: 45em }
+            .wizard > .content {min-height: auto/*45em*/ }
         }
         @media (min-width: 768px) {
             html { font-size: 1rem; }
-            .wizard > .content {min-height: 45em }
+            .wizard > .content {min-height: auto/*45em*/ }
         }
         @media (min-width: 992px) {
             html { font-size: 1.25rem; }
-            .wizard > .content {min-height: 25em }
+            .wizard > .content {min-height: auto/*25em*/ }
         }
         @media (min-width: 1200px) {
             html { font-size: 1.25rem; }
-            .wizard > .content {min-height: 25em }
+            .wizard > .content {min-height: auto/*25em*/ }
         }
     </style>
 
