@@ -976,6 +976,7 @@ $(document).ready(function () {
             $('#BellowLimit').hide();
             $('#select-3-16-3').val('no');
             $('#select-3-16-4').val('no');
+            EasyAdvance('Step3');
         };
     });
 
@@ -986,16 +987,22 @@ $(document).ready(function () {
         }else {
             $('#ExcludeSmallClaims').hide();
             $('#select-3-16-4').val('no');
+            EasyAdvance('Step3');
         };
     });
+
+    $('#select-3-16-4').change(function () { 
+        if ($(this).val() !== '' && $('#select-3-16-3').val() !== '' && $('#select-3-16-2').val() !== ''){
+            EasyAdvance('Step3');
+        };
+    });
+
 
     $('#select-3-17').change(function () { 
         if ($(this).val() == 'yes'){
             $('#ExcludeSmallClaims').show();
-            $('#select-3-16-4').val('');
         }else {
             $('#ExcludeSmallClaims').hide();
-            $('#select-3-16-4').val('no');
         };        
     });
 
@@ -1037,29 +1044,30 @@ $(document).ready(function () {
 
     //Easy advance behaviour Step1
     $('#select-1-2,#select-1-3,#select-1-4,#select-1-5').change(function () { 
-        validateForm('Step1')
-        nextPrev(1,'Step1');
+        EasyAdvance('Step1');
     });
 
     //Easy advance behaviour Step2
     $('#select-2-12').change(function () { 
-        validateForm('Step2');
-        nextPrev(1,'Step2');
+        EasyAdvance('Step2');
     });
 
     $('#input-2-7,#input-2-8-1,#input-2-9-1,#input-2-10-2,#input-2-13,#input-2-14-1').keypress(function (e) { 
         var keycode = (e.keyCode ? e.keyCode : e.which);
         if(keycode == '13'){
-            validateForm('Step2')
-            nextPrev(1,'Step2');  
+            EasyAdvance('Step2')
         }        
     });
 
     //Easy advance behaviour Step3
     $('#select-3-17,#select-3-18,#select-3-19').change(function () { 
-        validateForm('Step3')
-        nextPrev(1,'Step3');
+        EasyAdvance('Step3');
     });
+
+    function EasyAdvance (step){
+        validateForm(step);
+        nextPrev(1,step)
+    }
 
 
     //SmallClaimData
@@ -1946,10 +1954,10 @@ function nextPrev(n,step) {
     }
 
     if (step == 'Step3' && n == 1){
+        console.log(x[currentTab].id + ' = '+ $('#select-3-16-3').val())
         var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
         if (x[currentTab].id == 'Q16-Prev') {
             $('#input-3-16-1').val(SeparadorMiles(Value_11));
-            $('#select-3-16-2').val('');
             if (diff <= 0) {
                 $('#WhitinEvaluation').html('<h5>Your Recoverable Damages <span class="badge badge-primary">Are Not Within</span> your state&#39s small claim limit.</h5>');
                 $('#BellowLimit').hide();
@@ -1957,9 +1965,15 @@ function nextPrev(n,step) {
             }else{
                 $('#WhitinEvaluation').html('<h5>Your Recoverable Damages <span class="badge badge-primary">Are Within</span> your state&#39s small claim limit.</h5>');                
                 $('#AboveLimit').hide();
-                $('#select-3-16-3').val('');
                 $('#BellowLimit').show();
             }
+            if ($('#select-3-16-2').val() == 'yes'){
+                $('#BellowLimit').show();        
+            }else {
+                $('#BellowLimit').hide();
+                $('#select-3-16-3').val('no');
+                $('#select-3-16-4').val('no');
+            };
             x[currentTab].style.display = "none";
             previousTab = currentTab
             currentTab = currentTab + n;                  
