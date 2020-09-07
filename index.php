@@ -1,3 +1,18 @@
+<?php
+    //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
+    //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
+    session_start();
+    if(empty(isset($_SESSION['user']))){
+      header('location:login.php');
+    }
+    if(isset($_SESSION['user'])){
+        if ($_SESSION['user'] == 'admin') {
+            header('location:login.php');
+        }
+    }
+?>
+
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -14,6 +29,7 @@
         <link rel="stylesheet" href="css/jquery.steps.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="shortcut icon" type="image/png" href="../analyzer/assets/Lawsuit-Analysis-Logo.png" >
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script src="lib/modernizr-2.6.2.min.js"></script>
         <script src="lib/jquery-3.5.1.min.js"></script>
         <script src="lib/jquery.cookie-1.3.1.js"></script>
@@ -80,26 +96,36 @@
         h1,h3 { color: #9E2D2D ; }
         label { color: #345B99;}
 
-        @media (min-width: 576px) {
-            html { font-size: 0.75rem; }
+        @media (max-width: 576px) {
+            html { font-size: 1rem; }
+            h2 {font-size: 1.75rem}
+            h3 {font-size: 1.25rem}
             .wizard > .content {min-height: auto/*45em*/ }
+            #StepCollapse { display: block; }
+            .wizard.vertical > .steps {display: none;}
         }
         @media (min-width: 768px) {
             html { font-size: 1rem; }
+            h2 {font-size: 2rem}
+            h3 {font-size: 1.5rem}
             .wizard > .content {min-height: auto/*45em*/ }
-        }
-        @media (min-width: 992px) {
-            html { font-size: 1.25rem; }
-            .wizard > .content {min-height: auto/*25em*/ }
+            .wizard.vertical > .steps {display: inline;}
         }
         @media (min-width: 1200px) {
             html { font-size: 1.25rem; }
             .wizard > .content {min-height: auto/*25em*/ }
+            .wizard.vertical > .steps {display: inline;}
         }
     </style>
 
 
+
         <header>
+            <?php  
+                //define( 'WP_USE_THEMES', false );
+                //get_header(); 
+            ?>
+
             <h1 style="text-align: center;">Lawsuit Analyzer</h1>
             <h4 style="text-align: center;"> Receive a professional legal analysis of your dispute</h4>
         </header>
@@ -120,7 +146,15 @@
             </script>
             <div class="container-fluid">
                 <div id="wizard">
-                    <h2 style="text-align: center !important;">Legal Evaluation</h2>
+                    <div class="row">
+                        <button id="StepCollapse" class="btn btn-info w-100" type="button" style="background-color: #9E2D2D;">
+                            <i class="fa fa-align-left"></i>
+                            <span id = "ToggleBtnText">Show Steps</span>
+                        </button>             
+                    </div>
+
+                    
+                    <h2>Legal Evaluation</h2>
                     <section>
                         <div class="container-fluid">
                             <div class="row">
@@ -132,7 +166,7 @@
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
+                                                <img src="assets/helpimage.png" alt="Help Image">
                                             </a>
                                         </div>
                                     </div> 
@@ -219,7 +253,7 @@
                                                 </div>
 
                                             </form>
-                                            <div id="ResultStep1">
+                                            <div id="ResultStep1" style="display: none;">
                                                 <h4 id="ResultStep1Text1"></h6>    
                                                 <button class="btn btn-info" type="button" onclick="showTab(0,'Step1')">Edit answers</button>
                                             </div>
@@ -230,7 +264,7 @@
                         </div>
                     </section>
 
-                    <h2>Case Value Assesment</h2>
+                    <h2>Case Value Assessment</h2>
                     <section>
                         <div class="container-fluid">
                             <div class="row">
@@ -406,7 +440,7 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <div id="ResultStep2">
+                                            <div id="ResultStep2" style="display: none;">
                                                 <h4 id="ResultStep2Text1"></h6>
                                                 <h4 id="ResultStep2Text2"></h6>
                                                 <h4 id="ResultStep2Text3"></h6>
@@ -777,6 +811,7 @@
                                                 </div>
                                                 <div style="overflow:auto; margin-top: 15px;">
                                                     <div style="float:right;">
+                                                        <p>CONTINUE IF YOU HAVE DECIDED TO MOVE FORWARD WITH YOUR DISPUTE</p>
                                                         <button type="button" id="prevBtn6" class="btn btn-secondary" onclick="nextPrev(-1,'Step6')">Previous</button>
                                                         <button type="button" id="nextBtn6" class="btn btn-success" onclick="nextPrev(1,'Step6')">Next</button>
                                                     </div>
@@ -808,12 +843,39 @@
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step7">
-                                                <div id="Q33Chart" class="tab">
-                                                    <p id="NoteStep6">Note: Always remember to exhaust all settlement possibilities before pursuing your case through legal channels. Remember also, the case value we’re talking about is the one at row 23 of step five's table.</p>
-                                                    <br>
-                                                    <div id="ResultStep6"> 
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
-                                                    </div>            
+                                                <div id="Q34Last" class="tab">
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-12 d-flex justify-content-center justify-content-md-end" >
+                                                            <h4>Mediation</h4>
+                                                        </div>
+                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
+                                                            <p id="ResultStep7_1"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
+                                                            <h4>Recoverable Damages</h4>
+                                                        </div>
+                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
+                                                            <p id="ResultStep7_2"></p>
+                                                        </div>
+                                                    </div>                                                
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
+                                                            <h4>Small Claims limit</h4>
+                                                        </div>
+                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
+                                                            <p id="ResultStep7_3"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
+                                                            <h4>Forum Assessment</h4>
+                                                        </div>
+                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
+                                                            <p id="ResultStep7_4"></p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div style="overflow:auto; margin-top: 15px;">
                                                     <div style="float:right;">
@@ -875,6 +937,8 @@ $(document).ready(function () {
     $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
     //HidePreviousButton
     $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6").hide();
+    //Hide Toggle Button
+    //$("#StepCollapse").hide();
 
     $("#select-1-4").change(function(){
         if ($(this).val() == 'yes'){
@@ -998,6 +1062,7 @@ $(document).ready(function () {
     });
 
 
+/*
     $('#select-3-17').change(function () { 
         if ($(this).val() == 'yes'){
             $('#ExcludeSmallClaims').show();
@@ -1005,7 +1070,7 @@ $(document).ready(function () {
             $('#ExcludeSmallClaims').hide();
         };        
     });
-
+*/
 
 /*
     $("#input-2-7").on({
@@ -1058,10 +1123,34 @@ $(document).ready(function () {
             EasyAdvance('Step2')
         }        
     });
-
+    
+    $("input[type='radio'][name='attorney']").click(function(){
+        var selected = $("input[type='radio'][name='attorney']:checked");
+        if (selected.length > 0) {
+            EasyAdvance('Step2')
+        } 
+    });
+    
     //Easy advance behaviour Step3
     $('#select-3-17,#select-3-18,#select-3-19').change(function () { 
         EasyAdvance('Step3');
+    });
+
+    //Easy advance behaviour Step4
+    $("input[type='radio'][name='adversary']").click(function(){
+        var selected = $("input[type='radio'][name='adversary']:checked");
+        if (selected.length > 0) {
+            EasyAdvance('Step4')
+        } 
+    });
+
+    $("#StepCollapse").click(function () { 
+        if ( $(".steps").is(":visible")) {
+            $(".steps").hide();
+        } else {
+            $(".steps").show();
+            $("#ToggleBtnText").text('Hide Steps');
+        }
     });
 
     function EasyAdvance (step){
@@ -1411,6 +1500,8 @@ $(document).ready(function () {
     for (var i = 0; i <= SmallClaimsTable.length; i++) {
         $('#select-3-16').append('<option value="' + SmallClaimsTable[i]['Abrev'] + '">' + SmallClaimsTable[i]['State'] + '</option>');
     }
+
+
 });
 //Script For Step Behaviour
 var currentTab = 0; 
@@ -1421,6 +1512,7 @@ showTab(currentTab,'Step3');
 showTab(currentTab,'Step4');
 showTab(currentTab,'Step5');
 showTab(currentTab,'Step6');
+showTab(currentTab,'Step7');
 
 var DataForm;
 
@@ -1525,7 +1617,14 @@ function CheckStep5(){
     console.log(DataForm);
 }
 
-
+function CheckStep6(){
+    GetStepsData();
+    console.log(DataForm);
+    $('#ResultStep7_1').text( DataForm[6]['Values']['Val_34'] );
+    $('#ResultStep7_2').text( DataForm[6]['Values']['Val_35'] );
+    $('#ResultStep7_3').text( DataForm[6]['Values']['Val_36'] );
+    $('#ResultStep7_4').text( DataForm[6]['Values']['Val_38'] );
+}
 
 var Value_6,
     Value_8, Value_9, Value_8_plus_9, 
@@ -1533,7 +1632,8 @@ var Value_6,
     Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value, 
     selectedVal_Step4 , Value_21_Value , Value_22_Value,
     Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
-    Value_33_Chart_Title,Value_33_Chart_Text;
+    Value_33_Chart_Title,Value_33_Chart_Text,
+    Value_34_Text;
 
 function GetStepsData() {
     //** Step 1 Calculations */
@@ -1609,7 +1709,7 @@ function GetStepsData() {
         console.log(diff)
         console.log($('#SmallClaimLimitResult').text().replace(",",""))
         var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
-        if (diff <= 0) {
+        if (diff < 0) {
             Value_16_1 = 'Are Not Within'
             if ($('#select-3-16-2').val() == 'yes') {
                 if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'no') {
@@ -1685,7 +1785,7 @@ function GetStepsData() {
     //** Step 4 End*/
 
     //** Step 5 Calculations */
-        if ($('#select-3-16-2').val() == 'yes') {
+        if (diff >= 0) {
             Value_24 = 50
         } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
         } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
@@ -1718,17 +1818,22 @@ function GetStepsData() {
 
     //** Step 6 Calculations */
         var range = 0;
+        var temp = Math.round(Value_29,2)
         if (Value_29 <= 0.5 ) {range = 1}
-        if (Value_29 >= 0.51 && Value_29 <= 0.6 ) {range = 2}
-        if (Value_29 >= 0.61 && Value_29 <= 0.7 ) {range = 3}
-        if (Value_29 >= 0.72 && Value_29 <= 0.8 ) {range = 4}
-        if (Value_29 >= 0.81 && Value_29 <= 0.9 ) {range = 5}
-        if (Value_29 >= 0.91) {range = 6}
+        if (Value_29 > 0.5 && Value_29 <= 0.6 ) {range = 2}
+        if (Value_29 > 0.6 && Value_29 <= 0.7 ) {range = 3}
+        if (Value_29 > 0.7 && Value_29 <= 0.8 ) {range = 4}
+        if (Value_29 > 0.8 && Value_29 <= 0.9 ) {range = 5}
+        if (Value_29 > 0.9) {range = 6}
         Value_33_Chart_Title = VLookUp( Step6Table,range,'Range','Title' )
         Value_33_Chart_Text = VLookUp( Step6Table,range,'Range','Text' )
     //** Step 6 End */
 
+    //** Step 7 Calculations */
+        Value_34_Text = 'sfasdfas'
 
+
+    //** Step 7 End */
     DataForm = [
         {id: "Step1",
             Values: {
@@ -1811,6 +1916,15 @@ function GetStepsData() {
                 Val_33_Chart_Title: Value_33_Chart_Title,
                 Val_33_Chart_Text: Value_33_Chart_Text
             }
+        },
+        {id: "Step7",
+            Values: {
+                Val_34: 'Medition Results',
+                Val_35: Value_11,
+                Val_36: $('#SmallClaimLimitResult').text().replace(",",""),
+                Val_37: '',
+                Val_38: 'Forum assesment results'
+            }
         }
     ]
     console.log(DataForm);
@@ -1868,7 +1982,7 @@ function showTab(n,step) {
             $('#prevBtn5').hide();
             $('#nextBtn5').show();
         }; 
-        if (step == 'Step5'){
+        if (step == 'Step6'){
             $('#prevBtn6').hide();
             $('#nextBtn6').show();
         };        
@@ -1878,6 +1992,7 @@ function showTab(n,step) {
         if (step == 'Step3'){$('#prevBtn3').show()};
         if (step == 'Step4'){$('#prevBtn4').show()};
         if (step == 'Step5'){$('#prevBtn5').show()};
+        if (step == 'Step6'){$('#prevBtn6').show()};
     }
     /*
     if (n == (x.length - 1)) {
@@ -1967,10 +2082,10 @@ function nextPrev(n,step) {
                 $('#AboveLimit').hide();
                 $('#BellowLimit').show();
             }
-            if ($('#select-3-16-2').val() == 'yes'){
+            if ($('#select-3-16-2').val() == 'yes' ){
                 $('#BellowLimit').show();        
             }else {
-                $('#BellowLimit').hide();
+                if (diff <= 0 ) { $('#BellowLimit').hide() };
                 $('#select-3-16-3').val('no');
                 $('#select-3-16-4').val('no');
             };
@@ -1995,11 +2110,16 @@ function nextPrev(n,step) {
     }
 
     if (step == 'Step5' && n == 1) {
-        x[currentTab].style.display = "none";
+        //x[currentTab].style.display = "none";
         previousTab = currentTab
         currentTab = currentTab + n;         
     }
 
+    if (step == 'Step6' && n == 1) {
+        //x[currentTab].style.display = "none";
+        previousTab = currentTab
+        currentTab = currentTab + n;         
+    }
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
@@ -2063,6 +2183,13 @@ function nextPrev(n,step) {
             $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p>' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
             $("#wizard").steps('next');
         }
+
+        if (step == 'Step6'){
+            CheckStep6();
+            $("#prevBtn6").hide();
+            $("#nextBtn6").hide();
+            $("#wizard").steps('next');
+        }
         
         previousTab = 0
         currentTab = 0//Reset Ordinal
@@ -2109,7 +2236,7 @@ function validateForm(step) {
         if (step == 'Step4' && x[currentTab].id == 'Q21' ){
             var selected = $("input[type='radio'][name='adversary']:checked");
             if (selected.length == 0) {
-                $('#adversary_check').css('background-color', '#ffdddd');;
+                $('#adversary_check').css('background-color', '#ffdddd');
                 valid = false;
             }
         }
