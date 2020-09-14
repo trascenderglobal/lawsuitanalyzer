@@ -169,7 +169,17 @@
                                                 <img src="assets/helpimage.png" alt="Help Image">
                                             </a>
                                         </div>
-                                    </div> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step1" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>
                                     <div class="row"  > 
                                         <div class="col" style="text-align: center;" >
                                             <form id="Step1" >
@@ -280,6 +290,16 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step2" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>                                    
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step2">
@@ -468,7 +488,17 @@
                                                 <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
                                             </a>
                                         </div>
-                                    </div>                            
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step3" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>                                                               
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step3">
@@ -610,6 +640,16 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step4" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>                                    
+                                    <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step4">
                                                 <div id="Q21" class = "tab">                                        
@@ -698,6 +738,16 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step5" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>                                    
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step5">
@@ -798,7 +848,17 @@
                                                 <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
                                             </a>
                                         </div>
-                                    </div>                            
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step6" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>                                                               
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step6">
@@ -839,7 +899,17 @@
                                                 <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
                                             </a>
                                         </div>
-                                    </div>                            
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 sm-2"></div>
+                                        <div class="col-lg-4 sm-8">
+                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
+                                            <div class="progress" style="background: #D8D9DD;" >                                                
+                                                <div id="progress_Step7" class="progress-bar" style="background: #345B99;"></div>
+                                            </div>                                        
+                                        </div>
+                                        <div class="col-lg-4 sm-2"></div>
+                                    </div>                                                            
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step7">
@@ -1949,6 +2019,13 @@ function showTab(n,step) {
     console.log(n + '  -  ' + step)
     var stp = document.getElementById(step)
     var x = stp.getElementsByClassName("tab");
+    //Progress BAR
+    var progr = ( (n+1) / x.length) * 100
+    if (progr == 100 ){progr = 95}
+    $('#progress_' + step).css('width', progr.toString() + '%');
+    $('#progress_' + step).text(progr.toString() + '%');
+    $('#progress_' + step).removeClass('bg-success');
+    //console.log(progr.toString + '%')
     x[n].style.display = "block";
     //... and fix the Previous/Next buttons:
     if (n == 0) {
@@ -2193,6 +2270,11 @@ function nextPrev(n,step) {
         
         previousTab = 0
         currentTab = 0//Reset Ordinal
+        //PROGRESS BAR
+        $('#progress_' + step).css('width', '100%');
+        $('#progress_' + step).addClass('bg-success');
+        $('#progress_' + step).text('100%');
+
         return false;
     }
     // Otherwise, display the correct tab:

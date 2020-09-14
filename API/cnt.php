@@ -1,5 +1,6 @@
 <?php
-    //$mysqli = new mysqli( 'localhost','ofeliac2_adminbl', 'Happy2Day.,','ofeliac2_ordenes_oc');
+    //$mysqli = new mysqli( 'localhost','urbxspau9akvb', 'pydtd83aw5hz','dbkzbyfzdt6adn'); //Producción
+    //$mysqli = new mysqli( 'localhost','sp3_adminbinius', 'Happy2Grow.,','sp3_lawsuit_analyzer_form'); //SP3
     $mysqli = new mysqli( 'localhost','root', '','lawsuit_analyzer_form');
     $mysqli->set_charset('utf8');
     
