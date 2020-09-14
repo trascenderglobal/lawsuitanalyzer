@@ -170,7 +170,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -290,7 +290,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -489,7 +489,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -639,7 +639,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -738,7 +738,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -849,7 +849,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -886,7 +886,7 @@
 
                     <h2>Forum Assessment</h2>
                     <section>
-                    <div class="container-fluid">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
@@ -900,7 +900,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="margin-bottom: 15px;">
                                         <div class="col-lg-4 sm-2"></div>
                                         <div class="col-lg-4 sm-8">
                                             <p style="text-align: center;margin-bottom: 0">Progress</p>
@@ -1625,75 +1625,86 @@ var Step6Table = [
     }
 ]
 
-function CheckStep1(){
-    GetStepsData(); 
-    console.log(DataForm);
-    $('#StepResult').modal({backdrop: 'static', keyboard: false});
-    $('#StepResultTitle').text('This is Your Legal Evaluation');
-    $('#StepResultText1').text(DataForm[0]['Values']['Val_6']);
-    $('#StepResultText2').text('')
-    $('#StepResultText3').text('')
-    $('#StepResultDetailsHeader').text('')
-    $('#StepResultDetailsText').text('')
-}
 var Result1, Result2, Result3;
 
-function CheckStep2(){
-    GetStepsData();
-    console.log(DataForm);  
-    $('#StepResult').modal({backdrop: 'static', keyboard: false});
-    $('#StepResultTitle').text('Case Value Assessment.');
-    Result1 = parseInt($('#input-2-7').val().replace(",","")  ,10)
-    if (!isNaN(DataForm[1]['Values']['Val_11'])) {
-        var Result2 = DataForm[1]['Values']['Val_11']
-    }
-    if (!isNaN(DataForm[1]['Values']['Val_15'])) {
-        var Result3 = DataForm[1]['Values']['Val_15']
-    }        
-    $('#StepResultText1').text('$ ' + SeparadorMiles(Result1) + ' is your Total Damages [Question 5].');
-    $('#StepResultText2').text('$ ' + SeparadorMiles(Result2) + ' is your Recoverable Damages based on answers to Questions 6-8.');
-    $('#StepResultText3').text('$ ' + SeparadorMiles(Result3) + ' is your Overall Case Value Assessment which includes answers to Questions 9-10. This is the amount you are likely to recover.');
-    //$('#StepResultDetailsHeader').text('Whats does mean that amount?');
-    //$('#StepResultDetailsText').text('This is the amount you are likely to recover.');
-}
-
-function  CheckStep3 () {
-    GetStepsData();
-    console.log(DataForm);
-    $('#StepResult').modal({backdrop: 'static', keyboard: false});
-    $('#StepResultTitle').text('This is your Legal Options Assessment');
-    $('#StepResultText1').text( DataForm[2]['Values']['Val_20'])
-    $('#StepResultText2').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.')
-    $('#StepResultText3').text('')
-    $('#StepResultDetailsHeader').text('')
-    $('#StepResultDetailsText').text('')
-    //ResultStep3Text1
-}
-
-function CheckStep4 (){
-    GetStepsData();
-    console.log(DataForm)
-    $('#StepResult').modal({backdrop: 'static', keyboard: false});
-    $('#StepResultTitle').text('This is your Collectability Assessment.');
-    $('#StepResultText1').text( DataForm[3]['Values']['Val_22'])
-    $('#StepResultText2').text('Because your adversary is or does ' + DataForm[3]['Values']['Val_21_Value'])
-    $('#StepResultText3').text('')
-    $('#StepResultDetailsHeader').text('')
-    $('#StepResultDetailsText').text('')
-}
-
-function CheckStep5(){
-    GetStepsData();
-    console.log(DataForm);
-}
-
-function CheckStep6(){
-    GetStepsData();
-    console.log(DataForm);
-    $('#ResultStep7_1').text( DataForm[6]['Values']['Val_34'] );
-    $('#ResultStep7_2').text( DataForm[6]['Values']['Val_35'] );
-    $('#ResultStep7_3').text( DataForm[6]['Values']['Val_36'] );
-    $('#ResultStep7_4').text( DataForm[6]['Values']['Val_38'] );
+function CheckStep(Step,ShowModal){
+    if ( Step == 'Step1') {
+        GetStepsData(); 
+        console.log(DataForm);
+        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        $('#StepResultTitle').text('This is Your Legal Evaluation');
+        $('#StepResultText1').text(DataForm[0]['Values']['Val_6']);
+        $('#StepResultText2').text('')
+        $('#StepResultText3').text('')
+        $('#StepResultDetailsHeader').text('')
+        $('#StepResultDetailsText').text('')
+    };
+    if ( Step == 'Step2') {
+        GetStepsData();
+        console.log(DataForm); 
+        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        $('#StepResultTitle').text('Case Value Assessment.');
+        Result1 = parseInt($('#input-2-7').val().replace(",","")  ,10)
+        if (!isNaN(DataForm[1]['Values']['Val_11'])) {
+            var Result2 = DataForm[1]['Values']['Val_11']
+        }
+        if (!isNaN(DataForm[1]['Values']['Val_15'])) {
+            var Result3 = DataForm[1]['Values']['Val_15']
+        }        
+        $('#StepResultText1').text('$ ' + SeparadorMiles(Result1) + ' is your Total Damages [Question 5].');
+        $('#StepResultText2').text('$ ' + SeparadorMiles(Result2) + ' is your Recoverable Damages based on answers to Questions 6-8.');
+        $('#StepResultText3').text('$ ' + SeparadorMiles(Result3) + ' is your Overall Case Value Assessment which includes answers to Questions 9-10. This is the amount you are likely to recover.');
+        //$('#StepResultDetailsHeader').text('Whats does mean that amount?');
+        //$('#StepResultDetailsText').text('This is the amount you are likely to recover.');
+    };
+    if ( Step == 'Step3') {
+        GetStepsData();
+        console.log(DataForm);
+        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        $('#StepResultTitle').text('This is your Legal Options Assessment');
+        $('#StepResultText1').text( DataForm[2]['Values']['Val_20'])
+        $('#StepResultText2').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.')
+        $('#StepResultText3').text('')
+        $('#StepResultDetailsHeader').text('')
+        $('#StepResultDetailsText').text('')
+        //ResultStep3Text1
+    };
+    if ( Step == 'Step4') {
+        GetStepsData();
+        console.log(DataForm)
+        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        $('#StepResultTitle').text('This is your Collectability Assessment.');
+        $('#StepResultText1').text( DataForm[3]['Values']['Val_22'])
+        $('#StepResultText2').text('Because your adversary is or does ' + DataForm[3]['Values']['Val_21_Value'])
+        $('#StepResultText3').text('')
+        $('#StepResultDetailsHeader').text('')
+        $('#StepResultDetailsText').text('')
+    };
+    if ( Step == 'Step5') {
+        GetStepsData();
+        //LoadTable Step5
+        $('#tbl-row-1').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
+        $('#tbl-row-2').text(DataForm[4]['Values']['Val_24']);
+        $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
+        $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
+        $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
+        $('#tbl-row-6').text(DataForm[4]['Values']['Val_28']);
+        $('#To_Hide').hide();
+        $('#tbl-row-7').text(DataForm[4]['Values']['Val_29']);
+        $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
+        $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
+        var num = DataForm[4]['Values']['Val_32']
+        $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+        console.log(DataForm);
+    };
+    if ( Step == 'Step6') {
+        GetStepsData();
+        console.log(DataForm);
+        $('#ResultStep7_1').text( DataForm[6]['Values']['Val_34'] );
+        $('#ResultStep7_2').text( DataForm[6]['Values']['Val_35'] );
+        $('#ResultStep7_3').text( DataForm[6]['Values']['Val_36'] );
+        $('#ResultStep7_4').text( DataForm[6]['Values']['Val_38'] );
+    };    
 }
 
 var Value_6,
@@ -1855,7 +1866,7 @@ function GetStepsData() {
     //** Step 4 End*/
 
     //** Step 5 Calculations */
-        if (diff >= 0) {
+        if (diff >= 0 || $('#select-3-16-2').val() == 'yes' ){
             Value_24 = 50
         } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
         } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
@@ -2002,12 +2013,36 @@ function GetStepsData() {
 
 $('#btn-next-step-modal').click(function (e) { 
     GetStepsData();
-    $("#wizard").steps('next');
+    //var LastStep = $("#wizard").steps('getCurrentIndex')
+    var tablist = document.querySelector('[role="tablist"]');
+    var tabs = tablist.getElementsByTagName('li');
+    var ActiveTab = 0;
+    var lastdone = 0;
+    for (let index = 0; index < tabs.length; index++) {
+        if (tabs[index].className.includes('current')) { ActiveTab =  index  } ;
+        if (tabs[index].className.includes('done')) {lastdone = index } ; 
+    }
+    if (lastdone != 0 && ActiveTab < lastdone  ){  
+        for (let index = 0; index < (lastdone - ActiveTab); index++) {
+            $("#wizard").steps('next');
+        }
+        //recalculate
+        for (let index = 0; index <= lastdone; index++) {
+            var localstep = 'Step' + (index + 1)
+            CheckStep(localstep,false)
+            console.log('Ejecutó: ' + localstep)
+        }
+    } else {
+        $("#wizard").steps('next'); //Show the Next Step.
+    }
+
+    //Evaluate if the first tab from next step must be showed
+    /*
     if ( $('#ResultStep1').is(':visible') ){ showTab(0,'Step2') };
     if ( $('#ResultStep2').is(':visible') ){ showTab(0,'Step3') };
     if ( $('#ResultStep3').is(':visible') ){ showTab(0,'Step4') };
     if ( $('#ResultStep4').is(':visible') ){ showTab(0,'Step5') };
-
+    */
     $('#StepResult').modal('toggle');
 });
 
@@ -2201,7 +2236,7 @@ function nextPrev(n,step) {
     if (currentTab >= x.length) {
         // ... the form gets submitted:
         if (step == 'Step1'){ 
-            CheckStep1();
+            CheckStep(step,true);
             $('#prevBtn').hide();
             $("#nextBtn").hide();
             //StepResults StepView
@@ -2209,7 +2244,7 @@ function nextPrev(n,step) {
             $('#ResultStep1').show();
         }
         if (step == 'Step2'){ 
-            CheckStep2();
+            CheckStep(step,true);
             $("#prevBtn2").hide();
             $("#nextBtn2").hide();
             //StepResults StepView
@@ -2219,7 +2254,7 @@ function nextPrev(n,step) {
             $('#ResultStep2').show();
         }  
         if (step == 'Step3') {
-            CheckStep3();
+            CheckStep(step,true);
             $("#prevBtn3").hide();
             $("#nextBtn3").hide();
             //StepResults StepView
@@ -2229,7 +2264,7 @@ function nextPrev(n,step) {
             $('#ResultStep3').show();            
         }
         if (step == 'Step4'){
-            CheckStep4();
+            CheckStep(step,true);
             $("#prevBtn4").hide();
             $("#nextBtn4").hide();
             //StepResults StepView
@@ -2254,7 +2289,7 @@ function nextPrev(n,step) {
         }
         
         if (step == 'Step5'){
-            CheckStep5();
+            CheckStep(step,true);
             $("#prevBtn5").hide();
             $("#nextBtn5").hide();
             $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p>' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
@@ -2262,7 +2297,7 @@ function nextPrev(n,step) {
         }
 
         if (step == 'Step6'){
-            CheckStep6();
+            CheckStep(step,true);
             $("#prevBtn6").hide();
             $("#nextBtn6").hide();
             $("#wizard").steps('next');
