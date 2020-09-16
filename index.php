@@ -756,63 +756,54 @@
                                                         <table class="table table-bordered table-sm">
                                                             <thead class="thead-light">
                                                                 <tr>
-                                                                    <th scope="col">Q.</th>
-                                                                    <th scope="col">Item</th>
-                                                                    <th scope="col">Value</th>
+                                                                    <th colspan="2" scope="col">Results Carried Forward:</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td>23</td>
-                                                                    <td>YOUR CASE VALUE</td>
+                                                                    <td>Phase 1, Legal Evaluation [Range: 0 or 350]</td>
                                                                     <td id="tbl-row-1"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>24</td>
-                                                                    <td>YOUR CASE VALUE ASSESSMENT</td>
+                                                                    <td>Phase 2, Case Value Assessment [Unique to your case]</td>
                                                                     <td id="tbl-row-2"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>25</td>
-                                                                    <td>YOUR LEGAL EVALUATION</td>
+                                                                    <td>Case Value Assessment Algorithm [Range: 5-50]</td>
                                                                     <td id="tbl-row-3"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>26</td>
-                                                                    <td>YOUR LEGAL OPTIONS ASSESSMENT</td>
+                                                                    <td>Phase 3, Legal Options Assessment [Range: 0 -175]</td>
                                                                     <td id="tbl-row-4"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>27</td>
-                                                                    <td>YOUR COLLECTABILITY ASSESSMENT</td>
+                                                                    <td>Phase 4, Collectability Assessment [Range 0-150]</td>
                                                                     <td id="tbl-row-5"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>28</td>
-                                                                    <td>TOTAL OF ABOVE ASSESSMENTS</td>
-                                                                    <td id="tbl-row-6"> 0 </td>   
+                                                                    <td></td>
+                                                                    <td id="tbl-row-6">  </td>   
                                                                 </tr>
-                                                                <tr id="To_Hide">
-                                                                    <td>29</td>
-                                                                    <td>HIDE ROW</td>
-                                                                    <td id="tbl-row-7"> 0 </td>   
-                                                                </tr>
+                                                            </tbody>
+                                                            <thead class="thead-light">
                                                                 <tr>
-                                                                    <td>30</td>
-                                                                    <td>YOUR RECOVERABLE DAMAGES</td>
+                                                                    <th colspan="2" scope="col">Comprehensive Case Assessment:</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Recoverable Damages [Differs from Case Value Assessment]</td>
                                                                     <td id="tbl-row-8"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>31</td>
-                                                                    <td>YOUR SETTLEMENT AMOUNT</td>
+                                                                    <td>Suggested Settlement Amount</td>
                                                                     <td id="tbl-row-9"> 0 </td>   
                                                                 </tr>
 
                                                             </tbody>
                                                             <tfoot>
                                                                 <tr>
-                                                                    <th scope="row">32</th>
-                                                                    <th scope="row">YOUR CASE FEASIBILITY ASSESSMENT</th>
+                                                                    <th scope="row">Case Feasibility Assessment [Range 0-106%]</th>
                                                                     <th id="tbl-row-10" scope="row">0</th>
                                                                 </tr>
                                                             </tfoot>
@@ -1591,32 +1582,32 @@ var Step6Table = [
     {
         Range: 6,
         Title: "91% and above",
-        Text: "—Case feasibility is very good. You should proceed forward with your case."
+        Text: "Case feasibility is very good. You should proceed forward with your case."
     },
     {
         Range: 5,
         Title: "81% to 90%",
-        Text: "—Case feasibility is good. You should proceed forward with your case, but make best attempts to resolve your dispute through Last Chance Exercise and mediation first."
+        Text: "Case feasibility is good. You should proceed forward with your case, but make best attempts to resolve your dispute through Last Chance Exercise and Mediation first."
     },
     {
         Range: 4,
         Title: "71% to 80%",
-        Text: "—Case feasibility is reasonably good. If binding arbitration is your route, move forward but if there is an attorney fees provision, be aware that if you lose, you must pay your opponent’s attorney fees. If binding arbitration is not your route, you should proceed forward with your case only after proposing a Multi-Step ADR Agreement or Binding Arbitration Agreement to your adversary [See Appendix]. If consent is not obtained, pursue your case only after you have repeatedly attempted settlement. And remember: you may be in this category with a winning case and the best chances of collection, but since you have to travel the court maze, your feasibility is reduced."
+        Text: "Case feasibility is reasonably good. If binding arbitration is your route, move forward but if there is an attorney fees provision, be aware that if you lose, you must pay your opponent’s attorney fees. If binding arbitration is not your route, you should proceed forward with your case only after proposing a Multi-Step <a href='#'>ADR Agreement </a> or <a href='#'>Binding Arbitration Agreement </a> to your adversary. If your adversary will not agree to these alternative dispute resolution methods, pursue your case only after you have repeatedly attempted settlement. And remember: you may be in this category with a winning case and the best chances of collection, but since you have to travel the court maze, your feasibility is reduced.."
     },
     {
         Range: 3,
         Title: "61% to 70%",
-        Text: "—Your case feasibility is mid-range.\r\nIf you have a Binding Arbitration Agreement but no attorney fee provision, proceed forward. The dispute will be determined soon and you won’t be paying your opponent’s attorney fees if you lose. But first, attempt settlement and mediation.\r\nIf you have a binding arbitration provision and an attorney fees provision:\r\n1.     If you are at the high end of this category, you should proceed forward with the reminder that if you lose you will pay your adversary’s attorney fees.\r\n2.     If you are at the low end of this category, you should carefully consider your risk of losing and being hit with your opponent’s attorney fee tab. Do everything you can to settle your case. Proceed cautiously if you must thereafter.\r\nIf there is an attorney fee provision and no binding arbitration provision, you should lean more in favor of pursuing your dispute only by settlement. It may not be worthwhile to take this case into the expensive court forum, especially considering your exposure with an attorney fee provision. Proceed cautiously if you must.\r\nIf there is no attorney fee provision or binding arbitration provision, proceed only if you are at the high end of this category. Otherwise, it may not be worthwhile to take this case into the expensive court forum. Proceed cautiously if you must."
+        Text: "Your case feasibility is mid-range. If you have a Binding Arbitration Agreement but no attorney fee provision, proceed forward. The dispute will be determined soon and you won’t be paying your opponent’s attorney fees if you lose. But first, attempt settlement and mediation. If you have a binding arbitration provision and an attorney fees provision: 1. If you are at the high end of this category, you should proceed forward with the reminder that if you lose you will pay your adversary’s attorney fees. 2.  If you are at the low end of this category, you should carefully consider your risk of losing and being hit with your opponent’s attorney fee tab. Do everything you can to settle your case. Proceed cautiously if you must thereafter. If there is an attorney fee provision and no binding arbitration provision, you should lean more in favor of pursuing your dispute only by settlement. It may not be worthwhile to take this case into the expensive court forum, especially considering your exposure with an attorney fee provision. Proceed cautiously if you must. If there is no attorney fee provision or binding arbitration provision, proceed only if you are at the high end of this category. Otherwise, it may not be worthwhile to take this case into the expensive court forum. Proceed cautiously if you must..."
     },
     {
         Range: 2,
         Title: "51% to 60%",
-        Text: "—Make every attempt to settle your dispute at the suggested settlement figure. Carefully review all phases of The Pocket Lawyer Analyzer before you proceed. Always remember: if there’s an attorney fee provision and you lose, you’ll have to pay your adversary’s attorney fees. If you have slim chances of collecting on a judgment, perhaps it doesn’t make sense to proceed. If your case value is low and you have to travel the demanding court system, you may very well not want to go the long haul. If you are on the low side of this range, your feasibility indicates you should not pursue your case. Otherwise, proceed very cautiously if you must."
+        Text: "Make every attempt to settle your dispute at the suggested settlement figure. Always remember: if there’s an attorney fee provision and you lose, you’ll have to pay your adversary’s attorney fees. If you have slim chances of collecting on a judgment, perhaps it doesn’t make sense to proceed. If your case value is low and you have to travel the demanding court system, you may very well not want to go the long haul. If you are on the low side of this range, your feasibility indicates you should not pursue your case. Otherwise, proceed very cautiously if you must..."
     },
     {
         Range: 1,
         Title: "50% and below",
-        Text: "—You are discouraged from pursuing your case to judgment, but don’t let your opponent know that or you’ll never reach settlement. Encourage settlement again and again. After that, one mediation session is warranted. In view of mediation’s 85% success rate and your realistic attitude (given your low feasibility rating), the chances of success at mediated settlement are very high."
+        Text: "You are discouraged from pursuing your case to judgment, but don’t let your opponent know that or you’ll never reach settlement. Encourage settlement again and again. After that, one mediation session is warranted. In view of mediation’s 85% success rate and your realistic attitude (given your low feasibility rating), the chances of success at mediated settlement are very high..."
     },
     {
         Range: 0,
@@ -1651,9 +1642,9 @@ function CheckStep(Step,ShowModal){
         if (!isNaN(DataForm[1]['Values']['Val_15'])) {
             var Result3 = DataForm[1]['Values']['Val_15']
         }        
-        $('#StepResultText1').text('$ ' + SeparadorMiles(Result1) + ' is your Total Damages [Question 5].');
-        $('#StepResultText2').text('$ ' + SeparadorMiles(Result2) + ' is your Recoverable Damages based on answers to Questions 6-8.');
-        $('#StepResultText3').text('$ ' + SeparadorMiles(Result3) + ' is your Overall Case Value Assessment which includes answers to Questions 9-10. This is the amount you are likely to recover.');
+        $('#StepResultText1').text('$ ' + SeparadorMiles(Result1) + ' is your TOTAL DAMAGES.');
+        $('#StepResultText2').text('$ ' + SeparadorMiles(Result2) + ' is your RECOVERABLE DAMAGES, the amount of your claim [after apportionment of fault, whether you received a substantial benefit, and if there is a damage defining provision].');
+        $('#StepResultText3').text('$ ' + SeparadorMiles(Result3) + ' is your CASE VALUE ASSESSMENT, the amount you are likely to net depending on whether you hire an attorney and have a right to attorneys fee reimbursement,  whether you will go to arbitration, if you will invest substantial time of your own.');
         //$('#StepResultDetailsHeader').text('Whats does mean that amount?');
         //$('#StepResultDetailsText').text('This is the amount you are likely to recover.');
     };
@@ -1663,8 +1654,8 @@ function CheckStep(Step,ShowModal){
         if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('This is your Legal Options Assessment');
         $('#StepResultText1').text( DataForm[2]['Values']['Val_20'])
-        $('#StepResultText2').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.')
-        $('#StepResultText3').text('')
+        $('#StepResultText2').text('[Range: 0-175]')
+        $('#StepResultText3').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5')
         $('#StepResultDetailsHeader').text('')
         $('#StepResultDetailsText').text('')
         //ResultStep3Text1
@@ -1675,21 +1666,20 @@ function CheckStep(Step,ShowModal){
         if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('This is your Collectability Assessment.');
         $('#StepResultText1').text( DataForm[3]['Values']['Val_22'])
-        $('#StepResultText2').text('Because your adversary is or does ' + DataForm[3]['Values']['Val_21_Value'])
-        $('#StepResultText3').text('')
+        $('#StepResultText2').text('[Range: 0-150]')
+        $('#StepResultText3').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.')
         $('#StepResultDetailsHeader').text('')
         $('#StepResultDetailsText').text('')
     };
     if ( Step == 'Step5') {
         GetStepsData();
         //LoadTable Step5
-        $('#tbl-row-1').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
-        $('#tbl-row-2').text(DataForm[4]['Values']['Val_24']);
-        $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
+        $('#tbl-row-1').text(DataForm[4]['Values']['Val_25']);
+        $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
+        $('#tbl-row-3').text(DataForm[4]['Values']['Val_24']);
         $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
         $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
-        $('#tbl-row-6').text(DataForm[4]['Values']['Val_28']);
-        $('#To_Hide').hide();
+        $('#tbl-row-6').text(''/*DataForm[4]['Values']['Val_28']*/); //Blank Space
         $('#tbl-row-7').text(DataForm[4]['Values']['Val_29']);
         $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
         $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
@@ -2274,13 +2264,12 @@ function nextPrev(n,step) {
             $('#ResultStep4').show();
             //console.log('aqui viene ' + DataForm)
             //LoadTable Step5
-            $('#tbl-row-1').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
-            $('#tbl-row-2').text(DataForm[4]['Values']['Val_24']);
-            $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
+            $('#tbl-row-1').text(DataForm[4]['Values']['Val_25']);
+            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
+            $('#tbl-row-3').text(DataForm[4]['Values']['Val_24']);
             $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
             $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
-            $('#tbl-row-6').text(DataForm[4]['Values']['Val_28']);
-            $('#To_Hide').hide();
+            $('#tbl-row-6').text(''/*DataForm[4]['Values']['Val_28']*/); //Blank Space
             $('#tbl-row-7').text(DataForm[4]['Values']['Val_29']);
             $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
             $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
@@ -2292,7 +2281,7 @@ function nextPrev(n,step) {
             CheckStep(step,true);
             $("#prevBtn5").hide();
             $("#nextBtn5").hide();
-            $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p>' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
+            $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
             $("#wizard").steps('next');
         }
 
