@@ -112,7 +112,7 @@
 
         </style>
     </head>
-    <body style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <body style="font-family: 'Century Gothic','CenturyGothic','AppleGothic',sans-serif;">
 
         <header>
             <?php  

@@ -36,7 +36,7 @@
         <script src="js/bootstrap.js"  > </script>
         <script src="build/jquery.steps.js"></script> 
     </head>
-    <body style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+    <body style="font-family: 'Century Gothic','CenturyGothic','AppleGothic',sans-serif;">
 
     <style>
         /* Style the form */
@@ -1618,6 +1618,7 @@ var Step6Table = [
 
 var Result1, Result2, Result3;
 
+//Check for current Step. Advance to the final step (Edit case)
 function CheckStep(Step,ShowModal){
     if ( Step == 'Step1') {
         GetStepsData(); 
@@ -1689,6 +1690,8 @@ function CheckStep(Step,ShowModal){
     };
     if ( Step == 'Step6') {
         GetStepsData();
+        //Refresh Results
+        $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
         console.log(DataForm);
         $('#ResultStep7_1').text( DataForm[6]['Values']['Val_34'] );
         $('#ResultStep7_2').text( DataForm[6]['Values']['Val_35'] );
@@ -1940,7 +1943,7 @@ function GetStepsData() {
                 Val_15 :  Value_15
             }           
         },
-        {id:"Step3",
+        {id: "Step3",
             Values: {
                 //Step3
                 Val_16: $('#SmallClaimLimitResult').text().replace(",",""),
@@ -2012,7 +2015,10 @@ $('#btn-next-step-modal').click(function (e) {
         if (tabs[index].className.includes('current')) { ActiveTab =  index  } ;
         if (tabs[index].className.includes('done')) {lastdone = index } ; 
     }
+    console.log('ActiveTab: ' + ActiveTab)
+    console.log('lastdone: ' + lastdone)
     if (lastdone != 0 && ActiveTab < lastdone  ){  
+        //Advance to last Step
         for (let index = 0; index < (lastdone - ActiveTab); index++) {
             $("#wizard").steps('next');
         }
@@ -2169,7 +2175,6 @@ function nextPrev(n,step) {
             currentTab = currentTab + n;             
         }
     }
-
     if (step == 'Step3' && n == 1){
         console.log(x[currentTab].id + ' = '+ $('#select-3-16-3').val())
         var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
@@ -2210,13 +2215,11 @@ function nextPrev(n,step) {
         previousTab = currentTab
         currentTab = currentTab + n;         
     }
-
     if (step == 'Step5' && n == 1) {
         //x[currentTab].style.display = "none";
         previousTab = currentTab
         currentTab = currentTab + n;         
     }
-
     if (step == 'Step6' && n == 1) {
         //x[currentTab].style.display = "none";
         previousTab = currentTab
@@ -2275,8 +2278,7 @@ function nextPrev(n,step) {
             $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
             var num = DataForm[4]['Values']['Val_32']
             $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
-        }
-        
+        }        
         if (step == 'Step5'){
             CheckStep(step,true);
             $("#prevBtn5").hide();
@@ -2284,7 +2286,6 @@ function nextPrev(n,step) {
             $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
             $("#wizard").steps('next');
         }
-
         if (step == 'Step6'){
             CheckStep(step,true);
             $("#prevBtn6").hide();
