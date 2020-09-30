@@ -907,41 +907,30 @@
                                                 <div id="Q34Last" class="tab">
                                                     <div class="row">
                                                         <div class="col-lg-5 col-md-12 d-flex justify-content-center justify-content-md-end" >
-                                                            <h4>Mediation</h4>
+                                                            <h4>Forum:</h4>
                                                         </div>
-                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
+                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-center" >
                                                             <p id="ResultStep7_1"></p>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
-                                                            <h4>Recoverable Damages</h4>
+                                                            <h4>Mediation:</h4>
                                                         </div>
-                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
+                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-center" >
                                                             <p id="ResultStep7_2"></p>
                                                         </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col d-flex justify-content-start">
+                                                            <p style="color: red;" >You are done with the Lawsuit Analyzer©. You can go back and edit your answers and change your outcome. Once you click Forum below, your results will be emailed to you, and you no longer have the ability to edit.</p>
+                                                        </div>
                                                     </div>                                                
-                                                    <div class="row">
-                                                        <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
-                                                            <h4>Small Claims limit</h4>
-                                                        </div>
-                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
-                                                            <p id="ResultStep7_3"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
-                                                            <h4>Forum Assessment</h4>
-                                                        </div>
-                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-start" >
-                                                            <p id="ResultStep7_4"></p>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div style="overflow:auto; margin-top: 15px;">
                                                     <div style="float:right;">
                                                         <button type="button" id="prevBtn7" class="btn btn-info" onclick="">Download</button>
-                                                        <button type="button" id="nextBtn7" class="btn btn-success" onclick="">Submit</button>
+                                                        <button type="button" id="nextBtn7" class="btn btn-success" onclick="">Go to Mediation</button>
                                                     </div>
                                                 </div>                                                  
                                             </form>
@@ -997,7 +986,7 @@ $(document).ready(function () {
     //** Step 3 */
     $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
     //HidePreviousButton
-    $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6").hide();
+    $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6,#prevBtn7").hide();
     //Hide Toggle Button
     //$("#StepCollapse").hide();
 
@@ -1693,10 +1682,9 @@ function CheckStep(Step,ShowModal){
         //Refresh Results
         $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
         console.log(DataForm);
-        $('#ResultStep7_1').text( DataForm[6]['Values']['Val_34'] );
-        $('#ResultStep7_2').text( DataForm[6]['Values']['Val_35'] );
-        $('#ResultStep7_3').text( DataForm[6]['Values']['Val_36'] );
-        $('#ResultStep7_4').text( DataForm[6]['Values']['Val_38'] );
+        $('#ResultStep7_1').text( DataForm[6]['Values']['Val_38'] );
+        $('#ResultStep7_2').text( DataForm[6]['Values']['Val_34'] );
+
     };    
 }
 
@@ -1707,7 +1695,7 @@ var Value_6,
     selectedVal_Step4 , Value_21_Value , Value_22_Value,
     Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
     Value_33_Chart_Title,Value_33_Chart_Text,
-    Value_34_Text;
+    Value_34_Text, Value_38_Text;
 
 function GetStepsData() {
     //** Step 1 Calculations */
@@ -1723,6 +1711,7 @@ function GetStepsData() {
 
 
     //** Step 1 End */
+
     //** Step2 Calculations**/
         if (isNaN(parseInt($('#input-2-8-1').val().replace(",",""),10))){
             Value_8 = 0
@@ -1904,8 +1893,35 @@ function GetStepsData() {
     //** Step 6 End */
 
     //** Step 7 Calculations */
-        Value_34_Text = 'sfasdfas'
-
+        if (  $('#select-3-19').val() == 'yes' ) { 
+            Value_34_Text = 'Your Contract requires you to complete mediation'
+        } else {
+            Value_34_Text = 'Your Contract does not require mediation but your local court system or Judge may require it'
+        };
+        var TempVal1,TempVal2,TempVal3 = 'N';
+        if (diff >= 0 || $('#select-3-16-2').val() == 'yes') {
+            TempVal1 = 'Y'
+        } else {
+            TempVal1 = 'N'
+        };
+        if ($('#select-3-16-3').val() == 'yes') {
+            TempVal2 = 'Y'
+        } else {
+            TempVal2 = 'N'
+        };
+        if ($('#select-3-16-4').val() == 'yes') {
+            TempVal3 = 'Y'
+        } else {
+            TempVal3 = 'N'
+        };
+        var concat =  TempVal1 + TempVal2 + TempVal3 ;
+        if ( $('#select-3-16-3').val() == 'yes' ) {
+            Value_38_Text = 'Binding Arbitration';
+        } else {
+            if (concat == 'NNN') {Value_38_Text = 'General Civil Court System'};
+            if (concat == 'YYN') {Value_38_Text = 'Binding Arbitration'};
+            if (concat == 'YYY') {Value_38_Text = 'Small Claims'};
+        }
 
     //** Step 7 End */
     DataForm = [
@@ -1993,11 +2009,11 @@ function GetStepsData() {
         },
         {id: "Step7",
             Values: {
-                Val_34: 'Medition Results',
+                Val_34: Value_34_Text,
                 Val_35: Value_11,
                 Val_36: $('#SmallClaimLimitResult').text().replace(",",""),
                 Val_37: '',
-                Val_38: 'Forum assesment results'
+                Val_38: Value_38_Text
             }
         }
     ]
