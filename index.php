@@ -5,11 +5,7 @@
     if(empty(isset($_SESSION['user']))){
       header('location:login.php');
     }
-    if(isset($_SESSION['user'])){
-        if ($_SESSION['user'] == 'admin') {
-            header('location:login.php');
-        }
-    }
+
 ?>
 
 
@@ -125,9 +121,20 @@
                 //define( 'WP_USE_THEMES', false );
                 //get_header(); 
             ?>
+            <div class="row" style="margin: 0px;">
+                <div class="col" style="text-align: end;">
+                    <a href="logout.php">
+                        <img class="img-fluid" src="assets/close.png" alt="Close"  width="50" height="50"  >
+                    </a>
+                </div>
+            </div>
+            <div class="row" style="margin: 0px;">
+                <div class="col">
+                    <h1 style="text-align: center;">Lawsuit Analyzer</h1>
+                    <h4 style="text-align: center;"> Receive a professional legal analysis of your dispute</h4>              
+                </div>
+            </div>
 
-            <h1 style="text-align: center;">Lawsuit Analyzer</h1>
-            <h4 style="text-align: center;"> Receive a professional legal analysis of your dispute</h4>
         </header>
 
         <div class="content">
@@ -856,9 +863,7 @@
                                                 <div id="Q33Chart" class="tab">
                                                     <p id="NoteStep6">Note: Always remember to exhaust all settlement possibilities before pursuing your case through legal channels. Remember also, the case value we’re talking about is the one at row 23 of step five's table.</p>
                                                     <br>
-                                                    <div id="ResultStep6"> 
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. 
-                                                    </div>            
+                                                    <div id="ResultStep6"> </div>            
                                                 </div>
                                                 <div style="overflow:auto; margin-top: 15px;">
                                                     <div style="float:right;">
@@ -923,7 +928,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col d-flex justify-content-start">
-                                                            <p style="color: red;" >You are done with the Lawsuit Analyzer©. You can go back and edit your answers and change your outcome. Once you click Forum below, your results will be emailed to you, and you no longer have the ability to edit.</p>
+                                                            <p style="color: #9E2D2D;" >You are done with the Lawsuit Analyzer©. You can go back and edit your answers and change your outcome. Once you click Forum below, your results will be emailed to you, and you no longer have the ability to edit.</p>
                                                         </div>
                                                     </div>                                                
                                                 </div>
@@ -975,8 +980,30 @@
 </html>
 
 <script>
-   
+
 $(document).ready(function () {
+    var User_Id = <?php echo $_SESSION['user_id'] ?>;
+    localStorage.setItem('user_id',User_Id)
+    //Get Last Response by User
+    get_last_response(User_Id)
+    function get_last_response(User_Id){
+        var usid = User_Id
+        $.ajax({
+            type: "POST",
+            url: "API/glr.php",
+            data: {user_id: usid},
+            cache: 'false',
+            success: function (response) {
+                $validacion = response
+                if (response) {
+                    localStorage.setItem('user_lr', $validacion)
+                } else {
+                    localStorage.setItem('user_lr', 0)
+                }
+            }
+        });
+    }
+
     //Hide results Text
     $('#ResultStep1,#ResultStep2').hide();
     //Hide Dependency Question
@@ -1111,31 +1138,6 @@ $(document).ready(function () {
         };
     });
 
-
-/*
-    $('#select-3-17').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#ExcludeSmallClaims').show();
-        }else {
-            $('#ExcludeSmallClaims').hide();
-        };        
-    });
-*/
-
-/*
-    $("#input-2-7").on({
-      "focus": function (event) {
-          $(event.target).select();
-      },
-      "keyup": function (event) {
-          $(event.target).val(function (index, value ) {
-              return value.replace(/\D/g, "")
-                          //.replace(/([0-9])([0-9]{2})$/, '$1.$2')
-                          .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
-          });
-      }
-    }); 
-*/
     //Format numbers
     $("#input-2-7,#input-2-8-1,#input-2-9-1,#input-2-10-2,#input-2-14-1").on({
       "focus": function (event) {
@@ -1619,6 +1621,7 @@ function CheckStep(Step,ShowModal){
         $('#StepResultText3').text('')
         $('#StepResultDetailsHeader').text('')
         $('#StepResultDetailsText').text('')
+        PutAnswData(Step,DataForm);
     };
     if ( Step == 'Step2') {
         GetStepsData();
@@ -1664,13 +1667,13 @@ function CheckStep(Step,ShowModal){
     if ( Step == 'Step5') {
         GetStepsData();
         //LoadTable Step5
-        $('#tbl-row-1').text(DataForm[4]['Values']['Val_25']);
-        $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
-        $('#tbl-row-3').text(DataForm[4]['Values']['Val_24']);
+        $('#tbl-row-1').text(DataForm[4]['Values']['Val_23']);
+        $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_24']));
+        $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
         $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
         $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
         $('#tbl-row-6').text(''/*DataForm[4]['Values']['Val_28']*/); //Blank Space
-        $('#tbl-row-7').text(DataForm[4]['Values']['Val_29']);
+        $('#tbl-row-7').text('' /*DataForm[4]['Values']['Val_29']*/);
         $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
         $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
         var num = DataForm[4]['Values']['Val_32']
@@ -1695,7 +1698,8 @@ var Value_6,
     selectedVal_Step4 , Value_21_Value , Value_22_Value,
     Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
     Value_33_Chart_Title,Value_33_Chart_Text,
-    Value_34_Text, Value_38_Text;
+    Value_34_Text, Value_38_Text
+;
 
 function GetStepsData() {
     //** Step 1 Calculations */
@@ -1898,30 +1902,35 @@ function GetStepsData() {
         } else {
             Value_34_Text = 'Your Contract does not require mediation but your local court system or Judge may require it'
         };
-        var TempVal1,TempVal2,TempVal3 = 'N';
-        if (diff >= 0 || $('#select-3-16-2').val() == 'yes') {
+        var TempVal1,TempVal2,TempVal3,TempVal4 = 'N';
+        if ( $('#select-3-18').val() == 'yes') {
             TempVal1 = 'Y'
         } else {
             TempVal1 = 'N'
         };
-        if ($('#select-3-16-3').val() == 'yes') {
+        if (diff >= 0 || $('#select-3-16-2').val() == 'yes') {
             TempVal2 = 'Y'
         } else {
             TempVal2 = 'N'
         };
-        if ($('#select-3-16-4').val() == 'yes') {
+        if ($('#select-3-16-3').val() == 'yes') {
             TempVal3 = 'Y'
         } else {
             TempVal3 = 'N'
         };
-        var concat =  TempVal1 + TempVal2 + TempVal3 ;
-        if ( $('#select-3-16-3').val() == 'yes' ) {
-            Value_38_Text = 'Binding Arbitration';
+        if ($('#select-3-16-4').val() == 'yes') {
+            TempVal4 = 'Y'
         } else {
-            if (concat == 'NNN') {Value_38_Text = 'General Civil Court System'};
-            if (concat == 'YYN') {Value_38_Text = 'Binding Arbitration'};
-            if (concat == 'YYY') {Value_38_Text = 'Small Claims'};
-        }
+            TempVal4 = 'N'
+        };
+        var concat =  TempVal1 + TempVal2 + TempVal3 + TempVal4 ;
+        Value_38_Text = 'Your Forum'
+        if (concat == 'YNNN') {Value_38_Text = 'Binding Arbitration'};
+        if (concat == 'NYNN') {Value_38_Text = 'Small Claims'};
+        if (concat == 'NNNN') {Value_38_Text = 'General Civil Court System'};
+        if (concat == 'NYYN') {Value_38_Text = 'Binding Arbitration'};
+        if (concat == 'NYYY') {Value_38_Text = 'Small Claims'};
+        console.log(concat)
 
     //** Step 7 End */
     DataForm = [
@@ -1989,13 +1998,13 @@ function GetStepsData() {
         },
         {id: "Step5",
             Values: {
-                Val_23: Value_15,
-                Val_24: Value_24,
-                Val_25: Value_25,
+                Val_23: Value_25,
+                Val_24: Value_15,
+                Val_25: Value_24,
                 Val_26: Value_26,
                 Val_27: Value_22_Value,
-                Val_28: Value_28,
-                Val_29: Value_29,
+                Val_28: '',
+                Val_29: '',
                 Val_30: Value_11,
                 Val_31: Value_31,
                 Val_32: Value_29
@@ -2010,8 +2019,8 @@ function GetStepsData() {
         {id: "Step7",
             Values: {
                 Val_34: Value_34_Text,
-                Val_35: Value_11,
-                Val_36: $('#SmallClaimLimitResult').text().replace(",",""),
+                Val_35: '',
+                Val_36: '',
                 Val_37: '',
                 Val_38: Value_38_Text
             }
@@ -2057,6 +2066,30 @@ $('#btn-next-step-modal').click(function (e) {
     */
     $('#StepResult').modal('toggle');
 });
+
+
+function PutAnswData(Step,DataForm){
+    var dataPut = [];
+    var data = JSON.stringify(DataForm)
+    console.log('Data Enviada')
+    console.log(DataForm)
+    console.log('Test 1')
+    console.log(DataForm[0]['Values'])
+    //console.log(json_encode(data))
+    //console.log(JSON.parse(data))
+    if (Step == 'Step1') {
+        for (let index = 0; index <= 6; index++) {
+            dataPut.push({
+                form_responses_id: 1, 
+                form_questions_id: index + 1,
+                answer: DataForm[0]['Values'][index]
+                } 
+            )
+        };
+        //console.log( JSON.stringify(dataPut))
+    }
+
+}
 
 
 ///*****SCRIPTS TO GET SEPARATE QUESTIONS */
@@ -2283,13 +2316,13 @@ function nextPrev(n,step) {
             $('#ResultStep4').show();
             //console.log('aqui viene ' + DataForm)
             //LoadTable Step5
-            $('#tbl-row-1').text(DataForm[4]['Values']['Val_25']);
-            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_23']));
-            $('#tbl-row-3').text(DataForm[4]['Values']['Val_24']);
+            $('#tbl-row-1').text(DataForm[4]['Values']['Val_23']);
+            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_24']));
+            $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
             $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
             $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
             $('#tbl-row-6').text(''/*DataForm[4]['Values']['Val_28']*/); //Blank Space
-            $('#tbl-row-7').text(DataForm[4]['Values']['Val_29']);
+            $('#tbl-row-7').text(''/*DataForm[4]['Values']['Val_29']*/);
             $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
             $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
             var num = DataForm[4]['Values']['Val_32']
@@ -2415,17 +2448,6 @@ function validateForm(step) {
     */
     return valid; // return the valid status
 }
-/*
-function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i, x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
-    }
-    //... and adds the "active" class on the current step:
-    x[n].className += " active";
-}
-*/
 
 function SeparadorMiles(valor){
     if (Number.isInteger(valor)){
@@ -2447,7 +2469,6 @@ function SeparadorMiles(valor){
     return textoFinal ;
 };
 
-
 function VLookUp(object,value,attSearch,attResult){
     var TempArray = object
     var result = 'Not Found'
@@ -2459,6 +2480,5 @@ function VLookUp(object,value,attSearch,attResult){
     }
             
 }
-
 
 </script>

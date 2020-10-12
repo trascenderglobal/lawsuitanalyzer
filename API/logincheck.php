@@ -18,6 +18,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             $num_rows = mysqli_num_rows($resultado);
             if ($num_rows  == 1){
                 $data = $resultado->fetch_assoc();
+                $_SESSION['user_id'] = $data['id'];
                 $_SESSION['user'] = $data['user_login'];
                 $_SESSION['user_status'] = $data['user_status'];
                 $_SESSION['user_rol'] = $data['user_rol'];
