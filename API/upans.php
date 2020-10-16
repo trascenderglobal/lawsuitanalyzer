@@ -10,27 +10,52 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     
     require 'cnt.php';
 
-    if (isset($_POST['lr_id']) ){
-        $user_id = $mysqli->real_escape_string($_POST['lr_id']);
-        $status = $mysqli->real_escape_string('On Process');
-        
-        if($PreResultado = $mysqli->prepare("SELECT * FROM form_responses where users_id = ? and status = ? ORDER BY start_date DESC")){
-            $PreResultado->bind_param('is', $user_id, $status);
-            $PreResultado->execute();
-            $resultado = $PreResultado->get_result();
-            $num_rows = mysqli_num_rows($resultado);
-            if ($num_rows >= 1){
-                $data = $resultado->fetch_assoc();
-                $_SESSION['user_lr'] = $data['id'];
-                $_SESSION['user_ls'] = $data['last_step'];
-                $_SESSION['user_st'] = $data['status'];
-                echo true;
-            }else {
-                echo 'Invalid user or password';
-            };
-        }
-    } else {
-        echo 'error';
+    if (isset($_GET['act'])){$act= $_GET['act'];}
+    if (isset($_GET['uslr'])){$uslr= $_GET['uslr'];}
+
+    switch ($act) {
+        case 'ins':
+            # code...
+            /*
+            $values = "";
+            $arr = $_POST['data'];
+            $index = 0;
+            foreach ($arr as $answer) {
+                if (isset($answer['answer'])){ 
+                    $values = $values . "(" . $uslr . "," . $answer['form_questions_id'] . ",'" . $answer['answer'] . "')";
+                } else {
+                    $values = $values . "(" . $uslr . "," . $answer['form_questions_id'] . ",'')";
+                }
+                $index =  $index + 1;
+                if (count($arr) > 1 & $index != count($arr)) { $values = $values . "," ;}
+            }
+            $insercion = "INSERT INTO form_answers (form_responses_id, form_questions_id,answer)
+                                VALUES $values ";
+            //$resultado = $mysqli->query($insercion);
+            //echo json_encode($resultado);
+            print_r ($insercion);
+            break;
+            */
+        case 'upt':
+            # code...
+            $values = "";
+            $arr = $_POST['data'];
+            $index = 0;
+            foreach ($arr as $answer) {
+                if (isset($answer['answer'])){
+                    $ans = $mysqli->real_escape_string($answer['answer']);
+                    $PreResultado = $mysqli->prepare("UPDATE form_answers SET answer = ? WHERE form_responses_id = ? AND form_questions_id = ?");
+                    $PreResultado-> bind_param('sii',$ans, $uslr,$answer['form_questions_id']);
+                    $PreResultado->execute();
+                    $num_rows =  $mysqli->affected_rows;
+                    echo ('Answer: '  .  $ans );
+                    if ($num_rows > 0) {$index =  $index + 1 ;};
+                }
+                
+            }
+            
+            echo ('Updated: '  . $index );
+            break;
     }
 }
 

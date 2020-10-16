@@ -24,9 +24,27 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 $_SESSION['user_lr'] = $data['id'];
                 $_SESSION['user_ls'] = $data['last_step'];
                 $_SESSION['user_st'] = $data['status'];
-                echo true;
+                echo $data['id'];
             }else {
-                echo 'Invalid user or password';
+                $step = 1;
+                $status = 'On Process';
+                $PreResultado = $mysqli->prepare("INSERT INTO form_responses (users_id,last_step,status) VALUES (?, ?, ? )");
+                $PreResultado->bind_param('iss', $user_id, $step,$status);
+                $PreResultado->execute();
+                $resultado = $PreResultado->get_result();
+                sleep(3);
+                $PreResultado = $mysqli->prepare("SELECT * FROM form_responses where users_id = ? and status = ? ORDER BY start_date DESC");
+                $PreResultado->bind_param('is', $user_id, $status);
+                $PreResultado->execute();
+                $resultado = $PreResultado->get_result();
+                $num_rows = mysqli_num_rows($resultado);
+                if ($num_rows >= 1){
+                    $data = $resultado->fetch_assoc();
+                    $_SESSION['user_lr'] = $data['id'];
+                    $_SESSION['user_ls'] = $data['last_step'];
+                    $_SESSION['user_st'] = $data['status'];
+                    echo $data['id'];
+                }
             };
         }
     } else {

@@ -124,6 +124,7 @@
             <div class="row" style="margin: 0px;">
                 <div class="col" style="text-align: end;">
                     <a href="logout.php">
+                        Logout
                         <img class="img-fluid" src="assets/close.png" alt="Close"  width="50" height="50"  >
                     </a>
                 </div>
@@ -982,28 +983,9 @@
 <script>
 
 $(document).ready(function () {
-    var User_Id = <?php echo $_SESSION['user_id'] ?>;
-    localStorage.setItem('user_id',User_Id)
-    //Get Last Response by User
-    get_last_response(User_Id)
-    function get_last_response(User_Id){
-        var usid = User_Id
-        $.ajax({
-            type: "POST",
-            url: "API/glr.php",
-            data: {user_id: usid},
-            cache: 'false',
-            success: function (response) {
-                $validacion = response
-                if (response) {
-                    localStorage.setItem('user_lr', $validacion)
-                } else {
-                    localStorage.setItem('user_lr', 0)
-                }
-            }
-        });
-    }
-
+    localStorage.setItem('user_id',get_session('user_id'))
+    localStorage.setItem('user' , get_session('user'))
+    get_last_response(get_session('user_id'))
     //Hide results Text
     $('#ResultStep1,#ResultStep2').hide();
     //Hide Dependency Question
@@ -1209,7 +1191,6 @@ $(document).ready(function () {
         validateForm(step);
         nextPrev(1,step)
     }
-
 
     //SmallClaimData
     var SmallClaimsTable = [
@@ -1555,6 +1536,96 @@ $(document).ready(function () {
 
 
 });
+
+
+//Script functions to DB
+
+function get_last_response(User_Id){
+        var usid = User_Id
+        $.ajax({
+            type: "POST",
+            url: "API/glr.php",
+            data: {user_id: usid},
+            cache: 'false',
+            success: function (response) {
+                $validacion = response
+                if (response) {
+                    localStorage.setItem('user_lr', $validacion)
+                } else {
+                    localStorage.setItem('user_lr', 0)
+                }
+            }
+        });
+}
+
+function get_session(key){
+    var result = null
+    if (key == 'user_id'){
+        result = "<?php if(isset($_SESSION['user_id'])){ echo $_SESSION['user_id'] ; }  ?>";
+        if (result !== '') {return  result; }
+    }    
+    if (key == 'user'){
+        result = "<?php if(isset($_SESSION['user'])){ echo $_SESSION['user'] ; }  ?>";
+        if (result !== '') {return  result }
+    } 
+    if (key == 'user_status'){
+        result = "<?php if(isset($_SESSION['user_status'])){ echo $_SESSION['user_status'] ; }  ?>";
+        if (result !== '') {return  result } 
+    }    
+    if (key == 'user_rol'){
+        result = "<?php if(isset($_SESSION['user_rol'])){ echo $_SESSION['user_rol'] ; }  ?>";
+        if (result !== '') {return  result } 
+    }
+    if (key == 'user_lr'){
+        result = "<?php if(isset($_SESSION['user_lr'])){ echo $_SESSION['user_lr'] ; } ?>";
+        if (result !== '') {return  result; }
+    }
+    if (key == 'user_ls'){
+        result = "<?php if(isset($_SESSION['user_ls'])){ echo $_SESSION['user_ls'] ; } ?>";
+        if (result !== '') {return  result }        
+    }
+    if (key == 'user_st'){
+        result = "<?php if(isset($_SESSION['user_st'])){ echo $_SESSION['user_st'] ; } ?>";
+        if (result !== '') {return  result } 
+    }
+    return result  
+}
+
+function PutAnswData(Step,DataForm){
+    get_last_response(get_session('user_id'))
+    var dataPut = [];
+    var posit = 0;
+    var uslr = get_session('user_lr');
+    if (uslr == ''){uslr = localStorage.getItem('user_lr') }
+    if (Step == 'Step1') {posit = 0}
+    if (Step == 'Step2') {posit = 1}
+    if (Step == 'Step3') {posit = 2}
+    if (Step == 'Step4') {posit = 3}
+    if (Step == 'Step5') {posit = 4}
+    if (Step == 'Step6') {posit = 5}
+    if (Step == 'Step7') {posit = 6}
+    for (let index = 1; index <= 57; index++) {
+        dataPut.push({
+            "form_questions_id": index,
+            "answer": DataForm[posit]['Values'][index]
+            } 
+        )
+    };
+    $.ajax({
+        type: "POST",
+        url: "API/upans.php?act=upt&uslr=" + uslr,
+        dataType: 'json',
+        data: {data: dataPut }  ,
+        cache: 'false',
+        success: function (response) {
+        }
+    });
+
+
+
+}
+
+
 //Script For Step Behaviour
 var currentTab = 0; 
 var previousTab = 0;
@@ -1610,30 +1681,27 @@ var Step6Table = [
 var Result1, Result2, Result3;
 
 //Check for current Step. Advance to the final step (Edit case)
-function CheckStep(Step,ShowModal){
+function CheckStep(Step,FirstTime){
     if ( Step == 'Step1') {
         GetStepsData(); 
-        console.log(DataForm);
-        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        if (FirstTime){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('This is Your Legal Evaluation');
-        $('#StepResultText1').text(DataForm[0]['Values']['Val_6']);
+        $('#StepResultText1').text(DataForm[0]['Values'][7]);
         $('#StepResultText2').text('')
         $('#StepResultText3').text('')
         $('#StepResultDetailsHeader').text('')
         $('#StepResultDetailsText').text('')
-        PutAnswData(Step,DataForm);
     };
     if ( Step == 'Step2') {
         GetStepsData();
-        console.log(DataForm); 
-        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        if (FirstTime){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('Case Value Assessment.');
         Result1 = parseInt($('#input-2-7').val().replace(",","")  ,10)
-        if (!isNaN(DataForm[1]['Values']['Val_11'])) {
-            var Result2 = DataForm[1]['Values']['Val_11']
+        if (!isNaN(DataForm[1]['Values'][17])) {
+            var Result2 = DataForm[1]['Values'][17]
         }
-        if (!isNaN(DataForm[1]['Values']['Val_15'])) {
-            var Result3 = DataForm[1]['Values']['Val_15']
+        if (!isNaN(DataForm[1]['Values'][24])) {
+            var Result3 = DataForm[1]['Values'][24]
         }        
         $('#StepResultText1').text('$ ' + SeparadorMiles(Result1) + ' is your TOTAL DAMAGES.');
         $('#StepResultText2').text('$ ' + SeparadorMiles(Result2) + ' is your RECOVERABLE DAMAGES, the amount of your claim [after apportionment of fault, whether you received a substantial benefit, and if there is a damage defining provision].');
@@ -1643,10 +1711,9 @@ function CheckStep(Step,ShowModal){
     };
     if ( Step == 'Step3') {
         GetStepsData();
-        console.log(DataForm);
-        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        if (FirstTime){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('This is your Legal Options Assessment');
-        $('#StepResultText1').text( DataForm[2]['Values']['Val_20'])
+        $('#StepResultText1').text( DataForm[2]['Values'][37])
         $('#StepResultText2').text('[Range: 0-175]')
         $('#StepResultText3').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5')
         $('#StepResultDetailsHeader').text('')
@@ -1655,10 +1722,9 @@ function CheckStep(Step,ShowModal){
     };
     if ( Step == 'Step4') {
         GetStepsData();
-        console.log(DataForm)
-        if (ShowModal){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
+        if (FirstTime){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('This is your Collectability Assessment.');
-        $('#StepResultText1').text( DataForm[3]['Values']['Val_22'])
+        $('#StepResultText1').text( DataForm[3]['Values'][40])
         $('#StepResultText2').text('[Range: 0-150]')
         $('#StepResultText3').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.')
         $('#StepResultDetailsHeader').text('')
@@ -1667,33 +1733,32 @@ function CheckStep(Step,ShowModal){
     if ( Step == 'Step5') {
         GetStepsData();
         //LoadTable Step5
-        $('#tbl-row-1').text(DataForm[4]['Values']['Val_23']);
-        $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_24']));
-        $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
-        $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
-        $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
-        $('#tbl-row-6').text(''/*DataForm[4]['Values']['Val_28']*/); //Blank Space
-        $('#tbl-row-7').text('' /*DataForm[4]['Values']['Val_29']*/);
-        $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
-        $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
-        var num = DataForm[4]['Values']['Val_32']
+        $('#tbl-row-1').text(DataForm[4]['Values'][41]);
+        $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
+        $('#tbl-row-3').text(DataForm[4]['Values'][43]);
+        $('#tbl-row-4').text(DataForm[4]['Values'][44]);
+        $('#tbl-row-5').text(DataForm[4]['Values'][45]);
+        $('#tbl-row-6').text(''); //Blank Space
+        $('#tbl-row-7').text('');
+        $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
+        $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
+        var num = DataForm[4]['Values'][50]
         $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
-        console.log(DataForm);
     };
     if ( Step == 'Step6') {
         GetStepsData();
         //Refresh Results
-        $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
-        console.log(DataForm);
-        $('#ResultStep7_1').text( DataForm[6]['Values']['Val_38'] );
-        $('#ResultStep7_2').text( DataForm[6]['Values']['Val_34'] );
+        $('#ResultStep6').html('<p> '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values'][52] + '</p>')
+        $('#ResultStep7_1').text( DataForm[6]['Values'][57] );
+        $('#ResultStep7_2').text( DataForm[6]['Values'][53] );
 
-    };    
+    };
+    PutAnswData(Step,DataForm);   
 }
 
 var Value_6,
     Value_8, Value_9, Value_8_plus_9, 
-    Value_11, selectedVal_Step2, Value_13_2, Value_14_2, Value_15, 
+    Value_11, selectedVal_Step2, selectedVal_Step2_text, Value_13_2, Value_14_2, Value_15, 
     Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value, 
     selectedVal_Step4 , Value_21_Value , Value_22_Value,
     Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
@@ -1711,9 +1776,6 @@ function GetStepsData() {
         }else {
             Value_6 = 'Your Case is Feasible!';
         };
-        console.log(Value_6)
-
-
     //** Step 1 End */
 
     //** Step2 Calculations**/
@@ -1737,7 +1799,6 @@ function GetStepsData() {
             if ($('#select-2-10-1').val() == 'Damage-Limit') {
                 var initialdamage = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
                 var diff =  parseInt($('#input-2-10-2').val().replace(",","")  ,10) - initialdamage
-                console.log(diff)
                 if (diff >= 0){
                     Value_11 = initialdamage
                 } else {
@@ -1751,6 +1812,7 @@ function GetStepsData() {
         var selected = $("input[type='radio'][name='attorney']:checked");
         if (selected.length > 0) {
             selectedVal_Step2 = selected.val();
+            selectedVal_Step2_text = selected.next('label').text();
         }
         if ($('#select-2-12').val() == 'yes'){
             if (selectedVal_Step2 == 'value-1'){Value_13_2 = Value_11 };
@@ -1773,8 +1835,6 @@ function GetStepsData() {
 
     //** Step 3 Calculations*/
         var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
-        console.log(diff)
-        console.log($('#SmallClaimLimitResult').text().replace(",",""))
         var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
         if (diff < 0) {
             Value_16_1 = 'Are Not Within'
@@ -1937,96 +1997,95 @@ function GetStepsData() {
         {id: "Step1",
             Values: {
                 //Step1
-                Val_1 : $('#textarea-1-1').val(),
-                Val_2 : $('#select-1-2').val(),
-                Val_3 : $('#select-1-3').val(),
-                Val_4 : $('#select-1-4').val(),
-                Val_4_2: $('#textarea-1-4-1').val(),
-                Val_5 : $('#select-1-5').val(),
-                Val_6 : Value_6
+                1: $('#textarea-1-1').val(),
+                2: $('#select-1-2').val(),
+                3: $('#select-1-3').val(),
+                4: $('#select-1-4').val(),
+                5: $('#textarea-1-4-1').val(),
+                6: $('#select-1-5').val(),
+                7: Value_6
             }
         },
         {id: "Step2",
             Values: {
                 //Step2
-                Val_7 :  parseInt($('#input-2-7').val().replace(",","")  ,10),
-                Val_8 :  $('#select-2-8').val(),
-                Val_8_1 :  parseInt($('#input-2-8-1').val().replace(",","")  ,10),
-                Val_9 :  $('#select-2-9').val(),
-                Val_9_1 :  parseInt($('#input-2-9-1').val().replace(",","")  ,10),
-                Val_9_plus_8 :  Value_8_plus_9,
-                Val_10 :  $('#select-2-10').val(),
-                Val_10_1 :  $('#select-2-10-1').val(),
-                Val_10_2 :  parseInt($('#input-2-10-2').val().replace(",","")  ,10),
-                Val_11 :  Value_11,
-                Val_12 :  $('#select-2-12').val(),
-                Val_13_1 :  selectedVal_Step2,
-                Val_13_2 :  Value_13_2,
-                Val_14 :  $('#select-2-14').val(),
-                Val_14_1 :  parseInt($('#input-2-14-1').val().replace(",","")  ,10),
-                Val_14_2: Value_14_2,
-                Val_15 :  Value_15
+                8: parseInt($('#input-2-7').val().replace(",","")  ,10),
+                9: $('#select-2-8').val(),
+                10: parseInt($('#input-2-8-1').val().replace(",","")  ,10),
+                11: $('#select-2-9').val(),
+                12: parseInt($('#input-2-9-1').val().replace(",","")  ,10),
+                13: Value_8_plus_9,
+                14: $('#select-2-10').val(),
+                15: $('#select-2-10-1').val(),
+                16: parseInt($('#input-2-10-2').val().replace(",","")  ,10),
+                17: Value_11,
+                18: $('#select-2-12').val(),
+                19: selectedVal_Step2 + ' - ' + selectedVal_Step2_text,
+                20: Value_13_2,
+                21: $('#select-2-14').val(),
+                22: parseInt($('#input-2-14-1').val().replace(",","")  ,10),
+                23: Value_14_2,
+                24: Value_15
             }           
         },
         {id: "Step3",
             Values: {
                 //Step3
-                Val_16: $('#SmallClaimLimitResult').text().replace(",",""),
-                Val_16_1: Value_16_1,
-                Val_16_2: $('#select-3-16-2').val(),
-                Val_16_3: $('#select-3-16-3').val(),
-                Val_16_4: $('#select-3-16-4').val(),
-                Val_16_Value: Value_16_Value,
-                Val_17: $('#select-3-17').val(),
-                Val_17_Value: Value_17_Value,
-                Val_18: $('#select-3-18').val(),
-                Val_18_Value: Value_18_Value,
-                Val_19: $('#select-3-19').val(),
-                Val_19_Value: Value_19_Value,
-                Val_20: Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value 
+                25: $('#SmallClaimLimitResult').text().replace(",",""),
+                26: Value_16_1,
+                27: $('#select-3-16-2').val(),
+                28: $('#select-3-16-3').val(),
+                29: $('#select-3-16-4').val(),
+                30: Value_16_Value,
+                31: $('#select-3-17').val(),
+                32: Value_17_Value,
+                33: $('#select-3-18').val(),
+                34: Value_18_Value,
+                35: $('#select-3-19').val(),
+                36: Value_19_Value,
+                37: Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value 
             }
 
         },
         {id: "Step4",
             Values: {
                 //Step4
-                Val_21: selectedVal_Step4,
-                Val_21_Value: Value_21_Value,
-                Val_22: Value_22_Value
+                38: selectedVal_Step4,
+                39: Value_21_Value,
+                40: Value_22_Value
             }
 
         },
         {id: "Step5",
             Values: {
-                Val_23: Value_25,
-                Val_24: Value_15,
-                Val_25: Value_24,
-                Val_26: Value_26,
-                Val_27: Value_22_Value,
-                Val_28: '',
-                Val_29: '',
-                Val_30: Value_11,
-                Val_31: Value_31,
-                Val_32: Value_29
+                41: Value_25,
+                42: Value_15,
+                43: Value_24,
+                44: Value_26,
+                45: Value_22_Value,
+                46: '',
+                47: '',
+                48: Value_11,
+                49: Value_31,
+                50: Value_29
             }
         },
         {id: "Step6",
             Values: {
-                Val_33_Chart_Title: Value_33_Chart_Title,
-                Val_33_Chart_Text: Value_33_Chart_Text
+                51: Value_33_Chart_Title,
+                52: Value_33_Chart_Text
             }
         },
         {id: "Step7",
             Values: {
-                Val_34: Value_34_Text,
-                Val_35: '',
-                Val_36: '',
-                Val_37: '',
-                Val_38: Value_38_Text
+                53: Value_34_Text,
+                54: '',
+                55: '',
+                56: '',
+                57: Value_38_Text
             }
         }
     ]
-    console.log(DataForm);
 }
 
 $('#btn-next-step-modal').click(function (e) { 
@@ -2040,8 +2099,6 @@ $('#btn-next-step-modal').click(function (e) {
         if (tabs[index].className.includes('current')) { ActiveTab =  index  } ;
         if (tabs[index].className.includes('done')) {lastdone = index } ; 
     }
-    console.log('ActiveTab: ' + ActiveTab)
-    console.log('lastdone: ' + lastdone)
     if (lastdone != 0 && ActiveTab < lastdone  ){  
         //Advance to last Step
         for (let index = 0; index < (lastdone - ActiveTab); index++) {
@@ -2051,7 +2108,6 @@ $('#btn-next-step-modal').click(function (e) {
         for (let index = 0; index <= lastdone; index++) {
             var localstep = 'Step' + (index + 1)
             CheckStep(localstep,false)
-            console.log('Ejecutó: ' + localstep)
         }
     } else {
         $("#wizard").steps('next'); //Show the Next Step.
@@ -2068,35 +2124,10 @@ $('#btn-next-step-modal').click(function (e) {
 });
 
 
-function PutAnswData(Step,DataForm){
-    var dataPut = [];
-    var data = JSON.stringify(DataForm)
-    console.log('Data Enviada')
-    console.log(DataForm)
-    console.log('Test 1')
-    console.log(DataForm[0]['Values'])
-    //console.log(json_encode(data))
-    //console.log(JSON.parse(data))
-    if (Step == 'Step1') {
-        for (let index = 0; index <= 6; index++) {
-            dataPut.push({
-                form_responses_id: 1, 
-                form_questions_id: index + 1,
-                answer: DataForm[0]['Values'][index]
-                } 
-            )
-        };
-        //console.log( JSON.stringify(dataPut))
-    }
-
-}
-
-
 ///*****SCRIPTS TO GET SEPARATE QUESTIONS */
 
 function showTab(n,step) {
     // This function will display the specified tab of the form...
-    console.log(n + '  -  ' + step)
     var stp = document.getElementById(step)
     var x = stp.getElementsByClassName("tab");
     //Progress BAR
@@ -2105,7 +2136,6 @@ function showTab(n,step) {
     $('#progress_' + step).css('width', progr.toString() + '%');
     $('#progress_' + step).text(progr.toString() + '%');
     $('#progress_' + step).removeClass('bg-success');
-    //console.log(progr.toString + '%')
     x[n].style.display = "block";
     //... and fix the Previous/Next buttons:
     if (n == 0) {
@@ -2225,7 +2255,6 @@ function nextPrev(n,step) {
         }
     }
     if (step == 'Step3' && n == 1){
-        console.log(x[currentTab].id + ' = '+ $('#select-3-16-3').val())
         var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
         if (x[currentTab].id == 'Q16-Prev') {
             $('#input-3-16-1').val(SeparadorMiles(Value_11));
@@ -2314,25 +2343,24 @@ function nextPrev(n,step) {
             $('#ResultStep4Text2').text($('#StepResultText2').text());
             $('#ResultStep4Text3').text($('#StepResultText3').text());
             $('#ResultStep4').show();
-            //console.log('aqui viene ' + DataForm)
             //LoadTable Step5
-            $('#tbl-row-1').text(DataForm[4]['Values']['Val_23']);
-            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_24']));
-            $('#tbl-row-3').text(DataForm[4]['Values']['Val_25']);
-            $('#tbl-row-4').text(DataForm[4]['Values']['Val_26']);
-            $('#tbl-row-5').text(DataForm[4]['Values']['Val_27']);
-            $('#tbl-row-6').text(''/*DataForm[4]['Values']['Val_28']*/); //Blank Space
-            $('#tbl-row-7').text(''/*DataForm[4]['Values']['Val_29']*/);
-            $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values']['Val_30']));
-            $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values']['Val_31'])) );
-            var num = DataForm[4]['Values']['Val_32']
+            $('#tbl-row-1').text(DataForm[4]['Values'][41]);
+            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
+            $('#tbl-row-3').text(DataForm[4]['Values'][43]);
+            $('#tbl-row-4').text(DataForm[4]['Values'][44]);
+            $('#tbl-row-5').text(DataForm[4]['Values'][45]);
+            $('#tbl-row-6').text(''); //Blank Space
+            $('#tbl-row-7').text('');
+            $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
+            $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
+            var num = DataForm[4]['Values'][50]
             $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
         }        
         if (step == 'Step5'){
             CheckStep(step,true);
             $("#prevBtn5").hide();
             $("#nextBtn5").hide();
-            $('#ResultStep6').html('<p> '+  DataForm[5]['Values']['Val_33_Chart_Title'] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values']['Val_33_Chart_Text'] + '</p>')
+            $('#ResultStep6').html('<p> '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: justify;" >' + DataForm[5]['Values'][52] + '</p>')
             $("#wizard").steps('next');
         }
         if (step == 'Step6'){
