@@ -11,7 +11,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 
     require 'cnt.php';
     
-    if($PreResultado = $mysqli->prepare("SELECT * FROM users")){
+    if($PreResultado = $mysqli->prepare("SELECT id,user_nicename,user_email,user_status,user_rol FROM users")){
         $PreResultado->execute();
         $resultado = $PreResultado->get_result();
         /*

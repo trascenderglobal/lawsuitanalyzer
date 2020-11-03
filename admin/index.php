@@ -342,8 +342,6 @@ $(document).ready(function () {
 		method:'GET',
 		url:'../API/rusr.php',
 		success:function(response){
-			myArray = response.data
-            console.log(response)
 			buildTable(response)	
 		}
 	})
