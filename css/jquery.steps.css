@@ -112,8 +112,8 @@
 .wizard > .steps .disabled a:hover,
 .wizard > .steps .disabled a:active
 {
-    background: #eee;
-    color: #aaa;
+    background: #5f615f;
+    color: #fff;
     cursor: default;
 }
 
@@ -130,9 +130,9 @@
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: #345B99;
-    opacity: 50%;
-    color: #fff;
+    background: #e1e2e5;
+    opacity: 100%;
+    color: gray;
 }
 
 .wizard > .steps .error a,
@@ -145,7 +145,7 @@
 
 .wizard > .content
 {
-    background: #eee;
+    background: #e1e2e5;
     display: block;
     margin: 0.5em;
     min-height: 35em;

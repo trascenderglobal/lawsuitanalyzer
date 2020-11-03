@@ -48,7 +48,6 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                     $PreResultado-> bind_param('sii',$ans, $uslr,$answer['form_questions_id']);
                     $PreResultado->execute();
                     $num_rows =  $mysqli->affected_rows;
-                    echo ('Answer: '  .  $ans );
                     if ($num_rows > 0) {$index =  $index + 1 ;};
                 }
                 

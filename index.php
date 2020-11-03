@@ -32,11 +32,11 @@
         <script src="js/bootstrap.js"  > </script>
         <script src="build/jquery.steps.js"></script> 
     </head>
-    <body style="font-family: 'Century Gothic','CenturyGothic','AppleGothic',sans-serif;">
+    <body style="font-family: 'Montserrat';">
 
     <style>
         /* Style the form */
-        #Step1,#Step2,#Step3 {
+        #Step1,#Step2,#Step3,#Step4,#Step5,#Step6,#Step7 {
             /*text-align: ;background-color: #ffffff;*/
             margin: auto;
             padding-top: 15px;
@@ -90,7 +90,8 @@
 
         html { font-size: 1rem; }
         h1,h3 { color: #9E2D2D ; }
-        label { color: #345B99;}
+        label,h4 { color: #345B99;}
+        strong {color: #8fc2d1;}
 
         @media (max-width: 576px) {
             html { font-size: 1rem; }
@@ -99,6 +100,9 @@
             .wizard > .content {min-height: auto/*45em*/ }
             #StepCollapse { display: block; }
             .wizard.vertical > .steps {display: none;}
+            .helpimg {
+                width: 50px;
+            }
         }
         @media (min-width: 768px) {
             html { font-size: 1rem; }
@@ -106,11 +110,17 @@
             h3 {font-size: 1.5rem}
             .wizard > .content {min-height: auto/*45em*/ }
             .wizard.vertical > .steps {display: inline;}
+            .helpimg {
+                width: 80px;
+            }
         }
         @media (min-width: 1200px) {
             html { font-size: 1.25rem; }
             .wizard > .content {min-height: auto/*25em*/ }
             .wizard.vertical > .steps {display: inline;}
+            .helpimg {
+                width: 80px;
+            }
         }
     </style>
 
@@ -155,7 +165,7 @@
             <div class="container-fluid">
                 <div id="wizard">
                     <div class="row">
-                        <button id="StepCollapse" class="btn btn-info w-100" type="button" style="background-color: #9E2D2D;">
+                        <button id="StepCollapse" class="btn btn-info w-100" type="button" style="background-color: #9E2D2D;border-color: none; ">
                             <i class="fa fa-align-left"></i>
                             <span id = "ToggleBtnText">Show Steps</span>
                         </button>             
@@ -174,19 +184,9 @@
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img src="assets/helpimage.png" alt="Help Image">
+                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
                                         </div>
-                                    </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step1" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
                                     </div>
                                     <div class="row"  > 
                                         <div class="col" style="text-align: center;" >
@@ -198,7 +198,7 @@
                                                             <sup class="text-danger"> </sup>
                                                         </label>
                                                         <small id="HelpBlock-1-1" class="form-text text-muted">
-                                                            Enter below, and remember to access Help.
+                                                            Enter below, and remember to access <strong>Help</strong>.
                                                         </small>
                                                         <textarea id="textarea-1-1" name="textarea-1-1" required="required" class="form-control"></textarea>
                                                     </div>
@@ -263,20 +263,33 @@
                                                         <textarea id="textarea-1-5-1" class="form-control" name="" rows="3"></textarea>
                                                     </div>                                                   
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
-                                                    <button type="button" id="prevBtn" class="btn btn-secondary" onclick="nextPrev(-1,'Step1')">Previous</button>
-                                                    <button type="button" id="nextBtn" class="btn btn-success" onclick="nextPrev(1,'Step1')">Next</button>
+                                                
+                                                <div id="ResultStep1" style="display: none;">
+                                                    <h4 id="ResultStep1Text1"></h6>    
+                                                    <button class="btn btn-info" type="button" onclick="showTab(0,'Step1')">Edit answers</button>
+                                                </div>
+                                                
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step1" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step1" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="prevBtn1" class="btn btn-info" onclick="nextPrev(-1,'Step1')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn1" class="btn btn-info" onclick="nextPrev(1,'Step1')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
 
                                             </form>
-                                            <div id="ResultStep1" style="display: none;">
-                                                <h4 id="ResultStep1Text1"></h6>    
-                                                <button class="btn btn-info" type="button" onclick="showTab(0,'Step1')">Edit answers</button>
-                                            </div>
+                                            
+
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -297,17 +310,7 @@
                                                 <img src="assets/helpimage.png" alt="Help Image" width="100" height="100">
                                             </a>
                                         </div>
-                                    </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step2" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
-                                    </div>                                    
+                                    </div>                                 
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step2">
@@ -461,19 +464,31 @@
                                                         <input id="input-2-14-2" class="form-control" type= "text" value="0" disabled></input>
                                                     </div>
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
-                                                    <button type="button" id="prevBtn2" class="btn btn-secondary" onclick="nextPrev(-1,'Step2')">Previous</button>
-                                                    <button type="button" id="nextBtn2" class="btn btn-success" onclick="nextPrev(1,'Step2')">Next</button>
+
+                                                <div id="ResultStep2" style="display: none;">
+                                                    <h4 id="ResultStep2Text1"></h6>
+                                                    <h4 id="ResultStep2Text2"></h6>
+                                                    <h4 id="ResultStep2Text3"></h6>
+                                                    <button class="btn btn-info" type="button" onclick="showTab(0,'Step2')">Edit answers</button>
+                                                </div>
+
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step2" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step2" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="prevBtn2" class="btn btn-info" onclick="nextPrev(-1,'Step2')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn2" class="btn btn-info" onclick="nextPrev(1,'Step2')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
+
                                             </form>
-                                            <div id="ResultStep2" style="display: none;">
-                                                <h4 id="ResultStep2Text1"></h6>
-                                                <h4 id="ResultStep2Text2"></h6>
-                                                <h4 id="ResultStep2Text3"></h6>
-                                                <button class="btn btn-info" type="button" onclick="showTab(0,'Step2')">Edit answers</button>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -497,16 +512,6 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step3" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
-                                    </div>                                                               
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step3">
@@ -610,19 +615,30 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
-                                                    <button type="button" id="prevBtn3" class="btn btn-secondary" onclick="nextPrev(-1,'Step3')">Previous</button>
-                                                    <button type="button" id="nextBtn3" class="btn btn-success" onclick="nextPrev(1,'Step3')">Next</button>
-                                                    </div>
+                                                
+                                                <div id="ResultStep3">
+                                                    <h4 id="ResultStep3Text1"></h6> 
+                                                    <h4 id="ResultStep3Text2"></h6>
+                                                    <h4 id="ResultStep3Text3"></h6>                                            
+                                                    <button class="btn btn-info" type="button" onclick="showTab(0,'Step3')">Edit answers</button>
                                                 </div>
+
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step3" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step3" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="prevBtn3" class="btn btn-info" onclick="nextPrev(-1,'Step3')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn3" class="btn btn-info" onclick="nextPrev(1,'Step3')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                    </div>
+                                                </div>                                                
                                             </form>
-                                            <div id="ResultStep3">
-                                                <h4 id="ResultStep3Text1"></h6> 
-                                                <h4 id="ResultStep3Text2"></h6>
-                                                <h4 id="ResultStep3Text3"></h6>                                            
-                                                <button class="btn btn-info" type="button" onclick="showTab(0,'Step3')">Edit answers</button>
-                                            </div>                                    
+                                   
                                         </div>
                                     </div>
 
@@ -647,16 +663,6 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step4" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
-                                    </div>                                    
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step4">
@@ -710,19 +716,31 @@
 
                                                     </div>   
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
-                                                    <button type="button" id="prevBtn4" class="btn btn-secondary" onclick="nextPrev(-1,'Step4')">Previous</button>
-                                                    <button type="button" id="nextBtn4" class="btn btn-success" onclick="nextPrev(1,'Step4')">Next</button>
+
+                                                <div id="ResultStep4">
+                                                    <h4 id="ResultStep4Text1"></h6> 
+                                                    <h4 id="ResultStep4Text2"></h6>
+                                                    <h4 id="ResultStep4Text3"></h6>                                            
+                                                    <button class="btn btn-info" type="button" onclick="showTab(0,'Step4')">Edit answers</button>
+                                                </div>                                              
+
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step4" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step4" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
                                                     </div>
-                                                </div>                                                
+                                                    <div>
+                                                        <button type="button" id="prevBtn4" class="btn btn-info" onclick="nextPrev(-1,'Step4')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn4" class="btn btn-info" onclick="nextPrev(1,'Step4')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                    </div>
+                                                </div>
+                                            
                                             </form>
-                                            <div id="ResultStep4">
-                                                <h4 id="ResultStep4Text1"></h6> 
-                                                <h4 id="ResultStep4Text2"></h6>
-                                                <h4 id="ResultStep4Text3"></h6>                                            
-                                                <button class="btn btn-info" type="button" onclick="showTab(0,'Step4')">Edit answers</button>
-                                            </div>  
+
                                         </div>                                     
                                     </div>
                                 </div>
@@ -746,16 +764,6 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step5" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
-                                    </div>                                    
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step5">
@@ -781,7 +789,7 @@
                                                                     <td id="tbl-row-3"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Phase 3, Legal Options Assessment [Range: 0 -175]</td>
+                                                                    <td>Phase 3, Legal Options Assessment [Range: 0 -190]</td>
                                                                     <td id="tbl-row-4"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
@@ -818,12 +826,22 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
-                                                    <button type="button" id="prevBtn5" class="btn btn-secondary" onclick="nextPrev(-1,'Step5')">Previous</button>
-                                                    <button type="button" id="nextBtn5" class="btn btn-success" onclick="nextPrev(1,'Step5')">Next</button>
+                                                                                          
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step5" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step5" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
                                                     </div>
-                                                </div>                                                
+                                                    <div>
+                                                        <button type="button" id="prevBtn5" class="btn btn-info" onclick="nextPrev(-1,'Step5')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn5" class="btn btn-info" onclick="nextPrev(1,'Step5')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                    </div>
+                                                </div>                                             
+                                                                                       
                                             </form>
                                         </div>                                     
                                     </div>
@@ -848,16 +866,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step6" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
-                                    </div>                                                               
+
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step6">
@@ -866,13 +875,24 @@
                                                     <br>
                                                     <div id="ResultStep6"> </div>            
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
-                                                        <p>CONTINUE IF YOU HAVE DECIDED TO MOVE FORWARD WITH YOUR DISPUTE</p>
-                                                        <button type="button" id="prevBtn6" class="btn btn-secondary" onclick="nextPrev(-1,'Step6')">Previous</button>
-                                                        <button type="button" id="nextBtn6" class="btn btn-success" onclick="nextPrev(1,'Step6')">Next</button>
+
+                                                <p>CONTINUE IF YOU HAVE DECIDED TO MOVE FORWARD WITH YOUR DISPUTE</p>
+
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step6" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step6" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="prevBtn6" class="btn btn-info" onclick="nextPrev(-1,'Step6')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn6" class="btn btn-info" onclick="nextPrev(1,'Step6')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                                  
+
                                             </form>
                                         </div>
                                     </div>                                    
@@ -897,16 +917,6 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="row" style="margin-bottom: 15px;">
-                                        <div class="col-lg-4 sm-2"></div>
-                                        <div class="col-lg-4 sm-8">
-                                            <p style="text-align: center;margin-bottom: 0">Progress</p>
-                                            <div class="progress" style="background: #D8D9DD;" >                                                
-                                                <div id="progress_Step7" class="progress-bar" style="background: #345B99;"></div>
-                                            </div>                                        
-                                        </div>
-                                        <div class="col-lg-4 sm-2"></div>
-                                    </div>                                                            
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step7">
@@ -938,7 +948,23 @@
                                                         <button type="button" id="prevBtn7" class="btn btn-info" onclick="">Download</button>
                                                         <button type="button" id="nextBtn7" class="btn btn-success" onclick="">Go to Mediation</button>
                                                     </div>
-                                                </div>                                                  
+                                                </div>
+
+                                                <div class="d-flex flex-row justify-content-end">
+                                                    <div style="width: 120px; background: #5f615f;" > 
+                                                        <p id = "progress_text_Step7" style="color: white; margin-top: 5px;margin-bottom: 7px;font-size: 0.6rem;" ></p>
+                                                        <div class="progress" style="background: #D8D9DD; margin:0% 5% 0% 5%; height: 5px;" >
+                                                            <div id="progress_Step7" class="progress-bar" style="background: #345B99;"></div>                                                    
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="prevBtn7" class="btn btn-info" onclick="" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" id="nextBtn7" class="btn btn-info" onclick="" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                    </div>
+                                                </div>                                             
+                                            
                                             </form>
                                         </div>
                                     </div>                                    
@@ -995,7 +1021,7 @@ $(document).ready(function () {
     //** Step 3 */
     $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
     //HidePreviousButton
-    $("#prevBtn,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6,#prevBtn7").hide();
+    $("#prevBtn1,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6,#prevBtn7").hide();
     //Hide Toggle Button
     //$("#StepCollapse").hide();
 
@@ -1714,7 +1740,7 @@ function CheckStep(Step,FirstTime){
         if (FirstTime){$('#StepResult').modal({backdrop: 'static', keyboard: false})};
         $('#StepResultTitle').text('This is your Legal Options Assessment');
         $('#StepResultText1').text( DataForm[2]['Values'][37])
-        $('#StepResultText2').text('[Range: 0-175]')
+        $('#StepResultText2').text('[Range: 0-190]')
         $('#StepResultText3').text('This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5')
         $('#StepResultDetailsHeader').text('')
         $('#StepResultDetailsText').text('')
@@ -2134,7 +2160,7 @@ function showTab(n,step) {
     var progr = ( (n+1) / x.length) * 100
     if (progr == 100 ){progr = 95}
     $('#progress_' + step).css('width', progr.toString() + '%');
-    $('#progress_' + step).text(progr.toString() + '%');
+    $('#progress_text_' + step).text(progr.toString() + '% complete');
     $('#progress_' + step).removeClass('bg-success');
     x[n].style.display = "block";
     //... and fix the Previous/Next buttons:
@@ -2146,8 +2172,8 @@ function showTab(n,step) {
         currentTab = 0
         previousTab = 0
         if (step == 'Step1'){
-            $('#prevBtn').hide();
-            $('#nextBtn').show();
+            $('#prevBtn1').hide();
+            $('#nextBtn1').show();
             $('#ResultStep1').hide();
         };
         if (step == 'Step2'){
@@ -2174,7 +2200,7 @@ function showTab(n,step) {
             $('#nextBtn6').show();
         };        
         } else {
-        if (step == 'Step1'){$('#prevBtn').show()};
+        if (step == 'Step1'){$('#prevBtn1').show()};
         if (step == 'Step2'){$('#prevBtn2').show()};
         if (step == 'Step3'){$('#prevBtn3').show()};
         if (step == 'Step4'){$('#prevBtn4').show()};
@@ -2308,8 +2334,8 @@ function nextPrev(n,step) {
         // ... the form gets submitted:
         if (step == 'Step1'){ 
             CheckStep(step,true);
-            $('#prevBtn').hide();
-            $("#nextBtn").hide();
+            $('#prevBtn1').hide();
+            $("#nextBtn1").hide();
             //StepResults StepView
             $('#ResultStep1Text1').text($('#StepResultText1').text());
             $('#ResultStep1').show();
@@ -2375,7 +2401,7 @@ function nextPrev(n,step) {
         //PROGRESS BAR
         $('#progress_' + step).css('width', '100%');
         $('#progress_' + step).addClass('bg-success');
-        $('#progress_' + step).text('100%');
+        $('#progress_text_' + step).text('100% complete');
 
         return false;
     }
