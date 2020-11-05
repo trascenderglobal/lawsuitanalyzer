@@ -2,6 +2,8 @@
 
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
     sleep(1);
+    ini_set("session.cookie_lifetime","1200");
+    ini_set("session.gc_maxlifetime","1200");
     session_start();
 
     

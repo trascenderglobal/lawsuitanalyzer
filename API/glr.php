@@ -5,7 +5,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     session_start();
 
     if(empty(isset($_SESSION['user']))){
-        header('location:login.php');
+        header('location: ../login.php');
     }
     
     require 'cnt.php';
