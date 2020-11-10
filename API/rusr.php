@@ -1,7 +1,9 @@
 <?php
 
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-    session_start();
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    } 
 
     if(empty(isset($_SESSION['user']))){
         header('location: ../login.php');

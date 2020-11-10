@@ -1,7 +1,11 @@
 <?php
     //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
     //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-
+    session_start();
+   
+    if(!empty(isset($_SESSION['user']))){
+      header('location:index.php');
+    }
 ?>
 
 <!DOCTYPE html>

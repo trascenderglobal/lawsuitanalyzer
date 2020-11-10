@@ -1,17 +1,19 @@
 <?php
 
 if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-    sleep(1);
-    session_start();
 
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    } 
+    
     if(empty(isset($_SESSION['user']))){
         header('location: ../login.php');
     }
     
     require 'cnt.php';
 
-    if (isset($_POST['user_id']) ){
-        $user_id = $mysqli->real_escape_string($_POST['user_id']);
+    if (isset($_GET['user_id']) ){
+        $user_id = $mysqli->real_escape_string($_GET['user_id']);
         $status = $mysqli->real_escape_string('On Process');
         
         if($PreResultado = $mysqli->prepare("SELECT * FROM form_responses where users_id = ? and status = ? ORDER BY start_date DESC")){

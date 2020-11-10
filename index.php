@@ -1,13 +1,18 @@
 <?php
     //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
     //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-    session_start();
+    if (!isset($_SESSION)) { 
+        session_start(); 
+    } 
+
     if(isset($_SESSION['user_rol'])){
         if ($_SESSION['user_rol'] == 'admin') {
             header('location: admin/index.php');
         } else {
             if(empty(isset($_SESSION['user']))){
+                session_destroy();
                 header('location:login.php');
+                exit();
             }
         }
     }
@@ -128,7 +133,7 @@
         @media (max-width: 576px) {
             html { font-size: 1rem; }
             h2 {font-size: 1.75rem}
-            h3 {font-size: 1.25rem}
+            h3 {font-size: 1.2rem}
             .wizard > .content {min-height: auto/*45em*/ }
             #StepCollapse { display: block; }
             .wizard.vertical > .steps {display: none;}
@@ -142,7 +147,7 @@
         @media (min-width: 768px) {
             html { font-size: 1rem; }
             h2 {font-size: 2rem}
-            h3 {font-size: 1.5rem}
+            h3 {font-size: 1.4rem}
             .wizard > .content {min-height: auto/*45em*/ }
             .wizard.vertical > .steps {display: inline;}
             .helpimg {
@@ -304,7 +309,7 @@
                                                     </div>                                                   
                                                 </div>
                                                 
-                                                <div id="ResultStep1" style="display: none; margin:15% 0% 15% 0%;">
+                                                <div id="ResultStep1" style="display: none; margin:15% 0% 15% 0%;" >
                                                     <h4 id="ResultStep1Text1"></h6>    
                                                 </div>
                                                 
@@ -316,10 +321,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn1" class="btn btn-info" onclick="nextPrev(-1,'Step1')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn1" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn1" class="btn btn-info" onclick="nextPrev(1,'Step1')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn1" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
 
@@ -526,10 +531,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn2" class="btn btn-info" onclick="nextPrev(-1,'Step2')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn2" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn2" class="btn btn-info" onclick="nextPrev(1,'Step2')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn2" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
 
@@ -548,7 +553,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 3.</span> LEGAL OPTIONS ASSESSMENT</h2>    
+                                        <h2><span style="font-size: 1.5rem;" >PHASE 3.</span> Legal Options Assesment</h2>    
                                         <div class="col-lg-8 sm-6">
                                             <h3>What are your legal options?</h3>
                                         </div>
@@ -662,7 +667,7 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div id="ResultStep3" style="display: none; margin:5% 0% 15% 0%;" >
+                                                <div id="ResultStep3" style="display: none; margin:5% 0% 15% 0%;">
                                                     <h4 id="ResultStep3Text1"></h6> 
                                                     <h4 id="ResultStep3Text2"></h6>
                                                     <h4 id="ResultStep3Text3"></h6>                                            
@@ -676,10 +681,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn3" class="btn btn-info" onclick="nextPrev(-1,'Step3')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn3" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn3" class="btn btn-info" onclick="nextPrev(1,'Step3')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn3" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                                
                                             </form>
@@ -698,7 +703,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 4.</span> COLLECTABILITY ASSESSMENT</h2>    
+                                        <h2><span style="font-size: 1.5rem;" >PHASE 4.</span> Collectability Assesment</h2>    
                                         <div class="col-lg-8 sm-6">
                                             <h3>What are your chances of collecting on your judgment?</h3>
                                         </div>
@@ -762,7 +767,7 @@
                                                     </div>   
                                                 </div>
 
-                                                <div id="ResultStep4" style="display: none; margin:5% 0% 15% 0%;" >
+                                                <div id="ResultStep4" style="display: none; margin:5% 0% 15% 0%;">
                                                     <h4 id="ResultStep4Text1"></h6> 
                                                     <h4 id="ResultStep4Text2"></h6>
                                                     <h4 id="ResultStep4Text3"></h6>                                            
@@ -776,10 +781,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn4" class="btn btn-info" onclick="nextPrev(-1,'Step4')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn4" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn4" class="btn btn-info" onclick="nextPrev(1,'Step4')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn4" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
                                             
@@ -798,7 +803,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 5.</span> COMPREHENSIVE CASE ANALYSIS</h2>
+                                        <h2><span style="font-size: 1.5rem;" >PHASE 5.</span> Comprehensive Case Analysis</h2>
                                         <div class="col-lg-8 sm-6"> 
                                         </div>
                                         <div class="col-lg-4 sm-6" style="text-align: right;">
@@ -881,10 +886,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn5" class="btn btn-info" onclick="nextPrev(-1,'Step5')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn5" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn5" class="btn btn-info" onclick="nextPrev(1,'Step5')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn5" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                             
                                                                                        
@@ -932,10 +937,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn6" class="btn btn-info" onclick="nextPrev(-1,'Step6')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn6" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn6" class="btn btn-info" onclick="nextPrev(1,'Step6')" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn6" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                                  
 
@@ -1017,7 +1022,7 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section>              
                 </div>
             </div>
         </div>
@@ -1067,7 +1072,7 @@ $(document).ready(function () {
     //** Step 3 */
     $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
     //HidePreviousButton
-    $("#prevBtn1,#prevBtn2,#prevBtn3,#prevBtn4,#prevBtn5,#prevBtn6,#prevBtn7").hide();
+    $("#prevBtn1").hide();
     //Hide Toggle Button
     //$("#StepCollapse").hide();
 
@@ -1098,8 +1103,7 @@ $(document).ready(function () {
         if ($(this).val() == 'no') {
             $('#CauseOfSituation_yes').hide();
             $('#input-2-8-1').val(0);
-            validateForm('Step2'); //Easy advance included
-            nextPrev(1,'Step2'); //Easy advance included
+            EasyAdvance('Step2')
         };
     });
 
@@ -1109,8 +1113,7 @@ $(document).ready(function () {
         }else {
             $('#RecieveBenefit_yes').hide();
             $('#input-2-9-1').val(0);
-            validateForm('Step2'); //Easy advance included
-            nextPrev(1,'Step2'); //Easy advance included
+            EasyAdvance('Step2')
         };
     });
 
@@ -1122,8 +1125,7 @@ $(document).ready(function () {
             $('#DamageProvision_yes').hide();
             $('#select-2-10-1').val('default');
             $('#input-2-10-2').val(0); 
-            validateForm('Step2'); //Easy advance included
-            nextPrev(1,'Step2'); //Easy advance included
+            EasyAdvance('Step2')
         };
     });
 
@@ -1157,8 +1159,7 @@ $(document).ready(function () {
         }else {
             $('#moneytime_yes').hide();
             $('#input-2-14-1').val(0);
-            validateForm('Step2'); //Easy advance included
-            nextPrev(1,'Step2'); //Easy advance included
+            EasyAdvance('Step2');
         };
     });
 
@@ -1262,7 +1263,7 @@ $(document).ready(function () {
 
     function EasyAdvance (step){
         validateForm(step);
-        nextPrev(1,step)
+        nextPrev(1)
     }
 
     //SmallClaimData
@@ -1616,7 +1617,7 @@ $(document).ready(function () {
 function get_last_response(User_Id){
         var usid = User_Id
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "API/glr.php",
             data: {user_id: usid},
             cache: 'false',
@@ -1758,7 +1759,6 @@ function CheckStep(Step,FirstTime){
     if ( Step == 'Step1') {
         GetStepsData(); 
         if (FirstTime){ firstTimeStep();};
-        $('#StepResultTitle').text('This is Your Legal Evaluation');
         StepResultText1 = DataForm[0]['Values'][7];
         StepResultText2 = '';
         StepResultText3 = '';
@@ -1766,7 +1766,6 @@ function CheckStep(Step,FirstTime){
     if ( Step == 'Step2') {
         GetStepsData();
         if (FirstTime){ firstTimeStep();};
-        $('#StepResultTitle').text('Case Value Assessment.');
         Result1 = parseInt($('#input-2-7').val().replace(",","")  ,10)
         if (!isNaN(DataForm[1]['Values'][17])) {
             var Result2 = DataForm[1]['Values'][17]
@@ -1781,7 +1780,6 @@ function CheckStep(Step,FirstTime){
     if ( Step == 'Step3') {
         GetStepsData();
         if (FirstTime){ firstTimeStep();};
-        $('#StepResultTitle').text('This is your Legal Options Assessment');
         StepResultText1 = DataForm[2]['Values'][37];
         StepResultText2 = '[Range: 0-190]';
         StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5';
@@ -1789,7 +1787,6 @@ function CheckStep(Step,FirstTime){
     if ( Step == 'Step4') {
         GetStepsData();
         if (FirstTime){firstTimeStep();};
-        $('#StepResultTitle').text('This is your Collectability Assessment.');
         StepResultText1 = DataForm[3]['Values'][40];
         StepResultText2 = '[Range: 0-150]';
         StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.';
@@ -2091,7 +2088,7 @@ function GetStepsData() {
                 23: Value_14_2,
                 24: Value_15
             }           
-        },
+        },  
         {id: "Step3",
             Values: {
                 //Step3
@@ -2206,32 +2203,7 @@ function showTab(n,step) {
         previousTab = 0
         if (step == 'Step1'){
             $('#prevBtn1').hide();
-            $('#nextBtn1').show();
-            $('#ResultStep1').hide();
         };
-        if (step == 'Step2'){
-            $('#prevBtn2').hide();
-            $('#nextBtn2').show();
-            $('#ResultStep2').hide();
-        };
-        if (step == 'Step3'){
-            $('#prevBtn3').hide();
-            $('#nextBtn3').show();
-            $('#ResultStep3').hide();
-        };    
-        if (step == 'Step4'){
-            $('#prevBtn4').hide();
-            $('#nextBtn4').show();
-            $('#ResultStep4').hide();
-        };    
-        if (step == 'Step5'){
-            $('#prevBtn5').hide();
-            $('#nextBtn5').show();
-        }; 
-        if (step == 'Step6'){
-            $('#prevBtn6').hide();
-            $('#nextBtn6').show();
-        };        
         } else {
         if (step == 'Step1'){$('#prevBtn1').show()};
         if (step == 'Step2'){$('#prevBtn2').show()};
@@ -2251,11 +2223,236 @@ function showTab(n,step) {
     //fixStepIndicator(n)
 }
 
-function nextPrev(n,step) {
+function nextPrev(n){
+    //Get Current Step
+    var tablist = document.querySelector('[role="tablist"]');
+    var tabs = tablist.getElementsByTagName('li');
+    var ActiveTab = 0;
+    var lastdone = 0;
+    for (let index = 0; index < tabs.length; index++) {
+        if (tabs[index].className.includes('current')) { ActiveTab =  index + 1 } ;
+        if (tabs[index].className.includes('done')) {lastdone = index } ; 
+    }
+    var step = 'Step' + ActiveTab
+    var stp = document.getElementById(step);
+    var x = stp.getElementsByClassName("tab");
+    if (n == -1){
+        if (currentTab == 0 && previousTab == 0) {
+            //are we at the end?
+            var stp = document.getElementById('Step' + ActiveTab);
+            var x = stp.getElementsByClassName("tab");
+            console.log(x[0].id)
+            console.log($('#' + x[0].id).css("display"))
+            if ( $('#' + x[0].id).css("display") == 'block' ) {
+                var step = 'Step' + (ActiveTab - 1);
+                var stp = document.getElementById(step);
+                var x = stp.getElementsByClassName("tab");
+                if (ActiveTab <= 4) {
+                    $("#ResultStep" + (ActiveTab -1)).hide();
+                }
+                $("#wizard").steps('previous');
+                showTab(0,step)
+                return
+            } else {
+                if (ActiveTab <= 4) {
+                    $("#ResultStep" + ActiveTab).hide();
+                }
+                showTab(0,step)
+                return
+            }
+        }
+        x[currentTab].style.display = "none"
+        if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
+            $('#attorney_yes').show();
+            $('#attorney_no').hide();
+        } else {            
+            $('#attorney_yes').hide();
+            $('#attorney_no').show();
+        }
+        if (previousTab < (currentTab -1) ) {
+            currentTab = previousTab
+        } else {
+            previousTab = currentTab
+            currentTab = currentTab + n;
+        }
+        showTab(currentTab,step)  
+        return true
+    };
+    var IsValid = validateForm(step);
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !IsValid) return false;
+
+    //Check Especial Cases for Steps
+    if (step == 'Step1' && n == 1 && currentTab < x.length ){
+        if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
+            || (x[currentTab].id == 'Q3' &&  $('#select-1-3').val() == 'no') 
+            || (x[currentTab].id == 'Q4' &&  $('#select-1-4').val() == 'no') ){
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = x.length; //Skip to End       
+        }else{
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;
+        }
+    }
+    if (step == 'Step2' && n == 1 && currentTab < x.length ){
+        GetStepsData();
+        $('#input-2-11').val(SeparadorMiles(Value_11));     
+        if (x[currentTab].id == 'Q10' &&  $('#select-2-10').val() == 'no') {
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = 5; //Skip to Q12
+        }else if (x[currentTab].id == 'Q12' &&  $('#select-2-12').val() == 'yes'){
+            $('#attorney_no').hide();
+            $('#attorney_yes').show();
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n; 
+        } else {
+            $('#attorney_yes').hide();
+            $('#attorney_no').show();
+            $('#input-2-13').val(SeparadorMiles(Math.round(Value_11 * 0.8)));
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;             
+        }
+    }
+    if (step == 'Step3' && n == 1 && currentTab < x.length ){
+        var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
+        if (x[currentTab].id == 'Q16-Prev') {
+            $('#input-3-16-1').val(SeparadorMiles(Value_11));
+            if (diff <= 0) {
+                $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Not Within</span> your state&#39s small claim limit.</h6>');
+                $('#BellowLimit').hide();
+                $('#AboveLimit').show();
+            }else{
+                $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Within</span> your state&#39s small claim limit.</h6>');                
+                $('#AboveLimit').hide();
+                $('#BellowLimit').show();
+            }
+            if ($('#select-3-16-2').val() == 'yes' ){
+                $('#BellowLimit').show();        
+            }else {
+                if (diff <= 0 ) { $('#BellowLimit').hide() };
+                $('#select-3-16-3').val('no');
+                $('#select-3-16-4').val('no');
+            };
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;
+            $('#ok_step3').hide();                  
+        } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0)) {
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n + 1;
+            $('#select-3-18').val('no');           
+        }else {
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;  
+        } 
+    }
+    if (step == 'Step4' && n == 1 && currentTab < x.length ) {
+        x[currentTab].style.display = "none";
+        previousTab = currentTab
+        currentTab = currentTab + n;         
+    }
+    if (step == 'Step5' && n == 1 && currentTab < x.length ) {
+        //x[currentTab].style.display = "none";
+        previousTab = currentTab
+        currentTab = currentTab + n;         
+    }
+    if (step == 'Step6' && n == 1 && currentTab < x.length ) {
+        //x[currentTab].style.display = "none";
+        previousTab = currentTab
+        currentTab = currentTab + n;         
+    }
+    // if you have reached the end of the form STEP... 
+    //allow to show final Results
+    if (currentTab == x.length) {
+        CheckStep(step,false);
+        if (step == 'Step1') {
+            //StepResults StepView
+            $('#ResultStep1Text1').text(StepResultText1);
+            $('#ResultStep1').show();
+        }
+        if (step == 'Step2') {
+            //StepResults StepView
+            $('#ResultStep2Text1').text(StepResultText1);
+            $('#ResultStep2Text2').text(StepResultText2);
+            $('#ResultStep2Text3').text(StepResultText3);
+            $('#ResultStep2').show();
+        }
+        if (step == 'Step3') {
+            //StepResults StepView
+            $('#ResultStep3Text1').text(StepResultText1);
+            $('#ResultStep3Text2').text(StepResultText2);
+            $('#ResultStep3Text3').text(StepResultText3);
+            $('#ResultStep3').show(); 
+        }
+        if (step == 'Step4') {
+            //StepResults StepView
+            $('#ResultStep4Text1').text(StepResultText1);
+            $('#ResultStep4Text2').text(StepResultText2);
+            $('#ResultStep4Text3').text(StepResultText3);
+            $('#ResultStep4').show();
+            //LoadTable Step5
+            $('#tbl-row-1').text(DataForm[4]['Values'][41]);
+            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
+            $('#tbl-row-3').text(DataForm[4]['Values'][43]);
+            $('#tbl-row-4').text(DataForm[4]['Values'][44]);
+            $('#tbl-row-5').text(DataForm[4]['Values'][45]);
+            $('#tbl-row-6').text(''); //Blank Space
+            $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
+            $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
+            $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
+            var num = DataForm[4]['Values'][50]
+            $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+        }
+        if (step == 'Step5') {
+            $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
+            $("#wizard").steps('next');            
+        }
+        if (step == 'Step6') {
+            $("#wizard").steps('next');
+        }
+        previousTab = currentTab
+        currentTab = currentTab + n;
+        return
+    }
+    if (currentTab > x.length) {
+        // ... the form gets submitted:
+        CheckStep(step,true);
+        previousTab = 0
+        currentTab = 0//Reset Ordinal
+        //PROGRESS BAR
+        var resp = step.substr(step.length - 1, step.length)
+        resp = parseInt(resp)
+        var progr = Math.round( (0.143 * resp) * 100)
+        $('#progress_' + step).css('width', progr.toString() + '%');
+        $('#progress_' + step).addClass('bg-success');
+        $('#progress_text_' + step).text(progr.toString() + '% complete');
+
+        return false;
+    }
+    // Otherwise, display the correct tab:
+    if (n == 1){showTab(currentTab,step);}
+    /*
+    if (step == 'Step1' && n == 1){showTab(currentTab,'Step1');}
+    if (step == 'Step2' && n == 1){showTab(currentTab,'Step2');}
+    */
+}
+
+function nextPrev_last(n,step) {
     // This function will figure out which tab to display
     var stp = document.getElementById(step);
     var x = stp.getElementsByClassName("tab");
     if (n == -1) { 
+        if (currentTab > x.length) {
+            currentTab = currentTab - 1;
+            previousTab = previousTab - 1
+        }
         x[currentTab].style.display = "none"
         if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
             $('#attorney_yes').show();
@@ -2278,7 +2475,7 @@ function nextPrev(n,step) {
     if (n == 1 && !IsValid) return false;    
     
     //Check Especial Cases for Steps
-    if (step == 'Step1' && n == 1){
+    if (step == 'Step1' && n == 1 && currentTab <= x.length ){
         if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
             || (x[currentTab].id == 'Q3' &&  $('#select-1-3').val() == 'no') 
             || (x[currentTab].id == 'Q4' &&  $('#select-1-4').val() == 'no') ){
@@ -2335,7 +2532,8 @@ function nextPrev(n,step) {
             };
             x[currentTab].style.display = "none";
             previousTab = currentTab
-            currentTab = currentTab + n;                  
+            currentTab = currentTab + n;
+            $('#ok_step3').hide();                  
         } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0)) {
             x[currentTab].style.display = "none";
             previousTab = currentTab
@@ -2362,16 +2560,26 @@ function nextPrev(n,step) {
         previousTab = currentTab
         currentTab = currentTab + n;         
     }
-    // if you have reached the end of the form...
-    if (currentTab >= x.length) {
-        // ... the form gets submitted:
-        if (step == 'Step1'){ 
-            CheckStep(step,true);
-            $('#prevBtn1').hide();
-            $("#nextBtn1").hide();
+    // if you have reached the end of the form STEP... 
+    //allow to show final Results
+    if (currentTab == x.length) {
+        CheckStep(step,false);
+        if (step == 'Step1') {
             //StepResults StepView
             $('#ResultStep1Text1').text(StepResultText1);
             $('#ResultStep1').show();
+        }
+        previousTab = currentTab
+        currentTab = currentTab + n;
+        return
+    }
+    if (currentTab > x.length) {
+        // ... the form gets submitted:  
+        if (step == 'Step1'){
+            console.log('Test jaja')
+            CheckStep(step,true);
+            //$('#prevBtn1').hide();
+            //$("#nextBtn1").hide();
         }
         if (step == 'Step2'){ 
             CheckStep(step,true);
