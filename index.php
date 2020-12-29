@@ -41,7 +41,7 @@
         <script src="lib/jquery-3.5.1.min.js"></script>
         <script src="lib/jquery.cookie-1.3.1.js"></script>
         <script src="js/bootstrap.js"  > </script>
-        <script src="build/jquery.steps.js"></script> 
+        <script src="build/jquery.steps.js"></script>
     </head>
     <body style="font-family: 'Montserrat';">
 
@@ -75,7 +75,7 @@
         /* Hide all steps by default: */
         .tab {
             display: none;
-            margin: 5% 5% 10% 5%;
+            margin: 3% 5% 3% 5%;
         }
         
         .form-group {
@@ -201,7 +201,6 @@
                         $("#wizard").steps({
                             headerTag: "h2",
                             bodyTag: "section",
-                            transitionEffect: "slideLeft",
                             stepsOrientation: "vertical",
                             //enableAllSteps: true,
                             enablePagination: false,
@@ -224,10 +223,10 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <h2><span style="font-size: 1.5rem;" >PHASE 1.</span> Legal Evaluation</h2>
-                                        <div class="col-lg-8 sm-6"> 
+                                        <div class="col-lg-10 sm-6"> 
                                             <h3>What is your likelihood of prevailing?</h3>
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -240,7 +239,7 @@
                                                 <div id="Q1" class="tab">
                                                     <div class="form-group">
                                                         <label for="textarea-1-1" class="form-control-label">1. What obligations did your adversary owe you?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <small id="HelpBlock-1-1" class="form-text">
                                                             Enter below, and remember to access <strong>Help</strong>.
@@ -263,7 +262,7 @@
                                                 <div id="Q3" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-3">3. Have you sustained legally recognized damages as a direct result of your adversary's conduct?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-1-3" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -275,7 +274,7 @@
                                                 <div id="Q4" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-4">4. Did you have a prior obligation to your adversary?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-1-4" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -285,7 +284,7 @@
                                                     </div>
                                                     <div id = "PriorObligation_yes" class="form-group">
                                                         <label id="label-1-4-1" for="textarea-1-4-1">Please describe
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <textarea id="textarea-1-4-1" class="form-control" name="" rows="3"></textarea>
                                                     </div>                                            
@@ -293,23 +292,17 @@
                                                 <div id="Q5" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-1-5">5. Did you perform your obligation in a satisfactory manner?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-1-5" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
                                                             <option value="yes">Yes</option>
                                                             <option value="no">No</option>
                                                         </select>
-                                                    </div>
-                                                    <div id="PerformSatisfactory_yes" class="form-group">
-                                                        <label id="label-1-5-1" for="textarea-1-4-1">Please describe
-                                                            <sup class="text-danger"> </sup>
-                                                        </label>
-                                                        <textarea id="textarea-1-5-1" class="form-control" name="" rows="3"></textarea>
-                                                    </div>                                                   
+                                                    </div>                                               
                                                 </div>
                                                 
-                                                <div id="ResultStep1" style="display: none; margin:15% 0% 15% 0%;" >
+                                                <div id="ResultStep1" class = "results" style="display: none; margin:10% 0% 10% 0%;" >
                                                     <h4 id="ResultStep1Text1"></h6>    
                                                 </div>
                                                 
@@ -321,10 +314,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn1" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn1" class="btn btn-info" onclick="nextPrev(-1,0)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn1" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn1" class="btn btn-info" onclick="nextPrev(1,0)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
 
@@ -347,10 +340,10 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <h2><span style="font-size: 1.5rem;" >PHASE 2.</span> Case Value Assessment</h2>
-                                        <div class="col-lg-8 sm-6"> 
+                                        <div class="col-lg-10 sm-6"> 
                                             <h3>How much are you likely to recover?</h3>
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -371,7 +364,7 @@
                                                 <div id ="Q8" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-8">8. Were you a cause of the situation that caused your damages?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-2-8" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -389,7 +382,7 @@
                                                 <div id ="Q9" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-9">9. Did you receive a substantial benefit from the situation?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-2-9" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -413,7 +406,7 @@
                                                 <div id ="Q10" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-10">10. Is there a damage defining provision in a written agreement that pertains to this dispute?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-2-10" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -450,7 +443,7 @@
                                                 <div id ="Q12" class="tab">
                                                     <div class="form-group">
                                                         <label for="select-2-12">12. Will you be represented by an attorney?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-2-12" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -492,7 +485,7 @@
                                                 <div id ="Q14" class="tab">
                                                     <div class="form-group">
                                                         <label id="label-2-14" for="select-2-14">14. Will you invest substantial time into your case?
-                                                            <sup class="text-danger"> </sup>
+                                                            
                                                         </label>
                                                         <select id="select-2-14" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -513,7 +506,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div id="ResultStep2" style="display: none; margin:5% 5% 5% 5%; text-align: left;">
+                                                <div id="ResultStep2" class = "results" style="display: none; margin:5% 5% 5% 5%; text-align: left;">
                                                     <h5 id="ResultStep2Text1"></h5>
                                                     <br>
                                                     <h5 id="ResultStep2Text2"></h5>
@@ -531,10 +524,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn2" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn2" class="btn btn-info" onclick="nextPrev(-1,1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn2" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn2" class="btn btn-info" onclick="nextPrev(1,1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
 
@@ -554,10 +547,10 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <h2><span style="font-size: 1.5rem;" >PHASE 3.</span> Legal Options Assesment</h2>    
-                                        <div class="col-lg-8 sm-6">
+                                        <div class="col-lg-10 sm-6">
                                             <h3>What are your legal options?</h3>
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -569,7 +562,6 @@
                                                 <div id="Q16-Prev" class="tab">
                                                     <div class="form-group">
                                                         <label id="label-3-16" for="select-3-16">Select your state to look up your Small Claims Limit
-                                                            <sup class="text-danger"> </sup>
                                                         </label>
                                                         <select id="select-3-16" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -600,7 +592,6 @@
                                                         <div class="col-lg-12 col-md-12">
                                                             <div class="form-group">
                                                                 <label for="select-3-16-2">16. Are you willing to reduce your claim to fit the Small Claims Limit?</label>
-                                                                <sup class="text-danger"> </sup>
                                                                 </label>
                                                                 <select id="select-3-16-2" class="form-control" name="">
                                                                     <option value="" >Please choose an option</option>
@@ -613,7 +604,6 @@
                                                     <div id="BellowLimit"  >
                                                         <div class="form-group">
                                                             <label for="select-3-16-3">16sc. Do you have a binding arbitration provision in a written agreement with your adversary?</label>
-                                                            <sup class="text-danger"> </sup>
                                                             </label>
                                                             <select id="select-3-16-3" class="form-control" name="">
                                                                 <option value="" >Please choose an option</option>
@@ -623,7 +613,6 @@
                                                         </div>                                
                                                         <div id="ExcludeSmallClaims" class="form-group">
                                                             <label for="select-3-16-4">Does it exclude Small Claims?</label>                                                            
-                                                            <sup class="text-danger"> </sup>
                                                             </label>
                                                             <select id="select-3-16-4" class="form-control" name="">
                                                                 <option value="" >Please choose an option</option>
@@ -635,7 +624,7 @@
                                                 </div>  
                                                 <div id="Q17" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-3-17">17. Do you have a written agreement signed by your adversary that contains an attorneys’ fee provision?                                                            <sup class="text-danger">* </sup>
+                                                        <label for="select-3-17">17. Do you have a written agreement signed by your adversary that contains an attorneys’ fee provision?
                                                         </label>
                                                         <select id="select-3-17" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -646,7 +635,7 @@
                                                 </div>
                                                 <div id="Q18" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-3-18">18. Do you have an agreement signed by you and your adversary that requires binding arbitration?                                                            <sup class="text-danger">* </sup>
+                                                        <label for="select-3-18">18. Do you have an agreement signed by you and your adversary that requires binding arbitration?
                                                         </label>
                                                         <select id="select-3-18" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -657,7 +646,7 @@
                                                 </div>
                                                 <div id="Q19" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-3-19">19. Do you have an agreement signed by you and your adversary that requires mediation?                                                           <sup class="text-danger">* </sup>
+                                                        <label for="select-3-19">19. Do you have an agreement signed by you and your adversary that requires mediation?
                                                         </label>
                                                         <select id="select-3-19" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -667,7 +656,7 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <div id="ResultStep3" style="display: none; margin:5% 0% 15% 0%;">
+                                                <div id="ResultStep3" class = "results" style="display: none; margin:5% 0% 10% 0%;">
                                                     <h4 id="ResultStep3Text1"></h6> 
                                                     <h4 id="ResultStep3Text2"></h6>
                                                     <h4 id="ResultStep3Text3"></h6>                                            
@@ -681,10 +670,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn3" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn3" class="btn btn-info" onclick="nextPrev(-1,2)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn3" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn3" class="btn btn-info" onclick="nextPrev(1,2)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                                
                                             </form>
@@ -704,10 +693,10 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <h2><span style="font-size: 1.5rem;" >PHASE 4.</span> Collectability Assesment</h2>    
-                                        <div class="col-lg-8 sm-6">
+                                        <div class="col-lg-10 sm-6">
                                             <h3>What are your chances of collecting on your judgment?</h3>
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -767,7 +756,7 @@
                                                     </div>   
                                                 </div>
 
-                                                <div id="ResultStep4" style="display: none; margin:5% 0% 15% 0%;">
+                                                <div id="ResultStep4" class = "results" style="display: none; margin:5% 0% 10% 0%;">
                                                     <h4 id="ResultStep4Text1"></h6> 
                                                     <h4 id="ResultStep4Text2"></h6>
                                                     <h4 id="ResultStep4Text3"></h6>                                            
@@ -781,10 +770,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn4" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn4" class="btn btn-info" onclick="nextPrev(-1,3)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn4" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn4" class="btn btn-info" onclick="nextPrev(1,3)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>
                                             
@@ -804,9 +793,9 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <h2><span style="font-size: 1.5rem;" >PHASE 5.</span> Comprehensive Case Analysis</h2>
-                                        <div class="col-lg-8 sm-6"> 
+                                        <div class="col-lg-10 sm-6"> 
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -815,7 +804,7 @@
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step5">
-                                                <div id="Q23" class = "tab">                                        
+                                                <div id="Q23" class = "results">                                        
                                                     <div id="ResultStep5" class="table-responsive" style="text-align: initial;">
                                                         <table class="table table-bordered table-sm">
                                                             <thead style="color: #345B99;">
@@ -839,7 +828,7 @@
                                                                     <td id="tbl-row-3"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Phase 3, Legal Options Assessment [Range: 0 -190]</td>
+                                                                    <td>Phase 3, Legal Options Assessment [Range: 0-190]</td>
                                                                     <td id="tbl-row-4"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
@@ -851,7 +840,7 @@
                                                                     <td id="tbl-row-6">  </td>   
                                                                 </tr>
                                                             </tbody>
-                                                            <thead style="color: #345B99;">
+                                                            <thead style="color: #345B99;">                         
                                                                 <tr>
                                                                     <th colspan="2" scope="col">Comprehensive Case Assessment:</th>
                                                                 </tr>
@@ -870,7 +859,7 @@
                                                                     <td id="tbl-row-9"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td >Case Feasibility Assessment [Range 0-106%]</td>
+                                                                    <td >Case Feasibility Assessment [Range 0-100%]</td>
                                                                     <td id="tbl-row-10" scope="row">0</td>
                                                                 </tr>
                                                             </tbody>
@@ -886,10 +875,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn5" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn5" class="btn btn-info" onclick="nextPrev(-1,4)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn5" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn5" class="btn btn-info" onclick="nextPrev(1,4)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                             
                                                                                        
@@ -901,17 +890,17 @@
                         </div>
                     </section>
 
-                    <h2>Case Feasibility Assessment Chart</h2>
+                    <h2>Feasibility Assessment Chart</h2>
                     <section>
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 6.</span> Case Feasibility Assessment Chart</h2>
-                                        <div class="col-lg-8 sm-6"> 
+                                        <h2><span style="font-size: 1.5rem;" >PHASE 6.</span> Feasibility Assessment Chart</h2>
+                                        <div class="col-lg-10 sm-6"> 
                                             <h3>How Feasible is your case to pursue?</h3>
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -921,7 +910,7 @@
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step6">
-                                                <div id="Q33Chart" class="tab">
+                                                <div id="Q33Chart" class="results">
                                                     <p id="NoteStep6">Note: Always remember to exhaust all settlement possibilities before pursuing your case through legal channels. Remember also, the case value we’re talking about is the one at row 23 of step five's table.</p>
                                                     <br>
                                                     <div id="ResultStep6"> </div>            
@@ -937,10 +926,10 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn6" class="btn btn-info" onclick="nextPrev(-1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn6" class="btn btn-info" onclick="nextPrev(-1,5)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="nextBtn6" class="btn btn-info" onclick="nextPrev(1)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
+                                                        <button type="button" id="nextBtn6" class="btn btn-info" onclick="nextPrev(1,5)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                                  
 
@@ -959,10 +948,10 @@
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
                                         <h2><span style="font-size: 1.5rem;" >PHASE 7.</span> Forum Assessment</h2>
-                                        <div class="col-lg-8 sm-6"> 
+                                        <div class="col-lg-10 sm-6"> 
                                             <h3>Where will you pursue your dispute?</h3>
                                         </div>
-                                        <div class="col-lg-4 sm-6" style="text-align: right;">
+                                        <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
@@ -971,7 +960,7 @@
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step7">
-                                                <div id="Q34Last" class="tab">
+                                                <div id="Q34Last" class="results">
                                                     <div class="row">
                                                         <div class="col-lg-5 col-md-12 d-flex justify-content-center justify-content-md-end" >
                                                             <h4>Forum:</h4>
@@ -994,8 +983,8 @@
                                                         </div>
                                                     </div>                                                
                                                 </div>
-                                                <div style="overflow:auto; margin-top: 15px;">
-                                                    <div style="float:right;">
+                                                <div style="overflow:auto; margin: 2%;">
+                                                    <div style="float:center;">
                                                         <button type="button" id="prevBtn7" class="btn btn-info" onclick="">Download</button>
                                                         <button type="button" id="nextBtn7" class="btn btn-success" onclick="">Go to Mediation</button>
                                                     </div>
@@ -1009,7 +998,7 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button type="button" id="prevBtn7" class="btn btn-info" onclick="" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
+                                                        <button type="button" id="prevBtn7" class="btn btn-info" onclick="nextPrev(-1,6)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
                                                     </div>
                                                     <div>
                                                         <button type="button" id="nextBtn7" class="btn btn-info" onclick="" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
@@ -1027,30 +1016,39 @@
             </div>
         </div>
 
-        <div class="modal fade" id="StepResult" tabindex="-1" role="dialog" aria-labelledby="StepResultTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div id = "instructions_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="StepResultTitle"></h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col" > 
-                            <h6 style="text-align: left;" id="StepResultText1" ></h6>
-                            <h6 style="text-align: left;" id="StepResultText2" ></h6>
-                            <h6 style="text-align: left;" id="StepResultText3" ></h6>
-                            <h6 style="text-align: left; margin-top: 15px;" id="StepResultDetailsHeader"> </h6>
-                            <p style="text-align: left;" id="StepResultDetailsText"> </p>
-                        </div> 
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="instructions_modalTitle">Quick instructions</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>          
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Edit answers</button>
-                    <button type="button" class="btn btn-primary" id="btn-next-step-modal" >Continue</button>
-                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col" style="text-align: left;">
+                                <p>Please read the following instructions to make friendly this analysis.</p>                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="fa-ul">
+                                    <li><i class="fa-li fa fa-check"></i>You must complete successfully the previous step to enable the next step and get his results.</li>
+                                    <li><i class="fa-li fa fa-check"></i>You can edit answers by clicking on the step button on the left bar. Then, the Analyzer will place you at the end of the step or at the last answered question for the selected step.</li>
+                                    <li><i class="fa-li fa fa-check"></i>You can navigate through the quiz only by clicking on the up and down button <button type="button" class="btn btn-info" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button><button type="button" class="btn btn-info" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&darr;</button></li>
+                                    <li><i class="fa-li fa fa-check"></i>Please Enjoy !</li>
+                                </ul>   
+                            </div>                        
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div>
-        </div>    
+        </div>   
+
 
 
     </body>
@@ -1058,1345 +1056,750 @@
 </html>
 
 <script>
+    // executes when HTML-Document is loaded and DOM is ready
+    $(document).ready(function () {
+        //Hide results Text
+        $('#ResultStep1,#ResultStep2').hide();
+        //Hide Dependency Question
+        //**Step2 */
+        $('#PriorObligation_yes,#CauseOfSituation_yes,#RecieveBenefit_yes').hide();
+        $('#DamageProvision_yes,#attorney_yes,#attorney_no,#moneytime_yes').hide();
+        //** Step 3 */
+        $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
+        //HidePreviousButton
+        $("#prevBtn1").hide();
+        //Hide Toggle Button
+        //$("#StepCollapse").hide();
 
-$(document).ready(function () {
-    localStorage.setItem('user_id',get_session('user_id'))
-    localStorage.setItem('user' , get_session('user'))
-    get_last_response(get_session('user_id'))
-    //Hide results Text
-    $('#ResultStep1,#ResultStep2').hide();
-    //Hide Dependency Question
-    //**Step2 */
-    $('#PriorObligation_yes,#PerformSatisfactory_yes,#CauseOfSituation_yes,#RecieveBenefit_yes').hide();
-    $('#DamageProvision_yes,#attorney_yes,#attorney_no,#moneytime_yes').hide();
-    //** Step 3 */
-    $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
-    //HidePreviousButton
-    $("#prevBtn1").hide();
-    //Hide Toggle Button
-    //$("#StepCollapse").hide();
+        $("#select-1-4").change(function(){
+            if ($(this).val() == 'yes'){
+                $('#PriorObligation_yes').hide();
+                $('#textarea-1-4-1').text('NULL');
+            }else {
+                $('#PriorObligation_yes').hide();
+                $('#textarea-1-4-1').text('NULL');
+            };
+        });
 
-    $("#select-1-4").change(function(){
-        if ($(this).val() == 'yes'){
-            $('#PriorObligation_yes').show();
-            $('#textarea-1-4-1').text('');
-        }else {
-            $('#PriorObligation_yes').hide();
-            $('#textarea-1-4-1').text('NULL');
-        };
-    });
+        $('#select-2-8').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#CauseOfSituation_yes').show();          
+            }
+            if ($(this).val() == 'no') {
+                $('#CauseOfSituation_yes').hide();
+                $('#input-2-8-1').val(0);
+                EasyAdvance('Step2')
+            };
+        });
 
-    $('#select-1-5').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#PerformSatisfactory_yes').show();
-            $('#textarea-1-5-1').text('');            
-        }else {
-            $('#PerformSatisfactory_yes').hide();
-            $('#textarea-1-5-1').text('NULL');
-        };
-    });
+        $('#select-2-9').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#RecieveBenefit_yes').show();        
+            }else {
+                $('#RecieveBenefit_yes').hide();
+                $('#input-2-9-1').val(0);
+                EasyAdvance('Step2')
+            };
+        });
 
-    $('#select-2-8').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#CauseOfSituation_yes').show();          
-        }
-        if ($(this).val() == 'no') {
-            $('#CauseOfSituation_yes').hide();
-            $('#input-2-8-1').val(0);
-            EasyAdvance('Step2')
-        };
-    });
+        $('#select-2-10').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#DamageProvision_yes').show();        
+            }
+            if ($(this).val() == 'no') {
+                $('#DamageProvision_yes').hide();
+                $('#select-2-10-1').val('default');
+                $('#input-2-10-2').val(0); 
+                EasyAdvance('Step2')
+            };
+        });
 
-    $('#select-2-9').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#RecieveBenefit_yes').show();        
-        }else {
-            $('#RecieveBenefit_yes').hide();
-            $('#input-2-9-1').val(0);
-            EasyAdvance('Step2')
-        };
-    });
-
-    $('#select-2-10').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#DamageProvision_yes').show();        
-        }
-        if ($(this).val() == 'no') {
-            $('#DamageProvision_yes').hide();
-            $('#select-2-10-1').val('default');
-            $('#input-2-10-2').val(0); 
-            EasyAdvance('Step2')
-        };
-    });
-
-    $('#select-2-10-1').change(function () { 
-        if ($(this).val() == 'Liquidated-Damages'){
-            $('#label-2-10-2').text('Enter the Liquidated Damages amount from your contract.');        
-        }
-        if ($(this).val() == 'Damage-Limit') {
-            $('#label-2-10-2').text('Enter the Damage-Limit amount from your contract.');        
-        };
-        if ($(this).val() == 'default') {
-            $('#label-2-10-2').text('Please choose an option.');        
-        };
-    });
+        $('#select-2-10-1').change(function () { 
+            if ($(this).val() == 'Liquidated-Damages'){
+                $('#label-2-10-2').text('Enter the Liquidated Damages amount from your contract.');        
+            }
+            if ($(this).val() == 'Damage-Limit') {
+                $('#label-2-10-2').text('Enter the Damage-Limit amount from your contract.');        
+            };
+            if ($(this).val() == 'default') {
+                $('#label-2-10-2').text('Please choose an option.');        
+            };
+        });
 
 
-    $('#select-2-12').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#attorney_no').hide();
-            $('#attorney_yes').show();
-        }else {
-            $('#attorney_yes').hide();
-            $('#attorney_no').show(); 
-            
-        };
-    });
+        $('#select-2-12').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#attorney_no').hide();
+                $('#attorney_yes').show();
+            }else {
+                $('#attorney_yes').hide();
+                $('#attorney_no').show(); 
+                
+            };
+        });
 
-    $('#select-2-14').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#moneytime_yes').show();
-        }else {
-            $('#moneytime_yes').hide();
-            $('#input-2-14-1').val(0);
-            EasyAdvance('Step2');
-        };
-    });
+        $('#select-2-14').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#moneytime_yes').show();
+            }else {
+                $('#moneytime_yes').hide();
+                $('#input-2-14-1').val(0);
+                EasyAdvance('Step2');
+            };
+        });
 
-    $('#select-3-16-2').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#BellowLimit').show();
-            $('#select-3-16-3').val('');
-            $('#select-3-16-4').val('');         
-        }else {
-            $('#BellowLimit').hide();
-            $('#select-3-16-3').val('no');
-            $('#select-3-16-4').val('no');
-            EasyAdvance('Step3');
-        };
-    });
+        $('#select-3-16-2').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#BellowLimit').show();
+                $('#select-3-16-3').val('');
+                $('#select-3-16-4').val('');         
+            }else {
+                $('#BellowLimit').hide();
+                $('#select-3-16-3').val('no');
+                $('#select-3-16-4').val('no');
+                EasyAdvance('Step3');
+            };
+        });
 
-    $('#select-3-16-3').change(function () { 
-        if ($(this).val() == 'yes'){
-            $('#ExcludeSmallClaims').show();
-            $('#select-3-16-4').val('');
-        }else {
-            $('#ExcludeSmallClaims').hide();
-            $('#select-3-16-4').val('no');
-            EasyAdvance('Step3');
-        };
-    });
+        $('#select-3-16-3').change(function () { 
+            if ($(this).val() == 'yes'){
+                $('#ExcludeSmallClaims').show();
+                $('#select-3-16-4').val('');
+            }else {
+                $('#ExcludeSmallClaims').hide();
+                $('#select-3-16-4').val('no');
+                EasyAdvance('Step3');
+            };
+        });
 
-    $('#select-3-16-4').change(function () { 
-        if ($(this).val() !== '' && $('#select-3-16-3').val() !== '' && $('#select-3-16-2').val() !== ''){
-            EasyAdvance('Step3');
-        };
-    });
+        $('#select-3-16-4').change(function () { 
+            if ($(this).val() !== '' && $('#select-3-16-3').val() !== '' && $('#select-3-16-2').val() !== ''){
+                EasyAdvance('Step3');
+            };
+        });
 
-    //Format numbers
-    $("#input-2-7,#input-2-8-1,#input-2-9-1,#input-2-10-2,#input-2-14-1").on({
-      "focus": function (event) {
-          $(event.target).select();
-      },
-      "keyup": function (event) {
-          $(event.target).val(function (index, value ) {
-              return value.replace(/\D/g, "")
-                          //.replace(/([0-9])([0-9]{2})$/, '$1.$2')
-                          .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
-          });
-      }
-    });   
+        //Format numbers
+        $("#input-2-7,#input-2-8-1,#input-2-9-1,#input-2-10-2,#input-2-14-1").on({
+            "focus": function (event) {
+                $(event.target).select();
+            },
+            "keyup": function (event) {
+                $(event.target).val(function (index, value ) {
+                    return value.replace(/\D/g, "")
+                                //.replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                                .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                });
+            }
+        });   
 
-    $('#input-2-14-1').change(function () { 
-        if (!isNaN(parseInt($(this).val().replace(",",""),10))){
-            var val = parseInt($(this).val().replace(",",""),10) / 2
-            $('#input-2-14-2').val(SeparadorMiles(val));
-        }
-    });
-
-    //Easy advance behaviour Step1
-    $('#select-1-2,#select-1-3,#select-1-4,#select-1-5').change(function () { 
-        EasyAdvance('Step1');
-    });
-
-    //Easy advance behaviour Step2
-    $('#select-2-12').change(function () { 
-        EasyAdvance('Step2');
-    });
-
-    $('#input-2-7,#input-2-8-1,#input-2-9-1,#input-2-10-2,#input-2-13,#input-2-14-1').keypress(function (e) { 
-        var keycode = (e.keyCode ? e.keyCode : e.which);
-        if(keycode == '13'){
-            EasyAdvance('Step2')
-        }        
-    });
-    
-    $("input[type='radio'][name='attorney']").click(function(){
-        var selected = $("input[type='radio'][name='attorney']:checked");
-        if (selected.length > 0) {
-            EasyAdvance('Step2')
-        } 
-    });
-    
-    //Easy advance behaviour Step3
-    $('#select-3-17,#select-3-18,#select-3-19').change(function () { 
-        EasyAdvance('Step3');
-    });
-
-    //Easy advance behaviour Step4
-    $("input[type='radio'][name='adversary']").click(function(){
-        var selected = $("input[type='radio'][name='adversary']:checked");
-        if (selected.length > 0) {
-            EasyAdvance('Step4')
-        } 
-    });
-
-    $("#StepCollapse").click(function () { 
-        if ( $(".steps").is(":visible")) {
-            $(".steps").hide();
-            $("#ToggleBtnText").text('Show Steps');
-        } else {
-            $(".steps").show();
-            $("#ToggleBtnText").text('Hide Steps');
-        }
-    });
-
-    function EasyAdvance (step){
-        validateForm(step);
-        nextPrev(1)
-    }
-
-    //SmallClaimData
-    var SmallClaimsTable = [
-        {
-            Abrev: "AL",
-            State: "Alabama",
-            Dollar_Limit: "6,000",
-            Link: "http://judicial.alabama.gov/library/SmallClaimsRules"
-        },
-        {
-            Abrev: "AK",
-            State: "Alaska",
-            Dollar_Limit: "10,000",
-            Link: "http://www.state.ak.us/courts/forms/sc-100.pdf"
-        },
-        {
-            Abrev: "AZ",
-            State: "Arizona",
-            Dollar_Limit: "3,500",
-            Link: "https://www.azcourts.gov/selfservicecenter/Small-Claims"
-        },
-        {
-            Abrev: "AR",
-            State: "Arkansas",
-            Dollar_Limit: "5,000",
-            Link: "http://www.arlegalservices.org/smallclaimspacket"
-        },
-        {
-            Abrev: "CA",
-            State: "California",
-            Dollar_Limit: "10,000",
-            "Additional Information": "Limit for Businesses (except sole proprietors) and public entities is $5,000. You can only file 2 claims in a calendar year seeking more than $2,500. See CA Small Claims Court for more exceptions related to actions against guarantors. ",
-            Link: "https://www.courts.ca.gov/selfhelp-smallclaims.htm"
-        },
-        {
-            Abrev: "CO",
-            State: "Colorado",
-            Dollar_Limit: "7,500",
-            Link: "https://www.courts.state.co.us/Self_Help/smallclaims/"
-        },
-        {
-            Abrev: "CT",
-            State: "Connecticut",
-            Dollar_Limit: "5,000",
-            "Additional Information": "Except in landlord-tenant security deposit claims",
-            Link: "http://www.jud.state.ct.us/faq/smallclaims.html"
-        },
-        {
-            Abrev: "DE",
-            State: "Delaware",
-            Dollar_Limit: "15,000",
-            Link: "http://courts.delaware.gov/jpcourt/"
-        },
-        {
-            Abrev: "DC",
-            State: "District of Columbia",
-            Dollar_Limit: "10,000",
-            Link: "http://www.dccourts.gov/services/civil-matters"
-        },
-        {
-            Abrev: "FL",
-            State: "Florida",
-            Dollar_Limit: "8,000",
-            Link: "http://www.flcourts.org/resources-and-services/family-courts/family-law-self-help-information/small-claims.stml"
-        },
-        {
-            Abrev: "GA",
-            State: "Georgia",
-            Dollar_Limit: "15,000",
-            "Additional Information": "No limit in eviction cases.",
-            Link: "http://consumer.georgia.gov/consumer-topics/magistrate-court"
-        },
-        {
-            Abrev: "HI",
-            State: "Hawaii",
-            Dollar_Limit: "5,000",
-            "Additional Information": "No limit on landlord-tenant residential security deposit cases. For the return of leased or rented personal property, the property must not be worth more than $5,000.",
-            Link: "http://www.courts.state.hi.us/self-help/small_claims_info"
-        },
-        {
-            Abrev: "ID",
-            State: "Idaho",
-            Dollar_Limit: "5,000",
-            Link: "https://www.isc.idaho.gov/irsca"
-        },
-        {
-            Abrev: "IL",
-            State: "Illinois",
-            Dollar_Limit: "10,000",
-            Link: "http://www.ag.state.il.us/consumers/smlclaims.html"
-        },
-        {
-            Abrev: "IN",
-            State: "Indiana",
-            Dollar_Limit: "6,000",
-            "Additional Information": "$8,000 in Marion County",
-            Link: "http://www.in.gov/judiciary/2710.htm"
-        },
-        {
-            Abrev: "IA",
-            State: "Iowa",
-            Dollar_Limit: "6,500",
-            Link: "http://www.iowacourts.gov/Court_Rules__Forms/Small_Claims_Forms/"
-        },
-        {
-            Abrev: "KS",
-            State: "Kansas",
-            Dollar_Limit: "4,000",
-            Link: "http://www.kscourts.org/rules-procedures-forms/small-claims-information/"
-        },
-        {
-            Abrev: "KY",
-            State: "Kentucky",
-            Dollar_Limit: "2,500",
-            Link: "http://courts.ky.gov/resources/publicationsresources/Publications/P6SmallClaimsHandbookweb.pdf"
-        },
-        {
-            Abrev: "LA",
-            State: "Louisiana",
-            Dollar_Limit: "5,000",
-            Link: "http://brgov.com/dept/citycourt/"
-        },
-        {
-            Abrev: "ME",
-            State: "Maine",
-            Dollar_Limit: "6,000",
-            Link: "http://www.courts.state.me.us/maine_courts/specialized/small_claims/index.shtml"
-        },
-        {
-            Abrev: "MD",
-            State: "Maryland",
-            Dollar_Limit: "5,000",
-            Link: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&sqi=2&ved=0CC4QFjAC&url=http%3A%2F%2Fwww.courts.state.md.us%2Flegalhelp%2Fsmallclaims.html&ei=QF69VNDiB_SRsQSlj4GQBA&usg=AFQjCNE5DKWuSxYbgHYG8YWG5_leo5N9yg"
-        },
-        {
-            Abrev: "MA",
-            State: "Massachusetts",
-            Dollar_Limit: "7,000",
-            "Additional Information": "No limit for property damage caused by a motor vehicle.",
-            Link: "http://www.mass.gov/ago/consumer-resources/consumer-assistance/small-claims-court.html"
-        },
-        {
-            Abrev: "MI",
-            State: "Michigan",
-            Dollar_Limit: "6,000",
-            Link: "https://michiganlegalhelp.org/self-help-tools/money-and-debt/i-have-small-claims-case"
-        },
-        {
-            Abrev: "MN",
-            State: "Minnesota",
-            Dollar_Limit: "15,000",
-            "Additional Information": "$4,000 for claims involving consumer credit transactions",
-            Link: "http://www.mncourts.gov/selfhelp/?page=313"
-        },
-        {
-            Abrev: "MS",
-            State: "Mississippi",
-            Dollar_Limit: "3,500",
-            Link: "https://courts.ms.gov/trialcourts/justicecourt/justicecourt.php"
-        },
-        {
-            Abrev: "MO",
-            State: "Missouri",
-            Dollar_Limit: "5,000",
-            Link: "http://www.mobar.org/uploadedFiles/Home/Publications/Legal_Resources/Brochures_and_Booklets/small claims.pdf"
-        },
-        {
-            Abrev: "MT",
-            State: "Montana",
-            Dollar_Limit: "7,000",
-            Link: "http://dojmt.gov/consumer/guide-to-small-claims-court/"
-        },
-        {
-            Abrev: "NE",
-            State: "Nebraska",
-            Dollar_Limit: "3,600",
-            "Additional Information": "Through June 30, 2020 (adjusted every five years based on the Consumer Price Index",
-            Link: "https://supremecourt.nebraska.gov/self-help/small-claims/filing-small-claims-case-nebraska"
-        },
-        {
-            Abrev: "NV",
-            State: "Nevada",
-            Dollar_Limit: "10,000",
-            Link: "https://www.civillawselfhelpcenter.org/self-help/small-claims"
-        },
-        {
-            Abrev: "NH",
-            State: "New Hampshire",
-            Dollar_Limit: "10,000",
-            Link: "http://www.courts.state.nh.us/district/eclaims/"
-        },
-        {
-            Abrev: "NJ",
-            State: "New Jersey",
-            Dollar_Limit: "3,000",
-            "Additional Information": "For claims relating to security deposits; certain landlord-tenant suits cannot be brought",
-            Link: "https://njcourts.gov/selfhelp/small_claims.html"
-        },
-        {
-            Abrev: "NM",
-            State: "New Mexico",
-            Dollar_Limit: "10,000",
-            Link: "http://www.nmcourts.gov/Self-Help/self-help-guide.aspx"
-        },
-        {
-            Abrev: "NY",
-            State: "New York",
-            Dollar_Limit: "10,000",
-            Link: "http://www.courts.state.ny.us/courthelp/smallClaims/index.shtml"
-        },
-        {
-            Abrev: "NC",
-            State: "North Carolina",
-            Dollar_Limit: "10,000",
-            Link: "http://www.nccourts.org/Courts/Trial/Sclaims/"
-        },
-        {
-            Abrev: "ND",
-            State: "North Dakota",
-            Dollar_Limit: "15,000",
-            Link: "https://www.ndcourts.gov/legal-self-help/small-claims"
-        },
-        {
-            Abrev: "OH",
-            State: "Ohio",
-            Dollar_Limit: "6,000",
-            Link: "http://www.ohiojudges.org/Document.ashx?DocGuid=932074c6-0f9b-42d9-9979-1864ad693f5b"
-        },
-        {
-            Abrev: "OK",
-            State: "Oklahoma",
-            Dollar_Limit: "10,000",
-            Link: "http://www.oklahomacounty.org/158/Small-Claims"
-        },
-        {
-            Abrev: "OR",
-            State: "Oregon",
-            Dollar_Limit: "10,000",
-            Link: "https://www.courts.oregon.gov/forms/Pages/small-claims.aspx"
-        },
-        {
-            Abrev: "PA",
-            State: "Pennsylvania",
-            Dollar_Limit: "12,000",
-            Link: "http://www.pacourts.us/courts/minor-courts/"
-        },
-        {
-            Abrev: "RI",
-            State: "Rhode Island",
-            Dollar_Limit: "2,500",
-            Link: "https://www.courts.ri.gov/Courts/districtcourt/Pages/smallclaims.aspx"
-        },
-        {
-            Abrev: "SC",
-            State: "South Carolina",
-            Dollar_Limit: "7,500",
-            Link: "http://www.sccourts.org/selfhelp/FAQMagistrate.pdf"
-        },
-        {
-            Abrev: "SD",
-            State: "South Dakota",
-            Dollar_Limit: "12,000",
-            Link: "http://ujs.sd.gov/Small_Claims/"
-        },
-        {
-            Abrev: "TN",
-            State: "Tennessee",
-            Dollar_Limit: "25,000",
-            "Additional Information": "No limit in eviction suits or suits to recover personal property",
-            Link: "http://tncourts.gov/programs/self-help-center"
-        },
-        {
-            Abrev: "TX",
-            State: "Texas",
-            Dollar_Limit: "10,000",
-            "Additional Information": "Until August 31, 2020; $20,000 effective September 1, 2020",
-            Link: "https://guides.sll.texas.gov/small-claims"
-        },
-        {
-            Abrev: "UT",
-            State: "Utah",
-            Dollar_Limit: "11,000",
-            Link: "http://www.utcourts.gov/howto/smallclaims/"
-        },
-        {
-            Abrev: "VT",
-            State: "Vermont",
-            Dollar_Limit: "5,000",
-            Link: "http://www.vermontjudiciary.org/SRL/smallclaims/default.aspx"
-        },
-        {
-            Abrev: "VA",
-            State: "Virginia",
-            Dollar_Limit: "5,000",
-            Link: "http://www.courts.state.va.us/resources/small_claims_court_procedures.pdf"
-        },
-        {
-            Abrev: "WA",
-            State: "Washington",
-            Dollar_Limit: "10,000",
-            "Additional Information": "If brought by natural person; $5,000 all other cases",
-            Link: "http://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal"
-        },
-        {
-            Abrev: "WV",
-            State: "West Virginia",
-            Dollar_Limit: "10,000",
-            Link: "http://www.courtswv.gov/lower-courts"
-        },
-        {
-            Abrev: "WI",
-            State: "Wisconsin",
-            Dollar_Limit: "10,000",
-            "Additional Information": "No limit in eviction suits",
-            Link: "http://www.wicourts.gov/services/public/selfhelp/smallclaims.htm"
-        },
-        {
-            Abrev: "WY",
-            State: "Wyoming",
-            Dollar_Limit: "6,000",
-            Link: "https://www.courts.state.wy.us/court_rule/rules-and-forms-governing-small-claims-cases/"
-        }
-    ]
-
-    //Look for Small Claims Limit
-    $('#select-3-16').change(function () { 
-        if ($('#select-3-16').val() !== "" ) {
-            var StateLimitResults = VLookUp(SmallClaimsTable,$(this).val(),'Abrev', 'Dollar_Limit' );
-            var StateLinkResults = VLookUp(SmallClaimsTable,$(this).val(),'Abrev', 'Link')
-            $('#SmallClaimLimitResult').text(SeparadorMiles(StateLimitResults));
-            $('#SmallClaimLinkResult').html('<a href="' + StateLinkResults + '" target="_blank" >  <span class="badge badge-info-ls">Click Here</span> </a>');
-        }else{
-            $('#SmallClaimLimitResult').text('0')
-            $('#SmallClaimLinkResult').text('Please choose an option')
-        }
-        
-    });
-
-    //SmallClaimLoad
-    for (var i = 0; i <= SmallClaimsTable.length; i++) {
-        $('#select-3-16').append('<option value="' + SmallClaimsTable[i]['Abrev'] + '">' + SmallClaimsTable[i]['State'] + '</option>');
-    }
-
-
-});
-
-
-//Script functions to DB
-
-function get_last_response(User_Id){
-        var usid = User_Id
-        $.ajax({
-            type: "GET",
-            url: "API/glr.php",
-            data: {user_id: usid},
-            cache: 'false',
-            success: function (response) {
-                $validacion = response
-                if (response) {
-                    localStorage.setItem('user_lr', $validacion)
-                } else {
-                    localStorage.setItem('user_lr', 0)
-                }
+        $('#input-2-14-1').change(function () { 
+            if (!isNaN(parseInt($(this).val().replace(",",""),10))){
+                var val = parseInt($(this).val().replace(",",""),10) / 2
+                $('#input-2-14-2').val(SeparadorMiles(val));
             }
         });
-}
 
-function get_session(key){
-    var result = null
-    if (key == 'user_id'){
-        result = "<?php if(isset($_SESSION['user_id'])){ echo $_SESSION['user_id'] ; }  ?>";
-        if (result !== '') {return  result; }
-    }    
-    if (key == 'user'){
-        result = "<?php if(isset($_SESSION['user'])){ echo $_SESSION['user'] ; }  ?>";
-        if (result !== '') {return  result }
-    } 
-    if (key == 'user_status'){
-        result = "<?php if(isset($_SESSION['user_status'])){ echo $_SESSION['user_status'] ; }  ?>";
-        if (result !== '') {return  result } 
-    }    
-    if (key == 'user_rol'){
-        result = "<?php if(isset($_SESSION['user_rol'])){ echo $_SESSION['user_rol'] ; }  ?>";
-        if (result !== '') {return  result } 
-    }
-    if (key == 'user_lr'){
-        result = "<?php if(isset($_SESSION['user_lr'])){ echo $_SESSION['user_lr'] ; } ?>";
-        if (result !== '') {return  result; }
-    }
-    if (key == 'user_ls'){
-        result = "<?php if(isset($_SESSION['user_ls'])){ echo $_SESSION['user_ls'] ; } ?>";
-        if (result !== '') {return  result }        
-    }
-    if (key == 'user_st'){
-        result = "<?php if(isset($_SESSION['user_st'])){ echo $_SESSION['user_st'] ; } ?>";
-        if (result !== '') {return  result } 
-    }
-    return result  
-}
+        //Easy advance behaviour Step1
+        $('#select-1-2,#select-1-3,#select-1-4,#select-1-5').change(function () { 
+            EasyAdvance('Step1');
+        });
 
-function PutAnswData(Step,DataForm){
-    get_last_response(get_session('user_id'))
-    var dataPut = [];
-    var posit = 0;
-    var uslr = get_session('user_lr');
-    if (uslr == ''){uslr = localStorage.getItem('user_lr') }
-    if (Step == 'Step1') {posit = 0}
-    if (Step == 'Step2') {posit = 1}
-    if (Step == 'Step3') {posit = 2}
-    if (Step == 'Step4') {posit = 3}
-    if (Step == 'Step5') {posit = 4}
-    if (Step == 'Step6') {posit = 5}
-    if (Step == 'Step7') {posit = 6}
-    for (let index = 1; index <= 57; index++) {
-        dataPut.push({
-            "form_questions_id": index,
-            "answer": DataForm[posit]['Values'][index]
+        //Easy advance behaviour Step2
+        $('#select-2-12').change(function () { 
+            EasyAdvance('Step2');
+        });
+
+        $('#input-2-7,#input-2-8-1,#input-2-9-1,#input-2-10-2,#input-2-13,#input-2-14-1').keypress(function (e) { 
+            var keycode = (e.keyCode ? e.keyCode : e.which);
+            if(keycode == '13'){
+                EasyAdvance('Step2')
+            }        
+        });
+        
+        $("input[type='radio'][name='attorney']").click(function(){
+            var selected = $("input[type='radio'][name='attorney']:checked");
+            if (selected.length > 0) {
+                EasyAdvance('Step2')
             } 
-        )
-    };
-    $.ajax({
-        type: "POST",
-        url: "API/upans.php?act=upt&uslr=" + uslr,
-        dataType: 'json',
-        data: {data: dataPut }  ,
-        cache: 'false',
-        success: function (response) {
+        });
+        
+        //Easy advance behaviour Step3
+        $('#select-3-17,#select-3-18,#select-3-19').change(function () { 
+            EasyAdvance('Step3');
+        });
+
+        //Easy advance behaviour Step4
+        $("input[type='radio'][name='adversary']").click(function(){
+            var selected = $("input[type='radio'][name='adversary']:checked");
+            if (selected.length > 0) {
+                EasyAdvance('Step4')
+            } 
+        });
+
+        $("#StepCollapse").click(function () { 
+            if ( $(".steps").is(":visible")) {
+                $(".steps").hide();
+                $("#ToggleBtnText").text('Show Steps');
+            } else {
+                $(".steps").show();
+                $("#ToggleBtnText").text('Hide Steps');
+            }
+        });
+
+        function EasyAdvance (step){
+            validateForm(step);
+            var lastChar = step.substr(step.length - 1)
+            nextPrev(1,lastChar-1)
+        }
+
+        //SmallClaimData
+        var SmallClaimsTable = [
+            {
+                Abrev: "AL",
+                State: "Alabama",
+                Dollar_Limit: "6,000",
+                Link: "http://judicial.alabama.gov/library/SmallClaimsRules"
+            },
+            {
+                Abrev: "AK",
+                State: "Alaska",
+                Dollar_Limit: "10,000",
+                Link: "http://www.state.ak.us/courts/forms/sc-100.pdf"
+            },
+            {
+                Abrev: "AZ",
+                State: "Arizona",
+                Dollar_Limit: "3,500",
+                Link: "https://www.azcourts.gov/selfservicecenter/Small-Claims"
+            },
+            {
+                Abrev: "AR",
+                State: "Arkansas",
+                Dollar_Limit: "5,000",
+                Link: "http://www.arlegalservices.org/smallclaimspacket"
+            },
+            {
+                Abrev: "CA",
+                State: "California",
+                Dollar_Limit: "10,000",
+                "Additional Information": "Limit for Businesses (except sole proprietors) and public entities is $5,000. You can only file 2 claims in a calendar year seeking more than $2,500. See CA Small Claims Court for more exceptions related to actions against guarantors. ",
+                Link: "https://www.courts.ca.gov/selfhelp-smallclaims.htm"
+            },
+            {
+                Abrev: "CO",
+                State: "Colorado",
+                Dollar_Limit: "7,500",
+                Link: "https://www.courts.state.co.us/Self_Help/smallclaims/"
+            },
+            {
+                Abrev: "CT",
+                State: "Connecticut",
+                Dollar_Limit: "5,000",
+                "Additional Information": "Except in landlord-tenant security deposit claims",
+                Link: "http://www.jud.state.ct.us/faq/smallclaims.html"
+            },
+            {
+                Abrev: "DE",
+                State: "Delaware",
+                Dollar_Limit: "15,000",
+                Link: "http://courts.delaware.gov/jpcourt/"
+            },
+            {
+                Abrev: "DC",
+                State: "District of Columbia",
+                Dollar_Limit: "10,000",
+                Link: "http://www.dccourts.gov/services/civil-matters"
+            },
+            {
+                Abrev: "FL",
+                State: "Florida",
+                Dollar_Limit: "8,000",
+                Link: "http://www.flcourts.org/resources-and-services/family-courts/family-law-self-help-information/small-claims.stml"
+            },
+            {
+                Abrev: "GA",
+                State: "Georgia",
+                Dollar_Limit: "15,000",
+                "Additional Information": "No limit in eviction cases.",
+                Link: "http://consumer.georgia.gov/consumer-topics/magistrate-court"
+            },
+            {
+                Abrev: "HI",
+                State: "Hawaii",
+                Dollar_Limit: "5,000",
+                "Additional Information": "No limit on landlord-tenant residential security deposit cases. For the return of leased or rented personal property, the property must not be worth more than $5,000.",
+                Link: "http://www.courts.state.hi.us/self-help/small_claims_info"
+            },
+            {
+                Abrev: "ID",
+                State: "Idaho",
+                Dollar_Limit: "5,000",
+                Link: "https://www.isc.idaho.gov/irsca"
+            },
+            {
+                Abrev: "IL",
+                State: "Illinois",
+                Dollar_Limit: "10,000",
+                Link: "http://www.ag.state.il.us/consumers/smlclaims.html"
+            },
+            {
+                Abrev: "IN",
+                State: "Indiana",
+                Dollar_Limit: "6,000",
+                "Additional Information": "$8,000 in Marion County",
+                Link: "http://www.in.gov/judiciary/2710.htm"
+            },
+            {
+                Abrev: "IA",
+                State: "Iowa",
+                Dollar_Limit: "6,500",
+                Link: "http://www.iowacourts.gov/Court_Rules__Forms/Small_Claims_Forms/"
+            },
+            {
+                Abrev: "KS",
+                State: "Kansas",
+                Dollar_Limit: "4,000",
+                Link: "http://www.kscourts.org/rules-procedures-forms/small-claims-information/"
+            },
+            {
+                Abrev: "KY",
+                State: "Kentucky",
+                Dollar_Limit: "2,500",
+                Link: "http://courts.ky.gov/resources/publicationsresources/Publications/P6SmallClaimsHandbookweb.pdf"
+            },
+            {
+                Abrev: "LA",
+                State: "Louisiana",
+                Dollar_Limit: "5,000",
+                Link: "http://brgov.com/dept/citycourt/"
+            },
+            {
+                Abrev: "ME",
+                State: "Maine",
+                Dollar_Limit: "6,000",
+                Link: "http://www.courts.state.me.us/maine_courts/specialized/small_claims/index.shtml"
+            },
+            {
+                Abrev: "MD",
+                State: "Maryland",
+                Dollar_Limit: "5,000",
+                Link: "https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&cad=rja&uact=8&sqi=2&ved=0CC4QFjAC&url=http%3A%2F%2Fwww.courts.state.md.us%2Flegalhelp%2Fsmallclaims.html&ei=QF69VNDiB_SRsQSlj4GQBA&usg=AFQjCNE5DKWuSxYbgHYG8YWG5_leo5N9yg"
+            },
+            {
+                Abrev: "MA",
+                State: "Massachusetts",
+                Dollar_Limit: "7,000",
+                "Additional Information": "No limit for property damage caused by a motor vehicle.",
+                Link: "http://www.mass.gov/ago/consumer-resources/consumer-assistance/small-claims-court.html"
+            },
+            {
+                Abrev: "MI",
+                State: "Michigan",
+                Dollar_Limit: "6,000",
+                Link: "https://michiganlegalhelp.org/self-help-tools/money-and-debt/i-have-small-claims-case"
+            },
+            {
+                Abrev: "MN",
+                State: "Minnesota",
+                Dollar_Limit: "15,000",
+                "Additional Information": "$4,000 for claims involving consumer credit transactions",
+                Link: "http://www.mncourts.gov/selfhelp/?page=313"
+            },
+            {
+                Abrev: "MS",
+                State: "Mississippi",
+                Dollar_Limit: "3,500",
+                Link: "https://courts.ms.gov/trialcourts/justicecourt/justicecourt.php"
+            },
+            {
+                Abrev: "MO",
+                State: "Missouri",
+                Dollar_Limit: "5,000",
+                Link: "http://www.mobar.org/uploadedFiles/Home/Publications/Legal_Resources/Brochures_and_Booklets/small claims.pdf"
+            },
+            {
+                Abrev: "MT",
+                State: "Montana",
+                Dollar_Limit: "7,000",
+                Link: "http://dojmt.gov/consumer/guide-to-small-claims-court/"
+            },
+            {
+                Abrev: "NE",
+                State: "Nebraska",
+                Dollar_Limit: "3,600",
+                "Additional Information": "Through June 30, 2020 (adjusted every five years based on the Consumer Price Index",
+                Link: "https://supremecourt.nebraska.gov/self-help/small-claims/filing-small-claims-case-nebraska"
+            },
+            {
+                Abrev: "NV",
+                State: "Nevada",
+                Dollar_Limit: "10,000",
+                Link: "https://www.civillawselfhelpcenter.org/self-help/small-claims"
+            },
+            {
+                Abrev: "NH",
+                State: "New Hampshire",
+                Dollar_Limit: "10,000",
+                Link: "http://www.courts.state.nh.us/district/eclaims/"
+            },
+            {
+                Abrev: "NJ",
+                State: "New Jersey",
+                Dollar_Limit: "3,000",
+                "Additional Information": "For claims relating to security deposits; certain landlord-tenant suits cannot be brought",
+                Link: "https://njcourts.gov/selfhelp/small_claims.html"
+            },
+            {
+                Abrev: "NM",
+                State: "New Mexico",
+                Dollar_Limit: "10,000",
+                Link: "http://www.nmcourts.gov/Self-Help/self-help-guide.aspx"
+            },
+            {
+                Abrev: "NY",
+                State: "New York",
+                Dollar_Limit: "10,000",
+                Link: "http://www.courts.state.ny.us/courthelp/smallClaims/index.shtml"
+            },
+            {
+                Abrev: "NC",
+                State: "North Carolina",
+                Dollar_Limit: "10,000",
+                Link: "http://www.nccourts.org/Courts/Trial/Sclaims/"
+            },
+            {
+                Abrev: "ND",
+                State: "North Dakota",
+                Dollar_Limit: "15,000",
+                Link: "https://www.ndcourts.gov/legal-self-help/small-claims"
+            },
+            {
+                Abrev: "OH",
+                State: "Ohio",
+                Dollar_Limit: "6,000",
+                Link: "http://www.ohiojudges.org/Document.ashx?DocGuid=932074c6-0f9b-42d9-9979-1864ad693f5b"
+            },
+            {
+                Abrev: "OK",
+                State: "Oklahoma",
+                Dollar_Limit: "10,000",
+                Link: "http://www.oklahomacounty.org/158/Small-Claims"
+            },
+            {
+                Abrev: "OR",
+                State: "Oregon",
+                Dollar_Limit: "10,000",
+                Link: "https://www.courts.oregon.gov/forms/Pages/small-claims.aspx"
+            },
+            {
+                Abrev: "PA",
+                State: "Pennsylvania",
+                Dollar_Limit: "12,000",
+                Link: "http://www.pacourts.us/courts/minor-courts/"
+            },
+            {
+                Abrev: "RI",
+                State: "Rhode Island",
+                Dollar_Limit: "2,500",
+                Link: "https://www.courts.ri.gov/Courts/districtcourt/Pages/smallclaims.aspx"
+            },
+            {
+                Abrev: "SC",
+                State: "South Carolina",
+                Dollar_Limit: "7,500",
+                Link: "http://www.sccourts.org/selfhelp/FAQMagistrate.pdf"
+            },
+            {
+                Abrev: "SD",
+                State: "South Dakota",
+                Dollar_Limit: "12,000",
+                Link: "http://ujs.sd.gov/Small_Claims/"
+            },
+            {
+                Abrev: "TN",
+                State: "Tennessee",
+                Dollar_Limit: "25,000",
+                "Additional Information": "No limit in eviction suits or suits to recover personal property",
+                Link: "http://tncourts.gov/programs/self-help-center"
+            },
+            {
+                Abrev: "TX",
+                State: "Texas",
+                Dollar_Limit: "10,000",
+                "Additional Information": "Until August 31, 2020; $20,000 effective September 1, 2020",
+                Link: "https://guides.sll.texas.gov/small-claims"
+            },
+            {
+                Abrev: "UT",
+                State: "Utah",
+                Dollar_Limit: "11,000",
+                Link: "http://www.utcourts.gov/howto/smallclaims/"
+            },
+            {
+                Abrev: "VT",
+                State: "Vermont",
+                Dollar_Limit: "5,000",
+                Link: "http://www.vermontjudiciary.org/SRL/smallclaims/default.aspx"
+            },
+            {
+                Abrev: "VA",
+                State: "Virginia",
+                Dollar_Limit: "5,000",
+                Link: "http://www.courts.state.va.us/resources/small_claims_court_procedures.pdf"
+            },
+            {
+                Abrev: "WA",
+                State: "Washington",
+                Dollar_Limit: "10,000",
+                "Additional Information": "If brought by natural person; $5,000 all other cases",
+                Link: "http://www.courts.wa.gov/newsinfo/resources/?fa=newsinfo_jury.scc&altMenu=smal"
+            },
+            {
+                Abrev: "WV",
+                State: "West Virginia",
+                Dollar_Limit: "10,000",
+                Link: "http://www.courtswv.gov/lower-courts"
+            },
+            {
+                Abrev: "WI",
+                State: "Wisconsin",
+                Dollar_Limit: "10,000",
+                "Additional Information": "No limit in eviction suits",
+                Link: "http://www.wicourts.gov/services/public/selfhelp/smallclaims.htm"
+            },
+            {
+                Abrev: "WY",
+                State: "Wyoming",
+                Dollar_Limit: "6,000",
+                Link: "https://www.courts.state.wy.us/court_rule/rules-and-forms-governing-small-claims-cases/"
+            }
+        ]
+
+        //Look for Small Claims Limit
+        $('#select-3-16').change(function () { 
+            if ($('#select-3-16').val() !== "" ) {
+                var StateLimitResults = VLookUp(SmallClaimsTable,$(this).val(),'Abrev', 'Dollar_Limit' );
+                var StateLinkResults = VLookUp(SmallClaimsTable,$(this).val(),'Abrev', 'Link')
+                $('#SmallClaimLimitResult').text(SeparadorMiles(StateLimitResults));
+                $('#SmallClaimLinkResult').html('<a href="' + StateLinkResults + '" target="_blank" >  <span class="badge badge-info-ls">Click Here</span> </a>');
+            }else{
+                $('#SmallClaimLimitResult').text('0')
+                $('#SmallClaimLinkResult').text('Please choose an option')
+            }
+            
+        });
+
+        //SmallClaimLoad
+        for (var i = 0; i <= SmallClaimsTable.length; i++) {
+            $('#select-3-16').append('<option value="' + SmallClaimsTable[i]['Abrev'] + '">' + SmallClaimsTable[i]['State'] + '</option>');
         }
     });
 
+    // executes when complete page is fully loaded, including all frames, objects and images
+    $(window).on('load',function(){
+        localStorage.setItem('user_id',get_session('user_id'))
+        localStorage.setItem('user' , get_session('user'))
+        get_last_response(get_session('user_id'))
+        $('#instructions_modal').modal('show');
+    });
+    
 
+    //Script functions to DB
 
-}
-
-
-//Script For Step Behaviour
-var currentTab = 0; 
-var previousTab = 0;
-showTab(currentTab,'Step1'); 
-showTab(currentTab,'Step2'); 
-showTab(currentTab,'Step3');
-showTab(currentTab,'Step4');
-showTab(currentTab,'Step5');
-showTab(currentTab,'Step6');
-showTab(currentTab,'Step7');
-
-var DataForm;
-
-//Step6Table
-var Step6Table = [
-    {
-        Range: 6,
-        Title: "91% and above",
-        Text: "Case feasibility is very good. You should proceed forward with your case."
-    },
-    {
-        Range: 5,
-        Title: "81% to 90%",
-        Text: "Case feasibility is good. You should proceed forward with your case, but make best attempts to resolve your dispute through Last Chance Exercise and Mediation first."
-    },
-    {
-        Range: 4,
-        Title: "71% to 80%",
-        Text: "Case feasibility is reasonably good. If binding arbitration is your route, move forward but if there is an attorney fees provision, be aware that if you lose, you must pay your opponent’s attorney fees. If binding arbitration is not your route, you should proceed forward with your case only after proposing a Multi-Step <a href='#'>ADR Agreement </a> or <a href='#'>Binding Arbitration Agreement </a> to your adversary. If your adversary will not agree to these alternative dispute resolution methods, pursue your case only after you have repeatedly attempted settlement. And remember: you may be in this category with a winning case and the best chances of collection, but since you have to travel the court maze, your feasibility is reduced.."
-    },
-    {
-        Range: 3,
-        Title: "61% to 70%",
-        Text: "Your case feasibility is mid-range. If you have a Binding Arbitration Agreement but no attorney fee provision, proceed forward. The dispute will be determined soon and you won’t be paying your opponent’s attorney fees if you lose. But first, attempt settlement and mediation. If you have a binding arbitration provision and an attorney fees provision: 1. If you are at the high end of this category, you should proceed forward with the reminder that if you lose you will pay your adversary’s attorney fees. 2.  If you are at the low end of this category, you should carefully consider your risk of losing and being hit with your opponent’s attorney fee tab. Do everything you can to settle your case. Proceed cautiously if you must thereafter. If there is an attorney fee provision and no binding arbitration provision, you should lean more in favor of pursuing your dispute only by settlement. It may not be worthwhile to take this case into the expensive court forum, especially considering your exposure with an attorney fee provision. Proceed cautiously if you must. If there is no attorney fee provision or binding arbitration provision, proceed only if you are at the high end of this category. Otherwise, it may not be worthwhile to take this case into the expensive court forum. Proceed cautiously if you must..."
-    },
-    {
-        Range: 2,
-        Title: "51% to 60%",
-        Text: "Make every attempt to settle your dispute at the suggested settlement figure. Always remember: if there’s an attorney fee provision and you lose, you’ll have to pay your adversary’s attorney fees. If you have slim chances of collecting on a judgment, perhaps it doesn’t make sense to proceed. If your case value is low and you have to travel the demanding court system, you may very well not want to go the long haul. If you are on the low side of this range, your feasibility indicates you should not pursue your case. Otherwise, proceed very cautiously if you must..."
-    },
-    {
-        Range: 1,
-        Title: "50% and below",
-        Text: "You are discouraged from pursuing your case to judgment, but don’t let your opponent know that or you’ll never reach settlement. Encourage settlement again and again. After that, one mediation session is warranted. In view of mediation’s 85% success rate and your realistic attitude (given your low feasibility rating), the chances of success at mediated settlement are very high..."
-    },
-    {
-        Range: 0,
-        Title: "Default Title",
-        Text: "Default Text"
+    function get_last_response(User_Id){
+            var usid = User_Id
+            $.ajax({
+                type: "GET",
+                url: "API/glr.php",
+                data: {user_id: usid},
+                cache: 'false',
+                success: function (response) {
+                    $validacion = response
+                    if (response) {
+                        localStorage.setItem('user_lr', $validacion)
+                    } else {
+                        localStorage.setItem('user_lr', 0)
+                    }
+                }
+            });
     }
-]
 
-var Result1, Result2, Result3, StepResultText1, StepResultText2, StepResultText3 ;
-
-//Check for current Step. Advance to the final step (Edit case)
-function CheckStep(Step,FirstTime){
-    if ( Step == 'Step1') {
-        GetStepsData(); 
-        if (FirstTime){ firstTimeStep();};
-        StepResultText1 = DataForm[0]['Values'][7];
-        StepResultText2 = '';
-        StepResultText3 = '';
-    };
-    if ( Step == 'Step2') {
-        GetStepsData();
-        if (FirstTime){ firstTimeStep();};
-        Result1 = parseInt($('#input-2-7').val().replace(",","")  ,10)
-        if (!isNaN(DataForm[1]['Values'][17])) {
-            var Result2 = DataForm[1]['Values'][17]
+    function get_session(key){
+        var result = null
+        if (key == 'user_id'){
+            result = "<?php if(isset($_SESSION['user_id'])){ echo $_SESSION['user_id'] ; }  ?>";
+            if (result !== '') {return  result; }
+        }    
+        if (key == 'user'){
+            result = "<?php if(isset($_SESSION['user'])){ echo $_SESSION['user'] ; }  ?>";
+            if (result !== '') {return  result }
+        } 
+        if (key == 'user_status'){
+            result = "<?php if(isset($_SESSION['user_status'])){ echo $_SESSION['user_status'] ; }  ?>";
+            if (result !== '') {return  result } 
+        }    
+        if (key == 'user_rol'){
+            result = "<?php if(isset($_SESSION['user_rol'])){ echo $_SESSION['user_rol'] ; }  ?>";
+            if (result !== '') {return  result } 
         }
-        if (!isNaN(DataForm[1]['Values'][24])) {
-            var Result3 = DataForm[1]['Values'][24]
-        }        
-        StepResultText1 = '$ ' + SeparadorMiles(Result1) + ' is your TOTAL DAMAGES.';
-        StepResultText2 = '$ ' + SeparadorMiles(Result2) + ' is your RECOVERABLE DAMAGES,';
-        StepResultText3 = '$ ' + SeparadorMiles(Result3) + ' is your CASE VALUE ASSESSMENT,';
-    };
-    if ( Step == 'Step3') {
-        GetStepsData();
-        if (FirstTime){ firstTimeStep();};
-        StepResultText1 = DataForm[2]['Values'][37];
-        StepResultText2 = '[Range: 0-190]';
-        StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5';
-    };
-    if ( Step == 'Step4') {
-        GetStepsData();
-        if (FirstTime){firstTimeStep();};
-        StepResultText1 = DataForm[3]['Values'][40];
-        StepResultText2 = '[Range: 0-150]';
-        StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.';
-    };
-    if ( Step == 'Step5') {
-        GetStepsData();
-        //LoadTable Step5
-        $('#tbl-row-1').text(DataForm[4]['Values'][41]);
-        $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
-        $('#tbl-row-3').text(DataForm[4]['Values'][43]);
-        $('#tbl-row-4').text(DataForm[4]['Values'][44]);
-        $('#tbl-row-5').text(DataForm[4]['Values'][45]);
-        $('#tbl-row-6').text(''); //Blank Space
-        $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
-        $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
-        $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
-        var num = DataForm[4]['Values'][50]
-        $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
-    };
-    if ( Step == 'Step6') {
-        GetStepsData();
-        //Refresh Results
-        $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
-        $('#ResultStep7_1').text( DataForm[6]['Values'][57] );
-        $('#ResultStep7_2').text( DataForm[6]['Values'][53] );
+        if (key == 'user_lr'){
+            result = "<?php if(isset($_SESSION['user_lr'])){ echo $_SESSION['user_lr'] ; } ?>";
+            if (result !== '') {return  result; }
+        }
+        if (key == 'user_ls'){
+            result = "<?php if(isset($_SESSION['user_ls'])){ echo $_SESSION['user_ls'] ; } ?>";
+            if (result !== '') {return  result }        
+        }
+        if (key == 'user_st'){
+            result = "<?php if(isset($_SESSION['user_st'])){ echo $_SESSION['user_st'] ; } ?>";
+            if (result !== '') {return  result } 
+        }
+        return result  
+    }
 
-    };
-    PutAnswData(Step,DataForm);   
-}
-
-var Value_6,
-    Value_8, Value_9, Value_8_plus_9, 
-    Value_11, selectedVal_Step2, selectedVal_Step2_text, Value_13_2, Value_14_2, Value_15, 
-    Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value, 
-    selectedVal_Step4 , Value_21_Value , Value_22_Value,
-    Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
-    Value_33_Chart_Title,Value_33_Chart_Text,
-    Value_34_Text, Value_38_Text
-;
-
-function GetStepsData() {
-    //** Step 1 Calculations */
-        if($('#select-1-2').val() == 'yes' || 
-            ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no') || 
-            ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no' && $('#select-1-4').val() == 'no') ||
-            ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'yes' && $('#select-1-4').val() == 'yes' && $('#select-1-5').val() == 'no' ) ){
-            Value_6 = 'Your Case is Weak';
-        }else {
-            Value_6 = 'Your Case is Feasible!';
+    function PutAnswData(Step,DataForm){
+        console.log('pushing..', DataForm)
+        get_last_response(get_session('user_id'))
+        var dataPut = [];
+        var posit = 0;
+        var uslr = get_session('user_lr');
+        if (uslr == ''){uslr = localStorage.getItem('user_lr') }
+        if (Step == 'Step1') {posit = 0}
+        if (Step == 'Step2') {posit = 1}
+        if (Step == 'Step3') {posit = 2}
+        if (Step == 'Step4') {posit = 3}
+        if (Step == 'Step5') {posit = 4}
+        if (Step == 'Step6') {posit = 5}
+        if (Step == 'Step7') {posit = 6}
+        for (let index = 1; index <= 57; index++) {
+            dataPut.push({
+                "form_questions_id": index,
+                "answer": DataForm[posit]['Values'][index]
+                } 
+            )
         };
-    //** Step 1 End */
-
-    //** Step2 Calculations**/
-        if (isNaN(parseInt($('#input-2-8-1').val().replace(",",""),10))){
-            Value_8 = 0
-        } else {
-            Value_8 = parseInt($('#input-2-8-1').val().replace(",",""),10)
-        }
-
-        if (isNaN(parseInt($('#input-2-9-1').val().replace(",",""),10))){
-            Value_9 = 0
-        } else {
-            Value_9 = parseInt($('#input-2-9-1').val().replace(",",""),10)
-        }        
-        var Value_8_plus_9 = Value_8 +  Value_9
-        if ($('#select-2-10').val() == 'yes') {
-            //damageLimits
-            if ($('#select-2-10-1').val() == 'Liquidated-Damages') {
-                Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
-            };
-            if ($('#select-2-10-1').val() == 'Damage-Limit') {
-                var initialdamage = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
-                var diff =  parseInt($('#input-2-10-2').val().replace(",","")  ,10) - initialdamage
-                if (diff >= 0){
-                    Value_11 = initialdamage
-                } else {
-                    Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
-                }
-            };
-        } else {
-            Value_11 = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
-        }
-
-        var selected = $("input[type='radio'][name='attorney']:checked");
-        if (selected.length > 0) {
-            selectedVal_Step2 = selected.val();
-            selectedVal_Step2_text = selected.next('label').text();
-        }
-        if ($('#select-2-12').val() == 'yes'){
-            if (selectedVal_Step2 == 'value-1'){Value_13_2 = Value_11 };
-            if (selectedVal_Step2 == 'value-2'){Value_13_2 = Value_11 * 0.9};
-            if (selectedVal_Step2 == 'value-3'){Value_13_2 = Value_11 * 0.85};
-            if (selectedVal_Step2 == 'value-4'){Value_13_2 = Value_11 * 0.65};
-            if (selectedVal_Step2 == 'value-5'){Value_13_2 = Value_11 * 0.65};
-        }else {
-            Value_13_2 = Value_11 * 0.8 ;
-        };
-        Value_13_2 = Math.round(Value_13_2)
-        if (isNaN(parseInt($('#input-2-14-1').val().replace(",","")  ,10))) {
-            Value_14_2 = 0
-        }else {
-            Value_14_2 = parseInt($('#input-2-14-1').val().replace(",","")  ,10) / 2
-        }
-        Value_14_2 = Math.round(Value_14_2)
-        Value_15 = Value_13_2 - Value_14_2
-    //** Step 2 End **/
-
-    //** Step 3 Calculations*/
-        var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
-        var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
-        if (diff < 0) {
-            Value_16_1 = 'Are Not Within'
-            if ($('#select-3-16-2').val() == 'yes') {
-                if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'no') {
-                    Step3_16_Val_1 = 85
-                }
-                if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'yes') {
-                    Step3_16_Val_1 = 125
-                }
-                if ($('#select-3-16-3').val() == 'no'){
-                    Step3_16_Val_1 = 125
-                }                
+        $.ajax({
+            type: "POST",
+            url: "API/upans.php?act=upt&uslr=" + uslr,
+            dataType: 'json',
+            data: {data: dataPut }  ,
+            cache: 'false',
+            success: function (response) {
             }
-        }else{
-            Value_16_1 = 'Are Within'
-            if ($('#select-3-16-3').val() == 'no') {
-                Step3_16_Val_2 = 125
-            } else if ($('#select-3-16-4').val() == 'yes') {
-                Step3_16_Val_2 = 125
-            } else {
-                Step3_16_Val_1 = 85
-            }
-        }
-        Value_16_Value =  Step3_16_Val_1 + Step3_16_Val_2
-        Value_17_Value = 0
-        if ($('#select-3-17').val() == 'yes') {
-            if ($('#select-2-12').val() == 'yes') {
-                Value_17_Value = 50
-            } else {
-                Value_17_Value = 25
-            }
-        } else {
-            if ($('#select-2-12').val() == 'yes') {
-                Value_17_Value = 0
-            } else {
-                Value_17_Value = 25
-            }       
-        }
-        Value_18_Value = 0
-        if ($('#select-3-16-3').val() == 'no') {
-            if ( $('#select-3-18').val() == 'yes' ) { Value_18_Value = 85 }
-        }
-        Value_19_Value = 0
-        if (  $('#select-3-19').val() == 'yes' ) { Value_19_Value = 15}
+        });
 
 
 
-    //** Step 3 End */
-    
-    //** Step 4 Calculations*/
-        var adversary_value = [
-            {name: 'value-1',value: 150,description: 'a corporation'},
-            {name: 'value-2',value: 150,description: 'represented by an insurance company'},
-            {name: 'value-3',value: 140,description: 'an operating business other than a corporation, like an LLC, or Sole Proprietorship'},
-            {name: 'value-4',value: 130,description: 'own real property'},
-            {name: 'value-5',value: 120,description: 'have assets and is salaried'},
-            {name: 'value-6',value: 110,description: 'have assets and works for self as sole proprietor'},
-            {name: 'value-7',value: 90,description: 'have assets and none of above apply'},
-            {name: 'value-8',value: 75,description: 'none of above or below apply'},
-            {name: 'value-9',value: 50,description: 'have judgments against them'},
-            {name: 'value-10',value: 40,description: 'have no assets or means of support'},
-            {name: 'value-11',value: 20,description: 'have bankruptcy proceedings pending'}
-        ]
+    }
 
-        var selected = $("input[type='radio'][name='adversary']:checked");
-        if (selected.length > 0) {
-            selectedVal_Step4 = selected.val();
-            Value_21_Value = VLookUp(adversary_value, selectedVal_Step4,'name','description')
-            Value_22_Value = VLookUp(adversary_value, selectedVal_Step4,'name','value')
-        }
+    //Final BD
 
-    
 
-    //** Step 4 End*/
+    //Script For Step Behaviour
+    var currentTab = 0; 
+    var previousTab = 0;
+    showTab(currentTab,'Step1'); 
+    showTab(currentTab,'Step2'); 
+    showTab(currentTab,'Step3');
+    showTab(currentTab,'Step4');
+    showTab(currentTab,'Step5');
+    showTab(currentTab,'Step6');
+    showTab(currentTab,'Step7');
 
-    //** Step 5 Calculations */
-        if (diff >= 0 || $('#select-3-16-2').val() == 'yes' ){
-            Value_24 = 50
-        } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
-        } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
-        } else if (Value_15 >= 15001 && Value_15 <= 20000 ){ Value_24 = 15 
-        } else if (Value_15 >= 20001 && Value_15 <= 25000 ){ Value_24 = 20 
-        } else if (Value_15 >= 25001 && Value_15 <= 30000 ){ Value_24 = 25 
-        } else if (Value_15 >= 30001 && Value_15 <= 35000 ){ Value_24 = 30 
-        } else if (Value_15 >= 35000 && Value_15 <= 40000 ){ Value_24 = 35 
-        } else if (Value_15 >= 40001 && Value_15 <= 45000 ){ Value_24 = 40 
-        } else if (Value_15 >= 45001 && Value_15 <= 50000 ){ Value_24 = 45 
-        } else if (Value_15 >= 50001 ){ Value_24 = 50 
-        } else {Value_15 = 0}
+    var DataForm;
 
-        if (Value_6 == 'Your Case is Weak') {
-            Value_25 = 0
-        } else { Value_25 = 350 }
-
-        Value_26 = Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value
-        Value_28 = Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value
-        Value_29 = (Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value) / 700
-
-        if (Value_29 < 0.92){
-            Value_31 = Value_11 * Value_29
-        } else {
-            Value_31 = Value_11 * 0.92
-        }
-        
-
-    //** Step 5 End */
-
-    //** Step 6 Calculations */
-        var range = 0;
-        var temp = Math.round(Value_29,2)
-        if (Value_29 <= 0.5 ) {range = 1}
-        if (Value_29 > 0.5 && Value_29 <= 0.6 ) {range = 2}
-        if (Value_29 > 0.6 && Value_29 <= 0.7 ) {range = 3}
-        if (Value_29 > 0.7 && Value_29 <= 0.8 ) {range = 4}
-        if (Value_29 > 0.8 && Value_29 <= 0.9 ) {range = 5}
-        if (Value_29 > 0.9) {range = 6}
-        Value_33_Chart_Title = VLookUp( Step6Table,range,'Range','Title' )
-        Value_33_Chart_Text = VLookUp( Step6Table,range,'Range','Text' )
-    //** Step 6 End */
-
-    //** Step 7 Calculations */
-        if (  $('#select-3-19').val() == 'yes' ) { 
-            Value_34_Text = 'Your Contract requires you to complete mediation'
-        } else {
-            Value_34_Text = 'Your Contract does not require mediation but your local court system or Judge may require it'
-        };
-        var TempVal1,TempVal2,TempVal3,TempVal4 = 'N';
-        if ( $('#select-3-18').val() == 'yes') {
-            TempVal1 = 'Y'
-        } else {
-            TempVal1 = 'N'
-        };
-        if (diff >= 0 || $('#select-3-16-2').val() == 'yes') {
-            TempVal2 = 'Y'
-        } else {
-            TempVal2 = 'N'
-        };
-        if ($('#select-3-16-3').val() == 'yes') {
-            TempVal3 = 'Y'
-        } else {
-            TempVal3 = 'N'
-        };
-        if ($('#select-3-16-4').val() == 'yes') {
-            TempVal4 = 'Y'
-        } else {
-            TempVal4 = 'N'
-        };
-        var concat =  TempVal1 + TempVal2 + TempVal3 + TempVal4 ;
-        Value_38_Text = 'Your Forum'
-        if (concat == 'YNNN') {Value_38_Text = 'Binding Arbitration'};
-        if (concat == 'NYNN') {Value_38_Text = 'Small Claims'};
-        if (concat == 'NNNN') {Value_38_Text = 'General Civil Court System'};
-        if (concat == 'NYYN') {Value_38_Text = 'Binding Arbitration'};
-        if (concat == 'NYYY') {Value_38_Text = 'Small Claims'};
-        console.log(concat)
-
-    //** Step 7 End */
-    DataForm = [
-        {id: "Step1",
-            Values: {
-                //Step1
-                1: $('#textarea-1-1').val(),
-                2: $('#select-1-2').val(),
-                3: $('#select-1-3').val(),
-                4: $('#select-1-4').val(),
-                5: $('#textarea-1-4-1').val(),
-                6: $('#select-1-5').val(),
-                7: Value_6
-            }
+    //Step6Table
+    var Step6Table = [
+        {
+            Range: 6,
+            Title: "91% and above",
+            Text: "Case feasibility is very good. You should proceed forward with your case."
         },
-        {id: "Step2",
-            Values: {
-                //Step2
-                8: parseInt($('#input-2-7').val().replace(",","")  ,10),
-                9: $('#select-2-8').val(),
-                10: parseInt($('#input-2-8-1').val().replace(",","")  ,10),
-                11: $('#select-2-9').val(),
-                12: parseInt($('#input-2-9-1').val().replace(",","")  ,10),
-                13: Value_8_plus_9,
-                14: $('#select-2-10').val(),
-                15: $('#select-2-10-1').val(),
-                16: parseInt($('#input-2-10-2').val().replace(",","")  ,10),
-                17: Value_11,
-                18: $('#select-2-12').val(),
-                19: selectedVal_Step2 + ' - ' + selectedVal_Step2_text,
-                20: Value_13_2,
-                21: $('#select-2-14').val(),
-                22: parseInt($('#input-2-14-1').val().replace(",","")  ,10),
-                23: Value_14_2,
-                24: Value_15
-            }           
-        },  
-        {id: "Step3",
-            Values: {
-                //Step3
-                25: $('#SmallClaimLimitResult').text().replace(",",""),
-                26: Value_16_1,
-                27: $('#select-3-16-2').val(),
-                28: $('#select-3-16-3').val(),
-                29: $('#select-3-16-4').val(),
-                30: Value_16_Value,
-                31: $('#select-3-17').val(),
-                32: Value_17_Value,
-                33: $('#select-3-18').val(),
-                34: Value_18_Value,
-                35: $('#select-3-19').val(),
-                36: Value_19_Value,
-                37: Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value 
-            }
-
+        {
+            Range: 5,
+            Title: "81% to 90%",
+            Text: "Case feasibility is good. You should proceed forward with your case, but make best attempts to resolve your dispute through Last Chance Exercise and Mediation first."
         },
-        {id: "Step4",
-            Values: {
-                //Step4
-                38: selectedVal_Step4,
-                39: Value_21_Value,
-                40: Value_22_Value
-            }
-
+        {
+            Range: 4,
+            Title: "71% to 80%",
+            Text: "Case feasibility is reasonably good. If binding arbitration is your route, move forward but if there is an attorney fees provision, be aware that if you lose, you must pay your opponent’s attorney fees. If binding arbitration is not your route, you should proceed forward with your case only after proposing a Multi-Step <a href='#'>ADR Agreement </a> or <a href='#'>Binding Arbitration Agreement </a> to your adversary. If your adversary will not agree to these alternative dispute resolution methods, pursue your case only after you have repeatedly attempted settlement. And remember: you may be in this category with a winning case and the best chances of collection, but since you have to travel the court maze, your feasibility is reduced.."
         },
-        {id: "Step5",
-            Values: {
-                41: Value_25,
-                42: Value_15,
-                43: Value_24,
-                44: Value_26,
-                45: Value_22_Value,
-                46: '',
-                47: parseInt($('#input-2-7').val().replace(",","")  ,10),
-                48: Value_11,
-                49: Value_31,
-                50: Value_29
-            }
+        {
+            Range: 3,
+            Title: "61% to 70%",
+            Text: "Your case feasibility is mid-range. If you have a Binding Arbitration Agreement but no attorney fee provision, proceed forward. The dispute will be determined soon and you won’t be paying your opponent’s attorney fees if you lose. But first, attempt settlement and mediation. If you have a binding arbitration provision and an attorney fees provision: 1. If you are at the high end of this category, you should proceed forward with the reminder that if you lose you will pay your adversary’s attorney fees. 2.  If you are at the low end of this category, you should carefully consider your risk of losing and being hit with your opponent’s attorney fee tab. Do everything you can to settle your case. Proceed cautiously if you must thereafter. If there is an attorney fee provision and no binding arbitration provision, you should lean more in favor of pursuing your dispute only by settlement. It may not be worthwhile to take this case into the expensive court forum, especially considering your exposure with an attorney fee provision. Proceed cautiously if you must. If there is no attorney fee provision or binding arbitration provision, proceed only if you are at the high end of this category. Otherwise, it may not be worthwhile to take this case into the expensive court forum. Proceed cautiously if you must..."
         },
-        {id: "Step6",
-            Values: {
-                51: Value_33_Chart_Title,
-                52: Value_33_Chart_Text
-            }
+        {
+            Range: 2,
+            Title: "51% to 60%",
+            Text: "Make every attempt to settle your dispute at the suggested settlement figure. Always remember: if there’s an attorney fee provision and you lose, you’ll have to pay your adversary’s attorney fees. If you have slim chances of collecting on a judgment, perhaps it doesn’t make sense to proceed. If your case value is low and you have to travel the demanding court system, you may very well not want to go the long haul. If you are on the low side of this range, your feasibility indicates you should not pursue your case. Otherwise, proceed very cautiously if you must..."
         },
-        {id: "Step7",
-            Values: {
-                53: Value_34_Text,
-                54: '',
-                55: '',
-                56: '',
-                57: Value_38_Text
-            }
+        {
+            Range: 1,
+            Title: "50% and below",
+            Text: "You are discouraged from pursuing your case to judgment, but don’t let your opponent know that or you’ll never reach settlement. Encourage settlement again and again. After that, one mediation session is warranted. In view of mediation’s 85% success rate and your realistic attitude (given your low feasibility rating), the chances of success at mediated settlement are very high..."
+        },
+        {
+            Range: 0,
+            Title: "Default Title",
+            Text: "Default Text"
         }
     ]
 
 
-}
+    var RouteCache = [
+        {id: "Step1",IsCurrent: 0,PrevTab: 0,LastTab: 0},
+        {id: "Step2",IsCurrent: 0,PrevTab: 0,LastTab: 0},
+        {id: "Step3",IsCurrent: 0,PrevTab: 0,LastTab: 0},
+        {id: "Step4",IsCurrent: 0,PrevTab: 0,LastTab: 0},
+        {id: "Step5",IsCurrent: 0,PrevTab: 0,LastTab: 0},
+        {id: "Step6",IsCurrent: 0,PrevTab: 0,LastTab: 0},
+        {id: "Step7",IsCurrent: 0,PrevTab: 0,LastTab: 0}
+    ];
 
-function firstTimeStep(){
-    GetStepsData();
-    //var LastStep = $("#wizard").steps('getCurrentIndex')
-    var tablist = document.querySelector('[role="tablist"]');
-    var tabs = tablist.getElementsByTagName('li');
-    var ActiveTab = 0;
-    var lastdone = 0;
-    for (let index = 0; index < tabs.length; index++) {
-        if (tabs[index].className.includes('current')) { ActiveTab =  index  } ;
-        if (tabs[index].className.includes('done')) {lastdone = index } ; 
-    }
-    if (lastdone != 0 && ActiveTab < lastdone  ){  
-        //Advance to last Step
-        for (let index = 0; index < (lastdone - ActiveTab); index++) {
-            $("#wizard").steps('next');
-        }
-        //recalculate
-        for (let index = 0; index <= lastdone; index++) {
-            var localstep = 'Step' + (index + 1)
-            CheckStep(localstep,false)
-        }
-    } else {
-        $("#wizard").steps('next'); //Show the Next Step.
-    }
-}
 
-///*****SCRIPTS TO GET SEPARATE QUESTIONS */
+    var Result1, Result2, Result3, StepResultText1, StepResultText2, StepResultText3 ;
 
-function showTab(n,step) {
-    // This function will display the specified tab of the form...
-    var stp = document.getElementById(step)
-    var x = stp.getElementsByClassName("tab");
-    //Progress BAR
-    var resp = step.substr(step.length - 1, step.length)
-    resp = parseInt(resp)
-    var progr = Math.round( ( (((n+1) / x.length) * 0.143 ) + (0.143 * (resp - 1)) ) * 100 )
-    
-    //if (progr == 100 ){progr = 95}
-    $('#progress_' + step).css('width', progr.toString() + '%');
-    $('#progress_text_' + step).text(progr.toString() + '% complete');
-    $('#progress_' + step).removeClass('bg-success');
-    x[n].style.display = "block";
-    //... and fix the Previous/Next buttons:
-    if (n == 0) {
-        //Hide others TAB
-        for (let index = 0; index < x.length; index++) {
-            if (index > 0 ){ x[index].style.display = 'none'  };
-        }
-        currentTab = 0
-        previousTab = 0
-        if (step == 'Step1'){
-            $('#prevBtn1').hide();
+    //Check for current Step. Advance to the final step (Edit case)
+    function CheckStep(Step,FirstTime){
+        if ( Step == 'Step1') {
+            GetStepsData(); 
+            //if (FirstTime){ firstTimeStep();};
+            StepResultText1 = DataForm[0]['Values'][7];
+            StepResultText2 = '';
+            StepResultText3 = '';
         };
-        } else {
-        if (step == 'Step1'){$('#prevBtn1').show()};
-        if (step == 'Step2'){$('#prevBtn2').show()};
-        if (step == 'Step3'){$('#prevBtn3').show()};
-        if (step == 'Step4'){$('#prevBtn4').show()};
-        if (step == 'Step5'){$('#prevBtn5').show()};
-        if (step == 'Step6'){$('#prevBtn6').show()};
-    }
-    /*
-    if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Evaluate";
-    } else {
-        document.getElementById("nextBtn").innerHTML = "Next";
-    }
-    */
-    //... and run a function that will display the correct step indicator:
-    //fixStepIndicator(n)
-}
-
-function nextPrev(n){
-    //Get Current Step
-    var tablist = document.querySelector('[role="tablist"]');
-    var tabs = tablist.getElementsByTagName('li');
-    var ActiveTab = 0;
-    var lastdone = 0;
-    for (let index = 0; index < tabs.length; index++) {
-        if (tabs[index].className.includes('current')) { ActiveTab =  index + 1 } ;
-        if (tabs[index].className.includes('done')) {lastdone = index } ; 
-    }
-    var step = 'Step' + ActiveTab
-    var stp = document.getElementById(step);
-    var x = stp.getElementsByClassName("tab");
-    if (n == -1){
-        if (currentTab == 0 && previousTab == 0) {
-            //are we at the end?
-            var stp = document.getElementById('Step' + ActiveTab);
-            var x = stp.getElementsByClassName("tab");
-            console.log(x[0].id)
-            console.log($('#' + x[0].id).css("display"))
-            if ( $('#' + x[0].id).css("display") == 'block' ) {
-                var step = 'Step' + (ActiveTab - 1);
-                var stp = document.getElementById(step);
-                var x = stp.getElementsByClassName("tab");
-                if (ActiveTab <= 4) {
-                    $("#ResultStep" + (ActiveTab -1)).hide();
-                }
-                $("#wizard").steps('previous');
-                showTab(0,step)
-                return
-            } else {
-                if (ActiveTab <= 4) {
-                    $("#ResultStep" + ActiveTab).hide();
-                }
-                showTab(0,step)
-                return
+        if ( Step == 'Step2') {
+            GetStepsData();
+            //if (FirstTime){ firstTimeStep();};
+            Result1 = parseInt($('#input-2-7').val().replace(",","")  ,10)
+            if (!isNaN(DataForm[1]['Values'][17])) {
+                var Result2 = DataForm[1]['Values'][17]
             }
-        }
-        x[currentTab].style.display = "none"
-        if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
-            $('#attorney_yes').show();
-            $('#attorney_no').hide();
-        } else {            
-            $('#attorney_yes').hide();
-            $('#attorney_no').show();
-        }
-        if (previousTab < (currentTab -1) ) {
-            currentTab = previousTab
-        } else {
-            previousTab = currentTab
-            currentTab = currentTab + n;
-        }
-        showTab(currentTab,step)  
-        return true
-    };
-    var IsValid = validateForm(step);
-    // Exit the function if any field in the current tab is invalid:
-    if (n == 1 && !IsValid) return false;
-
-    //Check Especial Cases for Steps
-    if (step == 'Step1' && n == 1 && currentTab < x.length ){
-        if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
-            || (x[currentTab].id == 'Q3' &&  $('#select-1-3').val() == 'no') 
-            || (x[currentTab].id == 'Q4' &&  $('#select-1-4').val() == 'no') ){
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = x.length; //Skip to End       
-        }else{
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;
-        }
-    }
-    if (step == 'Step2' && n == 1 && currentTab < x.length ){
-        GetStepsData();
-        $('#input-2-11').val(SeparadorMiles(Value_11));     
-        if (x[currentTab].id == 'Q10' &&  $('#select-2-10').val() == 'no') {
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = 5; //Skip to Q12
-        }else if (x[currentTab].id == 'Q12' &&  $('#select-2-12').val() == 'yes'){
-            $('#attorney_no').hide();
-            $('#attorney_yes').show();
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n; 
-        } else {
-            $('#attorney_yes').hide();
-            $('#attorney_no').show();
-            $('#input-2-13').val(SeparadorMiles(Math.round(Value_11 * 0.8)));
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;             
-        }
-    }
-    if (step == 'Step3' && n == 1 && currentTab < x.length ){
-        var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
-        if (x[currentTab].id == 'Q16-Prev') {
-            $('#input-3-16-1').val(SeparadorMiles(Value_11));
-            if (diff <= 0) {
-                $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Not Within</span> your state&#39s small claim limit.</h6>');
-                $('#BellowLimit').hide();
-                $('#AboveLimit').show();
-            }else{
-                $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Within</span> your state&#39s small claim limit.</h6>');                
-                $('#AboveLimit').hide();
-                $('#BellowLimit').show();
-            }
-            if ($('#select-3-16-2').val() == 'yes' ){
-                $('#BellowLimit').show();        
-            }else {
-                if (diff <= 0 ) { $('#BellowLimit').hide() };
-                $('#select-3-16-3').val('no');
-                $('#select-3-16-4').val('no');
-            };
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;
-            $('#ok_step3').hide();                  
-        } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0)) {
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n + 1;
-            $('#select-3-18').val('no');           
-        }else {
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;  
-        } 
-    }
-    if (step == 'Step4' && n == 1 && currentTab < x.length ) {
-        x[currentTab].style.display = "none";
-        previousTab = currentTab
-        currentTab = currentTab + n;         
-    }
-    if (step == 'Step5' && n == 1 && currentTab < x.length ) {
-        //x[currentTab].style.display = "none";
-        previousTab = currentTab
-        currentTab = currentTab + n;         
-    }
-    if (step == 'Step6' && n == 1 && currentTab < x.length ) {
-        //x[currentTab].style.display = "none";
-        previousTab = currentTab
-        currentTab = currentTab + n;         
-    }
-    // if you have reached the end of the form STEP... 
-    //allow to show final Results
-    if (currentTab == x.length) {
-        CheckStep(step,false);
-        if (step == 'Step1') {
-            //StepResults StepView
-            $('#ResultStep1Text1').text(StepResultText1);
-            $('#ResultStep1').show();
-        }
-        if (step == 'Step2') {
-            //StepResults StepView
-            $('#ResultStep2Text1').text(StepResultText1);
-            $('#ResultStep2Text2').text(StepResultText2);
-            $('#ResultStep2Text3').text(StepResultText3);
-            $('#ResultStep2').show();
-        }
-        if (step == 'Step3') {
-            //StepResults StepView
-            $('#ResultStep3Text1').text(StepResultText1);
-            $('#ResultStep3Text2').text(StepResultText2);
-            $('#ResultStep3Text3').text(StepResultText3);
-            $('#ResultStep3').show(); 
-        }
-        if (step == 'Step4') {
-            //StepResults StepView
-            $('#ResultStep4Text1').text(StepResultText1);
-            $('#ResultStep4Text2').text(StepResultText2);
-            $('#ResultStep4Text3').text(StepResultText3);
-            $('#ResultStep4').show();
+            if (!isNaN(DataForm[1]['Values'][24])) {
+                var Result3 = DataForm[1]['Values'][24]
+            }        
+            StepResultText1 = '$ ' + SeparadorMiles(Result1) + ' is your TOTAL DAMAGES.';
+            StepResultText2 = '$ ' + SeparadorMiles(Result2) + ' is your RECOVERABLE DAMAGES,';
+            StepResultText3 = '$ ' + SeparadorMiles(Result3) + ' is your CASE VALUE ASSESSMENT,';
+        };
+        if ( Step == 'Step3') {
+            GetStepsData();
+            //if (FirstTime){ firstTimeStep();};
+            StepResultText1 = DataForm[2]['Values'][37];
+            StepResultText2 = '[Range: 0-190]';
+            StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5';
+        };
+        if ( Step == 'Step4') {
+            GetStepsData();
+            //if (FirstTime){firstTimeStep();};
+            StepResultText1 = DataForm[3]['Values'][40];
+            StepResultText2 = '[Range: 0-150]';
+            StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.';
+        };
+        if ( Step == 'Step5') {
+            GetStepsData();
             //LoadTable Step5
             $('#tbl-row-1').text(DataForm[4]['Values'][41]);
             $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
@@ -2409,374 +1812,919 @@ function nextPrev(n){
             $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
             var num = DataForm[4]['Values'][50]
             $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
-        }
-        if (step == 'Step5') {
+        };
+        if ( Step == 'Step6') {
+            GetStepsData();
+            //Refresh Results
             $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
-            $("#wizard").steps('next');            
-        }
-        if (step == 'Step6') {
-            $("#wizard").steps('next');
-        }
-        previousTab = currentTab
-        currentTab = currentTab + n;
-        return
-    }
-    if (currentTab > x.length) {
-        // ... the form gets submitted:
-        CheckStep(step,true);
-        previousTab = 0
-        currentTab = 0//Reset Ordinal
-        //PROGRESS BAR
-        var resp = step.substr(step.length - 1, step.length)
-        resp = parseInt(resp)
-        var progr = Math.round( (0.143 * resp) * 100)
-        $('#progress_' + step).css('width', progr.toString() + '%');
-        $('#progress_' + step).addClass('bg-success');
-        $('#progress_text_' + step).text(progr.toString() + '% complete');
+            $('#ResultStep7_1').text( DataForm[6]['Values'][57] );
+            $('#ResultStep7_2').text( DataForm[6]['Values'][53] );
 
-        return false;
+        };
+        PutAnswData(Step,DataForm);   
     }
-    // Otherwise, display the correct tab:
-    if (n == 1){showTab(currentTab,step);}
-    /*
-    if (step == 'Step1' && n == 1){showTab(currentTab,'Step1');}
-    if (step == 'Step2' && n == 1){showTab(currentTab,'Step2');}
-    */
-}
 
-function nextPrev_last(n,step) {
-    // This function will figure out which tab to display
-    var stp = document.getElementById(step);
-    var x = stp.getElementsByClassName("tab");
-    if (n == -1) { 
-        if (currentTab > x.length) {
-            currentTab = currentTab - 1;
-            previousTab = previousTab - 1
-        }
-        x[currentTab].style.display = "none"
-        if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
-            $('#attorney_yes').show();
-            $('#attorney_no').hide();
-        } else {            
-            $('#attorney_yes').hide();
-            $('#attorney_no').show();
-        }
-        if (previousTab < (currentTab -1) ) {
-            currentTab = previousTab
-        } else {
-            previousTab = currentTab
-            currentTab = currentTab + n;
-        }
-        showTab(currentTab,step)  
-        return true
-    }
-    var IsValid = validateForm(step)
-    // Exit the function if any field in the current tab is invalid:
-    if (n == 1 && !IsValid) return false;    
-    
-    //Check Especial Cases for Steps
-    if (step == 'Step1' && n == 1 && currentTab <= x.length ){
-        if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
-            || (x[currentTab].id == 'Q3' &&  $('#select-1-3').val() == 'no') 
-            || (x[currentTab].id == 'Q4' &&  $('#select-1-4').val() == 'no') ){
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = x.length; //Skip to End       
-        }else{
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;
-        }
-    }
-    if (step == 'Step2' && n == 1){
-        GetStepsData();
-        $('#input-2-11').val(SeparadorMiles(Value_11));     
-        if (x[currentTab].id == 'Q10' &&  $('#select-2-10').val() == 'no') {
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = 5; //Skip to Q12
-        }else if (x[currentTab].id == 'Q12' &&  $('#select-2-12').val() == 'yes'){
-            $('#attorney_no').hide();
-            $('#attorney_yes').show();
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n; 
-        } else {
-            $('#attorney_yes').hide();
-            $('#attorney_no').show();
-            $('#input-2-13').val(SeparadorMiles(Math.round(Value_11 * 0.8)));
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;             
-        }
-    }
-    if (step == 'Step3' && n == 1){
-        var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
-        if (x[currentTab].id == 'Q16-Prev') {
-            $('#input-3-16-1').val(SeparadorMiles(Value_11));
-            if (diff <= 0) {
-                $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Not Within</span> your state&#39s small claim limit.</h6>');
-                $('#BellowLimit').hide();
-                $('#AboveLimit').show();
-            }else{
-                $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Within</span> your state&#39s small claim limit.</h6>');                
-                $('#AboveLimit').hide();
-                $('#BellowLimit').show();
-            }
-            if ($('#select-3-16-2').val() == 'yes' ){
-                $('#BellowLimit').show();        
+    var Value_6,
+        Value_8, Value_9, Value_8_plus_9, 
+        Value_11, selectedVal_Step2, selectedVal_Step2_text, Value_13_2, Value_14_2, Value_15, 
+        Value_16_1, Value_16_Value, Value_17_Value, Value_18_Value, Value_19_Value, 
+        selectedVal_Step4 , Value_21_Value , Value_22_Value,
+        Value_24, Value_25,Value_26,Value_28,Value_29,Value_31,
+        Value_33_Chart_Title,Value_33_Chart_Text,
+        Value_34_Text, Value_38_Text
+    ;
+
+    function GetStepsData() {
+        //** Step 1 Calculations */
+            if($('#select-1-2').val() == 'yes' || 
+                ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no') || 
+                ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'no' && $('#select-1-4').val() == 'no') ||
+                ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'yes' && $('#select-1-4').val() == 'yes' && $('#select-1-5').val() == 'no' ) ){
+                Value_6 = 'Your Case is Weak';
             }else {
-                if (diff <= 0 ) { $('#BellowLimit').hide() };
-                $('#select-3-16-3').val('no');
-                $('#select-3-16-4').val('no');
+                Value_6 = 'Your Case is Feasible!';
             };
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;
-            $('#ok_step3').hide();                  
-        } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0)) {
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n + 1;
-            $('#select-3-18').val('no');           
-        }else {
-            x[currentTab].style.display = "none";
-            previousTab = currentTab
-            currentTab = currentTab + n;  
-        } 
-    }
-    if (step == 'Step4' && n == 1) {
-        x[currentTab].style.display = "none";
-        previousTab = currentTab
-        currentTab = currentTab + n;         
-    }
-    if (step == 'Step5' && n == 1) {
-        //x[currentTab].style.display = "none";
-        previousTab = currentTab
-        currentTab = currentTab + n;         
-    }
-    if (step == 'Step6' && n == 1) {
-        //x[currentTab].style.display = "none";
-        previousTab = currentTab
-        currentTab = currentTab + n;         
-    }
-    // if you have reached the end of the form STEP... 
-    //allow to show final Results
-    if (currentTab == x.length) {
-        CheckStep(step,false);
-        if (step == 'Step1') {
-            //StepResults StepView
-            $('#ResultStep1Text1').text(StepResultText1);
-            $('#ResultStep1').show();
-        }
-        previousTab = currentTab
-        currentTab = currentTab + n;
-        return
-    }
-    if (currentTab > x.length) {
-        // ... the form gets submitted:  
-        if (step == 'Step1'){
-            console.log('Test jaja')
-            CheckStep(step,true);
-            //$('#prevBtn1').hide();
-            //$("#nextBtn1").hide();
-        }
-        if (step == 'Step2'){ 
-            CheckStep(step,true);
-            $("#prevBtn2").hide();
-            $("#nextBtn2").hide();
-            //StepResults StepView
-            $('#ResultStep2Text1').text(StepResultText1);
-            $('#ResultStep2Text2').text(StepResultText2);
-            $('#ResultStep2Text3').text(StepResultText3);
-            $('#ResultStep2').show();
-        }  
-        if (step == 'Step3') {
-            CheckStep(step,true);
-            $("#prevBtn3").hide();
-            $("#nextBtn3").hide();
-            //StepResults StepView
-            $('#ResultStep3Text1').text(StepResultText1);
-            $('#ResultStep3Text2').text(StepResultText2);
-            $('#ResultStep3Text3').text(StepResultText3);
-            $('#ResultStep3').show();            
-        }
-        if (step == 'Step4'){
-            CheckStep(step,true);
-            $("#prevBtn4").hide();
-            $("#nextBtn4").hide();
-            //StepResults StepView
-            $('#ResultStep4Text1').text(StepResultText1);
-            $('#ResultStep4Text2').text(StepResultText2);
-            $('#ResultStep4Text3').text(StepResultText3);
-            $('#ResultStep4').show();
-            //LoadTable Step5
-            $('#tbl-row-1').text(DataForm[4]['Values'][41]);
-            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
-            $('#tbl-row-3').text(DataForm[4]['Values'][43]);
-            $('#tbl-row-4').text(DataForm[4]['Values'][44]);
-            $('#tbl-row-5').text(DataForm[4]['Values'][45]);
-            $('#tbl-row-6').text(''); //Blank Space
-            $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
-            $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
-            $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
-            var num = DataForm[4]['Values'][50]
-            $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
-        }        
-        if (step == 'Step5'){
-            CheckStep(step,true);
-            $("#prevBtn5").hide();
-            $("#nextBtn5").hide();
-            $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
-            $("#wizard").steps('next');
-        }
-        if (step == 'Step6'){
-            CheckStep(step,true);
-            $("#prevBtn6").hide();
-            $("#nextBtn6").hide();
-            $("#wizard").steps('next');
-        }
-        
-        previousTab = 0
-        currentTab = 0//Reset Ordinal
-        //PROGRESS BAR
-        var resp = step.substr(step.length - 1, step.length)
-        resp = parseInt(resp)
-        var progr = Math.round( (0.143 * resp) * 100)
-        $('#progress_' + step).css('width', progr.toString() + '%');
-        $('#progress_' + step).addClass('bg-success');
-        $('#progress_text_' + step).text(progr.toString() + '% complete');
+        //** Step 1 End */
 
-        return false;
-    }
-    // Otherwise, display the correct tab:
-    if (n == 1){showTab(currentTab,step);}
-    /*
-    if (step == 'Step1' && n == 1){showTab(currentTab,'Step1');}
-    if (step == 'Step2' && n == 1){showTab(currentTab,'Step2');}
-    */
-}
-
-function validateForm(step) {
-    // This function deals with validation of the form fields
-    var stp = document.getElementById(step)
-    var x, y, i, j, valid = true;
-    x = stp.getElementsByClassName("tab");
-    try {
-        y = x[currentTab].getElementsByTagName("input");
-        // A loop that checks every input field in the current tab:
-        for (i = 0; i < y.length; i++) {
-            // If a field is empty...
-            if (y[i].value == "") {
-                // add an "invalid" class to the field:
-                y[i].className += " invalid";
-                // and set the current valid status to false
-                valid = false;
+        //** Step2 Calculations**/
+            if (isNaN(parseInt($('#input-2-8-1').val().replace(",",""),10))){
+                Value_8 = 0
             } else {
-                y[i].className += " valid";
+                Value_8 = parseInt($('#input-2-8-1').val().replace(",",""),10)
             }
-        }
-    }catch(err){
-        valid = true
-    }
-    try {
-        if (step == 'Step2' && x[currentTab].id == 'Q13' && $('#select-2-12').val() == 'yes'){
+
+            if (isNaN(parseInt($('#input-2-9-1').val().replace(",",""),10))){
+                Value_9 = 0
+            } else {
+                Value_9 = parseInt($('#input-2-9-1').val().replace(",",""),10)
+            }        
+            var Value_8_plus_9 = Value_8 +  Value_9
+            if ($('#select-2-10').val() == 'yes') {
+                //damageLimits
+                if ($('#select-2-10-1').val() == 'Liquidated-Damages') {
+                    Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
+                };
+                if ($('#select-2-10-1').val() == 'Damage-Limit') {
+                    var initialdamage = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
+                    var diff =  parseInt($('#input-2-10-2').val().replace(",","")  ,10) - initialdamage
+                    if (diff >= 0){
+                        Value_11 = initialdamage
+                    } else {
+                        Value_11 = parseInt($('#input-2-10-2').val().replace(",","")  ,10);
+                    }
+                };
+            } else {
+                Value_11 = parseInt($('#input-2-7').val().replace(",","")  ,10) - Value_8_plus_9
+            }
+
             var selected = $("input[type='radio'][name='attorney']:checked");
-            if (selected.length == 0) {
-                $('#attorney_yes').css('background-color', '#ffdddd');;
-                valid = false;
+            if (selected.length > 0) {
+                selectedVal_Step2 = selected.val();
+                selectedVal_Step2_text = selected.next('label').text();
             }
-        }
-        if (step == 'Step4' && x[currentTab].id == 'Q21' ){
-            var selected = $("input[type='radio'][name='adversary']:checked");
-            if (selected.length == 0) {
-                $('#adversary_check').css('background-color', '#ffdddd');
-                valid = false;
+            if ($('#select-2-12').val() == 'yes'){
+                if (selectedVal_Step2 == 'value-1'){Value_13_2 = Value_11 };
+                if (selectedVal_Step2 == 'value-2'){Value_13_2 = Value_11 * 0.9};
+                if (selectedVal_Step2 == 'value-3'){Value_13_2 = Value_11 * 0.85};
+                if (selectedVal_Step2 == 'value-4'){Value_13_2 = Value_11 * 0.65};
+                if (selectedVal_Step2 == 'value-5'){Value_13_2 = Value_11 * 0.65};
+            }else {
+                Value_13_2 = Value_11 * 0.8 ;
+            };
+            Value_13_2 = Math.round(Value_13_2)
+            if (isNaN(parseInt($('#input-2-14-1').val().replace(",","")  ,10))) {
+                Value_14_2 = 0
+            }else {
+                Value_14_2 = parseInt($('#input-2-14-1').val().replace(",","")  ,10) / 2
             }
-        }
-    } catch (error) {
-        valid = true
-    }
-    try {
-        z = x[currentTab].getElementsByTagName("textarea");
-        // A loop that checks every textarea field in the current tab:
-        for (i = 0; i < z.length; i++) {
-            // If a field is empty...
-            if (z[i].value == "") {
-                // add an "invalid" class to the field:
-                z[i].className += " invalid";
-                // and set the current valid status to false
-                valid = false;
+            Value_14_2 = Math.round(Value_14_2)
+            Value_15 = Value_13_2 - Value_14_2
+        //** Step 2 End **/
+
+        //** Step 3 Calculations*/
+            var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
+            var Step3_16_Val_1 = 0 , Step3_16_Val_2 = 0;
+            if (diff < 0) {
+                Value_16_1 = 'Are Not Within'
+                if ($('#select-3-16-2').val() == 'yes') {
+                    if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'no') {
+                        Step3_16_Val_1 = 85
+                    }
+                    if ($('#select-3-16-3').val() == 'yes' &&  $('#select-3-16-4').val() == 'yes') {
+                        Step3_16_Val_1 = 125
+                    }
+                    if ($('#select-3-16-3').val() == 'no'){
+                        Step3_16_Val_1 = 125
+                    }                
+                }
+            }else{
+                Value_16_1 = 'Are Within'
+                if ($('#select-3-16-3').val() == 'no') {
+                    Step3_16_Val_2 = 125
+                } else if ($('#select-3-16-4').val() == 'yes') {
+                    Step3_16_Val_2 = 125
+                } else {
+                    Step3_16_Val_1 = 85
+                }
+            }
+            Value_16_Value =  Step3_16_Val_1 + Step3_16_Val_2
+            Value_17_Value = 0
+            if ($('#select-3-17').val() == 'yes') {
+                if ($('#select-2-12').val() == 'yes') {
+                    Value_17_Value = 50
+                } else {
+                    Value_17_Value = 25
+                }
             } else {
-                z[i].className += " valid";
+                if ($('#select-2-12').val() == 'yes') {
+                    Value_17_Value = 0
+                } else {
+                    Value_17_Value = 25
+                }       
             }
-        }   
-    }catch (err){
-        valid = true
+            Value_18_Value = 0
+            if ($('#select-3-16-3').val() == 'no') {
+                if ( $('#select-3-18').val() == 'yes' ) { Value_18_Value = 85 }
+            }
+            Value_19_Value = 0
+            if (  $('#select-3-19').val() == 'yes' ) { Value_19_Value = 15}
+
+
+
+        //** Step 3 End */
+        
+        //** Step 4 Calculations*/
+            var adversary_value = [
+                {name: 'value-1',value: 150,description: 'a corporation'},
+                {name: 'value-2',value: 150,description: 'represented by an insurance company'},
+                {name: 'value-3',value: 140,description: 'an operating business other than a corporation, like an LLC, or Sole Proprietorship'},
+                {name: 'value-4',value: 130,description: 'own real property'},
+                {name: 'value-5',value: 120,description: 'have assets and is salaried'},
+                {name: 'value-6',value: 110,description: 'have assets and works for self as sole proprietor'},
+                {name: 'value-7',value: 90,description: 'have assets and none of above apply'},
+                {name: 'value-8',value: 75,description: 'none of above or below apply'},
+                {name: 'value-9',value: 50,description: 'have judgments against them'},
+                {name: 'value-10',value: 40,description: 'have no assets or means of support'},
+                {name: 'value-11',value: 20,description: 'have bankruptcy proceedings pending'}
+            ]
+
+            var selected = $("input[type='radio'][name='adversary']:checked");
+            if (selected.length > 0) {
+                selectedVal_Step4 = selected.val();
+                Value_21_Value = VLookUp(adversary_value, selectedVal_Step4,'name','description')
+                Value_22_Value = VLookUp(adversary_value, selectedVal_Step4,'name','value')
+            }
+
+        
+
+        //** Step 4 End*/
+
+        //** Step 5 Calculations */
+            if (diff >= 0 || $('#select-3-16-2').val() == 'yes' ){
+                Value_24 = 50
+            } else if (Value_15 >= 0 && Value_15 <= 10000 ){ Value_24 = 5 
+            } else if (Value_15 >= 10001 && Value_15 <= 15000 ){ Value_24 = 10 
+            } else if (Value_15 >= 15001 && Value_15 <= 20000 ){ Value_24 = 15 
+            } else if (Value_15 >= 20001 && Value_15 <= 25000 ){ Value_24 = 20 
+            } else if (Value_15 >= 25001 && Value_15 <= 30000 ){ Value_24 = 25 
+            } else if (Value_15 >= 30001 && Value_15 <= 35000 ){ Value_24 = 30 
+            } else if (Value_15 >= 35000 && Value_15 <= 40000 ){ Value_24 = 35 
+            } else if (Value_15 >= 40001 && Value_15 <= 45000 ){ Value_24 = 40 
+            } else if (Value_15 >= 45001 && Value_15 <= 50000 ){ Value_24 = 45 
+            } else if (Value_15 >= 50001 ){ Value_24 = 50 
+            } else {Value_15 = 0}
+
+            if (Value_6 == 'Your Case is Weak') {
+                Value_25 = 0
+            } else { Value_25 = 350 }
+
+            Value_26 = Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value
+            Value_28 = Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value
+            Value_29 = (Value_24 + Value_25 + Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value + Value_22_Value) / 700
+            if (Value_29 > 1){Value_29 = 1}
+            if (Value_29 < 0.92){
+                Value_31 = Value_11 * Value_29
+            } else {
+                Value_31 = Value_11 * 0.92
+            }
+            
+
+        //** Step 5 End */
+
+        //** Step 6 Calculations */
+            var range = 0;
+            var temp = Math.round(Value_29,2)
+            if (Value_29 <= 0.5 ) {range = 1}
+            if (Value_29 > 0.5 && Value_29 <= 0.6 ) {range = 2}
+            if (Value_29 > 0.6 && Value_29 <= 0.7 ) {range = 3}
+            if (Value_29 > 0.7 && Value_29 <= 0.8 ) {range = 4}
+            if (Value_29 > 0.8 && Value_29 <= 0.9 ) {range = 5}
+            if (Value_29 > 0.9) {range = 6}
+            Value_33_Chart_Title = VLookUp( Step6Table,range,'Range','Title' )
+            Value_33_Chart_Text = VLookUp( Step6Table,range,'Range','Text' )
+        //** Step 6 End */
+
+        //** Step 7 Calculations */
+            if (  $('#select-3-19').val() == 'yes' ) { 
+                Value_34_Text = 'Your Contract requires you to complete mediation'
+            } else {
+                Value_34_Text = 'Your Contract does not require mediation but your local court system or Judge may require it'
+            };
+            var TempVal1,TempVal2,TempVal3,TempVal4 = 'N';
+            if ( $('#select-3-18').val() == 'yes') {
+                TempVal1 = 'Y'
+            } else {
+                TempVal1 = 'N'
+            };
+            if (diff >= 0 || $('#select-3-16-2').val() == 'yes') {
+                TempVal2 = 'Y'
+            } else {
+                TempVal2 = 'N'
+            };
+            if ($('#select-3-16-3').val() == 'yes') {
+                TempVal3 = 'Y'
+            } else {
+                TempVal3 = 'N'
+            };
+            if ($('#select-3-16-4').val() == 'yes') {
+                TempVal4 = 'Y'
+            } else {
+                TempVal4 = 'N'
+            };
+            var concat =  TempVal1 + TempVal2 + TempVal3 + TempVal4 ;
+            Value_38_Text = 'Your Forum'
+            if ($('#select-3-19').val() == 'yes') {
+                Value_38_Text = 'Mediation';
+            } else {
+                if (concat == 'YNNN') {Value_38_Text = 'Binding Arbitration'};
+                if (concat == 'NYNN') {Value_38_Text = 'Small Claims'};
+                if (concat == 'NNNN') {Value_38_Text = 'General Civil Court System'};
+                if (concat == 'NYYN') {Value_38_Text = 'Binding Arbitration'};
+                if (concat == 'NYYY') {Value_38_Text = 'Small Claims'};
+            }
+            //console.log(concat)
+
+        //** Step 7 End */
+        DataForm = [
+            {id: "Step1",
+                Values: {
+                    //Step1
+                    1: $('#textarea-1-1').val(),
+                    2: $('#select-1-2').val(),
+                    3: $('#select-1-3').val(),
+                    4: $('#select-1-4').val(),
+                    5: $('#textarea-1-4-1').val(),
+                    6: $('#select-1-5').val(),
+                    7: Value_6
+                }
+            },
+            {id: "Step2",
+                Values: {
+                    //Step2
+                    8: parseInt($('#input-2-7').val().replace(",","")  ,10),
+                    9: $('#select-2-8').val(),
+                    10: parseInt($('#input-2-8-1').val().replace(",","")  ,10),
+                    11: $('#select-2-9').val(),
+                    12: parseInt($('#input-2-9-1').val().replace(",","")  ,10),
+                    13: Value_8_plus_9,
+                    14: $('#select-2-10').val(),
+                    15: $('#select-2-10-1').val(),
+                    16: parseInt($('#input-2-10-2').val().replace(",","")  ,10),
+                    17: Value_11,
+                    18: $('#select-2-12').val(),
+                    19: selectedVal_Step2 + ' - ' + selectedVal_Step2_text,
+                    20: Value_13_2,
+                    21: $('#select-2-14').val(),
+                    22: parseInt($('#input-2-14-1').val().replace(",","")  ,10),
+                    23: Value_14_2,
+                    24: Value_15
+                }           
+            },  
+            {id: "Step3",
+                Values: {
+                    //Step3
+                    25: $('#SmallClaimLimitResult').text().replace(",",""),
+                    26: Value_16_1,
+                    27: $('#select-3-16-2').val(),
+                    28: $('#select-3-16-3').val(),
+                    29: $('#select-3-16-4').val(),
+                    30: Value_16_Value,
+                    31: $('#select-3-17').val(),
+                    32: Value_17_Value,
+                    33: $('#select-3-18').val(),
+                    34: Value_18_Value,
+                    35: $('#select-3-19').val(),
+                    36: Value_19_Value,
+                    37: Value_16_Value + Value_17_Value + Value_18_Value + Value_19_Value 
+                }
+
+            },
+            {id: "Step4",
+                Values: {
+                    //Step4
+                    38: selectedVal_Step4,
+                    39: Value_21_Value,
+                    40: Value_22_Value
+                }
+
+            },
+            {id: "Step5",
+                Values: {
+                    41: Value_25,
+                    42: Value_15,
+                    43: Value_24,
+                    44: Value_26,
+                    45: Value_22_Value,
+                    46: '',
+                    47: parseInt($('#input-2-7').val().replace(",","")  ,10),
+                    48: Value_11,
+                    49: Value_31,
+                    50: Value_29
+                }
+            },
+            {id: "Step6",
+                Values: {
+                    51: Value_33_Chart_Title,
+                    52: Value_33_Chart_Text
+                }
+            },
+            {id: "Step7",
+                Values: {
+                    53: Value_34_Text,
+                    54: '',
+                    55: '',
+                    56: '',
+                    57: Value_38_Text
+                }
+            }
+        ]
+
+
     }
 
-    try {
-        s = x[currentTab].getElementsByTagName("select");
-        // A loop that checks every select field in the current tab:
-        for (i = 0; i < s.length; i++) {
-            // If a field is empty...
-            if (s[i].value == "") {
-                // add an "invalid" class to the field:
-                s[i].className += " invalid";
-                // and set the current valid status to false
-                valid = false;
-                if (step == 'Step3' && x[currentTab].id == 'Q16'){
-                    if ($('#select-3-16-3').val() != '' && $('#select-3-16-4').val() != '' && $('#select-3-16-2').is(':hidden') ) {
-                        s[i].className += " valid";
-                        valid = true        
+    function firstTimeStep(){
+        //GetStepsData();
+        //var LastStep = $("#wizard").steps('getCurrentIndex')
+        var tablist = document.querySelector('[role="tablist"]');
+        var tabs = tablist.getElementsByTagName('li');
+        var ActiveTab = 0;
+        var lastdone = 0;
+        for (let index = 0; index < tabs.length; index++) {
+            if (tabs[index].className.includes('current')) { ActiveTab =  index  } ;
+            if (tabs[index].className.includes('done')) {lastdone = index } ; 
+        }
+        if (lastdone != 0 && ActiveTab < lastdone  ){  
+            //Fast Advance only up to Step 5
+            if (lastdone > 4 && ActiveTab < 4 ) {
+                lastdone = 4
+            }
+            //Advance to last Step
+            for (let index = 0; index < (lastdone - ActiveTab); index++) {
+                $("#wizard").steps('next');
+                showTab(RouteCache[ActiveTab + index].LastTab,RouteCache[ActiveTab + index].id);
+            }
+            RouteCache[lastdone].IsCurrent = 1
+            showTab(RouteCache[lastdone].LastTab,RouteCache[lastdone].id);
+            //recalculate
+            for (let index = 0; index <= lastdone; index++) {
+                var localstep = 'Step' + (index + 1)
+                CheckStep(localstep,false)
+            }
+        } else {
+            console.log('First Step')
+            RouteCache[ActiveTab + 1].IsCurrent = 1
+            showTab(0,RouteCache[ActiveTab + 1].id);
+            $("#wizard").steps('next'); //Show the Next Step.
+            
+    
+        }
+    }
+
+    ///*****SCRIPTS TO GET SEPARATE QUESTIONS */
+
+    function showTab(n,step) {
+        //console.log('Show: ' + n + ' From: ' + step)
+        // This function will display the specified tab of the form...
+        var stp = document.getElementById(step)
+        var x = stp.getElementsByClassName("tab");
+        //Progress BAR
+        var resp = step.substr(step.length - 1, step.length)
+        resp = parseInt(resp)
+        var NumTabs,ActualTab = n;
+        if (x.length == 0 ){
+            NumTabs = 1
+            ActualTab = 0
+        } else  {    
+            NumTabs = x.length
+            if (ActualTab > x.length){ActualTab = n - 1}
+        }
+        var progr = Math.round( ( (((ActualTab+1) / NumTabs) * 0.143 ) + (0.143 * (resp - 1)) ) * 100 )
+        
+        //if (progr == 100 ){progr = 95}
+        $('#progress_' + step).css('width', progr.toString() + '%');
+        $('#progress_text_' + step).text(progr.toString() + '% complete');
+        $('#progress_' + step).addClass('bg-success');
+        if (n >= x.length || x.length == 0) {
+            y = stp.getElementsByClassName("results");
+            y[0].style.display = "block"
+        } else {
+            x[n].style.display = "block";
+        }
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            //Hide others TAB
+            for (let index = 0; index < x.length; index++) {
+                if (index > 0 ){ x[index].style.display = 'none'  };
+            }
+            //currentTab = 0
+            //previousTab = 0
+            if (step == 'Step1'){
+                $('#prevBtn1').hide();
+            };
+            } else {
+            if (step == 'Step1'){$('#prevBtn1').show()};
+            if (step == 'Step2'){$('#prevBtn2').show()};
+            if (step == 'Step3'){$('#prevBtn3').show()};
+            if (step == 'Step4'){$('#prevBtn4').show()};
+            if (step == 'Step5'){$('#prevBtn5').show()};
+            if (step == 'Step6'){$('#prevBtn6').show()};
+        }
+        /*
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Evaluate";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        */
+        //... and run a function that will display the correct step indicator:
+        //fixStepIndicator(n)
+    }
+
+    function getCurrentPositions(stepID){
+        //Get Current Step
+        var StepList = document.querySelector('[role="tablist"]');
+        var Steps = StepList.getElementsByTagName('li');
+        var lastStepdone = 0;
+        var ActiveTab  = -1;
+        var step = 'Step' + ( stepID + 1 )
+        var stp = document.getElementById(step);
+        var x = stp.getElementsByClassName("tab");
+        for (let i = 0; i < x.length; i++) {
+            if (x[i].style.display === 'block'){
+                ActiveTab = i
+                RouteCache[stepID].LastTab = i
+            }
+        };
+        RouteCache.forEach(element => {
+            element.IsCurrent = 0
+        });
+        RouteCache[stepID].IsCurrent = 1
+    }
+
+    function nextPrev(n,stepID){
+        console.log("Click: " + n + "stepID " + stepID)
+        getCurrentPositions(stepID);
+        var step,stp,x;
+        RouteCache.forEach(element => {
+            if( element.IsCurrent == 1 ){
+                step = element.id.toString();
+                currentTab = element.LastTab;
+                previousTab = element.PrevTab;
+            }
+        });
+        console.log('Elemnt: ' + step +'Get currentTab: ' , currentTab , 'Get Last Tab: ', previousTab)
+        stp = document.getElementById(step);
+        x = stp.getElementsByClassName("tab");    
+        
+        if (n == -1){
+            console.log(RouteCache)
+            console.log('Ingreso -1: ' + RouteCache[stepID].LastTab + RouteCache[stepID].PrevTab)
+            if (RouteCache[stepID].LastTab == 0 && RouteCache[stepID].PrevTab == 0){
+                if (x.length !== 0) {
+                /*                
+                    y = stp.getElementsByClassName("results");
+                    y[0].style.display = "none"
+                } else {
+                    */
+                    x[currentTab].style.display = "none";
+                }
+                RouteCache[stepID].IsCurrent = 0;
+                $("#wizard").steps('previous');
+                const prevStepID = stepID - 1
+                const prevStep = "Step" + (prevStepID + 1)
+                RouteCache[prevStepID].IsCurrent = 1;
+                previousTab = RouteCache[prevStepID].PrevTab;
+                currentTab = RouteCache[prevStepID].LastTab + 1;
+                RouteCache[prevStepID].LastTab = currentTab;
+                console.log('Regreso Inicio: ' , RouteCache);
+                if (stepID <= 3){
+                    stp2 = document.getElementById(prevStep);
+                    y = stp2.getElementsByClassName("results");
+                    y[0].style.display = "none";  
+                    previousTab = 0;
+                    currentTab = 0;
+                    RouteCache[prevStepID].PrevTab = 0
+                    RouteCache[prevStepID].LastTab = currentTab;
+                    showTab(RouteCache[prevStepID].LastTab,prevStep);
+                } else {
+                    showTab(RouteCache[prevStepID].LastTab,prevStep);
+                }
+                return            
+            } else {
+                if (RouteCache[stepID].LastTab >= x.length ){
+
+                    console.log('Regreso especial...')
+                    y = stp.getElementsByClassName("results");
+                    y[0].style.display = "none"
+
+                    if (x.length == 0){
+                        y[0].style.display = "block"
+                        $("#wizard").steps('previous');
+                        const prevStepID = stepID - 1
+                        const prevStep = "Step" + (prevStepID + 1)
+                        RouteCache[prevStepID].IsCurrent = 1;
+                        previousTab = RouteCache[prevStepID].PrevTab;
+                        currentTab = RouteCache[prevStepID].LastTab + 1;
+                        RouteCache[prevStepID].LastTab = currentTab
+                        console.log('Regreso Inicio: ' , RouteCache);
+                        showTab(RouteCache[prevStepID].LastTab,prevStep)
+                        return
+                    }
+
+                } else {
+                    x[currentTab].style.display = "none"
+                    if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
+                        $('#attorney_yes').show();
+                        $('#attorney_no').hide();
+                    } else {            
+                        $('#attorney_yes').hide();
+                        $('#attorney_no').show();
                     }
                 }
-            } else {
-                s[i].className += " valid";
+
+                if (previousTab < (currentTab -1) ) {
+                    currentTab = previousTab
+                } else {
+                    previousTab = currentTab
+                    currentTab = currentTab + n;
+                }            
+                showTab(RouteCache[stepID].PrevTab,step);
+                currentTab = RouteCache[stepID].PrevTab
+                previousTab = currentTab + n;
+                if (previousTab < 0){previousTab = 0};
+                RouteCache[stepID].LastTab = currentTab;
+                RouteCache[stepID].PrevTab = previousTab;
+                console.log('Regreso Normal: ' , RouteCache)
+                return
             }
-        }        
-    }catch (err){
-        valid = true
-    }
-    // If the valid status is true, mark the step as finished and valid:
-    /*
-    if (valid) {
-        document.getElementsByClassName("step")[currentTab].className += " finish";
-    }
-    */
-    return valid; // return the valid status
-}
+        };
 
-function SeparadorMiles(valor){
-    if (Number.isInteger(valor)){
-        var texto = valor.toString();
-        var textoabs = texto.replace("-", "");
-    }
-    else {
-        var texto = valor ;
-        var textoabs = Math.round(valor);
-    };
-    if ( textoabs.length > 6 ){
-    var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
-    }
-    else if (textoabs.length <= 6 && textoabs.length > 3) {
-    var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
-    } else {
-    var textoFinal = texto ;
-    };
-    return textoFinal ;
-};
+        /*
+        if (n == -1){
+            if (currentTab == 0 && previousTab == 0) {
+                var stp = document.getElementById('Step' + ActiveTab);
+                var x = stp.getElementsByClassName("tab");
+                console.log(x[0].id)
+                console.log($('#' + x[0].id).css("display"))
+                if ( $('#' + x[0].id).css("display") == 'block' ) {
+                    var step = 'Step' + (ActiveTab - 1);
+                    var stp = document.getElementById(step);
+                    var x = stp.getElementsByClassName("tab");
+                    if (ActiveTab <= 4) {
+                        $("#ResultStep" + (ActiveTab -1)).hide();
+                    }
+                    $("#wizard").steps('previous');
+                    showTab(0,step)
+                    return
+                } else {
+                    if (ActiveTab <= 4) {
+                        $("#ResultStep" + ActiveTab).hide();
+                    }
+                    showTab(0,step)
+                    return
+                }
+            }
+            x[currentTab].style.display = "none"
+            if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
+                $('#attorney_yes').show();
+                $('#attorney_no').hide();
+            } else {            
+                $('#attorney_yes').hide();
+                $('#attorney_no').show();
+            }
+            if (previousTab < (currentTab -1) ) {
+                currentTab = previousTab
+            } else {
+                previousTab = currentTab
+                currentTab = currentTab + n;
+            }
+            showTab(currentTab,step)  
+            return true
+        };
+        */
+        var IsValid = validateForm(step);
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !IsValid) return false;
 
-function VLookUp(object,value,attSearch,attResult){
-    var TempArray = object
-    var result = 'Not Found'
-    for (var i = 0; i <= TempArray.length; i++) {
-        if (TempArray[i][attSearch] == value ) {
-            result = TempArray[i][attResult]
-            return result
+        //Check Especial Cases for Steps
+        if (step == 'Step1' && n == 1 && currentTab < x.length ){
+            if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
+                || (x[currentTab].id == 'Q3' &&  $('#select-1-3').val() == 'no') 
+                || (x[currentTab].id == 'Q4' &&  $('#select-1-4').val() == 'no') ){
+                x[currentTab].style.display = "none";
+                previousTab = currentTab;
+                currentTab = x.length; //Skip to End
+            }else{
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = currentTab + n;
+            }
         }
+        if (step == 'Step2' && n == 1 && currentTab < x.length ){
+            GetStepsData();
+            $('#input-2-11').val(SeparadorMiles(Value_11));     
+            if (x[currentTab].id == 'Q10' &&  $('#select-2-10').val() == 'no') {
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = 5; //Skip to Q12
+            }else if (x[currentTab].id == 'Q12' &&  $('#select-2-12').val() == 'yes'){
+                $('#attorney_no').hide();
+                $('#attorney_yes').show();
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = currentTab + n; 
+            } else {
+                $('#attorney_yes').hide();
+                $('#attorney_no').show();
+                $('#input-2-13').val(SeparadorMiles(Math.round(Value_11 * 0.8)));
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = currentTab + n;             
+            }
+        }
+        if (step == 'Step3' && n == 1 && currentTab < x.length ){
+            var diff = $('#SmallClaimLimitResult').text().replace(",","") - Value_11
+            if (x[currentTab].id == 'Q16-Prev') {
+                $('#input-3-16-1').val(SeparadorMiles(Value_11));
+                if (diff < 0) {
+                    $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Not Within</span> your state&#39s small claim limit.</h6>');
+                    $('#BellowLimit').hide();
+                    $('#AboveLimit').show();
+                }else{
+                    $('#WhitinEvaluation').html('<h6>Your Recoverable Damages <span class="badge badge-primary-ls">Are Within</span> your state&#39s small claim limit.</h6>');                
+                    $('#AboveLimit').hide();
+                    $('#BellowLimit').show();
+                }
+                if ($('#select-3-16-2').val() == 'yes' ){
+                    $('#BellowLimit').show();        
+                }else {
+                    if (diff < 0 ) { $('#BellowLimit').hide() };
+                    $('#select-3-16-3').val('no');
+                    $('#select-3-16-4').val('no');
+                };
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = currentTab + n;
+                $('#ok_step3').hide();                  
+            } else if (x[currentTab].id == 'Q17' &&  ($('#select-3-16-2').val() == 'yes' || diff > 0 || $('#select-3-16-3').val() == 'no')) {
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = currentTab + n + 1;
+                $('#select-3-18').val('no');           
+            }else {
+                x[currentTab].style.display = "none";
+                previousTab = currentTab
+                currentTab = currentTab + n;  
+            } 
+        }
+        if (step == 'Step4' && n == 1 && currentTab < x.length ) {
+            x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;         
+        }
+        if (step == 'Step5' && n == 1 && currentTab < x.length ) {
+            //x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;         
+        }
+        if (step == 'Step6' && n == 1 && currentTab < x.length ) {
+            //x[currentTab].style.display = "none";
+            previousTab = currentTab
+            currentTab = currentTab + n;         
+        }
+        RouteCache[stepID].PrevTab = previousTab;
+        RouteCache[stepID].LastTab = currentTab;
+        // if you have reached the end of the form STEP... 
+        //allow to show final Results
+        if (currentTab == x.length) {
+            CheckStep(step,false);
+            if (step == 'Step1') {
+                //StepResults StepView
+                $('#ResultStep1Text1').text(StepResultText1);
+                $('#ResultStep1').show();
+            }
+            if (step == 'Step2') {
+                //StepResults StepView
+                $('#ResultStep2Text1').text(StepResultText1);
+                $('#ResultStep2Text2').text(StepResultText2);
+                $('#ResultStep2Text3').text(StepResultText3);
+                $('#ResultStep2').show();
+            }
+            if (step == 'Step3') {
+                //StepResults StepView
+                $('#ResultStep3Text1').text(StepResultText1);
+                $('#ResultStep3Text2').text(StepResultText2);
+                $('#ResultStep3Text3').text(StepResultText3);
+                $('#ResultStep3').show(); 
+            }
+            if (step == 'Step4') {
+                //StepResults StepView
+                $('#ResultStep4Text1').text(StepResultText1);
+                $('#ResultStep4Text2').text(StepResultText2);
+                $('#ResultStep4Text3').text(StepResultText3);
+                $('#ResultStep4').show();
+                //LoadTable Step5
+                $('#tbl-row-1').text(DataForm[4]['Values'][41]);
+                $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
+                $('#tbl-row-3').text(DataForm[4]['Values'][43]);
+                $('#tbl-row-4').text(DataForm[4]['Values'][44]);
+                $('#tbl-row-5').text(DataForm[4]['Values'][45]);
+                $('#tbl-row-6').text(''); //Blank Space
+                $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
+                $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
+                $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
+                var num = DataForm[4]['Values'][50]
+                $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+            }
+            if (step == 'Step5') {
+                $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
+                //RouteCache[stepID].IsCurrent = 0
+                $("#wizard").steps('next');            
+            }
+            if (step == 'Step6') {
+                //RouteCache[stepID].IsCurrent = 0
+                $("#wizard").steps('next');
+            }
+            //previousTab = currentTab
+            currentTab = currentTab + n;
+            //RouteCache[stepID].PrevTab = previousTab
+            RouteCache[stepID].LastTab = currentTab
+            console.log('Fin Tab' , RouteCache)
+            return
+        }
+        if (currentTab > x.length) {
+            // ... the form gets submitted:
+            CheckStep(step,true);
+            firstTimeStep();
+            //RouteCache[stepID + 1].IsCurrent = 1
+            //previousTab = 0
+            //currentTab = 0//Reset Ordinal
+            //PROGRESS BAR
+            var resp = step.substr(step.length - 1, step.length)
+            resp = parseInt(resp)
+            var progr = Math.round( (0.143 * resp) * 100)
+            $('#progress_' + step).css('width', progr.toString() + '%');
+            $('#progress_' + step).addClass('bg-success');
+            $('#progress_text_' + step).text(progr.toString() + '% complete');
+            RouteCache[stepID].IsCurrent = 0
+            RouteCache[stepID].PrevTab = previousTab
+            RouteCache[stepID].LastTab = currentTab - 1
+            console.log('Fin Step   ' , RouteCache)
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        if (n == 1){
+            RouteCache[stepID].PrevTab = previousTab
+            RouteCache[stepID].LastTab = currentTab        
+            console.log('Avance: ' + step , RouteCache);
+            showTab(currentTab,step);
+        }
+        /*
+        if (step == 'Step1' && n == 1){showTab(currentTab,'Step1');}
+        if (step == 'Step2' && n == 1){showTab(currentTab,'Step2');}
+        */
     }
-            
-}
+
+    function validateForm(step) {
+        // This function deals with validation of the form fields
+        var stp = document.getElementById(step)
+        var x, y, i, j, valid = true;
+        x = stp.getElementsByClassName("tab");
+        try {
+            y = x[currentTab].getElementsByTagName("input");
+            // A loop that checks every input field in the current tab:
+            for (i = 0; i < y.length; i++) {
+                // If a field is empty...
+                if (y[i].value == "") {
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                } else {
+                    y[i].className += " valid";
+                }
+            }
+        }catch(err){
+            valid = true
+        }
+        try {
+            if (step == 'Step2' && x[currentTab].id == 'Q13' && $('#select-2-12').val() == 'yes'){
+                var selected = $("input[type='radio'][name='attorney']:checked");
+                if (selected.length == 0) {
+                    $('#attorney_yes').css('background-color', '#ffdddd');;
+                    valid = false;
+                }
+            }
+            if (step == 'Step4' && x[currentTab].id == 'Q21' ){
+                var selected = $("input[type='radio'][name='adversary']:checked");
+                if (selected.length == 0) {
+                    $('#adversary_check').css('background-color', '#ffdddd');
+                    valid = false;
+                }
+            }
+        } catch (error) {
+            valid = true
+        }
+        try {
+            z = x[currentTab].getElementsByTagName("textarea");
+            // A loop that checks every textarea field in the current tab:
+            for (i = 0; i < z.length; i++) {
+                // If a field is empty...
+                if (z[i].value == "") {
+                    // add an "invalid" class to the field:
+                    z[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                } else {
+                    z[i].className += " valid";
+                }
+            }   
+        }catch (err){
+            valid = true
+        }
+
+        try {
+            s = x[currentTab].getElementsByTagName("select");
+            // A loop that checks every select field in the current tab:
+            for (i = 0; i < s.length; i++) {
+                // If a field is empty...
+                if (s[i].value == "") {
+                    // add an "invalid" class to the field:
+                    s[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                    if (step == 'Step3' && x[currentTab].id == 'Q16'){
+                        if ($('#select-3-16-3').val() != '' && $('#select-3-16-4').val() != '' && $('#select-3-16-2').is(':hidden') ) {
+                            s[i].className += " valid";
+                            valid = true        
+                        }
+                    }
+                } else {
+                    s[i].className += " valid";
+                }
+            }        
+        }catch (err){
+            valid = true
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        /*
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        */
+        return valid; // return the valid status
+    }
+
+    function SeparadorMiles(valor){
+        if (Number.isInteger(valor)){
+            var texto = valor.toString();
+            var textoabs = texto.replace("-", "");
+        }
+        else {
+            var texto = valor ;
+            var textoabs = Math.round(valor);
+        };
+        if ( textoabs.length > 6 ){
+        var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
+        }
+        else if (textoabs.length <= 6 && textoabs.length > 3) {
+        var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
+        } else {
+        var textoFinal = texto ;
+        };
+        return textoFinal ;
+    };
+
+    function VLookUp(object,value,attSearch,attResult){
+        var TempArray = object
+        var result = 'Not Found'
+        for (var i = 0; i <= TempArray.length; i++) {
+            if (TempArray[i][attSearch] == value ) {
+                result = TempArray[i][attResult]
+                return result
+            }
+        }
+                
+    }
 
 </script>

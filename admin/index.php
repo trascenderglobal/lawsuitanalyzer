@@ -27,6 +27,10 @@
     <link rel="shortcut icon" type="image/png" href="../assets/Lawsuit-Analysis-Logo.png" >
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../lib/jquery-3.5.1.min.js"></script>
+    <script src="../lib/FileSaver.min.js" ></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.6/xlsx.core.min.js"></script>
+    <script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.8/xlsx.min.js"></script>
 
     <title>Lawsuit Analyzer Administrtator</title>
 
@@ -223,7 +227,7 @@
 
           <div class="row">
             <div class="col" style="text-align: center; align-items: center;" >
-                <table class="table table-responsive">
+                <table id = "UsersTable" class="table table-responsive">
                     <tr style="color: white; background-color: #9E2D2D; " >
                         <th>Id</th>
                         <th>User name</th>
@@ -328,6 +332,10 @@
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
 
+  <script>
+
+  </script>
+
 
 </body>
 
@@ -344,29 +352,38 @@ $(document).ready(function () {
 		success:function(response){
 			buildTable(response)	
 		}
-	})
+})
 
 
 
-	function buildTable(data){
-		var table = document.getElementById('myTable')
 
-		for (var i = 0; i < data.length; i++){
-			var row = `<tr>
-							<td>${data[i].id}</td>
-							<td>${data[i].user_nicename}</td>
-							<td>${data[i].user_email}</td>
-                            <td>${data[i].user_status}</td>
-                            <td>${data[i].user_rol}</td>
-                            <td>
-							    <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-							    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-						    </td>
-					  </tr>`
-			table.innerHTML += row
-		}
-	}
+
+function buildTable(data){
+  var table = document.getElementById('myTable')
+
+  for (var i = 0; i < data.length; i++){
+    var row = `<tr>
+            <td>${data[i].id}</td>
+            <td>${data[i].user_nicename}</td>
+            <td>${data[i].user_email}</td>
+                          <td>${data[i].user_status}</td>
+                          <td>${data[i].user_rol}</td>
+                          <td>
+                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+              </td>
+          </tr>`
+    table.innerHTML += row
+  }
+}
 
 });
+
+$("table").tableExport({
+  formats: ["xlsx","txt", "csv"], //Tipo de archivos a exportar ("xlsx","txt", "csv", "xls")
+  position: 'button',  // Posicion que se muestran los botones puedes ser: (top, bottom)
+  bootstrap: false,//Usar lo estilos de css de bootstrap para los botones (true, false)
+});
+
 
 </script>
