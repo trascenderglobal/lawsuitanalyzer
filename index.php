@@ -132,8 +132,8 @@
 
         @media (max-width: 576px) {
             html { font-size: 1rem; }
-            h2 {font-size: 1.75rem}
-            h3 {font-size: 1.2rem}
+            h2 {font-size: 6vw}
+            h3 {font-size: 4vw}
             .wizard > .content {min-height: auto/*45em*/ }
             #StepCollapse { display: block; }
             .wizard.vertical > .steps {display: none;}
@@ -146,8 +146,8 @@
         }
         @media (min-width: 768px) {
             html { font-size: 1rem; }
-            h2 {font-size: 2rem}
-            h3 {font-size: 1.4rem}
+            h2 {font-size: 3vw}
+            h3 {font-size: 2vw}
             .wizard > .content {min-height: auto/*45em*/ }
             .wizard.vertical > .steps {display: inline;}
             .helpimg {
@@ -222,7 +222,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 1.</span> Legal Evaluation</h2>
+                                        <h2>PHASE 1. Legal Evaluation</h2>
                                         <div class="col-lg-10 sm-6"> 
                                             <h3>What is your likelihood of prevailing?</h3>
                                         </div>
@@ -339,7 +339,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 2.</span> Case Value Assessment</h2>
+                                        <h2>PHASE 2. Case Value Assessment</h2>
                                         <div class="col-lg-10 sm-6"> 
                                             <h3>How much are you likely to recover?</h3>
                                         </div>
@@ -546,7 +546,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 3.</span> Legal Options Assesment</h2>    
+                                        <h2>PHASE 3. Legal Options Assesment</h2>    
                                         <div class="col-lg-10 sm-6">
                                             <h3>What are your legal options?</h3>
                                         </div>
@@ -692,7 +692,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 4.</span> Collectability Assesment</h2>    
+                                        <h2>PHASE 4. Collectability Assesment</h2>    
                                         <div class="col-lg-10 sm-6">
                                             <h3>What are your chances of collecting on your judgment?</h3>
                                         </div>
@@ -792,7 +792,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 5.</span> Comprehensive Case Analysis</h2>
+                                        <h2>PHASE 5. Comprehensive Case Analysis</h2>
                                         <div class="col-lg-10 sm-6"> 
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
@@ -896,7 +896,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 6.</span> Feasibility Assessment Chart</h2>
+                                        <h2>PHASE 6. Feasibility Assessment Chart</h2>
                                         <div class="col-lg-10 sm-6"> 
                                             <h3>How Feasible is your case to pursue?</h3>
                                         </div>
@@ -947,7 +947,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="row" style="align-items: flex-end;">
-                                        <h2><span style="font-size: 1.5rem;" >PHASE 7.</span> Forum Assessment</h2>
+                                        <h2>PHASE 7. Forum Assessment</h2>
                                         <div class="col-lg-10 sm-6"> 
                                             <h3>Where will you pursue your dispute?</h3>
                                         </div>
@@ -1056,6 +1056,71 @@
 </html>
 
 <script>
+    //function to show the first Questions of every Step by 'body current' class
+    $(function() {
+        (function($) {
+            var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+            $.fn.attrchange = function(callback) {
+                if (MutationObserver) {
+                    var options = {
+                        subtree: false,
+                        attributes: true
+                    };
+
+                    var observer = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(e) {
+                            callback.call(e.target, e.attributeName);
+                        });
+                    });
+
+                    return this.each(function() {
+                        observer.observe(this, options);
+                    });
+
+                }
+            }
+        })(jQuery);
+
+        //Now you need to append event listener
+        $('#wizard-p-0').attrchange(function(attrName) {
+            if(attrName=='class'){
+                if (this.className == 'body current'){
+                    ShowFirstOnly('Step1');
+                }
+            };
+        });
+        $('#wizard-p-1').attrchange(function(attrName) {
+            if(attrName=='class'){
+                if (this.className == 'body current'){
+                    ShowFirstOnly('Step2');
+                }
+            };
+        });
+        $('#wizard-p-2').attrchange(function(attrName) {
+            if(attrName=='class'){
+                if (this.className == 'body current'){
+                    ShowFirstOnly('Step3');
+                }
+            };
+        });
+        $('#wizard-p-3').attrchange(function(attrName) {
+            if(attrName=='class'){
+                if (this.className == 'body current'){
+                    ShowFirstOnly('Step4');
+                }
+            };
+        });
+
+        function ShowFirstOnly(Step){
+            var stp = document.getElementById(Step);
+            var y = stp.getElementsByClassName("results");
+            y[0].style.display = "none";
+            showTab(0,Step);
+        };
+
+    });
+
     // executes when HTML-Document is loaded and DOM is ready
     $(document).ready(function () {
         //Hide results Text
@@ -1173,7 +1238,7 @@
         });
 
         $('#select-3-16-4').change(function () { 
-            if ($(this).val() !== '' && $('#select-3-16-3').val() !== '' && $('#select-3-16-2').val() !== ''){
+            if ($(this).val() !== '' && $('#select-3-16-3').val() !== ''){
                 EasyAdvance('Step3');
             };
         });
@@ -2238,10 +2303,13 @@
             }
             //currentTab = 0
             //previousTab = 0
+            /*
             if (step == 'Step1'){
                 $('#prevBtn1').hide();
             };
-            } else {
+            */
+            $('#prevBtn' + resp).hide()
+        } else {
             if (step == 'Step1'){$('#prevBtn1').show()};
             if (step == 'Step2'){$('#prevBtn2').show()};
             if (step == 'Step3'){$('#prevBtn3').show()};
@@ -2306,7 +2374,7 @@
                     y[0].style.display = "none"
                 } else {
                     */
-                    x[currentTab].style.display = "none";
+                   // x[currentTab].style.display = "none";
                 }
                 RouteCache[stepID].IsCurrent = 0;
                 $("#wizard").steps('previous');
@@ -2317,7 +2385,7 @@
                 currentTab = RouteCache[prevStepID].LastTab + 1;
                 RouteCache[prevStepID].LastTab = currentTab;
                 console.log('Regreso Inicio: ' , RouteCache);
-                if (stepID <= 3){
+                if (stepID <= 4){
                     stp2 = document.getElementById(prevStep);
                     y = stp2.getElementsByClassName("results");
                     y[0].style.display = "none";  
