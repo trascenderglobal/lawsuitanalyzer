@@ -227,7 +227,7 @@
                                             <h3>What is your likelihood of prevailing?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
+                                            <a data-toggle="modal" data-target="#help-modal" data-step="Step1">
                                                 <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                             </a>
                                         </div>
@@ -969,24 +969,30 @@
                                                             <p id="ResultStep7_1"></p>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
-                                                            <h4>Mediation:</h4>
+                                                    <div id = "MediationYes" style="display: none;">
+                                                        <div class = "row">
+                                                            <div class="col d-flex justify-content-center" >
+                                                                <p style="color: #9E2D2D;" >If Mediation is unsuccessful, your next step is the Forum below.</p>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-center" >
-                                                            <p id="ResultStep7_2"></p>
+                                                        <div class = "row" >
+                                                            <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
+                                                                <h4>Forum:</h4>
+                                                            </div>
+                                                            <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-center" >
+                                                                <p id="ResultStep7_2"></p>
+                                                            </div>                                                        
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col d-flex justify-content-start">
-                                                            <p style="color: #9E2D2D;" >You are done with the Lawsuit Analyzer©. You can go back and edit your answers and change your outcome. Once you click Forum below, your results will be emailed to you, and you no longer have the ability to edit.</p>
+                                                            <p style="color: #9E2D2D;" >You have completed the Lawsuit Analyzer©. You can still edit your answers and change your outcome. Once you click the Go to button below, you will no longer be able to edit and your results will be emailed you.</p>
                                                         </div>
                                                     </div>                                                
                                                 </div>
                                                 <div style="overflow:auto; margin: 2%;">
                                                     <div style="float:center;">
-                                                        <button type="button" id="prevBtn7" class="btn btn-info" onclick="">Download</button>
-                                                        <button type="button" id="nextBtn7" class="btn btn-success" onclick="">Go to Mediation</button>
+                                                        <button type="button" id="nextBtn7" class="badge badge-info-ls" onclick="">Go to </button>
                                                     </div>
                                                 </div>
 
@@ -1048,6 +1054,25 @@
                 </div>
             </div>
         </div>   
+
+        <div id="help-modal" class="modal fade bd-example-modal-lg"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="help_modalTitle">Help</h1>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="error" ></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -1131,10 +1156,6 @@
         $('#DamageProvision_yes,#attorney_yes,#attorney_no,#moneytime_yes').hide();
         //** Step 3 */
         $('#AboveLimit,#BellowLimit,#ExcludeSmallClaims').hide();
-        //HidePreviousButton
-        $("#prevBtn1").hide();
-        //Hide Toggle Button
-        //$("#StepCollapse").hide();
 
         $("#select-1-4").change(function(){
             if ($(this).val() == 'yes'){
@@ -1233,6 +1254,8 @@
             }else {
                 $('#ExcludeSmallClaims').hide();
                 $('#select-3-16-4').val('no');
+                //$('#select-3-18').hide();
+                //$('#select-3-18').val('no')
                 EasyAdvance('Step3');
             };
         });
@@ -1664,12 +1687,50 @@
     $(window).on('load',function(){
         localStorage.setItem('user_id',get_session('user_id'))
         localStorage.setItem('user' , get_session('user'))
-        get_last_response(get_session('user_id'))
+        get_last_response(get_session('user_id'));
+        get_answers_form(get_session('user_lr'))
         $('#instructions_modal').modal('show');
+
     });
     
+    $('#help-modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var recipient = button.data('step') 
+        var modal = $(this)
+        Load_Help_Modal(modal,recipient);
+    });
+
+    //Loading modal from Page
+    function Load_Help_Modal(modal,recipient){
+        console.log('Entro a funcion' + modal + recipient)
+        if(recipient == 'Step1' ){
+            modal.find('.modal-body').load('https://lawsuitanalysis.com/Disclaimer/',function(response, status, xhr){
+                if ( status == "error" ) {
+                    var msg = "Sorry but there was an error: ";
+                    $( "#error" ).html( msg + xhr.status + " " + xhr.statusText + " XHR Response: " + response);
+                }
+            });
+        };
+    }
 
     //Script functions to DB
+
+    function get_answers_form(user_lr){
+        var user_lr = user_lr;
+        $.ajax({
+            type: "GET",
+            url: "API/gla.php",
+            data: {user_lr: user_lr},
+            cache: 'false',
+            success: function (response) {
+                $validacion = response
+                if (response) {
+                    print_answers(response)
+                };
+            }
+        });
+
+    }
 
     function get_last_response(User_Id){
             var usid = User_Id
@@ -1754,6 +1815,54 @@
         });
 
 
+
+    }
+
+    //Printing Result From DB
+    function print_answers(response){
+        var obj = JSON.parse(response)
+        //Step1
+        $('#textarea-1-1').text(String(obj[0][1]));
+        $('#select-1-2').val(String(obj[1][1]));
+        $('#select-1-3').val(String(obj[2][1]));
+        $('#select-1-4').val(String(obj[3][1]));
+        $('#textarea-1-4-1').text(String(obj[4][1]));
+        $('#select-1-5').val(String(obj[5][1]));
+        $('#ResultStep1Text1').text(String(obj[6][1]));
+        //Step2
+        $('#input-2-7').val(SeparadorMiles(obj[7][1]));
+        $('#select-2-8').val(String(obj[8][1]));
+        $('#input-2-8-1').val(SeparadorMiles(obj[9][1]));
+        $('#select-2-9').val(String(obj[10][1]));
+        $('#input-2-9-1').val(SeparadorMiles(obj[11][1]));
+        //
+        $('#select-2-10').val(String(obj[13][1]));
+        $('#select-2-10-1').val(String(obj[14][1]));
+        $('#input-2-10-2').val(SeparadorMiles(obj[15][1]));
+        $('#input-2-11').val(SeparadorMiles(obj[16][1]));
+        $('#select-2-12').val(String(obj[17][1]));
+        document.querySelector("[name=attorney][value=" + String(obj[18][1]).substring(0,7) + "]").checked = true;
+        $('#input-2-13').val(String(obj[19][1]));
+        $('#select-2-14').val(String(obj[20][1]));
+        $('#input-2-14-1').val(SeparadorMiles(obj[21][1]));
+        $('#input-2-14-2').val(SeparadorMiles(obj[22][1]));
+        //Step3
+        $('#input-3-16-1').val(SeparadorMiles(obj[23][1]));
+        //
+        //
+        $('#select-3-16-2').val(String(obj[26][1]));
+        $('#select-3-16-3').val(String(obj[27][1]));
+        $('#select-3-16-4').val(String(obj[28][1]));
+        //
+        $('#select-3-17').val(String(obj[30][1]));
+        //
+        $('#select-3-18').val(String(obj[32][1]));
+        //
+        $('#select-3-19').val(String(obj[34][1]));
+        //
+        //
+        //Step4
+        document.querySelector("[name=adversary][value=" + String(obj[37][1]) + "]").checked = true;
 
     }
 
@@ -2090,11 +2199,6 @@
         //** Step 6 End */
 
         //** Step 7 Calculations */
-            if (  $('#select-3-19').val() == 'yes' ) { 
-                Value_34_Text = 'Your Contract requires you to complete mediation'
-            } else {
-                Value_34_Text = 'Your Contract does not require mediation but your local court system or Judge may require it'
-            };
             var TempVal1,TempVal2,TempVal3,TempVal4 = 'N';
             if ( $('#select-3-18').val() == 'yes') {
                 TempVal1 = 'Y'
@@ -2117,17 +2221,20 @@
                 TempVal4 = 'N'
             };
             var concat =  TempVal1 + TempVal2 + TempVal3 + TempVal4 ;
-            Value_38_Text = 'Your Forum'
+            if (concat == 'YNNN') {Value_34_Text = 'Binding Arbitration' ,Value_38_Text = 'Binding Arbitration' };
+            if (concat == 'NYNN') {Value_34_Text = 'Small Claims',Value_38_Text = 'Small Claims'};
+            if (concat == 'NNNN') {Value_34_Text = 'Upper Civil Court',Value_38_Text = 'Upper Civil Court' };
+            if (concat == 'NYYN') {Value_34_Text = 'Binding Arbitration',Value_38_Text = 'Binding Arbitration'};
+            if (concat == 'NYYY') {Value_34_Text = 'Small Claims',Value_38_Text = 'Small Claims' };
+
             if ($('#select-3-19').val() == 'yes') {
                 Value_38_Text = 'Mediation';
+                $('#MediationYes').show();
+                $('#nextBtn7').text('Go To Mediation');
             } else {
-                if (concat == 'YNNN') {Value_38_Text = 'Binding Arbitration'};
-                if (concat == 'NYNN') {Value_38_Text = 'Small Claims'};
-                if (concat == 'NNNN') {Value_38_Text = 'General Civil Court System'};
-                if (concat == 'NYYN') {Value_38_Text = 'Binding Arbitration'};
-                if (concat == 'NYYY') {Value_38_Text = 'Small Claims'};
+                $('#MediationYes').hide();
+                $('#nextBtn7').text('Go To ' + Value_38_Text);
             }
-            //console.log(concat)
 
         //** Step 7 End */
         DataForm = [
@@ -2301,13 +2408,6 @@
             for (let index = 0; index < x.length; index++) {
                 if (index > 0 ){ x[index].style.display = 'none'  };
             }
-            //currentTab = 0
-            //previousTab = 0
-            /*
-            if (step == 'Step1'){
-                $('#prevBtn1').hide();
-            };
-            */
             $('#prevBtn' + resp).hide()
         } else {
             if (step == 'Step1'){$('#prevBtn1').show()};
@@ -2428,6 +2528,14 @@
                         $('#attorney_yes').hide();
                         $('#attorney_no').show();
                     }
+                    if (x[currentTab].id == 'Q19' && ($('#select-3-16-2').val() == 'yes' || $('#select-3-16-3').val() == 'no')){
+                        previousTab = previousTab - 1
+                        RouteCache[stepID].PrevTab = RouteCache[stepID].PrevTab - 1
+                        if ($('#select-3-16-2').val() == 'no'){
+                            previousTab = previousTab + 1
+                            RouteCache[stepID].PrevTab = RouteCache[stepID].PrevTab + 1
+                        }
+                    }
                 }
 
                 if (previousTab < (currentTab -1) ) {
@@ -2435,7 +2543,9 @@
                 } else {
                     previousTab = currentTab
                     currentTab = currentTab + n;
-                }            
+                }
+                
+                
                 showTab(RouteCache[stepID].PrevTab,step);
                 currentTab = RouteCache[stepID].PrevTab
                 previousTab = currentTab + n;
@@ -2558,7 +2668,12 @@
                 x[currentTab].style.display = "none";
                 previousTab = currentTab
                 currentTab = currentTab + n + 1;
-                $('#select-3-18').val('no');           
+                if ($('#select-3-16-2').val() == 'no') {
+                    currentTab = currentTab - 1
+                    $('#select-3-18').val('');
+                } else {
+                    $('#select-3-18').val('no');
+                }           
             }else {
                 x[currentTab].style.display = "none";
                 previousTab = currentTab
@@ -2623,6 +2738,7 @@
                 $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
                 var num = DataForm[4]['Values'][50]
                 $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+                $('#prevBtn4').show();
             }
             if (step == 'Step5') {
                 $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
