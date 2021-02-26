@@ -1,20 +1,25 @@
 <?php
     //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
     //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-    if (!isset($_SESSION)) { 
-        session_start(); 
-    } 
+    //if (!isset($_SESSION)) { 
+    //    session_start(); 
+    //} 
+    session_start();
 
     if(isset($_SESSION['user_rol'])){
         if ($_SESSION['user_rol'] == 'admin') {
             header('location: admin/index.php');
         } else {
-            if(empty(isset($_SESSION['user']))){
-                session_destroy();
+            if(!isset($_SESSION['user'])){
+                //session_destroy();
                 header('location:login.php');
                 exit();
             }
         }
+    } else {
+        //session_destroy();
+        header('location:login.php');
+        exit();
     }
 ?>
 
@@ -1254,8 +1259,6 @@
             }else {
                 $('#ExcludeSmallClaims').hide();
                 $('#select-3-16-4').val('no');
-                //$('#select-3-18').hide();
-                //$('#select-3-18').val('no')
                 EasyAdvance('Step3');
             };
         });
@@ -1283,6 +1286,7 @@
         $('#input-2-14-1').change(function () { 
             if (!isNaN(parseInt($(this).val().replace(",",""),10))){
                 var val = parseInt($(this).val().replace(",",""),10) / 2
+                console.log('Probando este. ')
                 $('#input-2-14-2').val(SeparadorMiles(val));
             }
         });
@@ -1334,7 +1338,7 @@
             }
         });
 
-        function EasyAdvance (step){
+        function EasyAdvance(step){
             validateForm(step);
             var lastChar = step.substr(step.length - 1)
             nextPrev(1,lastChar-1)
@@ -1665,17 +1669,20 @@
 
         //Look for Small Claims Limit
         $('#select-3-16').change(function () { 
+            validateSCL($(this).val());
+        });
+
+        function validateSCL(val){
             if ($('#select-3-16').val() !== "" ) {
-                var StateLimitResults = VLookUp(SmallClaimsTable,$(this).val(),'Abrev', 'Dollar_Limit' );
-                var StateLinkResults = VLookUp(SmallClaimsTable,$(this).val(),'Abrev', 'Link')
+                var StateLimitResults = VLookUp(SmallClaimsTable,val,'Abrev', 'Dollar_Limit' );
+                var StateLinkResults = VLookUp(SmallClaimsTable,val,'Abrev', 'Link')
                 $('#SmallClaimLimitResult').text(SeparadorMiles(StateLimitResults));
                 $('#SmallClaimLinkResult').html('<a href="' + StateLinkResults + '" target="_blank" >  <span class="badge badge-info-ls">Click Here</span> </a>');
             }else{
                 $('#SmallClaimLimitResult').text('0')
                 $('#SmallClaimLinkResult').text('Please choose an option')
             }
-            
-        });
+        };
 
         //SmallClaimLoad
         for (var i = 0; i <= SmallClaimsTable.length; i++) {
@@ -1688,9 +1695,7 @@
         localStorage.setItem('user_id',get_session('user_id'))
         localStorage.setItem('user' , get_session('user'))
         get_last_response(get_session('user_id'));
-        get_answers_form(get_session('user_lr'))
         $('#instructions_modal').modal('show');
-
     });
     
     $('#help-modal').on('show.bs.modal', function (event) {
@@ -1714,7 +1719,6 @@
     }
 
     //Script functions to DB
-
     function get_answers_form(user_lr){
         var user_lr = user_lr;
         $.ajax({
@@ -1743,6 +1747,7 @@
                     $validacion = response
                     if (response) {
                         localStorage.setItem('user_lr', $validacion)
+                        get_answers_form($validacion)
                     } else {
                         localStorage.setItem('user_lr', 0)
                     }
@@ -1798,11 +1803,20 @@
         if (Step == 'Step6') {posit = 5}
         if (Step == 'Step7') {posit = 6}
         for (let index = 1; index <= 57; index++) {
-            dataPut.push({
-                "form_questions_id": index,
-                "answer": DataForm[posit]['Values'][index]
-                } 
-            )
+            if (index == 55 && posit == 2){
+                //Special Case... State for Small Claims
+                dataPut.push({
+                    "form_questions_id": index,
+                    "answer": DataForm[6]['Values'][index]
+                    } 
+                )                
+            } else {
+                dataPut.push({
+                    "form_questions_id": index,
+                    "answer": DataForm[posit]['Values'][index]
+                    } 
+                )
+            }
         };
         $.ajax({
             type: "POST",
@@ -1821,6 +1835,7 @@
     //Printing Result From DB
     function print_answers(response){
         var obj = JSON.parse(response)
+        localStorage.setItem('lr',response)
         //Step1
         $('#textarea-1-1').text(String(obj[0][1]));
         $('#select-1-2').val(String(obj[1][1]));
@@ -1830,24 +1845,29 @@
         $('#select-1-5').val(String(obj[5][1]));
         $('#ResultStep1Text1').text(String(obj[6][1]));
         //Step2
-        $('#input-2-7').val(SeparadorMiles(obj[7][1]));
+        $('#input-2-7').val(SeparadorMiles(parseInt(obj[7][1] ,10)));
         $('#select-2-8').val(String(obj[8][1]));
-        $('#input-2-8-1').val(SeparadorMiles(obj[9][1]));
+        $('#input-2-8-1').val(SeparadorMiles(parseInt(obj[9][1])));
         $('#select-2-9').val(String(obj[10][1]));
         $('#input-2-9-1').val(SeparadorMiles(obj[11][1]));
         //
+        $('#select-2-10').val('');
         $('#select-2-10').val(String(obj[13][1]));
+        $('#select-2-10').trigger('change')
         $('#select-2-10-1').val(String(obj[14][1]));
-        $('#input-2-10-2').val(SeparadorMiles(obj[15][1]));
-        $('#input-2-11').val(SeparadorMiles(obj[16][1]));
+        $('#input-2-10-2').val(SeparadorMiles(parseInt(obj[15][1])));
+        $('#input-2-11').val(SeparadorMiles(parseInt(obj[16][1])));
         $('#select-2-12').val(String(obj[17][1]));
         document.querySelector("[name=attorney][value=" + String(obj[18][1]).substring(0,7) + "]").checked = true;
         $('#input-2-13').val(String(obj[19][1]));
         $('#select-2-14').val(String(obj[20][1]));
-        $('#input-2-14-1').val(SeparadorMiles(obj[21][1]));
-        $('#input-2-14-2').val(SeparadorMiles(obj[22][1]));
+        $('#select-2-14').trigger('change')
+        $('#input-2-14-1').val(SeparadorMiles(parseInt(obj[21][1])));
+        $('#input-2-14-2').val(SeparadorMiles(parseInt(obj[22][1])));
         //Step3
-        $('#input-3-16-1').val(SeparadorMiles(obj[23][1]));
+        $('#select-3-16').val(String(obj[54][1]));
+        $('#select-3-16').trigger('change')
+        $('#input-3-16-1').val(SeparadorMiles(parseInt(obj[23][1])));
         //
         //
         $('#select-3-16-2').val(String(obj[26][1]));
@@ -1995,7 +2015,13 @@
             $('#ResultStep7_2').text( DataForm[6]['Values'][53] );
 
         };
-        PutAnswData(Step,DataForm);   
+        var resp = Step.substr(Step.length - 1, Step.length)
+        resp = parseInt(resp)        
+        if (FirstTime){
+            PutAnswData(Step,DataForm);
+        } else if (FirstTime == false && resp >= 4 ) {
+            PutAnswData(Step,DataForm);
+        }
     }
 
     var Value_6,
@@ -2324,7 +2350,7 @@
                 Values: {
                     53: Value_34_Text,
                     54: '',
-                    55: '',
+                    55: $('#select-3-16').val(), //Special Case... State for Small Claims
                     56: '',
                     57: Value_38_Text
                 }
@@ -2670,7 +2696,6 @@
                 currentTab = currentTab + n + 1;
                 if ($('#select-3-16-2').val() == 'no') {
                     currentTab = currentTab - 1
-                    $('#select-3-18').val('');
                 } else {
                     $('#select-3-18').val('no');
                 }           
@@ -2718,7 +2743,7 @@
                 $('#ResultStep3Text1').text(StepResultText1);
                 $('#ResultStep3Text2').text(StepResultText2);
                 $('#ResultStep3Text3').text(StepResultText3);
-                $('#ResultStep3').show(); 
+                $('#ResultStep3').show();
             }
             if (step == 'Step4') {
                 //StepResults StepView
@@ -2892,7 +2917,7 @@
         var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
         }
         else if (textoabs.length <= 6 && textoabs.length > 3) {
-        var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
+            var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
         } else {
         var textoFinal = texto ;
         };

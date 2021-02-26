@@ -1,9 +1,9 @@
 <?php
     //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
     //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-    session_start();
+    //session_start();
    
-    if(!empty(isset($_SESSION['user']))){
+    if(isset($_SESSION['user'])){
       header('location:index.php');
     }
 ?>
@@ -186,7 +186,6 @@
             var pass = $('#passlg').val();
             if($.trim(user).length > 0 && $.trim(pass).length > 0){
                 $('#login').text('Please Wait...');
-                console.log('Ejecutando.')
                 $.ajax({
                     url: 'API/logincheck.php',
                     type: 'POST',
@@ -200,7 +199,6 @@
                         if($validacion == 'true'){
                             $('#login').text('Login Successful');
                             $(location).attr('href','index.php');
-                            console.log('Entro..');
                         } else {
                             $('#login').css('background-color', '#ffdddd');
                             $('#login').css('color', 'black');
@@ -210,7 +208,6 @@
                                 $('#login').css('color', '');
                                 $('#login').text('Login');
                             },2000);
-                            console.log('No Entro..');
                         }
                     }
                 }) ;

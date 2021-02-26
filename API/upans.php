@@ -43,6 +43,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             $values = "";
             $arr = $_POST['data'];
             $index = 0;
+            $updatedfields = '';
             foreach ($arr as $answer) {
                 if (isset($answer['answer'])){
                     $ans = $mysqli->real_escape_string($answer['answer']);
@@ -50,12 +51,13 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                     $PreResultado-> bind_param('sii',$ans, $uslr,$answer['form_questions_id']);
                     $PreResultado->execute();
                     $num_rows =  $mysqli->affected_rows;
-                    if ($num_rows > 0) {$index =  $index + 1 ;};
+                    if ($num_rows > 0) {
+                        $index =  $index + 1 ;
+                        $updatedfields = $updatedfields . ' | ' . $answer['form_questions_id'] . '' . $ans ;                    
+                    };
                 }
-                
-            }
-            
-            echo ('Updated: '  . $index );
+            }       
+            echo ('Updated: '  . $index . ' Rows ');
             break;
     }
 }
