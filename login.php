@@ -26,10 +26,11 @@
         <script src="lib/jquery-3.5.1.min.js"></script>
         <script src="lib/jquery.cookie-1.3.1.js"></script>
         <script src="js/bootstrap.js"  > </script>
-        <script src="build/jquery.steps.js"></script> 
+        <script src="build/jquery.steps.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
         <style>
 
-            form {border: 3px solid #f1f1f1;}
+            .row.boxed {border: 3px solid #f1f1f1;}
 
             input[type=text], input[type=password] {
             width: 100%;
@@ -129,25 +130,49 @@
         </header>
 
         <div class="content">
+           <div class="imgcontainer">
+                <img src="../analyzer/assets/Lawsuit-Analysis-Logo.png" alt=""  width="300">
+            </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-4 sm-12">
                         
                     </div>
                     <div class="col-lg-4 sm-12">
-                        <form action="" id = "formlogin" method="post">
-                            <div class="imgcontainer">
-                                <img src="../analyzer/assets/Lawsuit-Analysis-Logo.png" alt="Avatar" class="avatar"  width="519" height="173">
-                            </div>
-
+                        <div class="row boxed">
                             <div class="container">
-                                <label for="usuariolg"><b>Username</b></label>
-                                <input id = "usuariolg" type="text" placeholder="Enter Username" name="usuariolg" required>
+                                <p style="text-align: right;" ><a data-toggle="collapse" href="#loginForm">Login</a>  / <a data-toggle="collapse" href="#registerForm">Register</a> </p>                                                                       
+                                <div id="loginForm" class = "collapse show">
+                                    <form action="" id = "formlogin" method="post">
+                                        <label for="usuariolg"><b>Username</b></label>
+                                        <input id = "usuariolg" type="text" placeholder="Enter Username" name="usuariolg" required>
 
-                                <label for="passlg"><b>Password</b></label>
-                                <input id = "passlg" type="password" placeholder="Enter Password" name="passlg" required>
-                                    
-                                <button type="submit" id="login">Login</button>
+                                        <label for="passlg"><b>Password</b></label>
+                                        <input id = "passlg" type="password" placeholder="Enter Password" name="passlg" required>
+                                            
+                                        <button type="submit" id="login">Login</button>   
+                                    </form>                                     
+                                </div>
+
+                                <div id="registerForm" class = "collapse" >
+                                    <form action="" id = "formregister" method="post">
+                                        <label for="usuariorg"><b>Username</b></label>
+                                        <input id = "usuariorg" type="text" placeholder="Enter Username" name="usuariorg" required>
+
+                                        <label for="emailrg"><b>Email</b></label>
+                                        <input id = "emailrg" type="text" placeholder="Your Email" name="emailrg" required>
+
+                                        <label for="passrg"><b>Password</b></label>
+                                        <input id = "passrg" type="password" placeholder="Enter Password" name="passrg" required>
+                                            
+                                        <label for="passrg1"><b>Confirm Password</b></label>
+                                        <input id = "passrg1" type="password" placeholder="Enter Password" name="passrg1" required>
+
+                                        <div class="badge badge-warning" style="display: none; white-space: normal !important;"  id="signup_message"></div>
+
+                                        <button type="submit" id="register">Register</button>   
+                                    </form>                                     
+                                </div>
                                 <!-- 
                                 <label>
                                     <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -160,7 +185,7 @@
                                 <span class="psw">Forgot <a href="#">password?</a></span>
                             </div>
                             -->
-                        </form>                     
+                        </div>                   
                     </div>
                     <div class="col-lg-4 sm-12">
                         
@@ -176,9 +201,37 @@
 
 <script>
     $(document).ready(function(){
+
+        $('#usuariolg').focus();
+
         $('#login').click(function(){
             event.preventDefault();
             validar_login();
+        });
+
+        $('#register').click(function(){
+            event.preventDefault();
+            sign_up();
+        });
+
+        $("#loginForm").on('show.bs.collapse', function(){
+            if ($("#registerForm").hasClass('collapse show')) {
+                $("#registerForm").collapse('hide')
+            }
+        });
+
+        $("#loginForm").on('shown.bs.collapse', function(){
+            $('#login').focus();
+        });
+
+        $("#registerForm").on('show.bs.collapse', function(){
+            if ($("#loginForm").hasClass('collapse show') || $("#loginForm").hasClass('show') ) {
+                $("#loginForm").collapse('hide')
+            }
+        });
+
+        $("#registerForm").on('shown.bs.collapse', function(){
+            $('#usuariorg').focus();
         });
 
         function validar_login(){
@@ -212,6 +265,69 @@
                     }
                 }) ;
             };
+        };
+
+        function sign_up(){
+            var user = $('#usuariorg').val();
+            user = $.trim(user);
+            var email = $('#emailrg').val();
+            email = $.trim(email);
+            var pass = $('#passrg').val();
+            pass = $.trim(pass);
+            var pass1 = $('#passrg1').val();
+            pass1 = $.trim(pass1);
+            if (pass != pass1){
+                $('#signup_message').show();
+                $('#signup_message').focus();
+                $('#signup_message').text('Passwords do not match.');
+                setTimeout(() => { 
+                    $('#signup_message').hide();
+                },2000);
+            } else {
+                $('#register').text('Please Wait...');
+                $.ajax({
+                    url: 'API/signup.php',
+                    type: 'POST',
+                    data: {
+                        usn:user,
+                        email:email,
+                        password:pass,
+                        password1:pass1},
+                    cache: 'false',
+                    beforesend:function(){
+                        $('#register').text('Please Wait...');
+                    },
+                    success:function(data){                    
+                        $validacion =  JSON.parse(data)
+                        if($validacion['success'] == 'true'){
+                            $('#signup_message').show();
+                            $('#signup_message').focus();
+                            $('#signup_message').text($validacion['message']);
+                            setTimeout(() => { 
+                                $('#signup_message').hide();
+                                $('#register').text('Register');
+                            },3000);
+                        } else {
+                            $('#signup_message').show();
+                            $('#signup_message').focus();
+                            $('#signup_message').text($validacion['message']);
+                            setTimeout(() => { 
+                                $('#signup_message').hide();
+                                $('#register').text('Register');
+                            },3000);
+                        }
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        $('#signup_message').show();
+                            $('#signup_message').focus();
+                            $('#signup_message').text('Error:' + errorThrown);
+                            setTimeout(() => { 
+                                $('#signup_message').hide();
+                                $('#register').text('Register');
+                            },3000);
+                    }
+                }) ;
+            }
         };
     });
 

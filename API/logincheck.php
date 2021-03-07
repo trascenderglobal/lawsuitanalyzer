@@ -16,18 +16,24 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
         $user = $mysqli->real_escape_string($_POST['user']);
         $pass = $mysqli->real_escape_string($_POST['pass']);
         
-        if($PreResultado = $mysqli->prepare("SELECT * FROM users where user_login = ? and user_pass = ?")){
-            $PreResultado->bind_param('ss', $user, $pass);
+        if($PreResultado = $mysqli->prepare("SELECT * FROM users where user_login = ? and user_status = ?")){
+            $status = 'ACTIVE';
+            $PreResultado->bind_param('ss', $user, $status);
             $PreResultado->execute();
             $resultado = $PreResultado->get_result();
             $num_rows = mysqli_num_rows($resultado);
-            if ($num_rows  == 1){
+            if ($num_rows  >= 1){
                 $data = $resultado->fetch_assoc();
-                $_SESSION['user_id'] = $data['id'];
-                $_SESSION['user'] = $data['user_nicename'];
-                $_SESSION['user_status'] = $data['user_status'];
-                $_SESSION['user_rol'] = $data['user_rol'];
-                echo 'true';
+                while ($data) {
+                    # code...
+                    if ( password_verify($pass,$data['user_pass'])){
+                        $_SESSION['user_id'] = $data['id'];
+                        $_SESSION['user'] = $data['user_nicename'];
+                        $_SESSION['user_status'] = $data['user_status'];
+                        $_SESSION['user_rol'] = $data['user_rol'];
+                        die ('true');
+                    }
+                }
             }else {
                 echo 'Invalid user or password';
             };
