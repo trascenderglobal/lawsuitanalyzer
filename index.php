@@ -3156,6 +3156,7 @@
         var emailUser = get_session('email');
         var uslr =  get_session('user_lr');
         var usid = get_session('user_id');
+        if (uslr == ''){uslr = localStorage.getItem('user_lr') }
         var valResult = ''
         if (status == 'processing' ){
             console.log('Status OK')

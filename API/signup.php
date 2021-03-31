@@ -34,7 +34,8 @@
                         <p>Here is your login details : </p>
                         <hr style="color:grey; text-align: center;">
     
-                        <span  style="color:#C0392B;">Username:</span> '.$usn.' <br>
+                        <span  style="color:#C0392B;">Name:</span> '.$usn.' <br>
+                        <span  style="color:#C0392B;">Email:</span> '.$email.' <br>
                         <span  style="color:#C0392B;">Password:</span> Your Nominated Password <br>
     
                         <hr style="color:grey; text-align: center;"><br>

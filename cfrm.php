@@ -9,7 +9,7 @@
 		$email = $mysqli->real_escape_string($_GET['email']);
         if($PreResultado = $mysqli->prepare("SELECT * FROM users where user_login = ? and user_email = ? and user_confirmation = ?")){
             //$status = 'NEW';
-            $PreResultado->bind_param('sss', $usn,$email,$passkey);
+            $PreResultado->bind_param('sss', $email,$email,$passkey);
             $PreResultado->execute();
             $resultado = $PreResultado->get_result();
             $num_rows = mysqli_num_rows($resultado);
