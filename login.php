@@ -144,8 +144,8 @@
                                 <p style="text-align: right;" ><a data-toggle="collapse" href="#loginForm">Login</a>  / <a data-toggle="collapse" href="#registerForm">Register</a> </p>                                                                       
                                 <div id="loginForm" class = "collapse show">
                                     <form action="" id = "formlogin" method="post">
-                                        <label for="usuariolg"><b>Username</b></label>
-                                        <input id = "usuariolg" type="text" placeholder="Enter Username" name="usuariolg" required>
+                                        <label for="usuariolg"><b>Email</b></label>
+                                        <input id = "usuariolg" type="text" placeholder="Enter Email" name="usuariolg" required>
 
                                         <label for="passlg"><b>Password</b></label>
                                         <input id = "passlg" type="password" placeholder="Enter Password" name="passlg" required>
@@ -156,8 +156,8 @@
 
                                 <div id="registerForm" class = "collapse" >
                                     <form action="" id = "formregister" method="post">
-                                        <label for="usuariorg"><b>Username</b></label>
-                                        <input id = "usuariorg" type="text" placeholder="Enter Username" name="usuariorg" required>
+                                        <label for="usuariorg"><b>Name</b></label>
+                                        <input id = "usuariorg" type="text" placeholder="Enter your name" name="usuariorg" required>
 
                                         <label for="emailrg"><b>Email</b></label>
                                         <input id = "emailrg" type="text" placeholder="Your Email" name="emailrg" required>

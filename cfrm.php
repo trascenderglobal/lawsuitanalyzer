@@ -22,12 +22,12 @@
                 $PreResultado->execute();
                 $resultado = $PreResultado->get_result();
                 if ($num_rows > 0) {
-                    $_SESSION['msg1']="<div style=\"color:green\">Your account <b>has been activated</b> successfully. You can login <a href = '/analyzer/login.php'>here</a></div><br><br>";                    
+                    $_SESSION['msg1']="<div style=\"color:green\">Your account <b>has been activated</b> successfully. You can login <a href = 'https://lawsuitanalysis.com/analyzer/login.php'>here</a></div><br><br>";                    
                 } else {
                     $_SESSION['msg1']="<div style=\"color:red\"><b>Error activating account. Please contact support.</b></div><br><br>";                    
                 }
             } else {
-                $_SESSION['msg1']="<div style=\"color:black\">Your account <b>has already been activated.</b> You can login <a href = '/analyzer/login.php'>here</a></div><br><br>";                    
+                $_SESSION['msg1']="<div style=\"color:black\">Your account <b>has already been activated.</b> You can login <a href = 'https://lawsuitanalysis.com/analyzer/login.php'>here</a></div><br><br>";                    
             };
         } else {
             $_SESSION['msg1']= "error";

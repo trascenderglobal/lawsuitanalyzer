@@ -13,7 +13,7 @@
             $bit=0;
             $confirmation=md5(uniqid(rand()));
             $subject="Your confirmation link from Lawsuit Analyzer";
-            $header= array("From: Lawsuit Analyzer ","Content-type: text/html");
+            $header= array("From: affiliates@lawsuitanalysis.com","Content-type: text/html");
             $message='
             
                 <html>
@@ -24,35 +24,24 @@
                 <body>
     
                 <div  style=" border:1px solid grey; padding:20px;">
-                        <div style="font-size: 35px; margin: 30px;color:#C0392B;">
-                            <strong>Hello, Welcome !</strong> 
+                        <div style="font-size: 28px; margin: 30px;color:#C0392B; text-align: center;">
+                            <strong>Hello, Welcome to Lawsuit Analyzer<sup>©</sup>!</strong> 
                         </div>
                         <p> Dear User,<br><br>
-                                We really appreciate you signing up to LawSuit Analyzer.
-                        </p><br>
-    
-                        <div id="instructions">
-                                <div class="category">
-                                        <div class="category-heading" style="font-weight: 500; font-size: 16px;"> Resources </div>
-                                        <ul class="category-instructions">
-                                                <li> <a href = "https://lawsuitanalysis.com/analyzer-intro/" >How it Works </a>: an in-depth Explanation.</li>
-                                                <li> <a href = "https://lawsuitanalysis.com/analyzer-intro/" > Instructions.</a> </li>
-                                                <li> <a href = "https://lawsuitanalysis.com/product/lawsuit_analyzer/">Buy.</a> </li>
-                                        </ul>
-                                </div>
-                        </div>
+                                We really appreciate you signing up to LawSuit Analyzer<sup>©</sup>.
+                        </p>
                         <br>
                         <p>Here is your login details : </p>
-                        <hr style="  width:80%; color:grey; text-align: center;">
+                        <hr style="color:grey; text-align: center;">
     
                         <span  style="color:#C0392B;">Username:</span> '.$usn.' <br>
                         <span  style="color:#C0392B;">Password:</span> Your Nominated Password <br>
     
-                        <hr style="width:80%; color:grey; text-align: center;"><br>
+                        <hr style="color:grey; text-align: center;"><br>
                         <div style="width:100%;background-color:#C0392B;line-height:40px;margin:0px auto;border-radius: .25rem;" >
-                            <a href="http://localhost/analyzer/cfrm.php?usn='.$usn.'&passkey='.$confirmation.'&email='.$email.'" style="color:white;text-align:center;text-decoration:none;display:block;"> Activate My Account </a>
+                            <a href="https://lawsuitanalysis.com/analyzer/cfrm.php?usn='.$usn.'&passkey='.$confirmation.'&email='.$email.'" style="color:white;text-align:center;text-decoration:none;display:block;"> Activate My Account </a>
                         </div>       
-                        <br><br><br>
+                        <br><br>
                         <div>
                             Self-help services may not be permitted in all states. The information provided on this site is not legal advice, does not constitute a lawyer referral service, and no attorney-client or confidential relationship is or will be formed by use of the site. The attorney listings on this site are paid attorney advertising. In some states, the information on this website may be considered a lawyer referral service. Please reference the Terms of Use and the Supplemental Terms for specific information related to your state. Your use of this website constitutes acceptance of the Terms of Use, Disclaimer, Supplemental Terms, Privacy Policy and Cookie Policy.
                         </div>
@@ -83,13 +72,13 @@
                         $rol = 'CLIENT';
                         $PreResultado = $mysqli->prepare("INSERT INTO users (user_login,user_pass,user_nicename,user_email,user_status,user_confirmation,user_rol) 
                                                             VALUES (?,?,?,?,?,?,?)");
-                        $PreResultado->bind_param('sssssss', $usn,$password,$usn,$email,$status,$confirmation,$rol);
+                        $PreResultado->bind_param('sssssss', $email,$password,$usn,$email,$status,$confirmation,$rol);
                         $PreResultado->execute();
                         $num_rows = $mysqli->affected_rows;
                         if ($num_rows > 0) {
                             $to=$email;
                             $sentmail = mail($to,$subject,$message,implode("\r\n",$header)) 
-                                or die(json_encode(array("success" => false, "message" => 'Error sending email. "http://localhost/analyzer/confirm.php?usn='.$usn.'&passkey='.$confirmation.'&email='.$email.'"')));
+                                or die(json_encode(array("success" => false, "message" => 'Error sending email. "https://lawsuitanalysis.com/analyzer/cfrm.php?usn='.$usn.'&passkey='.$confirmation.'&email='.$email.'"')));
                             $_SESSION['msg2']="<div style=\"color:green\"><b>A confirmation link has been sent to $to.<br>Please click on it to activate your account.</b></div><br>";    
                             echo json_encode(array("success" => true, "message" => "A confirmation link has been sent to $to. Please click on it to activate your account."));
                         

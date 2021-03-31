@@ -134,6 +134,9 @@
         h1,h3 { color: #9E2D2D ; }
         label,h4 { color: #345B99;}
         strong {color: #8fc2d1;}
+        .helpimg {
+            cursor: help;
+        }
 
         @media (max-width: 576px) {
             html { font-size: 1rem; }
@@ -160,7 +163,7 @@
             }
             .form-check-label {
                 font-size: 0.8rem;
-            }            
+            }       
         }
         @media (min-width: 1200px) {
             html { font-size: 1.25rem; }
@@ -192,8 +195,7 @@
             </div>
             <div class="row" style="margin: 0px;">
                 <div class="col">
-                    <h1 style="text-align: center;">Lawsuit Analyzer</h1>
-                    <h4 style="text-align: center;"> Receive a professional legal analysis of your dispute</h4>              
+                    <h1 style="text-align: center;">Lawsuit Analyzer<sup>©</sup> </h1>
                 </div>
             </div>
 
@@ -213,6 +215,18 @@
                     });
             </script>
             <div class="container-fluid">
+                <div id = "btnPaymentInstructions" class = "row" style="display: none;">
+                    <div class="col" style="text-align: center;">
+                        <p style="margin-bottom: 0px !important;"> Please complete the purchase process with the same email registered on Analyzer. See payment instructions <a data-toggle="modal" data-target="#payment_modal" href="#">here</a>.</p>
+                        <p style="margin-bottom: 0px !important;"> Have you already paid an Analyzer. Validate your purchase <a data-toggle="modal" data-target="#validate_purchase" href="#">here</a>.</p>
+                    </div>
+                    <div id ="PaymentProcess">
+
+                    </div>
+                    <div class="col" style="text-align: center;">
+                        <p>Copyright© 2021 Lawsuit Analysis All rights reserved.</p>
+                    </div>
+                </div>
                 <div id="wizard">
                     <div class="row">
                         <button id="StepCollapse" class="btn btn-info w-100" type="button" style="background-color: #9E2D2D;border-color: none; ">
@@ -229,21 +243,34 @@
                                     <div class="row" style="align-items: flex-end;">
                                         <h2>PHASE 1. Legal Evaluation</h2>
                                         <div class="col-lg-10 sm-6"> 
-                                            <h3>What is your likelihood of prevailing?</h3>
+                                            <h3>What is your likelihood of winning your case?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a data-toggle="modal" data-target="#help-modal" data-step="Step1">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(1)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>
                                     <div class="row"  > 
                                         <div class="col" style="text-align: center;" >
                                             <form id="Step1" >
                                                 <!-- One "tab" for each step in the form: -->
+                                                <div id="Pre-Q1" class = "tab" >
+                                                    <p style="color: #345B99" >Click on the Help Button for important information that will help you answer these questions </p>
+                                                    <div id = "Pre_Q1_Check" class="form-group" >
+                                                        <div class="form-check form-check-inline" style="text-align: justify !important;">
+                                                            <input id = "check_terms" name="check_terms" class="form-check-input" type="checkbox" value="true" style="width: 20%;">
+                                                            <label class="form-check-label" for="check_terms" >
+                                                                Check here to indicate that you have read and agree to the <a href="#"><strong>terms of use</strong></a> this Analyzer.
+                                                            </label>
+                                                        </div>
+                                                    </div>                                                
+                                                </div>
+
                                                 <div id="Q1" class="tab">
                                                     <div class="form-group">
-                                                        <label for="textarea-1-1" class="form-control-label">1. What obligations did your adversary owe you?
+                                                        <label for="textarea-1-1" class="form-control-label">What obligations did your adversary owe you?
                                                             
                                                         </label>
                                                         <small id="HelpBlock-1-1" class="form-text">
@@ -254,7 +281,7 @@
                                                 </div>
                                                 <div id="Q2" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-1-2">2. Did your adversary perform these obligations in a satisfactory manner?
+                                                        <label for="select-1-2">Did your adversary perform these obligations in a satisfactory manner?
                                                             <sup class="text-danger"></sup>
                                                         </label>
                                                         <select id="select-1-2" class="form-control" name="">
@@ -266,7 +293,7 @@
                                                 </div>
                                                 <div id="Q3" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-1-3">3. Have you sustained legally recognized damages as a direct result of your adversary's conduct?
+                                                        <label for="select-1-3">Have you sustained legally recognized damages as a direct result of your adversary's conduct?
                                                             
                                                         </label>
                                                         <select id="select-1-3" class="form-control" name="">
@@ -278,7 +305,7 @@
                                                 </div>
                                                 <div id="Q4" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-1-4">4. Did you have a prior obligation to your adversary?
+                                                        <label for="select-1-4">Did you have a prior obligation to your adversary?
                                                             
                                                         </label>
                                                         <select id="select-1-4" class="form-control" name="">
@@ -296,7 +323,7 @@
                                                 </div>
                                                 <div id="Q5" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-1-5">5. Did you perform your obligation in a satisfactory manner?
+                                                        <label for="select-1-5">Did you perform your obligation in a satisfactory manner?
                                                             
                                                         </label>
                                                         <select id="select-1-5" class="form-control" name="">
@@ -308,7 +335,11 @@
                                                 </div>
                                                 
                                                 <div id="ResultStep1" class = "results" style="display: none; margin:10% 0% 10% 0%;" >
-                                                    <h4 id="ResultStep1Text1"></h6>    
+                                                    <h4 id="ResultStep1Text1"></h4>
+                                                    <br>
+                                                    <h3 id="ResultStep1Text2"></h3>
+                                                    <br>
+                                                    <p id="ResultStep1Text3"></p>  
                                                 </div>
                                                 
                                                 <div class="d-flex flex-row justify-content-end">
@@ -349,26 +380,30 @@
                                             <h3>How much are you likely to recover?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(2)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>                                 
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step2">
+                                                <div id = "Pre-Q7" class = "tab" >
+                                                    <p style="color: #345B99" >Click on the Help Button for important information that will help you answer these questions </p>
+                                                </div>
                                                 <div id ="Q7" class="tab">
                                                     <div class="form-group">
-                                                        <label for="input-2-7">7. What is the amount of your damages?</label>
+                                                        <label for="input-2-7">What is the amount of your damages?</label>
                                                         <input id="input-2-7" class="form-control" type="text" name="" placeholder="Enter $ amount">
                                                         <small id="HelpBlock-2-7-1" class="form-text text-muted">
                                                         Remember to access <strong>Help</strong> to guide you to your answer.
                                                         </small>
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                                 <div id ="Q8" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-2-8">8. Were you a cause of the situation that caused your damages?
+                                                        <label for="select-2-8">Were you a cause of the situation that caused your damages?
                                                             
                                                         </label>
                                                         <select id="select-2-8" class="form-control" name="">
@@ -386,7 +421,7 @@
                                                 </div>
                                                 <div id ="Q9" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-2-9">9. Did you receive a substantial benefit from the situation?
+                                                        <label for="select-2-9">Did you receive a substantial benefit from the situation?
                                                             
                                                         </label>
                                                         <select id="select-2-9" class="form-control" name="">
@@ -410,7 +445,7 @@
                                                 </div>
                                                 <div id ="Q10" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-2-10">10. Is there a damage defining provision in a written agreement that pertains to this dispute?
+                                                        <label for="select-2-10">Is there a damage defining provision in a written agreement that pertains to this dispute?
                                                             
                                                         </label>
                                                         <select id="select-2-10" class="form-control" name="">
@@ -437,7 +472,7 @@
                                                 </div>
                                                 <div id ="Q11" class="tab">
                                                     <div class="form-group">
-                                                        <label id="label-2-11" for="input-2-11">11. This is the amount of your Recoverable Damages.
+                                                        <label id="label-2-11" for="input-2-11">How much are you likely to recover?
                                                         </label>
                                                         <small class="form-text" style="margin-bottom: 4%;" >
                                                             After deduction for contributing to your damages and any substantial benefit you received, and factoring in your damage defining provision, if applicable
@@ -447,7 +482,7 @@
                                                 </div>
                                                 <div id ="Q12" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-2-12">12. Will you be represented by an attorney?
+                                                        <label for="select-2-12">Will you be represented by an attorney?
                                                             
                                                         </label>
                                                         <select id="select-2-12" class="form-control" name="">
@@ -459,7 +494,7 @@
                                                 </div>
                                                 <div id ="Q13" class="tab">
                                                     <div id="attorney_yes" class="form-group" style="text-align: justify;">
-                                                        <label>13. Select ONE of the following options:</label>
+                                                        <label>Select ONE of the following options:</label>
                                                         <div class="form-check form-check-inline">
                                                             <input id="radio-2-13-1" class="form-check-input" type="radio" name="attorney" value="value-1" style="width: auto;">
                                                             <label for="radio-2-13-1" class="form-check-label" style="text-align: justify;">Does the agreement signed by you and your adversary contain both an attorneys’ fee and binding arbitration provision?</label>
@@ -482,14 +517,14 @@
                                                         </div>
                                                     </div>
                                                     <div id="attorney_no" class="form-group">
-                                                        <label id="label-2-13" for="input-2-13">13. Because you will not be represented by an Attorney, we have deducted 20% as a margin of error from your Recoverable Damages.
+                                                        <label id="label-2-13" for="input-2-13">Because you will not be represented by an Attorney, we have deducted 20% as a margin of error from your Recoverable Damages.
                                                         </label>
                                                         <input id="input-2-13" class="form-control" type= "text"  value="0"  disabled></input>
                                                     </div>
                                                 </div>
                                                 <div id ="Q14" class="tab">
                                                     <div class="form-group">
-                                                        <label id="label-2-14" for="select-2-14">14. Will you invest substantial time into your case?
+                                                        <label id="label-2-14" for="select-2-14">Will you invest substantial time into your case?
                                                             
                                                         </label>
                                                         <select id="select-2-14" class="form-control" name="">
@@ -515,10 +550,12 @@
                                                     <h5 id="ResultStep2Text1"></h5>
                                                     <br>
                                                     <h5 id="ResultStep2Text2"></h5>
-                                                    <p>the amount of your claim [after apportionment of fault, whether you received a substantial benefit, and if there is a damage defining provision].</p>
+                                                    <p>the amount of your claim after apportionment of fault, whether you received a substantial benefit, and if there is a damage defining provision.</p>
                                                     <br>
                                                     <h5 id="ResultStep2Text3"></h5>
                                                     <p>the amount you are likely to net depending on whether you hire an attorney and have a right to attorneys fee reimbursement, whether you will go to arbitration, if you will invest substantial time of your own.</p>
+                                                    <br>
+                                                    <p>This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.</p>
                                                 </div>
 
                                                 <div class="d-flex flex-row justify-content-end">
@@ -556,14 +593,18 @@
                                             <h3>What are your legal options?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(3)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step3">
+                                                <div id="Prev-Step3" class = "tab" >
+                                                    <p style="color: #345B99" >Click on the Help Button for important information that will help you answer these questions </p>
+                                                </div>                                                
                                                 <div id="Q16-Prev" class="tab">
                                                     <div class="form-group">
                                                         <label id="label-3-16" for="select-3-16">Select your state to look up your Small Claims Limit
@@ -596,7 +637,7 @@
                                                     <div id="AboveLimit"  >
                                                         <div class="col-lg-12 col-md-12">
                                                             <div class="form-group">
-                                                                <label for="select-3-16-2">16. Are you willing to reduce your claim to fit the Small Claims Limit?</label>
+                                                                <label for="select-3-16-2">Are you willing to reduce your claim to fit the Small Claims Limit?</label>
                                                                 </label>
                                                                 <select id="select-3-16-2" class="form-control" name="">
                                                                     <option value="" >Please choose an option</option>
@@ -608,7 +649,7 @@
                                                     </div>
                                                     <div id="BellowLimit"  >
                                                         <div class="form-group">
-                                                            <label for="select-3-16-3">16sc. Do you have a binding arbitration provision in a written agreement with your adversary?</label>
+                                                            <label for="select-3-16-3">Do you have a binding arbitration provision in a written agreement with your adversary?</label>
                                                             </label>
                                                             <select id="select-3-16-3" class="form-control" name="">
                                                                 <option value="" >Please choose an option</option>
@@ -629,7 +670,7 @@
                                                 </div>  
                                                 <div id="Q17" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-3-17">17. Do you have a written agreement signed by your adversary that contains an attorneys’ fee provision?
+                                                        <label for="select-3-17">Do you have a written agreement signed by your adversary that contains an attorneys’ fee provision?
                                                         </label>
                                                         <select id="select-3-17" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -640,7 +681,7 @@
                                                 </div>
                                                 <div id="Q18" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-3-18">18. Do you have an agreement signed by you and your adversary that requires binding arbitration?
+                                                        <label for="select-3-18">Do you have an agreement signed by you and your adversary that requires binding arbitration?
                                                         </label>
                                                         <select id="select-3-18" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -651,7 +692,7 @@
                                                 </div>
                                                 <div id="Q19" class="tab">
                                                     <div class="form-group">
-                                                        <label for="select-3-19">19. Do you have an agreement signed by you and your adversary that requires mediation?
+                                                        <label for="select-3-19">Do you have an agreement signed by you and your adversary that requires mediation?
                                                         </label>
                                                         <select id="select-3-19" class="form-control" name="">
                                                             <option value="" >Please choose an option</option>
@@ -662,9 +703,10 @@
                                                 </div>
                                                 
                                                 <div id="ResultStep3" class = "results" style="display: none; margin:5% 0% 10% 0%;">
-                                                    <h4 id="ResultStep3Text1"></h6> 
-                                                    <h4 id="ResultStep3Text2"></h6>
-                                                    <h4 id="ResultStep3Text3"></h6>                                            
+                                                    <h4 id="ResultStep3Text1"></h4> 
+                                                    <h4 id="ResultStep3Text2"></h4>
+                                                    <br>
+                                                    <p id="ResultStep3Text3"></p>                                            
                                                 </div>
 
                                                 <div class="d-flex flex-row justify-content-end">
@@ -702,14 +744,18 @@
                                             <h3>What are your chances of collecting on your judgment?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(4)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
                                             <form id="Step4">
+                                                <div id="Prev-Q21" class = "tab" >
+                                                    <p style="color: #345B99" >Click on the Help Button for important information that will help you answer these questions. </p>
+                                                </div> 
                                                 <div id="Q21" class = "tab">                                        
                                                     <div id = 'adversary_check' class="form-group" style="text-align: justify;">
                                                         <label>21. Select the first option that relates to your adversary:</label>
@@ -760,11 +806,11 @@
 
                                                     </div>   
                                                 </div>
-
                                                 <div id="ResultStep4" class = "results" style="display: none; margin:5% 0% 10% 0%;">
-                                                    <h4 id="ResultStep4Text1"></h6> 
-                                                    <h4 id="ResultStep4Text2"></h6>
-                                                    <h4 id="ResultStep4Text3"></h6>                                            
+                                                    <h4 id="ResultStep4Text1"></h4> 
+                                                    <h4 id="ResultStep4Text2"></h4>
+                                                    <br>
+                                                    <p id="ResultStep4Text3"></p>                                            
                                                 </div>                                              
 
                                                 <div class="d-flex flex-row justify-content-end">
@@ -801,9 +847,10 @@
                                         <div class="col-lg-10 sm-6"> 
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(5)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -829,7 +876,7 @@
                                                                 </tr>
                                                                 -->
                                                                 <tr>
-                                                                    <td>Phase 2, Case Value Assessment [Range: 5-50]</td>
+                                                                    <td>Phase 2, Damage Assessment [Range: 5-50]</td>
                                                                     <td id="tbl-row-3"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
@@ -837,12 +884,8 @@
                                                                     <td id="tbl-row-4"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Phase 4, Collectability Assessment [Range 0-150]</td>
+                                                                    <td>Phase 4, Collectability Assessment [Range 20-150]</td>
                                                                     <td id="tbl-row-5"> 0 </td>   
-                                                                </tr>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td id="tbl-row-6">  </td>   
                                                                 </tr>
                                                             </tbody>
                                                             <thead style="color: #345B99;">                         
@@ -852,7 +895,11 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td>Total Damages</td>
+                                                                    <td>Case Feasibility Assessment [Range 20-100%]</td>
+                                                                    <td id="tbl-row-6">  </td>   
+                                                                </tr>                                                            
+                                                                <tr>
+                                                                    <td>Gross Damages</td>
                                                                     <td id="tbl-row-7">0</td>   
                                                                 </tr>
                                                                 <tr>
@@ -860,15 +907,16 @@
                                                                     <td id="tbl-row-8"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td>Suggested Settlement Amount</td>
+                                                                    <td>Net Damages</td>
                                                                     <td id="tbl-row-9"> 0 </td>   
                                                                 </tr>
                                                                 <tr>
-                                                                    <td >Case Feasibility Assessment [Range 0-100%]</td>
-                                                                    <td id="tbl-row-10" scope="row">0</td>
+                                                                    <td >Pre-Litigation Settlement Amount</td>
+                                                                    <td id="tbl-row-10">0</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
+                                                        <p>These results and those in the nest two Phases will be emailed to you when you complete Lawsuit Analyzer©</p>
                                                     </div>
                                                 </div>
                                                                                           
@@ -906,9 +954,7 @@
                                             <h3>How Feasible is your case to pursue?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(6)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                         </div>
                                     </div>
 
@@ -916,12 +962,12 @@
                                         <div class="col" style="text-align: center;">
                                             <form id="Step6">
                                                 <div id="Q33Chart" class="results">
-                                                    <p id="NoteStep6">Note: Always remember to exhaust all settlement possibilities before pursuing your case through legal channels. Remember also, the case value we’re talking about is the one at row 23 of step five's table.</p>
+                                                    <p id="NoteStep6"> <strong>Lawsuit Analzyer</strong><sup>©</sup> has calculated your Case Feasibility based on your answers to be:</p>
                                                     <br>
-                                                    <div id="ResultStep6"> </div>            
+                                                    <div id="ResultStep6"> </div>
+                                                    <br>
+                                                    <p >Click on the Help Button to access what this means to you</p>    
                                                 </div>
-
-                                                <p style = "font-weight: bold;">CONTINUE IF YOU HAVE DECIDED TO MOVE FORWARD WITH YOUR DISPUTE</p>
 
                                                 <div class="d-flex flex-row justify-content-end">
                                                     <div style="width: 120px; background: #5f615f;" > 
@@ -957,9 +1003,10 @@
                                             <h3>Where will you pursue your dispute?</h3>
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
-                                            <a href="https://drive.google.com/open?id=1BHMKEMDuHqm6pxDn23UFILuJ6WDMO8wV" target="_blank">
-                                                <img  class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                            </a>
+                                            <img onclick="callHelpPage(7)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
+                                        </div>
+                                        <div class="col" style="text-align: center;">
+                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -1027,7 +1074,7 @@
             </div>
         </div>
 
-        <div id = "instructions_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div id = "instructions_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -1058,30 +1105,82 @@
                     </div>
                 </div>
             </div>
-        </div>   
-
-        <div id="help-modal" class="modal fade bd-example-modal-lg"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
+        </div>
+        
+        <div id = "payment_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" >
                     <div class="modal-header">
-                        <h1 class="modal-title" id="help_modalTitle">Help</h1>
+                        <h1 class="modal-title" id="payment_modalTitle">Payment</h1>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p id="error" ></p>
+                        <div class="row">
+                            <div class="col" style="text-align: left;">
+                                <p>Please read the following instructions to make friendly this analysis.</p>                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <ul class="fa-ul">
+                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
+                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
+                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
+                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
+                                </ul>   
+                            </div>                        
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
+                    </div>                    
+                </div>
+            </div>
+        </div> 
+
+        <div id="modal_data_clear" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" >
+                <div class="modal-content">
+                    <div class="modal-body" style="text-align: center;">
+                        Data wiped successfully
                     </div>
                 </div>
             </div>
         </div>
 
-
+        <div id="validate_purchase" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" style="padding-bottom: 0;">
+                        <form id = "validatingForm">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="validationEmail">Email</label>
+                                        <input id="validationEmail" class="form-control" type="email" name="validationEmail" placeholder="mail@domain.com" required>                                        
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="validationOrder">Order number</label>
+                                        <input id="validationOrder" class="form-control" type="text" name="validationOrder" placeholder="order number" required>                            
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <p id = "validationMsg" style="text-align: center; display: none;"> Sorry. We could'nt find a valid order related with this email.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id = "btnSuccess" class="btn btn-success" type="button" onclick="document.location.reload(true)" style="display: none;">Get started</button>
+                        <button id = "btnValidation" class="btn btn-info" type="button" onclick="validateOrder()">Validate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </body>
+
+
 
 </html>
 
@@ -1221,9 +1320,11 @@
         $('#select-2-12').change(function () { 
             if ($(this).val() == 'yes'){
                 $('#attorney_no').hide();
+                $('#attorney_yes').css("display","block");
                 $('#attorney_yes').show();
             }else {
                 $('#attorney_yes').hide();
+                $('#attorney_no').css("display","block");
                 $('#attorney_no').show(); 
                 
             };
@@ -1696,27 +1797,18 @@
         localStorage.setItem('user' , get_session('user'))
         get_last_response(get_session('user_id'));
         $('#instructions_modal').modal('show');
+        $.ajax({
+            type: "GET",
+            url: "https://ip-api.com/json/",
+            success: function (response) {
+                localStorage.setItem('ip',response.query);
+            },
+            error(error) {
+                localStorage.setItem('ip','Failed to GET IP. Details: ' + error.statusText);
+            }
+        });
     });
     
-    $('#help-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) 
-        var recipient = button.data('step') 
-        var modal = $(this)
-        Load_Help_Modal(modal,recipient);
-    });
-
-    //Loading modal from Page
-    function Load_Help_Modal(modal,recipient){
-        console.log('Entro a funcion' + modal + recipient)
-        if(recipient == 'Step1' ){
-            modal.find('.modal-body').load('https://lawsuitanalysis.com/Disclaimer/',function(response, status, xhr){
-                if ( status == "error" ) {
-                    var msg = "Sorry but there was an error: ";
-                    $( "#error" ).html( msg + xhr.status + " " + xhr.statusText + " XHR Response: " + response);
-                }
-            });
-        };
-    }
 
     //Script functions to DB
     function get_answers_form(user_lr){
@@ -1744,10 +1836,14 @@
                 data: {user_id: usid},
                 cache: 'false',
                 success: function (response) {
-                    $validacion = response
+                    $validacion = JSON.parse(response);
                     if (response) {
-                        localStorage.setItem('user_lr', $validacion)
-                        get_answers_form($validacion)
+                        var st = 1
+                        if ($validacion['st'] === 'Paid') {st = 10};
+                        if ($validacion['st'] === 'Finished') {st = 100};
+                        localStorage.setItem('user_lr', $validacion['lr'])
+                        localStorage.setItem('st', st)
+                        get_answers_form($validacion['lr'])
                     } else {
                         localStorage.setItem('user_lr', 0)
                     }
@@ -1785,6 +1881,18 @@
             result = "<?php if(isset($_SESSION['user_st'])){ echo $_SESSION['user_st'] ; } ?>";
             if (result !== '') {return  result } 
         }
+        if (key == 'wck'){
+            result = "<?php if(isset($_SESSION['wck'])){ echo $_SESSION['wck'] ; } ?>";
+            if (result !== '') {return  result } 
+        }
+        if (key == 'wcs'){
+            result = "<?php if(isset($_SESSION['wcs'])){ echo $_SESSION['wcs'] ; } ?>";
+            if (result !== '') {return  result } 
+        }
+        if (key == 'email'){
+            result = "<?php if(isset($_SESSION['email'])){ echo $_SESSION['email'] ; } ?>";
+            if (result !== '') {return  result } 
+        }
         return result  
     }
 
@@ -1794,6 +1902,7 @@
         var dataPut = [];
         var posit = 0;
         var uslr = get_session('user_lr');
+        var usid = get_session('user_id');
         if (uslr == ''){uslr = localStorage.getItem('user_lr') }
         if (Step == 'Step1') {posit = 0}
         if (Step == 'Step2') {posit = 1}
@@ -1810,6 +1919,13 @@
                     "answer": DataForm[6]['Values'][index]
                     } 
                 )                
+            } else if (index == 56) {
+                //Special Case... Save agrre to terms
+                dataPut.push({
+                    "form_questions_id": index,
+                    "answer": 'Yes from Ip: ' + localStorage.getItem('ip')
+                    }
+                )
             } else {
                 dataPut.push({
                     "form_questions_id": index,
@@ -1820,7 +1936,7 @@
         };
         $.ajax({
             type: "POST",
-            url: "API/upans.php?act=upt&uslr=" + uslr,
+            url: "API/upans.php?act=upt&uslr=" + uslr + "&usls=" + (posit+1),
             dataType: 'json',
             data: {data: dataPut }  ,
             cache: 'false',
@@ -1851,9 +1967,14 @@
         $('#select-2-9').val(String(obj[10][1]));
         $('#input-2-9-1').val(SeparadorMiles(obj[11][1]));
         //
-        $('#select-2-10').val('');
         $('#select-2-10').val(String(obj[13][1]));
-        $('#select-2-10').trigger('change')
+            if (String(obj[13][1]) == 'yes'){
+                $('#DamageProvision_yes').show();} 
+            else {
+                $('#DamageProvision_yes').hide();
+                $('#select-2-10-1').val('default');
+                $('#input-2-10-2').val(0); 
+            }
         $('#select-2-10-1').val(String(obj[14][1]));
         $('#input-2-10-2').val(SeparadorMiles(parseInt(obj[15][1])));
         $('#input-2-11').val(SeparadorMiles(parseInt(obj[16][1])));
@@ -1861,7 +1982,12 @@
         document.querySelector("[name=attorney][value=" + String(obj[18][1]).substring(0,7) + "]").checked = true;
         $('#input-2-13').val(String(obj[19][1]));
         $('#select-2-14').val(String(obj[20][1]));
-        $('#select-2-14').trigger('change')
+            if (String(obj[20][1]) == 'yes'){
+                $('#moneytime_yes').show();
+            }else {
+                $('#moneytime_yes').hide();
+                $('#input-2-14-1').val(0);
+            };
         $('#input-2-14-1').val(SeparadorMiles(parseInt(obj[21][1])));
         $('#input-2-14-2').val(SeparadorMiles(parseInt(obj[22][1])));
         //Step3
@@ -1961,8 +2087,12 @@
             GetStepsData(); 
             //if (FirstTime){ firstTimeStep();};
             StepResultText1 = DataForm[0]['Values'][7];
-            StepResultText2 = '';
-            StepResultText3 = '';
+            var StepResultText2_Details = '0 points out of 350'
+            if (StepResultText1.includes("Feasible")) {
+                StepResultText2_Details = '350 points out of 350'
+            }
+            StepResultText2 = 'For your Legal Evaluation you have received ' + StepResultText2_Details;
+            StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis Phase 5';
         };
         if ( Step == 'Step2') {
             GetStepsData();
@@ -1974,43 +2104,43 @@
             if (!isNaN(DataForm[1]['Values'][24])) {
                 var Result3 = DataForm[1]['Values'][24]
             }        
-            StepResultText1 = '$ ' + SeparadorMiles(Result1) + ' is your TOTAL DAMAGES.';
+            StepResultText1 = '$ ' + SeparadorMiles(Result1) + ' is your GROSS DAMAGES.';
             StepResultText2 = '$ ' + SeparadorMiles(Result2) + ' is your RECOVERABLE DAMAGES,';
-            StepResultText3 = '$ ' + SeparadorMiles(Result3) + ' is your CASE VALUE ASSESSMENT,';
+            StepResultText3 = '$ ' + SeparadorMiles(Result3) + ' is your NET DAMAGES,';
         };
         if ( Step == 'Step3') {
             GetStepsData();
             //if (FirstTime){ firstTimeStep();};
-            StepResultText1 = DataForm[2]['Values'][37];
-            StepResultText2 = '[Range: 0-190]';
+            StepResultText1 = 'You have received ' + DataForm[2]['Values'][37] + ' points ';
+            StepResultText2 = 'out of 190';
             StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5';
         };
         if ( Step == 'Step4') {
             GetStepsData();
             //if (FirstTime){firstTimeStep();};
-            StepResultText1 = DataForm[3]['Values'][40];
-            StepResultText2 = '[Range: 0-150]';
+            StepResultText1 = 'You have received ' + DataForm[3]['Values'][40] + ' points ';
+            StepResultText2 = 'out of 150';
             StepResultText3 = 'This result is part of an algorithm that will be factored into your Comprehensive Case Analysis in Phase 5.';
         };
         if ( Step == 'Step5') {
             GetStepsData();
             //LoadTable Step5
             $('#tbl-row-1').text(DataForm[4]['Values'][41]);
-            $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
+            $('#tbl-row-2').text('');
             $('#tbl-row-3').text(DataForm[4]['Values'][43]);
             $('#tbl-row-4').text(DataForm[4]['Values'][44]);
             $('#tbl-row-5').text(DataForm[4]['Values'][45]);
-            $('#tbl-row-6').text(''); //Blank Space
+            var num = DataForm[4]['Values'][50]
+            $('#tbl-row-6').text((Math.round((num + Number.EPSILON) * 100)) + ' %' ); //Blank Space
             $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
             $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
-            $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
-            var num = DataForm[4]['Values'][50]
-            $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+            $('#tbl-row-9').text('$' + SeparadorMiles(DataForm[4]['Values'][42]) );
+            $('#tbl-row-10').text( '$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );         
         };
         if ( Step == 'Step6') {
             GetStepsData();
             //Refresh Results
-            $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
+            $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + ' out of 100%')
             $('#ResultStep7_1').text( DataForm[6]['Values'][57] );
             $('#ResultStep7_2').text( DataForm[6]['Values'][53] );
 
@@ -2042,7 +2172,7 @@
                 ($('#select-1-2').val() == 'no' && $('#select-1-3').val() == 'yes' && $('#select-1-4').val() == 'yes' && $('#select-1-5').val() == 'no' ) ){
                 Value_6 = 'Your Case is Weak';
             }else {
-                Value_6 = 'Your Case is Feasible!';
+                Value_6 = 'Your Case is Feasible';
             };
         //** Step 1 End */
 
@@ -2400,6 +2530,47 @@
 
     ///*****SCRIPTS TO GET SEPARATE QUESTIONS */
 
+    function resetTest() {
+
+        get_last_response(get_session('user_id'))
+
+        var dataPut = [];
+        var posit = 0;
+        var uslr = get_session('user_lr');
+        var usid = get_session('user_id');
+        if (uslr == ''){uslr = localStorage.getItem('user_lr') }
+        
+        for (let index = 1; index <= 57; index++) {
+            if (index == 56) {
+                //Special Case... Save agrre to terms
+                dataPut.push({
+                    "form_questions_id": index,
+                    "answer": 'Yes from Ip: ' + localStorage.getItem('ip')
+                    }
+                )
+            } else {
+                dataPut.push({
+                    "form_questions_id": index,
+                    "answer": ''
+                    } 
+                )
+            }
+        };        
+
+        $.ajax({
+            type: "POST",
+            url: "API/upans.php?act=res&uslr=" + uslr + "&usls=1",
+            dataType: 'json',
+            data: {data: dataPut }  ,
+            cache: 'false',
+            success: function (response) {
+            }
+        });
+        $('#modal_data_clear').modal('show');
+        $('#modal_data_clear').modal('focus');
+
+    }
+
     function showTab(n,step) {
         //console.log('Show: ' + n + ' From: ' + step)
         // This function will display the specified tab of the form...
@@ -2443,6 +2614,8 @@
             if (step == 'Step5'){$('#prevBtn5').show()};
             if (step == 'Step6'){$('#prevBtn6').show()};
         }
+
+
         /*
         if (n == (x.length - 1)) {
             document.getElementById("nextBtn").innerHTML = "Evaluate";
@@ -2549,10 +2722,12 @@
                     x[currentTab].style.display = "none"
                     if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
                         $('#attorney_yes').show();
+                        $('#attorney_yes').css("display","block");
                         $('#attorney_no').hide();
                     } else {            
                         $('#attorney_yes').hide();
                         $('#attorney_no').show();
+                        $('#attorney_no').css("display","block");
                     }
                     if (x[currentTab].id == 'Q19' && ($('#select-3-16-2').val() == 'yes' || $('#select-3-16-3').val() == 'no')){
                         previousTab = previousTab - 1
@@ -2582,56 +2757,25 @@
                 return
             }
         };
-
-        /*
-        if (n == -1){
-            if (currentTab == 0 && previousTab == 0) {
-                var stp = document.getElementById('Step' + ActiveTab);
-                var x = stp.getElementsByClassName("tab");
-                console.log(x[0].id)
-                console.log($('#' + x[0].id).css("display"))
-                if ( $('#' + x[0].id).css("display") == 'block' ) {
-                    var step = 'Step' + (ActiveTab - 1);
-                    var stp = document.getElementById(step);
-                    var x = stp.getElementsByClassName("tab");
-                    if (ActiveTab <= 4) {
-                        $("#ResultStep" + (ActiveTab -1)).hide();
-                    }
-                    $("#wizard").steps('previous');
-                    showTab(0,step)
-                    return
-                } else {
-                    if (ActiveTab <= 4) {
-                        $("#ResultStep" + ActiveTab).hide();
-                    }
-                    showTab(0,step)
-                    return
-                }
-            }
-            x[currentTab].style.display = "none"
-            if (x[currentTab].id == 'Q14' &&  $('#select-2-12').val() == 'yes'){
-                $('#attorney_yes').show();
-                $('#attorney_no').hide();
-            } else {            
-                $('#attorney_yes').hide();
-                $('#attorney_no').show();
-            }
-            if (previousTab < (currentTab -1) ) {
-                currentTab = previousTab
-            } else {
-                previousTab = currentTab
-                currentTab = currentTab + n;
-            }
-            showTab(currentTab,step)  
-            return true
-        };
-        */
         var IsValid = validateForm(step);
         // Exit the function if any field in the current tab is invalid:
         if (n == 1 && !IsValid) return false;
 
         //Check Especial Cases for Steps
         if (step == 'Step1' && n == 1 && currentTab < x.length ){
+            if ((x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes') || x[currentTab].id == 'Q3'){
+                var PaymentStatus = localStorage.getItem('st');
+                console.log(PaymentStatus);
+                if (PaymentStatus !== "10") {
+                    GetStepsData();
+                    PutAnswData('Step1',DataForm);                    
+                    $('#btnPaymentInstructions').css('display', 'grid');
+                    $('#wizard').detach();
+                    $('#PaymentProcess').css('height', '430px');
+                    var url = "https://lawsuitanalysis.com/product/lawsuit_analyzer/";
+                    $('#PaymentProcess').html('<iframe id = "PaymentsFrame" width="100%" height="100%" frameborder="1" allowtransparency="true" scrolling="yes" src="'+url+'"></iframe>');
+                };
+            }
             if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
                 || (x[currentTab].id == 'Q3' &&  $('#select-1-3').val() == 'no') 
                 || (x[currentTab].id == 'Q4' &&  $('#select-1-4').val() == 'no') ){
@@ -2645,6 +2789,8 @@
             }
         }
         if (step == 'Step2' && n == 1 && currentTab < x.length ){
+
+            
             GetStepsData();
             $('#input-2-11').val(SeparadorMiles(Value_11));     
             if (x[currentTab].id == 'Q10' &&  $('#select-2-10').val() == 'no') {
@@ -2654,12 +2800,14 @@
             }else if (x[currentTab].id == 'Q12' &&  $('#select-2-12').val() == 'yes'){
                 $('#attorney_no').hide();
                 $('#attorney_yes').show();
+                $('#attorney_yes').css("display","block");
                 x[currentTab].style.display = "none";
                 previousTab = currentTab
                 currentTab = currentTab + n; 
             } else {
                 $('#attorney_yes').hide();
                 $('#attorney_no').show();
+                $('#attorney_no').css("display","block");
                 $('#input-2-13').val(SeparadorMiles(Math.round(Value_11 * 0.8)));
                 x[currentTab].style.display = "none";
                 previousTab = currentTab
@@ -2729,6 +2877,9 @@
             if (step == 'Step1') {
                 //StepResults StepView
                 $('#ResultStep1Text1').text(StepResultText1);
+                $('#ResultStep1Text2').text(StepResultText2);
+                $('#ResultStep1Text3').text(StepResultText3);
+                $('#ResultStep1').css("display","block"); //Trick for Help Page
                 $('#ResultStep1').show();
             }
             if (step == 'Step2') {
@@ -2736,6 +2887,7 @@
                 $('#ResultStep2Text1').text(StepResultText1);
                 $('#ResultStep2Text2').text(StepResultText2);
                 $('#ResultStep2Text3').text(StepResultText3);
+                $('#ResultStep2').css("display","block"); //Trick for Help Page
                 $('#ResultStep2').show();
             }
             if (step == 'Step3') {
@@ -2743,6 +2895,7 @@
                 $('#ResultStep3Text1').text(StepResultText1);
                 $('#ResultStep3Text2').text(StepResultText2);
                 $('#ResultStep3Text3').text(StepResultText3);
+                $('#ResultStep3').css("display","block"); //Trick for Help Page
                 $('#ResultStep3').show();
             }
             if (step == 'Step4') {
@@ -2750,28 +2903,32 @@
                 $('#ResultStep4Text1').text(StepResultText1);
                 $('#ResultStep4Text2').text(StepResultText2);
                 $('#ResultStep4Text3').text(StepResultText3);
+                $('#ResultStep4').css("display","block"); //Trick for Help Page
                 $('#ResultStep4').show();
                 //LoadTable Step5
+                $('#ResultStep5').css("display","block"); //Trick for Help Page
                 $('#tbl-row-1').text(DataForm[4]['Values'][41]);
-                $('#tbl-row-2').text('$' + SeparadorMiles(DataForm[4]['Values'][42]));
+                $('#tbl-row-2').text('');
                 $('#tbl-row-3').text(DataForm[4]['Values'][43]);
                 $('#tbl-row-4').text(DataForm[4]['Values'][44]);
                 $('#tbl-row-5').text(DataForm[4]['Values'][45]);
-                $('#tbl-row-6').text(''); //Blank Space
+                var num = DataForm[4]['Values'][50]
+                $('#tbl-row-6').text((Math.round((num + Number.EPSILON) * 100)) + ' %' ); //Blank Space
                 $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
                 $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
-                $('#tbl-row-9').text('$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
-                var num = DataForm[4]['Values'][50]
-                $('#tbl-row-10').text( (Math.round((num + Number.EPSILON) * 100)) + ' %' );         
+                $('#tbl-row-9').text('$' + SeparadorMiles(DataForm[4]['Values'][42]) );
+                $('#tbl-row-10').text( '$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49]))  );         
                 $('#prevBtn4').show();
             }
             if (step == 'Step5') {
-                $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + '</p> <p style="text-align: center;" >' + DataForm[5]['Values'][52] + '</p>')
+                $('#Q33Chart').css("display","block"); //Trick for Help Page
+                $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + ' out of 100%')
                 //RouteCache[stepID].IsCurrent = 0
                 $("#wizard").steps('next');            
             }
             if (step == 'Step6') {
                 //RouteCache[stepID].IsCurrent = 0
+                $('#Q34Last').css("display","block"); //Trick for Help Page
                 $("#wizard").steps('next');
             }
             //previousTab = currentTab
@@ -2837,6 +2994,15 @@
             valid = true
         }
         try {
+            if (step == 'Step1' && x[currentTab].id == 'Pre-Q1'){
+                var selected = $("input[type='checkbox'][name='check_terms']:checked");
+                if (selected.length == 0) {
+                    $('#Pre_Q1_Check').css('background-color', '#ffdddd');;
+                    valid = false;
+                } else {
+                    $('#Pre_Q1_Check').css('background-color', '');;
+                }
+            }
             if (step == 'Step2' && x[currentTab].id == 'Q13' && $('#select-2-12').val() == 'yes'){
                 var selected = $("input[type='radio'][name='attorney']:checked");
                 if (selected.length == 0) {
@@ -2902,6 +3068,212 @@
         }
         */
         return valid; // return the valid status
+    }
+
+    function validateOrder(){
+        var email = $('#validationEmail').val();
+        var email2,email3,status = ''
+        var prdct = 0;
+        var valid = true;
+        var order = $('#validationOrder').val();
+        var wck = get_session('wck');
+        var wcs = get_session('wcs');
+        var valResultTxt = '';
+        
+        if (email.length == 0){
+            $('#validationEmail').css('background-color', '#ffdddd');
+            setTimeout(() => {
+                $('#validationEmail').css('background-color', 'white');
+            }, 1700);
+            valid = false;
+        }
+        if (order.length == 0){
+            $('#validationOrder').css('background-color', '#ffdddd');
+            setTimeout(() => {
+                $('#validationOrder').css('background-color', 'white');
+            }, 1700);
+            valid = false;
+        }
+        if (!valid) {return}
+        $('#btnValidation').text('Validating...');
+        $('#btnValidation').css('background-color', '#FFCC00');
+        $('#btnValidation').css('box-shadow', 'none');
+        $('#btnValidation').css('border-color', '#FFCC00');
+
+        $.ajax({
+            type: "GET",
+            url: "https://lawsuitanalysis.com/wp-json/wc/v3/orders/" + order,
+            timeout: 0,
+            headers: {
+                "Authorization": "Basic " + btoa(wck + ":" + wcs)
+            },
+            success: function (response) {
+                status = response.status
+                orderWC = response.id
+                prdct = response.line_items[0].product_id
+                email2 = response.billing.email
+                if (response.customer_id !== 0){
+                    $.ajax({
+                        type: "GET",
+                        url: "https://lawsuitanalysis.com/wp-json/wc/v3/customers/" + response.customer_id,
+                        timeout: 0,
+                        headers: {
+                            "Authorization": "Basic " + btoa(wck + ":" + wcs)
+                        },                 
+                        success: function (response2) {
+                            email3 = response2.email
+                            valResultTxt = validationMsg(orderWC,prdct,status,email,email2,email3);
+                            localStorage.setItem('msg', valResultTxt)
+                        },
+                        error (error) {
+                            valResultTxt = validationMsg(orderWC,prdct,status,email,email2,email3);
+                            localStorage.setItem('msg', valResultTxt)
+                            console.log('Error retrieving Customer data.');
+                        }
+                    });
+                }
+            },
+            error(error){
+                valResultTxt = validationMsg(orderWC,prdct,status,email,email2,email3);
+                localStorage.setItem('msg', valResultTxt)
+                console.log('Error retrieving Order data.')
+            }
+        });
+
+        setTimeout(() => {
+            $('#btnValidation').text('Validate');
+            $('#btnValidation').css('background-color', '#138496');
+            $('#validationMsg').css('display', 'grid');
+            setTimeout(() => {
+                $('#validationMsg').css('display', 'none');
+            }, 10000);
+        }, 4000);
+
+
+    };
+
+    function validationMsg(order,prdct,status,email,email2,email3) {
+        var emailUser = get_session('email');
+        var uslr =  get_session('user_lr');
+        var usid = get_session('user_id');
+        var valResult = ''
+        if (status == 'processing' ){
+            console.log('Status OK')
+            if (prdct == 6121) {
+                console.log('PRODUCT OK')
+                if (emailUser == email){
+                    console.log('USER ANA OK')
+                    if (email == email2 || email == email3){
+                        console.log('EMAILS OK')
+                        var dataPut = [];
+                        dataPut.push({
+                            "ord": order,
+                            "sts": 'processing'
+                            } 
+                        ) 
+                        $.ajax({
+                            type: "POST",
+                            url: "API/uppay.php?uslr=" + uslr + "&usid="+usid+"&ord="+order,
+                            cache: 'false',
+                            data: {data: dataPut},
+                            success: function (response) {
+                                valResult = "Thank you for being our valued customer. We are so grateful for the pleasure of serving you and hope we met your expectations.";
+                                $('#validationMsg').text(valResult);
+                                $('#validationMsg').css('display', 'grid');
+                                $('#btnValidation').css('display', 'none');
+                                $('#btnSuccess').css('display', 'grid');
+                                return valResult
+                            },
+                            error (err) {
+                                console.log('Error updating customer data.')
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+    function callHelpPage(Phase) {
+        var HelpPage = getActiveQuestion(Phase);
+        var PhaseURL = Phase;
+        var FinalURL = 'https://lawsuitanalysis.com/p' + PhaseURL + "-hp" + HelpPage
+        var win = window.open(FinalURL, '_blank');
+        win.focus();
+    }
+
+    function getActiveQuestion(Phase) {
+        var hp = '0';
+        var step = 'Step' + Phase;
+        var stp = document.getElementById(step);
+        var x = stp.querySelectorAll(".tab,.results");
+        console.log(x)
+        for (let i = 0; i < x.length; i++) {
+            if (x[i].style.display === 'block') {
+                if (x[i].id === 'Pre-Q1'){hp = '0'};
+                if (x[i].id === 'Q1'){hp = '1'};
+                if (x[i].id === 'Q2'){hp = '2'};
+                if (x[i].id === 'Q3'){hp = '3'};
+                if (x[i].id === 'Q4'){hp = '4'};
+                if (x[i].id === 'Q5'){hp = '5'};
+                if (x[i].id === 'ResultStep1'){hp = '5a'};
+                //step2
+                if (x[i].id === 'Pre-Q7'){hp = '6'};
+                if (x[i].id === 'Q7'){hp = '7'};
+                if (x[i].id === 'Q8'){hp = '8'};
+                if (x[i].id === 'Q9'){hp = '9'};
+                if (x[i].id === 'Q10'){hp = '10'};
+                if (x[i].id === 'Q11'){hp = '11'};
+                if (x[i].id === 'Q12'){hp = '12'};
+                if (x[i].id === 'Q13'){
+                    var y = x[i].getElementsByClassName("form-group")
+                    console.log(y)
+                    for (let index = 0; index < y.length; index++) {
+                        if (y[index].style.display === 'block') {
+                            if (y[index].id == 'attorney_yes'){hp = '13a'};
+                            if (y[index].id == 'attorney_no'){hp = '13'};
+                        } 
+                    }
+                };
+                if (x[i].id === 'Q14'){hp = '14'};
+                if (x[i].id === 'ResultStep2'){hp = '14b'};
+                //step3
+                if (x[i].id === 'Prev-Step3'){hp = '14d'};
+                if (x[i].id === 'Q16-Prev'){hp = '15'};
+                if (x[i].id === 'Q16'){hp = '16'};
+                if (x[i].id === 'Q17'){hp = '17'};
+                if (x[i].id === 'Q18'){hp = '18'};
+                if (x[i].id === 'Q19'){hp = '19'};
+                if (x[i].id === 'ResultStep3'){hp = '20'};
+                //Step4
+                if (x[i].id === 'Prev-Q21'){hp = '21'};
+                if (x[i].id === 'Q21'){hp = '21a'};
+                if (x[i].id === 'ResultStep4'){hp = '22'};
+                //Step5
+                if (x[i].id === 'Q23'){hp = '23'};
+                //Step6
+                if (x[i].id === 'Q33Chart'){
+                    if ($('#ResultStep6').text().includes('91% and above')){hp = '24';}
+                    if ($('#ResultStep6').text().includes('81% to 90%')){hp = '24-1';}
+                    if ($('#ResultStep6').text().includes('71% to 80%')){hp = '24-2';}
+                    if ($('#ResultStep6').text().includes('61% to 70%')){hp = '24-3';}
+                    if ($('#ResultStep6').text().includes('51% to 60%')){hp = '24-4';}
+                    if ($('#ResultStep6').text().includes('50% and below')){hp = '24-5';}                
+                };
+                //Step7
+                if (x[i].id === 'Q34Last'){
+                    if ($('#ResultStep7_1').text().includes('Small Claims')){hp = '25';}
+                    if ($('#ResultStep7_1').text().includes('Binding Arbitration')){hp = '25-1';}
+                    if ($('#ResultStep7_1').text().includes('Upper Civil Court')){hp = '25-2';}
+                    if ($('#ResultStep7_1').text().includes('Mediation')){
+                        if($('#ResultStep7_2').text().includes('Small Claims')){hp = '25-3';}
+                        if($('#ResultStep7_2').text().includes('Binding Arbitration')){hp = '25-4';}
+                        if($('#ResultStep7_2').text().includes('Upper Civil Court')){hp = '25-5';}
+                    };
+                };
+            };            
+        };
+        return hp
     }
 
     function SeparadorMiles(valor){

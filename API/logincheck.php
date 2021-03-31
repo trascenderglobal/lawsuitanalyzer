@@ -23,15 +23,19 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             $resultado = $PreResultado->get_result();
             $num_rows = mysqli_num_rows($resultado);
             if ($num_rows  >= 1){
-                $data = $resultado->fetch_assoc();
-                while ($data) {
+                $data = $resultado->fetch_all();
+                for ($i=0; $i < $num_rows; $i++) { 
                     # code...
-                    if ( password_verify($pass,$data['user_pass'])){
-                        $_SESSION['user_id'] = $data['id'];
-                        $_SESSION['user'] = $data['user_nicename'];
-                        $_SESSION['user_status'] = $data['user_status'];
-                        $_SESSION['user_rol'] = $data['user_rol'];
-                        die ('true');
+                    if ( password_verify($pass,$data[$i][2])){
+                        $_SESSION['user_id'] = $data[$i][0];
+                        $_SESSION['user'] = $data[$i][3];
+                        $_SESSION['email'] = $data[$i][4];
+                        $_SESSION['user_status'] = $data[$i][6];
+                        $_SESSION['user_rol'] = $data[$i][8];
+                        $_SESSION['wck'] = 'ck_0b3b4ac24f2fadd6811260e7b04f7841feaee86f';
+                        $_SESSION['wcs'] = 'cs_c1170ee6621d8a5a02087f26f875ed3ecc91c878';
+                        echo ('true');
+                        return;
                     }
                 }
             }else {

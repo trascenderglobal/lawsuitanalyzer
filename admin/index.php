@@ -112,19 +112,14 @@
            <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="../logout.php" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout</span>
-              </a>
-            </li>
+
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="../logout.php" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Logout</span>
+              <a class="nav-link dropdown-toggle" href="../logout.php" id="userDropdown" role="button" >
+                <span class="" style="color: black;">Logout</span>
               </a>
             </li>
 
@@ -139,13 +134,14 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <!-- 
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            -->
           </div>
 
-          <!-- Content Row -->
+          <!-- Content Row KPIS
           <div class="row">
 
-            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -162,7 +158,6 @@
               </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
@@ -179,7 +174,6 @@
               </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
@@ -204,8 +198,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card border-left-warning shadow h-100 py-2">
                 <div class="card-body">
@@ -222,24 +214,76 @@
               </div>
             </div>
           </div>
+          -->
 
-          <!-- Content Row -->
-
-          <div class="row">
+          <!-- Content Row TABLES-->
+          <ul class="nav nav-tabs justify-content-center">
+            <li class="nav-item">
+              <button id="usersMenu" class="nav-link" type="button" onclick="changeTable('TableUsers','usersMenu')">Users</button>
+            </li>
+            <li class="nav-item">
+              <button id="responsesMenu" class="nav-link" type="button" onclick="changeTable('TableResponses','responsesMenu')">Responses</button>
+            </li>
+            <li class="nav-item">
+              <button id="answersMenu" class="nav-link" type="button" onclick="changeTable('TableAnswers','answersMenu')">Answers</button>
+            </li>
+          </ul>
+          <div id="TableUsers" class="row" style="display: none;">
             <div class="col" style="text-align: center; align-items: center;" >
-                <table id = "UsersTable" class="table table-responsive">
+                <table class="table table-responsive">
                     <tr style="color: white; background-color: #9E2D2D; " >
                         <th>Id</th>
                         <th>User name</th>
                         <th>Email</th>
-                        <th>Status</th>
+                        <th>Registered On</th>
                         <th>Rol</th>
-                        <th>Actions</th>
+                        <th>Status</th>
+                        <th>Responses</th>
                     </tr>
-                    <tbody id="myTable"></tbody>
+                    <tbody id="bodyTableUsers"></tbody>
                 </table>       
             </div>
           </div>
+
+          <div id="TableResponses" class="row" style="display: none;">
+            <div class="col" style="text-align: center; align-items: center;" >
+                <table class="table table-responsive">
+                    <tr style="color: white; background-color: #9E2D2D; " >
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Last Step</th>
+                        <th>Start Date</th>
+                        <th>Status</th>
+                        <th>Order Number WC</th>
+                        <th>Order Status WC</th>
+                    </tr>
+                    <tbody id="bodyTableResponses"></tbody>
+                </table>       
+            </div>
+          </div>
+
+          <div id="TableAnswers" class="row" style="display: none;">
+            <div class="input-group"  style="width: 40%; margin-bottom: 2%;" >
+              <input id="ridSearch" type="number" class="form-control rounded" placeholder="Response Id" aria-label="Search"
+                aria-describedby="search-addon" />
+              <button type="button" class="btn btn-outline-primary" onclick="searchAnsw()">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+
+            <div class="col-12" style="text-align: center; align-items: center;" >
+                <table class="table table-responsive">
+                    <tr style="color: white; background-color: #9E2D2D; " >
+                        <th>Response Id</th>
+                        <th>Step</th>
+                        <th>Q Number</th>
+                        <th>Q Title</th>
+                        <th>Answer</th>
+                    </tr>
+                    <tbody id="bodyTableAnswers"></tbody>
+                </table>       
+            </div>
+          </div>          
 
         </div>
         <!-- /.container-fluid -->
@@ -275,25 +319,22 @@
 				</div>
 				<div class="modal-body">					
 					<div class="form-group">
-						<label>User name</label>
-						<input type="text" class="form-control" required>
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input type="email" class="form-control" required>
-					</div>
-					<div class="form-group">
 						<label>Status</label>
 						<input class="form-control" required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Rol</label>
-						<input type="text" class="form-control" required>
-					</div>					
+					</div>				
 				</div>
+
+        <div class="form-group">
+          <label for="statusUser">Status</label>
+          <select id="statusUser" class="form-control" name="statusUser">
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="INACTIVE">INACTIVE</option>
+          </select>
+        </div>
+
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Save">
+					<input type="button" class="btn btn-info" value="Save" >
 				</div>
 			</form>
 		</div>
@@ -345,45 +386,96 @@
 <script>
 
 $(document).ready(function () {
-    var myArray = []
-	$.ajax({
-		method:'GET',
-		url:'../API/rusr.php',
-		success:function(response){
-			buildTable(response)	
-		}
-})
-
-
-
-
-
-function buildTable(data){
-  var table = document.getElementById('myTable')
-
-  for (var i = 0; i < data.length; i++){
-    var row = `<tr>
-            <td>${data[i].id}</td>
-            <td>${data[i].user_nicename}</td>
-            <td>${data[i].user_email}</td>
-                          <td>${data[i].user_status}</td>
-                          <td>${data[i].user_rol}</td>
-                          <td>
-                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-              </td>
-          </tr>`
-    table.innerHTML += row
-  }
-}
 
 });
 
+
+function searchAnsw() {
+  var rid = $('#ridSearch').val();
+  $.ajax({
+    method:'GET',
+    url:'../API/rusr.php?act=answ&rid=' + rid,
+    success:function(response){
+      var data = response;
+      $('#bodyTableAnswers').empty()
+      for (var i = 0; i < data.length; i++){
+        var row = `<tr>
+                <td>${data[i].id}</td>
+                <td>${data[i].step_title}</td>
+                <td>${data[i].q_number}</td>
+                <td>${data[i].q_title}</td>
+                <td>${data[i].answer}</td>
+              </tr>`
+        $('#bodyTableAnswers').append(row)
+      };
+    }
+  });
+}
+
+function changeTable(targetTable,navId) {
+    //Reset ALL
+    $('#TableUsers').hide();
+    $('#TableResponses').hide();
+    $('#TableAnswers').hide();
+    $('#usersMenu').removeClass('active');
+    $('#responsesMenu').removeClass('active');
+    $('#answersMenu').removeClass('active');
+    //Load Data
+    if (targetTable == 'TableUsers') {
+      $.ajax({
+        method:'GET',
+        url:'../API/rusr.php?act=users',
+        success:function(response){
+          var data = response;
+          $('#bodyTableUsers').empty()
+          for (var i = 0; i < data.length; i++){
+            var row = `<tr>
+                    <td>${data[i].id}</td>
+                    <td>${data[i].user_nicename}</td>
+                    <td>${data[i].user_email}</td>
+                    <td>${data[i].user_registered}</td>
+                    <td>${data[i].user_rol}</td>
+                    <td>${data[i].user_status}</td>
+                    <td>${data[i].user_responses}</td>
+                  </tr>`
+            $('#bodyTableUsers').append(row)
+          };
+        }
+      });
+    };
+    if (targetTable == 'TableResponses') {
+      $.ajax({
+        method:'GET',
+        url:'../API/rusr.php?act=resp',
+        success:function(response){
+          var data = response;
+          $('#bodyTableResponses').empty()
+          for (var i = 0; i < data.length; i++){
+            var row = `<tr>
+                    <td>${data[i].id}</td>
+                    <td>${data[i].user_email}</td>
+                    <td>${data[i].last_step}</td>
+                    <td>${data[i].start_date}</td>
+                    <td>${data[i].status}</td>
+                    <td>${data[i].Order_Number}</td>
+                    <td>${data[i].Order_Status}</td>
+                  </tr>`
+            $('#bodyTableResponses').append(row)
+          };
+        }
+      });
+    }
+    //Show Table
+    $('#' + targetTable).show();
+    $('#' + navId).addClass('active');
+  }
+
+/*
 $("table").tableExport({
   formats: ["xlsx","txt", "csv"], //Tipo de archivos a exportar ("xlsx","txt", "csv", "xls")
   position: 'button',  // Posicion que se muestran los botones puedes ser: (top, bottom)
   bootstrap: false,//Usar lo estilos de css de bootstrap para los botones (true, false)
 });
-
+*/
 
 </script>
