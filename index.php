@@ -1795,7 +1795,7 @@
         win.focus();
         MailQuiz(DataForm);
         EndQuiz();
-
+        window.location.href = "https://lawsuitanalysis.com/analyzer/logout.php"
     }
 
 
@@ -3294,7 +3294,7 @@
         $.ajax({
             url: 'API/fml.php',
             type: 'POST',
-            data: {data: dataPut},
+            data: {data: dataPut , email: localStorage.getItem('email')},
             cache: 'false',
             success:function(response){                    
 

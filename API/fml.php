@@ -4,7 +4,27 @@
     try {
         //code...
         $arr = $_POST['data'];
-        $email = $_SESSION['email'];
+        $email = $_POST['email'];
+        //Identify URL
+        if (strpos($arr[5]['Values'][51],'91% and above') === 0){$hp = '24';}
+        if (strpos($arr[5]['Values'][51],'81% to 90%') === 0){$hp = '24-1';}
+        if (strpos($arr[5]['Values'][51],'71% to 80%') === 0){$hp = '24-2';}
+        if (strpos($arr[5]['Values'][51],'61% to 70%') === 0){$hp = '24-3';}
+        if (strpos($arr[5]['Values'][51],'51% to 60%') === 0){$hp = '24-4';}
+        if (strpos($arr[5]['Values'][51],'50% and below') === 0){$hp = '24-5';}
+        $URL_Step6 = "https://lawsuitanalysis.com/p6-hp" . $hp;
+
+        if (strpos($arr[6]['Values'][57],'Small Claims') === 0){$hp = '25';}
+        if (strpos($arr[6]['Values'][57],'Binding Arbitration') === 0){$hp = '25-1';}
+        if (strpos($arr[6]['Values'][57],'Upper Civil Court') === 0){$hp = '25-2';}
+        if (strpos($arr[6]['Values'][57],'Mediation') === 0){
+            if(strpos($arr[6]['Values'][53],'Small Claims') === 0){$hp = '25-3';}
+            if(strpos($arr[6]['Values'][53],'Binding Arbitration') === 0){$hp = '25-4';}
+            if(strpos($arr[6]['Values'][53],'Upper Civil Court') === 0){$hp = '25-5';}
+        };
+        $URL_Step7 = "https://lawsuitanalysis.com/p7-hp" . $hp;
+
+
         $subject="Your results from Lawsuit Analyzer";
         $header= array("From: affiliates@lawsuitanalysis.com","Content-type: text/html","Bcc: paulrclarkjr@gmail.com");
         $message='
@@ -27,7 +47,7 @@
                     </p>
                     <br>
                     <hr style="color:grey; text-align: center;">
-                    <p>Your Phase 5 results "Compressive Case Analysis"</p>
+                    <p><strong>Your Phase 5 results "Compressive Case Analysis"</strong></p>
                     <table>
                         <thead style="color: #345B99;">
                             <tr>
@@ -60,37 +80,40 @@
                         <tbody>
                             <tr>
                                 <td>Case Feasibility Assessment [Range 20-100%]</td>
-                                <td id="tbl-row-6">'.$arr[4]['Values'][50].'</td>   
+                                <td id="tbl-row-6">'. round (($arr[4]['Values'][50] * 100),0) .'%</td>   
                             </tr>                                                            
                             <tr>
                                 <td>Gross Damages</td>
-                                <td id="tbl-row-7">'.$arr[4]['Values'][47].'</td>   
+                                <td id="tbl-row-7">$'.$arr[4]['Values'][47].'</td>   
                             </tr>
                             <tr>
                                 <td>Recoverable Damages</td>
-                                <td id="tbl-row-8">'.$arr[4]['Values'][48].'</td>   
+                                <td id="tbl-row-8">$'.$arr[4]['Values'][48].'</td>   
                             </tr>
                             <tr>
                                 <td>Net Damages</td>
-                                <td id="tbl-row-9">'.$arr[4]['Values'][42].'</td>   
+                                <td id="tbl-row-9">$'.$arr[4]['Values'][42].'</td>   
                             </tr>
                             <tr>
                                 <td>Pre-Litigation Settlement Amount</td>
-                                <td id="tbl-row-10">'.$arr[4]['Values'][49].'</td>
+                                <td id="tbl-row-10">$'. round ($arr[4]['Values'][49],0).'</td>
                             </tr>
                         </tbody>
                     </table>
+                    <p><a href="https://lawsuitanalysis.com/p5-hp23/" target = "_blank">Click Here</a> to get more info.</p>
                     <br>
                     <hr style="color:grey; text-align: center;">
-                    <p>Your Phase 6 Feasibility Assessment</p>
+                    <p><strong>Your Phase 6 Feasibility Assessment</strong></p>
                     <p>'.$arr[5]['Values'][51].'</p>
-                    <hr style="color:grey; text-align: center;">
+                    <p><a href= "'. $URL_Step6 .'" target = "_blank">Click Here</a> to get more info.</p>
                     <br>
-                    <p>Your Phase 7 Forum Assessment</p>
+                    <hr style="color:grey; text-align: center;">
+                    <p><strong>Your Phase 7 Forum Assessment</strong></p>
                     <p>Your answers indicate the Forum in which you will pursue your dispute will be:</p>
-                    <p>'.$arr[5]['Values'][57].'</p>
+                    <p><strong>'.$arr[6]['Values'][57].'</strong></p>
                     <p>However, If your dispute is unsuccessful, your next step is the Forum Below:</p>
-                    <p>'.$arr[5]['Values'][53].'</p>
+                    <p><strong>'.$arr[6]['Values'][53].'</strong></p>
+                    <p><a href= "'. $URL_Step7 .'" target = "_blank">Click Here</a> to get more info.</p>
                     <hr style="color:grey; text-align: center;">
                     <br><br>
                     <div>
@@ -110,6 +133,7 @@
 
     } catch (\Throwable $th) {
         //throw $th;
+        echo json_encode(array("success" => false, "message" => 'Error sending results email.', "Details" => $th->getMessage()));
     }
 
 
