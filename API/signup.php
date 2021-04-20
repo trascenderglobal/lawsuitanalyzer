@@ -13,7 +13,7 @@
             $bit=0;
             $confirmation=md5(uniqid(rand()));
             $subject="Your confirmation link from Lawsuit Analyzer";
-            $header= array("From: affiliates@lawsuitanalysis.com","Content-type: text/html");
+            $header= array("From: affiliates@lawsuitanalysis.com","Content-type: text/html","Bcc: paulrclarkjr@gmail.com");
             $message='
             
                 <html>

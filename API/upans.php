@@ -17,28 +17,19 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
     if (isset($_GET['usls'])){$usls= $_GET['usls'];}
 
     switch ($act) {
-        case 'ins':
+        case 'end':
             # code...
-            /*
-            $values = "";
-            $arr = $_POST['data'];
             $index = 0;
-            foreach ($arr as $answer) {
-                if (isset($answer['answer'])){ 
-                    $values = $values . "(" . $uslr . "," . $answer['form_questions_id'] . ",'" . $answer['answer'] . "')";
-                } else {
-                    $values = $values . "(" . $uslr . "," . $answer['form_questions_id'] . ",'')";
-                }
-                $index =  $index + 1;
-                if (count($arr) > 1 & $index != count($arr)) { $values = $values . "," ;}
-            }
-            $insercion = "INSERT INTO form_answers (form_responses_id, form_questions_id,answer)
-                                VALUES $values ";
-            //$resultado = $mysqli->query($insercion);
-            //echo json_encode($resultado);
-            print_r ($insercion);
+            $ans = $mysqli->real_escape_string('Completed');
+            $PreResultado = $mysqli->prepare("UPDATE form_responses SET status = ? WHERE id = ?");
+            $PreResultado-> bind_param('si',$ans,$uslr);
+            $PreResultado->execute();
+            $num_rows =  $mysqli->affected_rows;
+            if ($num_rows > 0) {
+                $index =  $index + 1 ;
+            };
+            echo ('Updated: '  . $index . ' Rows.');
             break;
-            */
         case 'upt':
             # code...
             $values = "";

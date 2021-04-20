@@ -138,6 +138,16 @@
             cursor: help;
         }
 
+        /* Payment Instructions*/
+        .dot {
+            height: 30px;
+            width: 30px;
+            background-color: #9E2D2D;
+            color: white;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
         @media (max-width: 576px) {
             html { font-size: 1rem; }
             h2 {font-size: 6vw}
@@ -151,8 +161,11 @@
             .form-check-label {
                 font-size: 0.6rem;
             }
+            .instructionTitle {
+                text-align: left !important;
+            }
         }
-        @media (min-width: 768px) {
+        @media (max-width: 768px) {
             html { font-size: 1rem; }
             h2 {font-size: 3vw}
             h3 {font-size: 2vw}
@@ -163,7 +176,10 @@
             }
             .form-check-label {
                 font-size: 0.8rem;
-            }       
+            }
+            .instructionTitle {
+                text-align: left !important;
+            }   
         }
         @media (min-width: 1200px) {
             html { font-size: 1.25rem; }
@@ -215,17 +231,46 @@
                     });
             </script>
             <div class="container-fluid">
-                <div id = "btnPaymentInstructions" class = "row" style="display: none;">
-                    <div class="col" style="text-align: center;">
-                        <p style="margin-bottom: 0px !important;"> Please complete the purchase process with the same email registered on Analyzer. See payment instructions <a data-toggle="modal" data-target="#payment_modal" href="#">here</a>.</p>
-                        <p style="margin-bottom: 0px !important;"> Have you already paid an Analyzer. Validate your purchase <a data-toggle="modal" data-target="#validate_purchase" href="#">here</a>.</p>
+                <div id = "btnPaymentInstructions" class = "row" style="display: none; margin: 0px;">
+                    <p style="text-align: center;"> <br><br>Hello! Thanks for signing up and using the Analyzer. We hope it is being useful in the assessment of your case. 
+                        <br><br>Unfortunately, you have reached the free usage limit.
+                        <br><br>We'd love to keep you using the analyzer and you can do it by completing the payment process instructed below.
+                        <br><br>Please follow step 1 and once you're done come back with the order code and finish step 2.
+                        <br><br>Please refer to our FAQ or CONTACT section if you have any questions or feedback.
+                        <br>
+                    </p>
+                    <p style="text-align: right;">
+                        -- The Lawsuit Analysis Team.
+                    </p>
+                    <div class = "row" >
+                        <div class="col-lg-3 sm-12 instructionTitle" style="text-align: right;">
+                            <span class="dot" style="text-align: center !important;">1</span> <strong style="color: black;">Payment</strong>
+                        </div>
+                        <div class = "col-lg-9 sm-12" >
+                            <p> Please <a href="https://lawsuitanalysis.com/product/lawsuit_analyzer/" target="_blank" >click here</a>, a new window will open so you can go to our payment checkout and complete your order using the same email registered on Analyzer<sup>©</sup></p>
+                        </div>        
                     </div>
-                    <div id ="PaymentProcess">
+                    <div class="row" >
+                        <div class="col-lg-3 sm-12 instructionTitle" style="text-align: right;">
+                            <span class="dot" style="text-align: center !important;">2</span> <strong  style="color: black;">Validation</strong>
+                        </div>
+                        <div class = "col-lg-9 sm-12" >
+                            <p> Have you already paid the analyzer? Please validate your purchase by entering your Order Number in the box below and click on "Validate"</p>
+                            <label for="validationOrder">Order number</label>
+                            <input id="validationOrder" class="form-control" type="text" name="validationOrder" placeholder="order number" required style="width: 200px !important;">                            
+                            <p id = "validationMsg" style="display: none;"> Sorry. We couldn't find a valid order related to this email.</p>
+                            <button id = "btnSuccess" class="btn btn-success" type="button" onclick="document.location.reload(true)" style="display: none;">Get started</button>
+                            <br>
+                            <button id = "btnValidation" class="btn btn-info" type="button" onclick="validateOrder()">Validate</button>                     
+                        </div> 
+                    </div>
 
+                    <div class="row" style="background-color: #dbdbdb; margin-top: 35px; text-align: justify;">
+                        <div class = "col-lg-12"  style="margin-top: 20px;">
+                            <p style="font-size: small;"> Self-help services may not be permitted in all states. The information provided on this site is not legal advice, does not constitute a lawyer referral service, and no attorney-client or confidential relationship is or will be formed by use of the site. The attorney listings on this site are paid attorney advertising. In some states, the information on this website may be considered a lawyer referral service. Please reference the Terms of Use and the Supplemental Terms for specific information related to your state. Your use of this website constitutes acceptance of the Terms of Use, Disclaimer, Supplemental Terms, Privacy Policy and Cookie Policy</p>
+                        </div>
                     </div>
-                    <div class="col" style="text-align: center;">
-                        <p>Copyright© 2021 Lawsuit Analysis All rights reserved.</p>
-                    </div>
+
                 </div>
                 <div id="wizard">
                     <div class="row">
@@ -1044,7 +1089,7 @@
                                                 </div>
                                                 <div style="overflow:auto; margin: 2%;">
                                                     <div style="float:center;">
-                                                        <button type="button" id="nextBtn7" class="badge badge-info-ls" onclick="">Go to </button>
+                                                        <button type="button" id="nextBtn7" class="badge badge-info-ls" onclick="gotolink()">Go to </button>
                                                     </div>
                                                 </div>
 
@@ -1054,12 +1099,6 @@
                                                         <div class="progress" style="background: #D8D9DD; margin:5% 5% 5% 5%; height: 5px;" >
                                                             <div id="progress_Step7" class="progress-bar" style="background: #345B99;"></div>                                                    
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <button type="button" id="prevBtn7" class="btn btn-info" onclick="nextPrev(-1,6)" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button>
-                                                    </div>
-                                                    <div>
-                                                        <button type="button" id="nextBtn7" class="btn btn-info" onclick="" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f">&darr;</button>    
                                                     </div>
                                                 </div>                                             
                                             
@@ -1074,72 +1113,6 @@
             </div>
         </div>
 
-        <div id = "instructions_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title" id="instructions_modalTitle">Quick instructions</h1>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col" style="text-align: left;">
-                                <p>Please read the following instructions to make friendly this analysis.</p>                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <ul class="fa-ul">
-                                    <li><i class="fa-li fa fa-check"></i>You must complete successfully the previous step to enable the next step and get his results.</li>
-                                    <li><i class="fa-li fa fa-check"></i>You can edit answers by clicking on the step button on the left bar. Then, the Analyzer will place you at the end of the step or at the last answered question for the selected step.</li>
-                                    <li><i class="fa-li fa fa-check"></i>You can navigate through the quiz only by clicking on the up and down button <button type="button" class="btn btn-info" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&uarr;</button><button type="button" class="btn btn-info" style="border-radius: 0 !important; background-color: #80b5b5;margin: 0px;border-color: #5f615f;" >&darr;</button></li>
-                                    <li><i class="fa-li fa fa-check"></i>Please Enjoy !</li>
-                                </ul>   
-                            </div>                        
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id = "payment_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"  aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        <h1 class="modal-title" id="payment_modalTitle">Payment</h1>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col" style="text-align: left;">
-                                <p>Please read the following instructions to make friendly this analysis.</p>                                
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <ul class="fa-ul">
-                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
-                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
-                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
-                                    <li><i class="fa-li fa fa-check"></i>You must ...</li>
-                                </ul>   
-                            </div>                        
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">OK</button>
-                    </div>                    
-                </div>
-            </div>
-        </div> 
-
         <div id="modal_data_clear" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" >
                 <div class="modal-content">
@@ -1150,6 +1123,7 @@
             </div>
         </div>
 
+        <!--
         <div id="validate_purchase" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -1168,7 +1142,7 @@
                                 </div>
                             </div>
                         </form>
-                        <p id = "validationMsg" style="text-align: center; display: none;"> Sorry. We could'nt find a valid order related with this email.</p>
+                        <p id = "validationMsg" style="text-align: center; display: none;"> Sorry. We couldn't find a valid order related to this email.</p>
                     </div>
                     <div class="modal-footer">
                         <button id = "btnSuccess" class="btn btn-success" type="button" onclick="document.location.reload(true)" style="display: none;">Get started</button>
@@ -1177,7 +1151,7 @@
                 </div>
             </div>
         </div>
-
+        -->
     </body>
 
 
@@ -1795,8 +1769,8 @@
     $(window).on('load',function(){
         localStorage.setItem('user_id',get_session('user_id'))
         localStorage.setItem('user' , get_session('user'))
+        localStorage.setItem('email' , get_session('email'))
         get_last_response(get_session('user_id'));
-        $('#instructions_modal').modal('show');
         $.ajax({
             type: "GET",
             url: "https://ip-api.com/json/",
@@ -1809,6 +1783,21 @@
         });
     });
     
+    //Script to End the Analyzer
+    function gotolink() {
+        var textButton =  $('#nextBtn7').text();
+        var FinalURL = ''
+        if (textButton.includes('Go To Mediation')) { FinalURL = 'https://lawsuitanalysis.com/mediation-resource/' }
+        if (textButton.includes('Go To Binding Arbitration')) { FinalURL = 'https://lawsuitanalysis.com/arbitration-resource/' }
+        if (textButton.includes('Go To Small Claims')) { FinalURL = 'https://lawsuitanalysis.com/small-claims-resource/'      }
+        if (textButton.includes('Go To Upper Civil Court')) { FinalURL = 'https://lawsuitanalysis.com/upper-civil-courts-resource/' }
+        var win = window.open(FinalURL, '_blank');
+        win.focus();
+        MailQuiz(DataForm);
+        EndQuiz();
+
+    }
+
 
     //Script functions to DB
     function get_answers_form(user_lr){
@@ -1840,7 +1829,7 @@
                     if (response) {
                         var st = 1
                         if ($validacion['st'] === 'Paid') {st = 10};
-                        if ($validacion['st'] === 'Finished') {st = 100};
+                        if ($validacion['st'] === 'Completed') {st = 100};
                         localStorage.setItem('user_lr', $validacion['lr'])
                         localStorage.setItem('st', st)
                         get_answers_form($validacion['lr'])
@@ -1946,6 +1935,19 @@
 
 
 
+    }
+
+    function EndQuiz() {
+        var uslr = get_session('user_lr');
+        if (uslr == ''){uslr = localStorage.getItem('user_lr') };
+        $.ajax({
+            type: "POST",
+            url: "API/upans.php?act=end&uslr=" + uslr,
+            dataType: 'json',
+            cache: 'false',
+            success: function (response) {
+            }
+        });        
     }
 
     //Printing Result From DB
@@ -2771,9 +2773,14 @@
                     PutAnswData('Step1',DataForm);                    
                     $('#btnPaymentInstructions').css('display', 'grid');
                     $('#wizard').detach();
-                    $('#PaymentProcess').css('height', '430px');
                     var url = "https://lawsuitanalysis.com/product/lawsuit_analyzer/";
-                    $('#PaymentProcess').html('<iframe id = "PaymentsFrame" width="100%" height="100%" frameborder="1" allowtransparency="true" scrolling="yes" src="'+url+'"></iframe>');
+                    /*
+                    $('#PaymentProcess').show();
+                    setTimeout(() => {
+                        $('#PaymentProcess').hide();
+                        window.open(url, '_blank').focus();
+                    }, 5000);
+                    */
                 };
             }
             if ( (x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes')
@@ -3071,20 +3078,22 @@
     }
 
     function validateOrder(){
-        var email = $('#validationEmail').val();
+        var email =  localStorage.getItem('email') //$('#validationEmail').val();
         var email2,email3,status = ''
-        var prdct = 0;
+        var prdct,orderWC = 0;
         var valid = true;
         var order = $('#validationOrder').val();
         var wck = get_session('wck');
         var wcs = get_session('wcs');
         var valResultTxt = '';
-        
+        //console.log('Validacion: ', email, email2,email3,status, prdct,valid,order )
         if (email.length == 0){
+            /*
             $('#validationEmail').css('background-color', '#ffdddd');
             setTimeout(() => {
                 $('#validationEmail').css('background-color', 'white');
             }, 1700);
+            */
             valid = false;
         }
         if (order.length == 0){
@@ -3094,6 +3103,7 @@
             }, 1700);
             valid = false;
         }
+        console.log('Validacion: ', valid )
         if (!valid) {return}
         $('#btnValidation').text('Validating...');
         $('#btnValidation').css('background-color', '#FFCC00');
@@ -3112,6 +3122,8 @@
                 orderWC = response.id
                 prdct = response.line_items[0].product_id
                 email2 = response.billing.email
+                valResultTxt = validationMsg(orderWC,prdct,status,email,email2,email3);
+                localStorage.setItem('msg', valResultTxt)
                 if (response.customer_id !== 0){
                     $.ajax({
                         type: "GET",
@@ -3146,7 +3158,7 @@
             $('#validationMsg').css('display', 'grid');
             setTimeout(() => {
                 $('#validationMsg').css('display', 'none');
-            }, 10000);
+            }, 15000);
         }, 4000);
 
 
@@ -3275,6 +3287,23 @@
             };            
         };
         return hp
+    }
+
+    function MailQuiz(dataPut) {
+        console.log(dataPut);
+        $.ajax({
+            url: 'API/fml.php',
+            type: 'POST',
+            data: {data: dataPut},
+            cache: 'false',
+            success:function(response){                    
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        }) ;        
+        
     }
 
     function SeparadorMiles(valor){

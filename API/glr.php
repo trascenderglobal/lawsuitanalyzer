@@ -40,20 +40,21 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                         break;
                     }
                 }
-                echo  json_encode(array("lr" => $lr, "st" => $_SESSION['user_st']));
-            }else if ($num_rows = 1){
+                echo  json_encode(array("lr" => $lr, "st" => $_SESSION['user_st'], "case" => 'mas de 1'));
+            }else if ($num_rows == 1){
                 $data = $resultado->fetch_assoc();
                 $_SESSION['user_lr'] = $data['id'];
                 $_SESSION['user_ls'] = $data['last_step'];
                 $_SESSION['user_st'] = $data['status'];
-                echo json_encode(array("lr" => $_SESSION['user_lr'], "st" => $_SESSION['user_st']));
+                echo json_encode(array("lr" => $_SESSION['user_lr'], "st" => $_SESSION['user_st'], "case" => 'solo 1', "respuesta" => $resultado));
             } else {
-                $step = 1;
+                $step = '1';
                 $status = 'In Process';
                 $PreResultado = $mysqli->prepare("INSERT INTO form_responses (users_id,last_step,status) VALUES (?, ?, ? )");
                 $PreResultado->bind_param('iss', $user_id, $step,$status);
                 $PreResultado->execute();
                 $resultado = $PreResultado->get_result();
+                echo json_encode(array("lr" => 'Insertado', "st" => 'Insertado'));;
                 sleep(3);
                 $PreResultado = $mysqli->prepare("SELECT * FROM form_responses where users_id = ? and status = ? ORDER BY start_date DESC");
                 $PreResultado->bind_param('is', $user_id, $status);
@@ -65,9 +66,11 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                     $_SESSION['user_lr'] = $data['id'];
                     $_SESSION['user_ls'] = $data['last_step'];
                     $_SESSION['user_st'] = $data['status'];
-                    echo json_encode(array("lr" => $_SESSION['user_lr'], "st" => $_SESSION['user_st']));;
+                    echo json_encode(array("lr" => $_SESSION['user_lr'], "st" => $_SESSION['user_st'] , "case" => 'despues de insertar 1'));;
                 }
             };
+        } else {
+            echo 'error en consulta';
         }
     } else {
         echo 'error';

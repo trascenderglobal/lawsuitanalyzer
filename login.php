@@ -2,9 +2,13 @@
     //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
     //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
     //session_start();
-   
-    if(isset($_SESSION['user'])){
-      header('location:index.php');
+    session_start();
+    if(isset($_SESSION['user_rol'])){
+        if ($_SESSION['user_rol'] == 'admin') {
+            header('location: admin/index.php');
+        } else {
+            header('location:index.php');
+        }  
     }
 ?>
 
@@ -126,7 +130,6 @@
             ?>
 
             <h1 style="text-align: center;">Lawsuit Analyzer</h1>
-            <h4 style="text-align: center;"> Receive a professional legal analysis of your dispute</h4>
         </header>
 
         <div class="content">

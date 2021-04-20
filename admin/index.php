@@ -4,9 +4,18 @@
     session_start();
     if(isset($_SESSION['user_rol'])){
         if ($_SESSION['user_rol'] !== 'admin') {
+            header('location: ../login.php');
+        } else {
+          if ($_SESSION['user_rol'] == 'CLIENT' || $_SESSION['user_rol'] == 'CUSTOMER') {
             header('location: ../index.php');
-        }  
-    }
+            exit();
+          }
+        }
+    } else {
+      //session_destroy();
+      header('location: ../login.php');
+      exit();
+  }
 
 ?>
 <!DOCTYPE html>
@@ -236,9 +245,10 @@
                         <th>User name</th>
                         <th>Email</th>
                         <th>Registered On</th>
-                        <th>Rol</th>
+                        <th>Role</th>
                         <th>Status</th>
                         <th>Responses</th>
+                        <th>Responses Completed</th>
                     </tr>
                     <tbody id="bodyTableUsers"></tbody>
                 </table>       
@@ -437,6 +447,7 @@ function changeTable(targetTable,navId) {
                     <td>${data[i].user_rol}</td>
                     <td>${data[i].user_status}</td>
                     <td>${data[i].user_responses}</td>
+                    <td>${data[i].response_completed}</td>
                   </tr>`
             $('#bodyTableUsers').append(row)
           };
