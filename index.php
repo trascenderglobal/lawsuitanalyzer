@@ -1,26 +1,141 @@
 <?php
-    //require($_SERVER['DOCUMENT_ROOT'].'/wordpress/obsequiosespeciales.com/wp-load.php');
-    //require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-    //if (!isset($_SESSION)) { 
-    //    session_start(); 
-    //} 
     session_start();
 
+    //Only for admin Users
     if(isset($_SESSION['user_rol'])){
         if ($_SESSION['user_rol'] == 'admin') {
             header('location: admin/index.php');
+        } 
+    };
+    
+
+    //Validate if LK is typed
+    if (isset($_GET['lk']) && !empty($_GET['lk'])){
+        $license = $_GET['lk'];
+        if (strlen($license) == 0 ) {
+            //No license typed
+            exit();
         } else {
-            if(!isset($_SESSION['user'])){
-                //session_destroy();
-                header('location:login.php');
-                exit();
-            }
-        }
+            //Check for an existing user
+            require 'API/cnt.php';
+            $user = $license . '@lawsuitanalysis.com';
+            $pass = $license . '@lawsuitanalysis.com';
+            if($PreResultado = $mysqli->prepare("SELECT * FROM users where user_login = ? and user_status = ?")){
+                $status = 'ACTIVE';
+                $PreResultado->bind_param('ss', $user, $status);
+                $PreResultado->execute();
+                $resultado = $PreResultado->get_result();
+                $num_rows = mysqli_num_rows($resultado);
+                //If user exist
+                if ($num_rows  >= 1){
+                    $data = $resultado->fetch_all();
+                    for ($i=0; $i < $num_rows; $i++) { 
+                        # code...
+                        if ( password_verify($pass,$data[$i][2])){
+                            $_SESSION['user_id'] = $data[$i][0];
+                            $_SESSION['user'] = $data[$i][3];
+                            $_SESSION['email'] = $data[$i][4];
+                            $_SESSION['user_status'] = $data[$i][6];
+                            $_SESSION['user_rol'] = $data[$i][8];
+                            $_SESSION['wck'] = 'ck_0b3b4ac24f2fadd6811260e7b04f7841feaee86f';
+                            $_SESSION['wcs'] = 'cs_c1170ee6621d8a5a02087f26f875ed3ecc91c878';
+                            $_SESSION['lk'] = $license;                            
+                        }
+                    }
+                }else {
+                //If User doesn't exist
+
+                    //Validate License Key
+                    $curl = curl_init();
+                    $ck = "ck_cdfdbcc314b56083fc142a2ff04dfbc94a11b3f7";
+                    $cs = "cs_9f4938b2cddf0b876dab41394e49bb5c54035438";
+                    curl_setopt_array($curl, array(
+                        CURLOPT_URL => "https://lawsuitanalysis.com/wp-json/lmfwc/v2/licenses/". $license ."?consumer_key=" . $ck . "&consumer_secret=" . $cs . "",
+                        CURLOPT_RETURNTRANSFER => true,
+                        CURLOPT_ENCODING => "",
+                        CURLOPT_MAXREDIRS => 10,
+                        CURLOPT_TIMEOUT => 0,
+                        CURLOPT_FOLLOWLOCATION => false,
+                        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                        CURLOPT_CUSTOMREQUEST => "GET",
+                    ));
+                    $response = curl_exec($curl);
+                    $err = curl_error($curl);
+                    curl_close($curl);
+                    if ($err) {
+                        exit();
+                    } else {
+                        $findSucess   = '"success":true';
+                        $findFalse = "License Key: ". $license . " could not be found.";
+                        $posSuc = strpos($response, $findSucess);
+                        $posFal = strpos($response, $findFalse);
+                        //If license doesn't exist
+                        if ($posFal === false) {
+                        } else {
+                            exit();
+                        } ;
+                        //If license exist
+                        if ($posSuc === false) {
+                        } else{
+                            //Create a New Active User
+                            $status = 'ACTIVE' ;
+                            $confirmation = $license;
+                            $rol = 'CUSTOMER';
+                            $password= password_hash($pass , PASSWORD_DEFAULT, array("cost" => 15));
+                            $PreResultado = $mysqli->prepare("INSERT INTO users (user_login,user_pass,user_nicename,user_email,user_status,user_confirmation,user_rol) 
+                                                                VALUES (?,?,?,?,?,?,?)");
+                            $PreResultado->bind_param('sssssss', $user,$password,$license,$user,$status,$confirmation,$rol);
+                            $PreResultado->execute();
+                            $num_rows = $mysqli->affected_rows;
+                            if ($num_rows > 0) {
+                                sleep(4);
+                                //Retrieve the New User ID
+                                $PreResultado = $mysqli->prepare("SELECT * FROM users where user_login = ? and user_status = ?");
+                                $status = 'ACTIVE';
+                                $PreResultado->bind_param('ss', $user, $status);
+                                $PreResultado->execute();
+                                $resultado = $PreResultado->get_result();
+                                $num_rows = mysqli_num_rows($resultado);
+                                if ($num_rows  >= 1){
+                                    $data = $resultado->fetch_all();
+                                    for ($i=0; $i < $num_rows; $i++) { 
+                                        if ( password_verify($pass,$data[$i][2])){
+                                            $_SESSION['user_id'] = $data[$i][0];
+                                            $_SESSION['user'] = $data[$i][3];
+                                            $_SESSION['email'] = $data[$i][4];
+                                            $_SESSION['user_status'] = $data[$i][6];
+                                            $_SESSION['user_rol'] = $data[$i][8];
+                                            $_SESSION['wck'] = 'ck_0b3b4ac24f2fadd6811260e7b04f7841feaee86f';
+                                            $_SESSION['wcs'] = 'cs_c1170ee6621d8a5a02087f26f875ed3ecc91c878';
+                                            $_SESSION['lk'] = $license;
+                                            //Activate License, Only one-time
+                                            $curl = curl_init();
+                                            curl_setopt_array($curl, array(
+                                                CURLOPT_URL => "https://lawsuitanalysis.com/wp-json/lmfwc/v2/licenses/activate/". $license ."?consumer_key=" . $ck . "&consumer_secret=" . $cs . "",
+                                                CURLOPT_RETURNTRANSFER => true,
+                                                CURLOPT_ENCODING => "",
+                                                CURLOPT_MAXREDIRS => 10,
+                                                CURLOPT_TIMEOUT => 0,
+                                                CURLOPT_FOLLOWLOCATION => false,
+                                                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                                                CURLOPT_CUSTOMREQUEST => "GET",
+                                            ));
+                                            $response = curl_exec($curl);
+                                            $err = curl_error($curl);   
+                                            curl_close($curl);                                  
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
     } else {
-        //session_destroy();
-        header('location:login.php');
         exit();
     }
+
 ?>
 
 
@@ -47,6 +162,7 @@
         <script src="lib/jquery.cookie-1.3.1.js"></script>
         <script src="js/bootstrap.js"  > </script>
         <script src="build/jquery.steps.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body style="font-family: 'Montserrat';">
 
@@ -232,40 +348,15 @@
             </script>
             <div class="container-fluid">
                 <div id = "btnPaymentInstructions" class = "row" style="display: none; margin: 0px;">
-                    <p style="text-align: center;"> <br><br>Hello! Thanks for signing up and using the Analyzer. We hope it is being useful in the assessment of your case. 
-                        <br><br>Unfortunately, you have reached the free usage limit.
-                        <br><br>We'd love to keep you using the analyzer and you can do it by completing the payment process instructed below.
-                        <br><br>Please follow step 1 and once you're done come back with the order code and finish step 2.
-                        <br><br>Please refer to our FAQ or CONTACT section if you have any questions or feedback.
+                    <p style="text-align: center;"> <br><br>Hello! Thanks for using the Analyzer. We hope it is being useful in the assessment of your case. 
+                        <br><br>Unfortunately, you have reached the usage limit for this license key.
+                        <br><br>We'd love to keep you using the analyzer and you can do it by completing another payment process.
                         <br>
                     </p>
                     <p style="text-align: right;">
                         -- The Lawsuit Analysis Team.
                     </p>
-                    <div class = "row" >
-                        <div class="col-lg-3 sm-12 instructionTitle" style="text-align: right;">
-                            <span class="dot" style="text-align: center !important;">1</span> <strong style="color: black;">Payment</strong>
-                        </div>
-                        <div class = "col-lg-9 sm-12" >
-                            <p> Please <a href="https://lawsuitanalysis.com/product/lawsuit_analyzer/" target="_blank" >click here</a>, a new window will open so you can go to our payment checkout and complete your order using the same email registered on Analyzer<sup>©</sup></p>
-                        </div>        
-                    </div>
-                    <div class="row" >
-                        <div class="col-lg-3 sm-12 instructionTitle" style="text-align: right;">
-                            <span class="dot" style="text-align: center !important;">2</span> <strong  style="color: black;">Validation</strong>
-                        </div>
-                        <div class = "col-lg-9 sm-12" >
-                            <p> Have you already paid the analyzer? Please validate your purchase by entering your Order Number in the box below and click on "Validate"</p>
-                            <label for="validationOrder">Order number</label>
-                            <input id="validationOrder" class="form-control" type="text" name="validationOrder" placeholder="order number" required style="width: 200px !important;">                            
-                            <p id = "validationMsg" style="display: none;"> Sorry. We couldn't find a valid order related to this email.</p>
-                            <button id = "btnSuccess" class="btn btn-success" type="button" onclick="document.location.reload(true)" style="display: none;">Get started</button>
-                            <br>
-                            <button id = "btnValidation" class="btn btn-info" type="button" onclick="validateOrder()">Validate</button>                     
-                        </div> 
-                    </div>
-
-                    <div class="row" style="background-color: #dbdbdb; margin-top: 35px; text-align: justify;">
+                    <div class="row" style="background-color: #dbdbdb; margin-top: 35px; text-align: justify; position: absolute; width: 100%; bottom: 0;">
                         <div class = "col-lg-12"  style="margin-top: 20px;">
                             <p style="font-size: small;"> Self-help services may not be permitted in all states. The information provided on this site is not legal advice, does not constitute a lawyer referral service, and no attorney-client or confidential relationship is or will be formed by use of the site. The attorney listings on this site are paid attorney advertising. In some states, the information on this website may be considered a lawyer referral service. Please reference the Terms of Use and the Supplemental Terms for specific information related to your state. Your use of this website constitutes acceptance of the Terms of Use, Disclaimer, Supplemental Terms, Privacy Policy and Cookie Policy</p>
                         </div>
@@ -292,9 +383,6 @@
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <img onclick="callHelpPage(1)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                        </div>
-                                        <div class="col" style="text-align: center;">
-                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>
                                     <div class="row"  > 
@@ -426,9 +514,6 @@
                                         </div>
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <img onclick="callHelpPage(2)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
-                                        </div>
-                                        <div class="col" style="text-align: center;">
-                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
                                         </div>
                                     </div>                                 
                                     <div class="row">
@@ -640,9 +725,6 @@
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <img onclick="callHelpPage(3)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                         </div>
-                                        <div class="col" style="text-align: center;">
-                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
@@ -791,9 +873,6 @@
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <img onclick="callHelpPage(4)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                         </div>
-                                        <div class="col" style="text-align: center;">
-                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
@@ -894,9 +973,6 @@
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <img onclick="callHelpPage(5)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                         </div>
-                                        <div class="col" style="text-align: center;">
-                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
@@ -940,7 +1016,7 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
-                                                                    <td>Case Feasibility Assessment [Range 20-100%]</td>
+                                                                    <td>Case Feasibility Assessment [Range 4-100%]</td>
                                                                     <td id="tbl-row-6">  </td>   
                                                                 </tr>                                                            
                                                                 <tr>
@@ -1050,9 +1126,6 @@
                                         <div class="col-lg-2 sm-6" style="text-align: right;">
                                             <img onclick="callHelpPage(7)" class = "helpimg" src="assets/helpimage.png" alt="Help Image">
                                         </div>
-                                        <div class="col" style="text-align: center;">
-                                            <button type="button" class="btn btn-light" onclick="resetTest()" style="padding: 0px 10px 0px 10px ; margin: 0px;height: 25px;font-size: 70%;font-weight: bold;" >Reset Test</button>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="text-align: center;">
@@ -1085,6 +1158,8 @@
                                                         <div class="col d-flex justify-content-start">
                                                             <p style="color: #9E2D2D;" >You have completed the Lawsuit Analyzer©. You can still edit your answers and change your outcome. Once you click the Go to button below, you will no longer be able to edit and your results will be emailed you.</p>
                                                         </div>
+                                                        <input id = "emailSummary" class="form-control" type="email" name="emailSummary" placeholder="email">
+                                                        <p id = "emailSummary_error" style="color: #9E2D2D; display: none;" >Please enter your email address in format: yourname@example.com </p>                    
                                                     </div>                                                
                                                 </div>
                                                 <div style="overflow:auto; margin: 2%;">
@@ -1111,6 +1186,435 @@
                     </section>              
                 </div>
             </div>
+        </div>
+
+        <div id = "email_result" class = "container-fluid" style="display: none;">
+            <div class="row" style="margin: 0px;">
+                <div class="col">
+                    <h1 style="text-align: center; color: #9E2D2D">Lawsuit Analyzer<sup>©</sup> </h1>
+                </div>
+            </div>
+
+            <div class="content" style="margin: 5%;">
+                <p> Dear User,<br><br>
+                You have completed Lawsuit Analyzer©. We hope you have found the process helpful. You will find in this package the following:
+                </p>
+                <br>
+                <p>
+                    Your Phase 5 results "Compressive Case Analysis"<br>
+                    Your Phase 6 Feasibility Assessment<br>
+                    Your Phase 7 Forum Assessment<br>
+                    An explanation of your Forum Assessment
+                </p>
+                <br>
+                <p>
+                    We encourage you to take advantage of the many Resources that explain the process ahead by clicking here.
+                </p>
+                <div style="text-align: center;">
+                    <a href="https://lawsuitanalysis.com/lawsuit-analyzer-resource/" id="ResourcesEmail" class="badge badge-info-ls">Resource</a>                
+                </div>
+
+                <hr style="color:grey; text-align: center;">
+
+                <div class = "html2pdf__page-break"></div>
+
+                <h1 style="text-align: center;color: #9E2D2D">Lawsuit Analyzer<sup>©</sup> </h1>
+
+                <p style="text-align: center;"><strong style="color: black !important;">Your Phase 5 results "Compressive Case Analysis"</strong></p>
+                    <table>
+                        <thead style="color: #345B99;">
+                            <tr>
+                                <th colspan="2" scope="col">Results Carried Forward:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Phase 1, Legal Evaluation [Range: 0 or 350]</td>
+                                <td id="tbl-row-1-result"> </td>   
+                            </tr>
+                            <tr>
+                                <td>Phase 2, Damage Assessment [Range: 5-50]</td>
+                                <td id="tbl-row-3-result"></td>   
+                            </tr>
+                            <tr>
+                                <td>Phase 3, Legal Options Assessment [Range: 0-190]</td>
+                                <td id="tbl-row-4-result"></td>   
+                            </tr>
+                            <tr>
+                                <td>Phase 4, Collectability Assessment [Range 20-150]</td>
+                                <td id="tbl-row-5-result"></td>
+                            </tr>
+                        </tbody>
+                        <thead style="color: #345B99;">                         
+                            <tr>
+                                <th colspan="2" scope="col">Comprehensive Case Assessment:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Case Feasibility Assessment [Range 4-100%]</td>
+                                <td id="tbl-row-6-result"></td>   
+                            </tr>                                                            
+                            <tr>
+                                <td>Gross Damages</td>
+                                <td id="tbl-row-7-result"></td>   
+                            </tr>
+                            <tr>
+                                <td>Recoverable Damages</td>
+                                <td id="tbl-row-8-result"></td>   
+                            </tr>
+                            <tr>
+                                <td>Net Damages</td>
+                                <td id="tbl-row-9-result"></td>   
+                            </tr>
+                            <tr>
+                                <td>Pre-Litigation Settlement Amount</td>
+                                <td id="tbl-row-10-result"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <br>
+
+                <hr style="color:grey; text-align: center;">
+
+                <div class = "html2pdf__page-break"></div>
+
+                <h1 style="text-align: center; color: #9E2D2D">Lawsuit Analyzer<sup>©</sup> </h1>
+
+                <p style="text-align: center;"><strong style="color: black !important;">Your Phase 6 Feasibility Assessment</strong></p>
+
+                    <div id="phase-6-mail-1" style="display: none;">
+                        <p><span style="font-weight: 400;">Feasibility Assessment answers the ultimate question:</span></p>
+                        <p style="text-align: center;"><span style="color: red;">Should you pursue your case, and if so, how?</span></p>
+                        <p><span style="font-weight: 400;">Feasibility assessment gives you the fruits of the labor you have put into answering Lawsuit Analyzer<em><sup>©</sup></em>’s multitude of questions. In the days and weeks ahead read and ponder your recommendations carefully, some of which may be:</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">What steps should you take before moving forward?</span></li>
+                        <li><span style="font-weight: 400;">Should you reduce your claim to fit into Small Claims?</span></li>
+                        <li><span style="font-weight: 400;">Is collectability a big problem for you?</span></li>
+                        <li><span style="font-weight: 400;">What are the most important issues for you to consider?</span></li>
+                        <li><span style="font-weight: 400;">If your contract has an Attorney Fee provision, are you prepared to take the risk that you might lose and have to pay your adversary’s attorney fees?</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">Don’t allow yourself to just barrel ahead with an emotional charge. Take the steps recommended. Consider all consequences. Go slowly with a clear state of mind.</span></p>
+                        
+                        <p style="text-align: center;"><span style="color: #547391; text-align: center;">Your Case Feasibility Rating is 91% and above</span></p>
+                        
+                        <p><span style="font-weight: 400;">Your case feasibility is very good. There are many variables that put you in this feasibility category, so take what applies to your case and skip what does not.</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">Review your Phase 5 Comprehensive Case Analysis to better understand the strengths and weaknesses of your case and try to improve on weaknesses.</span></li>
+                        <li><span style="font-weight: 400;">When you complete Lawsuit Analyzer<em><sup>©</sup></em> go to the <a href="”https://lawsuitanalysis.com/resources/”">Lawsuit Analyzer<em><sup>©</sup></em> Resource page</a> to get more insight into your results (your results pages will be e-mailed to you as a reminder).</span></li>
+                        <li><span style="font-weight: 400;">If your Collectability Assessment is low, again consider reducing your settlement demand or reducing your damages to fit within the Small Claims limit so you will have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">Prepare and send a Demand Letter to your adversary. Review the<a href="”https://lawsuitanalysis.com/Demand-Letter/”"> Demand Letter Resource.</a></span></li>
+                        <li><span style="font-weight: 400;">If Small Claims or Arbitration is your first or second Forum as you will discover soon, move forward if settlement efforts fail. Your dispute should be determined relatively soon.</span></li>
+                        <li><span style="font-weight: 400;">If your answers to Lawsuit Analyzer<em><sup>©</sup></em> change during the course of your case, work your case through Lawsuit Analyzer<em><sup>©</sup></em> again since your results may change.</span></li>
+                        <li><span style="font-weight: 400;">Constantly evaluate your case as it proceeds through the litigation process and make adjustments to your strategy. What worked before may no longer.</span></li>
+                        <li><span style="font-weight: 400;">If a contract with your adversary includes an Attorney Fee provision:</span>
+                        <ul>
+                        <li><span style="font-weight: 400;">Keep in mind that if you lose you could end up paying your adversary’s attorney fees.</span></li>
+                        <li><span style="font-weight: 400;">Keep in mind also that an Attorney Fee provision does not mean the court will approve all the attorney fees incurred, as some may not be deemed ‘reasonable’, nor does it mean that you will actually collect on any Attorney Fee award you receive. Review your Collectability Assessment in Phase 4.</span></li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney, continually evaluate your attorney fees and work with your attorney as a team. To learn more go to the <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        </ul>
+                        </li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney and do not have an Attorney Fee provision in a contract with your adversary, you could end up with a large attorney fee bill. Continually evaluate your attorney fees and work with your attorney as a team as described in our<a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        <li><span style="font-weight: 400;">If the Upper Civil Court (UCC) system is your Forum:</span></li>
+                        <li><span style="font-weight: 400;">Move forward with your case only after proposing a Multi-Step ADR agreement to your adversary available in our <a href="”https://lawsuitanalysis.com/mediation/”">Mediation</a> or<a href="”https://lawsuitanalysis.com/arbitration/”">Arbitration</a>Resources. If your adversary does not agree, proceed down this list.</span></li>
+                        <li><span style="font-weight: 400;">Mediation or some type of settlement procedure should be considered again and again as your case winds through the system. To learn more go to our<a href="”https://lawsuitanalysis.com/upper-civil-courts/”"> Upper Civil Courts Resource </a>which targets specific points when settlement evaluation should be considered. It’s never too late to settle and to be in charge of your own destiny instead of waiting for an overworked judge or disinterested jury to decide your fate.</span></li>
+                        <li><span style="font-weight: 400;">If your adversary counter sues you, adopt more of a conciliatory stance since you are now also a defendant.</span></li>
+                        <li><span style="font-weight: 400;">Make sure your decisions are made as objectively as possible and are not clouded by ego.</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">This page will be emailed to you when you complete Lawsuit Analyzer<em><sup>©</sup></em>.</span></p>
+                        <h3>The Case of the Crafty Computer Consultant</h3>
+                        <p><span style="font-weight: 400;">Betty’s feasibility rating is 78% out of 100% which is reasonably good. She followed her Feasibility Recommendations and recapped her situation like this.</span><br>
+                        <span style="font-weight: 400;">She’s had about five discussions with Crafty trying to resolve their dispute. She recently sent a demand letter advising that she intends to proceed with a lawsuit against him. Betty feels she has done everything she can to settle without the help of a Mediator. She is headed for the complex Upper Civil Court system and the least expensive attorney she could find to represent her is $350 per hour. She’ll get most of what she pays back since she her agreement with Crafty includes an Attorney Fee provision (if she is able to collect on her judgment), but she’ll be out-of-pocket those attorney fees as her case proceeds the slow road to trial.</span></p>
+                        <p><span style="font-weight: 400;">She does not have an Arbitration agreement with Crafty, so she will now present Chris with an ADR Agreement first calling for Mediation and if unsuccessful Arbitration, making the long and expensive road ahead the enemy instead of one another. If Crafty does not agree to these alternative procedures, Betty should again consider reducing her claim to an amount that fits the Small Claims limit. Betty’s Recoverable Damages are $9,720, but her Net Damages projected to reflect her result after trial are $7,498, closer to the Small Claims limit of $3,500 in her state. Is it worth it to her to give up $4,000 to obtain a quick and easy judgment before the Small Claims court?</span></p>
+                        <p><span style="font-weight: 400;">She will talk to her accountant and see if she can write off the difference and make her decision after that. She’s feeling that she just wants to end it all soon, gaining something but not all she feels entitled to. She feels that putting her energy into growing her business is far more productive than a long, involved court battle. She also understands the court system is far from perfect and she could end up a loser paying Crafty’s attorney fees in the process. She doesn’t feel like taking this risk.</span></p>
+                        <p><span style="font-weight: 400;">Next up is Phase 7, the concluding segment of Lawsuit Analyzer<em><sup>©</sup></em> which directs you to the appropriate Forum for your dispute and provides you with the resources you need to move ahead.</span></p>
+                    </div>
+
+                    <div id="phase-6-mail-2" style="display: none;">
+                        <p><span style="font-weight: 400;">Feasibility Assessment answers the ultimate question:</span></p>
+                        <p style="text-align: center;"><span style="color: red;">Should you pursue your case, and if so, how?</span></p>
+                        <p><span style="font-weight: 400;">Feasibility assessment gives you the fruits of the labor you have put into answering Lawsuit Analyzer<em><sup>©</sup></em>’s multitude of questions. In the days and weeks ahead read and ponder your recommendations carefully, some of which may be:</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">What steps should you take before moving forward?</span></li>
+                        <li><span style="font-weight: 400;">Should you reduce your claim to fit into Small Claims?</span></li>
+                        <li><span style="font-weight: 400;">Is collectability a big problem for you?</span></li>
+                        <li><span style="font-weight: 400;">What are the most important issues for you to consider?</span></li>
+                        <li><span style="font-weight: 400;">If your contract has an Attorney Fee provision, are you prepared to take the risk that you might lose and have to pay your adversary’s attorney fees?</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">Don’t allow yourself to just barrel ahead with an emotional charge. Take the steps recommended. Consider all consequences. Go slowly with a clear state of mind.</span></p>
+                        <p style="text-align: center;"><span style="color: #547391; text-align: center;">Your Case Feasibility Rating is 91% and above</span></p>
+                        <p><span style="font-weight: 400;">Your case feasibility is very good. There are many variables that put you in this feasibility category, so take what applies to your case and skip what does not.</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">Review your Phase 5 Comprehensive Case Analysis to better understand the strengths and weaknesses of your case and try to improve on weaknesses.</span></li>
+                        <li><span style="font-weight: 400;">When you complete Lawsuit Analyzer<em><sup>©</sup></em> go to the <a href="”https://lawsuitanalysis.com/resources/”">Lawsuit Analyzer<em><sup>©</sup></em> Resource page</a> to get more insight into your results (your results pages will be e-mailed to you as a reminder).</span></li>
+                        <li><span style="font-weight: 400;">If your Collectability Assessment is low, again consider reducing your settlement demand or reducing your damages to fit within the Small Claims limit so you will have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">Prepare and send a Demand Letter to your adversary. Review the<a href="”https://lawsuitanalysis.com/Demand-Letter/”"> Demand Letter Resource.</a></span></li>
+                        <li><span style="font-weight: 400;">If Small Claims or Arbitration is your first or second Forum as you will discover soon, move forward if settlement efforts fail. Your dispute should be determined relatively soon.</span></li>
+                        <li><span style="font-weight: 400;">If your answers to Lawsuit Analyzer<em><sup>©</sup></em> change during the course of your case, work your case through Lawsuit Analyzer<em><sup>©</sup></em> again since your results may change.</span></li>
+                        <li><span style="font-weight: 400;">Constantly evaluate your case as it proceeds through the litigation process and make adjustments to your strategy. What worked before may no longer.</span></li>
+                        <li><span style="font-weight: 400;">If a contract with your adversary includes an Attorney Fee provision:</span>
+                        <ul>
+                        <li><span style="font-weight: 400;">Keep in mind that if you lose you could end up paying your adversary’s attorney fees.</span></li>
+                        <li><span style="font-weight: 400;">Keep in mind also that an Attorney Fee provision does not mean the court will approve all the attorney fees incurred, as some may not be deemed ‘reasonable’, nor does it mean that you will actually collect on any Attorney Fee award you receive. Review your Collectability Assessment in Phase 4.</span></li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney, continually evaluate your attorney fees and work with your attorney as a team. To learn more go to the <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        </ul>
+                        </li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney and do not have an Attorney Fee provision in a contract with your adversary, you could end up with a large attorney fee bill. Continually evaluate your attorney fees and work with your attorney as a team as described in our<a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        <li><span style="font-weight: 400;">If the Upper Civil Court (UCC) system is your Forum:</span></li>
+                        <li><span style="font-weight: 400;">Move forward with your case only after proposing a Multi-Step ADR agreement to your adversary available in our <a href="”https://lawsuitanalysis.com/mediation/”">Mediation</a> or<a href="”https://lawsuitanalysis.com/arbitration/”">Arbitration</a>Resources. If your adversary does not agree, proceed down this list.</span></li>
+                        <li><span style="font-weight: 400;">Mediation or some type of settlement procedure should be considered again and again as your case winds through the system. To learn more go to our<a href="”https://lawsuitanalysis.com/upper-civil-courts/”"> Upper Civil Courts Resource </a>which targets specific points when settlement evaluation should be considered. It’s never too late to settle and to be in charge of your own destiny instead of waiting for an overworked judge or disinterested jury to decide your fate.</span></li>
+                        <li><span style="font-weight: 400;">If your adversary counter sues you, adopt more of a conciliatory stance since you are now also a defendant.</span></li>
+                        <li><span style="font-weight: 400;">Make sure your decisions are made as objectively as possible and are not clouded by ego.</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">This page will be emailed to you when you complete Lawsuit Analyzer<em><sup>©</sup></em>.</span></p>
+                        <h3>The Case of the Crafty Computer Consultant</h3>
+                        <p><span style="font-weight: 400;">Betty’s feasibility rating is 78% out of 100% which is reasonably good. She followed her Feasibility Recommendations and recapped her situation like this.</span><br>
+                        <span style="font-weight: 400;">She’s had about five discussions with Crafty trying to resolve their dispute. She recently sent a demand letter advising that she intends to proceed with a lawsuit against him. Betty feels she has done everything she can to settle without the help of a Mediator. She is headed for the complex Upper Civil Court system and the least expensive attorney she could find to represent her is $350 per hour. She’ll get most of what she pays back since she her agreement with Crafty includes an Attorney Fee provision (if she is able to collect on her judgment), but she’ll be out-of-pocket those attorney fees as her case proceeds the slow road to trial.</span></p>
+                        <p><span style="font-weight: 400;">She does not have an Arbitration agreement with Crafty, so she will now present Chris with an ADR Agreement first calling for Mediation and if unsuccessful Arbitration, making the long and expensive road ahead the enemy instead of one another. If Crafty does not agree to these alternative procedures, Betty should again consider reducing her claim to an amount that fits the Small Claims limit. Betty’s Recoverable Damages are $9,720, but her Net Damages projected to reflect her result after trial are $7,498, closer to the Small Claims limit of $3,500 in her state. Is it worth it to her to give up $4,000 to obtain a quick and easy judgment before the Small Claims court?</span></p>
+                        <p><span style="font-weight: 400;">She will talk to her accountant and see if she can write off the difference and make her decision after that. She’s feeling that she just wants to end it all soon, gaining something but not all she feels entitled to. She feels that putting her energy into growing her business is far more productive than a long, involved court battle. She also understands the court system is far from perfect and she could end up a loser paying Crafty’s attorney fees in the process. She doesn’t feel like taking this risk.</span></p>
+                        <p><span style="font-weight: 400;">Next up is Phase 7, the concluding segment of Lawsuit Analyzer<em><sup>©</sup></em> which directs you to the appropriate Forum for your dispute and provides you with the resources you need to move ahead.</span></p>
+                    </div>
+
+                    <div id="phase-6-mail-3" style="display: none;">
+                        <p><span style="font-weight: 400;">Feasibility Assessment answers the ultimate question:</span></p>
+                        <p style="text-align: center;"><span style="color: red;">Should you pursue your case, and if so, how?</span></p>
+                        <p><span style="font-weight: 400;">Feasibility assessment gives you the fruits of the labor you have put into answering Lawsuit Analyzer<em><sup>©</sup></em>’s multitude of questions. In the days and weeks ahead read and ponder your recommendations carefully, some of which may be:</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">What steps should you take before moving forward?</span></li>
+                        <li><span style="font-weight: 400;">Should you reduce your claim to fit into Small Claims?</span></li>
+                        <li><span style="font-weight: 400;">Is collectability a big problem for you?</span></li>
+                        <li><span style="font-weight: 400;">What are the most important issues for you to consider?</span></li>
+                        <li><span style="font-weight: 400;">If your contract has an Attorney Fee provision, are you prepared to take the risk that you might lose and have to pay your adversary’s attorney fees?</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">Don’t allow yourself to just barrel ahead with an emotional charge. Take the steps recommended. Consider all consequences. Go slowly with a clear state of mind.</span></p>
+                        <p style="text-align: center;"><span style="color: #547391; text-align: center;">Your Case Feasibility Rating is 71% – 80%</span></p>
+                        <p><span style="font-weight: 400;">Your case feasibility is reasonably good. There are many variables that put you in this feasibility category, so take what applies to your case and skip what does not.</span></p>
+                        <ul>
+                        <ul>
+                        <li><span style="font-weight: 400;">Review your Phase 5 Comprehensive Case Analysis to better understand the strengths and weaknesses of your case and try to improve on weaknesses.</span></li>
+                        <li><span style="font-weight: 400;">When you complete Lawsuit Analyzer<em><sup>©</sup></em> go to the <a href="”https://lawsuitanalysis.com/resources/”">Lawsuit Analyzer<em><sup>©</sup></em> Resource page</a> to get more insight into your results (your results pages will be e-mailed to you as a reminder).</span></li>
+                        <li><span style="font-weight: 400;">If your Collectability Assessment is low, again consider reducing your settlement demand or reducing your damages to fit within the Small Claims limit so you will have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">Prepare and send a Demand Letter to your adversary. Review the<a href="”https://lawsuitanalysis.com/demand-letter/”"> Demand Letter Resource</a>.</span></li>
+                        <li><span style="font-weight: 400;">If Small Claims or Arbitration is your first or second Forum as you will discover soon, move forward if settlement efforts fail. Your dispute should be determined relatively soon.</span></li>
+                        <li><span style="font-weight: 400;">If your answers to Lawsuit Analyzer<em><sup>©</sup></em> change during the course of your case, work your case through Lawsuit Analyzer<em><sup>©</sup></em> again since your results may change.</span></li>
+                        <li><span style="font-weight: 400;">Constantly evaluate your case as it proceeds through the litigation process and make adjustments to your strategy. What worked before may no longer.</span></li>
+                        <li><span style="font-weight: 400;">If a contract with your adversary includes an Attorney Fee provision:</span></li>
+                        <ul>
+                        <li><span style="font-weight: 400;">Keep in mind that if you lose you could end up paying your adversary’s attorney fees.</span></li>
+                        <li><span style="font-weight: 400;">Keep in mind also that an Attorney Fee provision does not mean the court will approve all the attorney fees incurred, as some may not be deemed ‘reasonable’, nor does it mean that you will actually collect on any Attorney Fee award you receive. Review your Collectability Assessment in Phase 4.</span></li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney, continually evaluate your attorney fees and work with your attorney as a team. To learn more go to the <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        </ul>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney and do not have an Attorney Fee provision in a contract with your adversary, you could end up with a large attorney fee bill. Continually evaluate your attorney fees and work with your attorney as a team as described in our <a href="”https://lawsuitanalysis.com/Hiring-a-Lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        <li><span style="font-weight: 400;">If the Upper Civil Court (UCC) system is your Forum:</span></li>
+                        <li><span style="font-weight: 400;">Move forward with your case only after proposing a Multi-Step ADR agreement to your adversary available in our <a href="”https://lawsuitanalysis.com/mediation/”">Mediation</a> or <a href="”https://lawsuitanalysis.com/arbitration/”">Arbitration</a> Resources. If your adversary does not agree, proceed down this list.</span></li>
+                        </ul>
+                        </ul>
+                        <ul>
+                        <li><span style="font-weight: 400;">Mediation or some type of settlement procedure should be considered again and again as your case winds through the system. To learn more go to our<a href="”https://lawsuitanalysis.com/upper-civil-courts/”"> Upper Civil Courts Resource</a> which targets specific points when settlement evaluation should be considered. It’s never too late to settle and to be in charge of your own destiny instead of waiting for an overworked judge or disinterested jury to decide your fate.</span></li>
+                        <li><span style="font-weight: 400;">If your adversary counter sues you, adopt more of a conciliatory stance since you are now also a defendant.</span></li>
+                        <li><span style="font-weight: 400;">Make sure your decisions are made as objectively as possible and are not clouded by ego.</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">This page will be emailed to you when you complete Lawsuit Analyzer<em><sup>©</sup></em>.</span></p>
+                        <h3>The Case of the Crafty Computer Consultant</h3>
+                        <p><span style="font-weight: 400;">Betty’s feasibility rating is 78% out of 100% which is reasonably good. She followed her Feasibility Recommendations and recapped her situation like this.</span><br>
+                        <span style="font-weight: 400;">She’s had about five discussions with Crafty trying to resolve their dispute. She recently sent a demand letter advising that she intends to proceed with a lawsuit against him. Betty feels she has done everything she can to settle without the help of a Mediator. She is headed for the complex Upper Civil Court system and the least expensive attorney she could find to represent her is $350 per hour. She’ll get most of what she pays back since she her agreement with Crafty includes an Attorney Fee provision (if she is able to collect on her judgment), but she’ll be out-of-pocket those attorney fees as her case proceeds the slow road to trial.</span></p>
+                        <p><span style="font-weight: 400;">She does not have an Arbitration agreement with Crafty, so she will now present Chris with an ADR Agreement first calling for Mediation and if unsuccessful Arbitration, making the long and expensive road ahead the enemy instead of one another. If Crafty does not agree to these alternative procedures, Betty should again consider reducing her claim to an amount that fits the Small Claims limit. Betty’s Recoverable Damages are $9,720, but her Net Damages projected to reflect her result after trial are $7,498, closer to the Small Claims limit of $3,500 in her state. Is it worth it to her to give up $4,000 to obtain a quick and easy judgment before the Small Claims court?</span></p>
+                        <p><span style="font-weight: 400;">She will talk to her accountant and see if she can write off the difference and make her decision after that. She’s feeling that she just wants to end it all soon, gaining something but not all she feels entitled to. She feels that putting her energy into growing her business is far more productive than a long, involved court battle. She also understands the court system is far from perfect and she could end up a loser paying Crafty’s attorney fees in the process. She doesn’t feel like taking this risk.</span></p>
+                        <p><span style="font-weight: 400;">Next up is Phase 7, the concluding segment of Lawsuit Analyzer<em><sup>©</sup></em> which directs you to the appropriate Forum for your dispute and provides you with the resources you need to move ahead.</span></p>
+                    </div>
+
+                    <div id="phase-6-mail-4" style="display: none;">
+                        <p><span style="font-weight: 400;">Feasibility Assessment answers the ultimate question:</span></p>
+                        <p style="text-align: center;"><span style="color: red;">Should you pursue your case, and if so, how?</span></p>
+                        <p><span style="font-weight: 400;">Feasibility assessment gives you the fruits of the labor you have put into answering Lawsuit Analyzer<em><sup>©</sup></em>’s multitude of questions. In the days and weeks ahead read and ponder your recommendations carefully, some of which may be:</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">What steps should you take before moving forward?</span></li>
+                        <li><span style="font-weight: 400;">Should you reduce your claim to fit into Small Claims?</span></li>
+                        <li><span style="font-weight: 400;">Is collectability a big problem for you?</span></li>
+                        <li><span style="font-weight: 400;">What are the most important issues for you to consider?</span></li>
+                        <li><span style="font-weight: 400;">If your contract has an Attorney Fee provision, are you prepared to take the risk that you might lose and have to pay your adversary’s attorney fees?</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">Don’t allow yourself to just barrel ahead with an emotional charge. Take the steps recommended. Consider all consequences. Go slowly with a clear state of mind.</span></p>
+                        <p style="text-align: center;"><span style="color: #547391; text-align: center;">Case Feasibility Rating is 61% -70%</span></p>
+                        <p><span style="font-weight: 400;">Your case feasibility is above average. There are many variables that put you in this feasibility category, so take what applies to your case and skip what does not.</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">Review your Phase 5 Comprehensive Case Analysis to better understand the strengths and weaknesses of your case and try to improve on weaknesses.</span></li>
+                        <li><span style="font-weight: 400;">When you complete Lawsuit Analyzer<em><sup>©</sup></em> go to the <a href="”https://lawsuitanalysis.com/resources/”">Lawsuit Analyzer<em><sup>©</sup></em> Resource page</a> to get more insight into your results (your results pages will be e-mailed to you as a reminder).</span></li>
+                        <li><span style="font-weight: 400;">If your Collectability Assessment is low, again consider reducing your settlement demand or reducing your damages to fit within the Small Claims limit so you will have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">Prepare and send a Demand Letter to your adversary. Review the<a href="”https://lawsuitanalysis.com/demand-letter/”"> Demand Letter Resource</a>.</span></li>
+                        <li><span style="font-weight: 400;">If Small Claims or Arbitration is your first or second Forum as you will discover soon, move forward if settlement efforts fail. Your dispute should be determined relatively soon.</span></li>
+                        <li><span style="font-weight: 400;">If your answers to Lawsuit Analyzer<em><sup>©</sup></em> change during the course of your case, work your case through Lawsuit Analyzer<em><sup>©</sup></em> again since your results may change.</span></li>
+                        <li><span style="font-weight: 400;">Constantly evaluate your case as it proceeds through the litigation process and make adjustments to your strategy. What worked before may no longer.</span></li>
+                        <li><span style="font-weight: 400;">If a contract with your adversary includes an Attorney Fee provision:</span>
+                        <ul>
+                        <li><span style="font-weight: 400;">Keep in mind that if you lose you could end up paying your adversary’s attorney fees.</span></li>
+                        <li><span style="font-weight: 400;">Keep in mind also that an Attorney Fee provision does not mean the court will approve all the attorney fees incurred, as some may not be deemed ‘reasonable’, nor does it mean that you will actually collect on any Attorney Fee award you receive. Review your Collectability Assessment in Phase 4.</span></li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney, continually evaluate your attorney fees and work with your attorney as a team. To learn more go to the <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        </ul>
+                        </li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney and do not have an Attorney Fee provision in a contract with your adversary, you could end up with a large attorney fee bill. Continually evaluate your attorney fees and work with your attorney as a team as described in our <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        <li><span style="font-weight: 400;">If the Upper Civil Court (UCC) system is your Forum:</span></li>
+                        <li><span style="font-weight: 400;">Move forward with your case only after proposing a Multi-Step ADR agreement to your adversary available in our <a href="”https://lawsuitanalysis.com/mediation/”">Mediation</a> or<a href="”https://lawsuitanalysis.com/arbitration/”"> Arbitration</a> Resources. If your adversary does not agree, proceed down this list.</span></li>
+                        <li><span style="font-weight: 400;">Since your feasibility rating is only above average, do everything you can to get your case decided soon. Taking an above average case down the long and winding road of the UCC system could have unsettling consequences. If your adversary does not agree, proceed down this list.</span></li>
+                        <li><span style="font-weight: 400;">Mediation or some type of settlement procedure should be considered again and again as your case winds through the system. To learn more go to our <a href="”https://lawsuitanalysis.com/upper-civil-courts/”">Upper Civil Courts Resource</a> which targets specific points when settlement evaluation should be considered. It’s never too late to settle and to be in charge of your own destiny instead of waiting for an overworked judge or disinterested jury to decide your fate.</span></li>
+                        <li><span style="font-weight: 400;">If your adversary counter sues you, adopt more of a conciliatory stance since you are now also a defendant.</span></li>
+                        <li><span style="font-weight: 400;">Make sure your decisions are made as objectively as possible and are not clouded by ego.</span></li>
+                        <li><span style="font-weight: 400;">This page will be emailed to you when you complete Lawsuit Analyzer<em><sup>©</sup></em>. </span><br>
+                        <h3>The Case of the Crafty Computer Consultant</h3>
+                        <p><span style="font-weight: 400;">Betty’s feasibility rating is 78% out of 100% which is reasonably good. She followed her Feasibility Recommendations and recapped her situation like this.</span><br>
+                        <span style="font-weight: 400;">She’s had about five discussions with Crafty trying to resolve their dispute. She recently sent a demand letter advising that she intends to proceed with a lawsuit against him. Betty feels she has done everything she can to settle without the help of a Mediator. She is headed for the complex Upper Civil Court system and the least expensive attorney she could find to represent her is $350 per hour. She’ll get most of what she pays back since she her agreement with Crafty includes an Attorney Fee provision (if she is able to collect on her judgment), but she’ll be out-of-pocket those attorney fees as her case proceeds the slow road to trial.</span></p>
+                        <p><span style="font-weight: 400;">She does not have an Arbitration agreement with Crafty, so she will now present Chris with an ADR Agreement first calling for Mediation and if unsuccessful Arbitration, making the long and expensive road ahead the enemy instead of one another. If Crafty does not agree to these alternative procedures, Betty should again consider reducing her claim to an amount that fits the Small Claims limit. Betty’s Recoverable Damages are $9,720, but her Net Damages projected to reflect her result after trial are $7,498, closer to the Small Claims limit of $3,500 in her state. Is it worth it to her to give up $4,000 to obtain a quick and easy judgment before the Small Claims court?</span></p>
+                        <p><span style="font-weight: 400;">She will talk to her accountant and see if she can write off the difference and make her decision after that. She’s feeling that she just wants to end it all soon, gaining something but not all she feels entitled to. She feels that putting her energy into growing her business is far more productive than a long, involved court battle. She also understands the court system is far from perfect and she could end up a loser paying Crafty’s attorney fees in the process. She doesn’t feel like taking this risk.</span></p>
+                        <p><span style="font-weight: 400;">Next up is Phase 7, the concluding segment of Lawsuit Analyzer<em><sup>©</sup></em> which directs you to the appropriate Forum for your dispute and provides you with the resources you need to move ahead.</span></p></li>
+                        </ul>
+                    </div>
+
+                    <div id="phase-6-mail-5" style="display: none;">
+                        <p><span style="font-weight: 400;">Feasibility Assessment answers the ultimate question:</span></p>
+                        <p style="text-align: center;"><span style="color: red;">Should you pursue your case, and if so, how?</span></p>
+                        <p><span style="font-weight: 400;">Feasibility assessment gives you the fruits of the labor you have put into answering Lawsuit Analyzer<em><sup>©</sup></em>’s multitude of questions. In the days and weeks ahead read and ponder your recommendations carefully, some of which may be:</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">What steps should you take before moving forward?</span></li>
+                        <li><span style="font-weight: 400;">Should you reduce your claim to fit into Small Claims?</span></li>
+                        <li><span style="font-weight: 400;">Is collectability a big problem for you?</span></li>
+                        <li><span style="font-weight: 400;">What are the most important issues for you to consider?</span></li>
+                        <li><span style="font-weight: 400;">If your contract has an Attorney Fee provision, are you prepared to take the risk that you might lose and have to pay your adversary’s attorney fees?</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">Don’t allow yourself to just barrel ahead with an emotional charge. Take the steps recommended. Consider all consequences. Go slowly with a clear state of mind.</span></p>
+                        <p style="text-align: center;"><span style="color: #547391; text-align: center;">Your Case Feasibility Rating is 51% -60%</span></p>
+                        <p><span style="font-weight: 400;">Your case feasibility is average. There are many variables that put you in this feasibility category, so take what applies to your case and skip what does not.</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">Review your Phase 5 Comprehensive Case Analysis to better understand the strengths and weaknesses of your case and try to improve on weaknesses.</span></li>
+                        <li><span style="font-weight: 400;">When you complete Lawsuit Analyzer<em><sup>©</sup></em> go to the<a href="”https://lawsuitanalysis.com/resources/”"> Lawsuit Analyzer<em><sup>©</sup></em> Resource page</a> to get more insight into your results (your results pages will be e-mailed to you as a reminder).</span></li>
+                        <li><span style="font-weight: 400;">If your Collectability Assessment is low, again consider reducing your settlement demand or reducing your damages to fit within the Small Claims limit so you will have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">Prepare and send a Demand Letter to your adversary. Review the<a href="”https://lawsuitanalysis.com/demand-letter/”"> Demand Letter Resource</a>.</span></li>
+                        <li><span style="font-weight: 400;">If Small Claims or Arbitration is your first or second Forum as you will discover soon, move forward if settlement efforts fail. Your dispute should be determined relatively soon.</span></li>
+                        <li><span style="font-weight: 400;">If your answers to Lawsuit Analyzer<em><sup>©</sup></em> change during the course of your case, work your case through Lawsuit Analyzer<em><sup>©</sup></em> again since your results may change.</span></li>
+                        <li><span style="font-weight: 400;">Constantly evaluate your case as it proceeds through the litigation process and make adjustments to your strategy. What worked before may no longer.</span></li>
+                        <li><span style="font-weight: 400;">If a contract with your adversary includes an Attorney Fee provision:</span>
+                        <ul>
+                        <li><span style="font-weight: 400;">Keep in mind that if you lose you could end up paying your adversary’s attorney fees.</span></li>
+                        <li><span style="font-weight: 400;">Keep in mind also that an Attorney Fee provision does not mean the court will approve all the attorney fees incurred, as some may not be deemed ‘reasonable’, nor does it mean that you will actually collect on any Attorney Fee award you receive. Review your Collectability Assessment in Phase 4.</span></li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney, continually evaluate your attorney fees and work with your attorney as a team. To learn more go to the <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        </ul>
+                        </li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney and do not have an Attorney Fee provision in a contract with your adversary, you could end up with a large attorney fee bill. Continually evaluate your attorney fees and work with your attorney as a team as described in our<a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”"> Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much.</span></li>
+                        <li><span style="font-weight: 400;">If the Upper Civil Court (UCC) system is your Forum:</span></li>
+                        <li><span style="font-weight: 400;">Move forward with your case only after proposing a Multi-Step ADR agreement to your adversary available in our <a href="”https://lawsuitanalysis.com/mediation/”">Mediation</a> or <a href="”https://lawsuitanalysis.com/arbitration/”">Arbitration</a> Resources. Since your feasibility rating is only average, do everything you can to get your case decided soon. Taking an average case down the long and winding road of the UCC system could have grave consequences. If your adversary does not agree, proceed down this list.</span></li>
+                        <li><span style="font-weight: 400;">Mediation or some type of settlement procedure should be considered again and again as your case winds through the system. To learn more go to our <a href="”https://lawsuitanalysis.com/upper-civil-courts/”">Upper Civil Courts Resource</a> which targets specific points when settlement evaluation should be considered. It’s never too late to settle and to be in charge of your own destiny instead of waiting for an overworked judge or disinterested jury to decide your fate.</span></li>
+                        <li><span style="font-weight: 400;">If your adversary counter sues you, adopt more of a conciliatory stance since you are now also a defendant.</span></li>
+                        <li><span style="font-weight: 400;">Make sure your decisions are made as objectively as possible and are not clouded by ego.</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">This page will be emailed to you when you complete Lawsuit Analyzer<em><sup>©</sup></em>. </span></p>
+                        <h3 style="text-align: left;">The Case of the Crafty Computer Consultant</h3>
+                        <p><span style="font-weight: 400;">Betty’s feasibility rating is 78% out of 100% which is reasonably good. She followed her Feasibility Recommendations and recapped her situation like this.</span><br><span style="font-weight: 400;">She’s had about five discussions with Crafty trying to resolve their dispute. She recently sent a demand letter advising that she intends to proceed with a lawsuit against him. Betty feels she has done everything she can to settle without the help of a Mediator. She is headed for the complex Upper Civil Court system and the least expensive attorney she could find to represent her is $350 per hour. She’ll get most of what she pays back since she her agreement with Crafty includes an Attorney Fee provision (if she is able to collect on her judgment), but she’ll be out-of-pocket those attorney fees as her case proceeds the slow road to trial.</span></p>
+                        <p><span style="font-weight: 400;">She does not have an Arbitration agreement with Crafty, so she will now present Chris with an ADR Agreement first calling for Mediation and if unsuccessful Arbitration, making the long and expensive road ahead the enemy instead of one another. If Crafty does not agree to these alternative procedures, Betty should again consider reducing her claim to an amount that fits the Small Claims limit. Betty’s Recoverable Damages are $9,720, but her Net Damages projected to reflect her result after trial are $7,498, closer to the Small Claims limit of $3,500 in her state. Is it worth it to her to give up $4,000 to obtain a quick and easy judgment before the Small Claims court?</span></p>
+                        <p><span style="font-weight: 400;">She will talk to her accountant and see if she can write off the difference and make her decision after that. She’s feeling that she just wants to end it all soon, gaining something but not all she feels entitled to. She feels that putting her energy into growing her business is far more productive than a long, involved court battle. She also understands the court system is far from perfect and she could end up a loser paying Crafty’s attorney fees in the process. She doesn’t feel like taking this risk.</span></p>
+                        <p><span style="font-weight: 400;">Next up is Phase 7, the concluding segment of Lawsuit Analyzer<em><sup>©</sup></em> which directs you to the appropriate Forum for your dispute and provides you with the resources you need to move ahead.</span></p>
+                    </div>
+
+                    <div id="phase-6-mail-6" style="display: none;">
+                        <p><span style="font-weight: 400;">Feasibility Assessment answers the ultimate question:</span></p>
+                        <p style="text-align: center;"><span style="color: red;">Should you pursue your case, and if so, how?</span></p>
+                        <p><span style="font-weight: 400;">Feasibility assessment gives you the fruits of the labor you have put into answering Lawsuit Analyzer<em><sup>©</sup></em>’s multitude of questions. In the days and weeks ahead read and ponder your recommendations carefully, some of which may be:</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">What steps should you take before moving forward?</span></li>
+                        <li><span style="font-weight: 400;">Should you reduce your claim to fit into Small Claims?</span></li>
+                        <li><span style="font-weight: 400;">Is collectability a big problem for you?</span></li>
+                        <li><span style="font-weight: 400;">What are the most important issues for you to consider?</span></li>
+                        <li><span style="font-weight: 400;">If your contract has an Attorney Fee provision, are you prepared to take the risk that you might lose and have to pay your adversary’s attorney fees?</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">Don’t allow yourself to just barrel ahead with an emotional charge. Take the steps recommended. Consider all consequences. Go slowly with a clear state of mind.</span></p>
+                        <p style="text-align: center;"><span style="color: #547391; text-align: center;">Your Case Feasibility Rating is 50% and below</span></p>
+                        <p><span style="font-weight: 400;">There are many variables that put you in this feasibility category, so take what applies to your case and skip what does not.</span></p>
+                        <ul>
+                        <li><span style="font-weight: 400;">Review your Phase 5 Comprehensive Case Analysis to better understand the strengths and weaknesses of your case and try to improve on weaknesses.</span></li>
+                        <li><span style="font-weight: 400;">When you complete Lawsuit Analyzer<em><sup>©</sup></em> go to the <a href="”https://lawsuitanalysis.com/resources/”">Lawsuit Analyzer<em><sup>©</sup></em> Resource page</a> to get more insight into your results (your results pages will be e-mailed to you as a reminder).</span></li>
+                        <li><span style="font-weight: 400;">If your Collectability Assessment is low, again consider reducing your settlement demand or reducing your damages to fit within the Small Claims limit so you will have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">Prepare and send a Demand Letter to your adversary. Review the <a href="”https://lawsuitanalysis.com/demand-letter/”">Demand Letter Resource</a>. With this low of a feasibility rating, especially if you are in the lower range, consider reducing your settlement demand from the amount recommended in Phase 5 or reducing your damages to fit within the Small Claims limit so you will hopefully have resolution quickly and economically.</span></li>
+                        <li><span style="font-weight: 400;">If Small Claims or Arbitration is your first or second Forum, as you will discover soon, move forward if settlement efforts fail. Your dispute should be determined relatively soon and there isn’t much downside aside from losing if:</span></li>
+                        <li><span style="font-weight: 400;">You are at the high end of this range, and</span></li>
+                        <li><span style="font-weight: 400;">You feel reasonably confident about your case, and</span></li>
+                        <li><span style="font-weight: 400;">Your damages are high enough to warrant proceeding.</span></li>
+                        <li><span style="font-weight: 400;">If you are headed to Arbitration and you discover that your adversary will hire an attorney, think twice if there is an Attorney Fee provision in an agreement with your adversary since you could lose a whole lot more than your case.</span></li>
+                        <li><span style="font-weight: 400;">If your answers to Lawsuit Analyzer<em><sup>©</sup></em> change during the course of your case, work your case through Lawsuit Analyzer<em><sup>©</sup></em> again since your results may change.</span></li>
+                        <li><span style="font-weight: 400;">Constantly evaluate your case as it proceeds through the litigation process and make adjustments to your strategy. What worked before may no longer. With this low of a feasibility rating, if you encounter a bump in the road you might want to just give up. It’s simple to dismiss a case and might be a wise decision for you.</span></li>
+                        <li><span style="font-weight: 400;">If a contract with your adversary includes an Attorney Fee provision:</span>
+                        <ul>
+                        <li><span style="font-weight: 400;">Keep in mind that if you lose you could end up paying your adversary’s attorney fees.</span></li>
+                        <li><span style="font-weight: 400;">Keep in mind also that an Attorney Fee provision does not mean the court will approve all the attorney fees incurred, as some may not be deemed ‘reasonable’, nor does it mean that you will actually collect on any Attorney Fee award you receive. Review your Collectability Assessment in Phase 4.</span></li>
+                        <li><span style="font-weight: 400;">If you plan to hire an attorney, continually evaluate your attorney fees and work with your attorney as a team. To learn more go to the Hiring an Attorney Resource. Frequently weigh whether your potential recovery justifies spending so much, especially with this low of a feasibility rating.</span></li>
+                        </ul>
+                        </li>
+                        </ul>
+                        <p><span style="font-weight: 400;">If you plan to hire an attorney and do not have an Attorney Fee provision in a contract with your adversary, you could end up with a large attorney fee bill. Continually evaluate your attorney fees and work with your attorney as a team as described in our <a href="”https://lawsuitanalysis.com/hiring-a-lawyer/”">Hiring an Attorney Resource</a>. Frequently weigh whether your potential recovery justifies spending so much especially with this low of a feasibility rating.</span></p>
+                        <p><span style="font-weight: 400;">If the Upper Civil Court (UCC) system is your Forum:</span></p>
+                        <p><span style="font-weight: 400;">Taking a below average case down the long and winding road of the UCC system could have grave consequences. Move forward with your case only after proposing a Multi-Step ADR agreement to your adversary available in our <a href="”https://lawsuitanalysis.com/mediation/”">Mediation</a> or<a href="”https://lawsuitanalysis.com/arbitration/”">Arbitration</a> Resources. You need to contain your costs and time. Make sure the ADR Agreement states that Mediation will be no more than a half or full day. For Arbitration, provide that there will be no or little discovery and the Arbitration hearing will be limited to one day only. If your adversary does not agree, proceed cautiously if:</span></p>
+                        <ul>
+                        <li>
+                        <ul>
+                        <li><span style="font-weight: 400;">You are at the high end of this range, and</span></li>
+                        <li><span style="font-weight: 400;">You feel reasonably confident about your case, and</span></li>
+                        <li><span style="font-weight: 400;">Your damages are high enough to warrant proceeding.</span></li>
+                        </ul>
+                        </li>
+                        <li><span style="font-weight: 400;">If your feasibility is on the lower side of this range, you should give great thought to not pursuing your case. If you move ahead proceed very cautiously.</span></li>
+                        <li><span style="font-weight: 400;">Mediation or some type of settlement procedure should be considered again and again as your case winds through the system. To learn more go to our <a href="”https://lawsuitanalysis.com/upper-civil-courts/”">Upper Civil Courts Resource</a> which targets specific points when settlement evaluation should be considered. It’s never too late to settle and to be in charge of your own destiny instead of waiting for an overworked judge or disinterested jury to decide your fate.</span></li>
+                        <li><span style="font-weight: 400;">If your adversary counter sues you, adopt more of a conciliatory stance since you are now also a defendant.</span></li>
+                        <li><span style="font-weight: 400;">Make sure your decisions are made as objectively as possible and are not clouded by ego.</span></li>
+                        </ul>
+                        <p><span style="font-weight: 400;">This page will be emailed to you when you complete Lawsuit Analyzer<em><sup>©</sup></em>. </span></p>
+                        <h3>The Case of the Crafty Computer Consultant</h3>
+                        <p><span style="font-weight: 400;">Betty’s feasibility rating is 78% out of 100% which is reasonably good. She followed her Feasibility Recommendations and recapped her situation like this.</span><br><span style="font-weight: 400;">She’s had about five discussions with Crafty trying to resolve their dispute. She recently sent a demand letter advising that she intends to proceed with a lawsuit against him. Betty feels she has done everything she can to settle without the help of a Mediator. She is headed for the complex Upper Civil Court system and the least expensive attorney she could find to represent her is $350 per hour. She’ll get most of what she pays back since she her agreement with Crafty includes an Attorney Fee provision (if she is able to collect on her judgment), but she’ll be out-of-pocket those attorney fees as her case proceeds the slow road to trial.</span></p>
+                        <p><span style="font-weight: 400;">She does not have an Arbitration agreement with Crafty, so she will now present Chris with an ADR Agreement first calling for Mediation and if unsuccessful Arbitration, making the long and expensive road ahead the enemy instead of one another. If Crafty does not agree to these alternative procedures, Betty should again consider reducing her claim to an amount that fits the Small Claims limit. Betty’s Recoverable Damages are $9,720, but her Net Damages projected to reflect her result after trial are $7,498, closer to the Small Claims limit of $3,500 in her state. Is it worth it to her to give up $4,000 to obtain a quick and easy judgment before the Small Claims court?</span></p>
+                        <p><span style="font-weight: 400;">She will talk to her accountant and see if she can write off the difference and make her decision after that. She’s feeling that she just wants to end it all soon, gaining something but not all she feels entitled to. She feels that putting her energy into growing her business is far more productive than a long, involved court battle. She also understands the court system is far from perfect and she could end up a loser paying Crafty’s attorney fees in the process. She doesn’t feel like taking this risk.</span></p>
+                        <p><span style="font-weight: 400;">Next up is Phase 7, the concluding segment of Lawsuit Analyzer<em><sup>©</sup></em> which directs you to the appropriate Forum for your dispute and provides you with the resources you need to move ahead.</span></p>
+                    </div>
+
+                <hr style="color:grey; text-align: center;">
+
+                <div class = "html2pdf__page-break"></div>
+
+                <h1 style="text-align: center; color: #9E2D2D">Lawsuit Analyzer<sup>©</sup> </h1>
+
+                <p style="text-align: center;"><strong style="color: black !important; text-align: center !important;">Your Phase 7 Forum Assessment</strong></p>
+
+                    <div class="results">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-12 d-flex justify-content-center justify-content-md-end" >
+                                <h4>Forum:</h4>
+                            </div>
+                            <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-center" >
+                                <p id="ResultStep7_1-result"></p>
+                            </div>
+                        </div>
+                        <div id = "MediationYes-result" style="display: none;">
+                            <div class = "row">
+                                <div class="col d-flex justify-content-center" >
+                                    <p style="color: #9E2D2D;" >If Mediation is unsuccessful, your next step is the Forum below.</p>
+                                </div>
+                            </div>
+                            <div class = "row" >
+                                <div class="col-lg-5 col-sm-12 d-flex justify-content-center justify-content-md-end" >
+                                    <h4>Forum:</h4>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 d-flex justify-content-center justify-content-md-center" >
+                                    <p id="ResultStep7_2-result"></p>
+                                </div>                                                        
+                            </div>
+                        </div>
+                    </div>                 
+
+                    <div style="overflow:auto; margin: 2%;">
+                        <div style="text-align: center;">
+                            <a id="nextBtn7-result" class="badge badge-info-ls">Go to </a>
+                        </div>
+                    </div>
+
+
+
+            </div>
+
         </div>
 
         <div id="modal_data_clear" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -1361,7 +1865,6 @@
         $('#input-2-14-1').change(function () { 
             if (!isNaN(parseInt($(this).val().replace(",",""),10))){
                 var val = parseInt($(this).val().replace(",",""),10) / 2
-                console.log('Probando este. ')
                 $('#input-2-14-2').val(SeparadorMiles(val));
             }
         });
@@ -1762,7 +2265,8 @@
         //SmallClaimLoad
         for (var i = 0; i <= SmallClaimsTable.length; i++) {
             $('#select-3-16').append('<option value="' + SmallClaimsTable[i]['Abrev'] + '">' + SmallClaimsTable[i]['State'] + '</option>');
-        }
+        };
+        
     });
 
     // executes when complete page is fully loaded, including all frames, objects and images
@@ -1786,18 +2290,77 @@
     //Script to End the Analyzer
     function gotolink() {
         var textButton =  $('#nextBtn7').text();
-        var FinalURL = ''
-        if (textButton.includes('Go To Mediation')) { FinalURL = 'https://lawsuitanalysis.com/mediation-resource/' }
-        if (textButton.includes('Go To Binding Arbitration')) { FinalURL = 'https://lawsuitanalysis.com/arbitration-resource/' }
-        if (textButton.includes('Go To Small Claims')) { FinalURL = 'https://lawsuitanalysis.com/small-claims-resource/'      }
-        if (textButton.includes('Go To Upper Civil Court')) { FinalURL = 'https://lawsuitanalysis.com/upper-civil-courts-resource/' }
-        var win = window.open(FinalURL, '_blank');
-        win.focus();
-        MailQuiz(DataForm);
-        EndQuiz();
-        window.location.href = "https://lawsuitanalysis.com/analyzer/logout.php"
+        var FinalURL = '';
+        var mailTo = $('#emailSummary').val();
+        if (validateMail(mailTo)){
+            print2pdf('email_result',mailTo);
+            if (textButton.includes('Go To Mediation')) { FinalURL = 'https://lawsuitanalysis.com/mediation-resource/' }
+            if (textButton.includes('Go To Binding Arbitration')) { FinalURL = 'https://lawsuitanalysis.com/arbitration-resource/' }
+            if (textButton.includes('Go To Small Claims')) { FinalURL = 'https://lawsuitanalysis.com/small-claims-resource/'      }
+            if (textButton.includes('Go To Upper Civil Court')) { FinalURL = 'https://lawsuitanalysis.com/upper-civil-courts-resource/' }
+            var win = window.open(FinalURL, '_blank');
+            win.focus();
+            EndQuiz();
+            window.location.href = "https://lawsuitanalysis.com/"
+        } else {
+            $('#emailSummary').css('background-color', '#ffdddd');
+            $('#emailSummary_error').show();
+            setTimeout(() => {
+                $('#emailSummary').css('background-color', '#ffffff');
+                $('#emailSummary_error').hide();                
+            }, 2500);
+        }
     }
 
+    //Scrip to Download and Email the Results
+    function print2pdf(id,emailTo) {
+        var license = get_session('lk');
+        var element = document.getElementById(id);
+        if ($('#ResultStep6').text().includes('91% and above')){$("#phase-6-mail-1").show();}
+        if ($('#ResultStep6').text().includes('81% to 90%')){$("#phase-6-mail-2").show();}
+        if ($('#ResultStep6').text().includes('71% to 80%')){$("#phase-6-mail-3").show();}
+        if ($('#ResultStep6').text().includes('61% to 70%')){$("#phase-6-mail-4").show();}
+        if ($('#ResultStep6').text().includes('51% to 60%')){$("#phase-6-mail-5").show();}
+        if ($('#ResultStep6').text().includes('50% and below')){$("#phase-6-mail-6").show();}
+        $('#' + id).show();
+        html2pdf().from(element).save();
+        info_PDf =  $('#' + id).html();
+        $.ajax({
+            url: 'API/sml.php',
+            data: {file: info_PDf,mailTo: emailTo },
+            dataType: 'json',
+            type: 'POST',
+            success: function(data){
+                console.log('Finish.');
+            }
+        });
+
+        setTimeout(() => {
+            $('#' + id).hide();
+            $("#phase-6-mail-1").hide();
+            $("#phase-6-mail-2").hide();
+            $("#phase-6-mail-3").hide();
+            $("#phase-6-mail-4").hide();
+            $("#phase-6-mail-5").hide();
+            $("#phase-6-mail-6").hide();                   
+        },250);
+    };
+
+    //Validate mail before send
+    function validateMail(field){
+        var resp = false;
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if (field.match(validRegex)) {
+            if (field.includes('example.com') || field.includes('domain.com') || field.includes('yourdomain.com') ){
+                resp = false;
+            } else {
+                resp = true;
+            }
+        } else {
+            resp = false;
+        };
+        return resp;
+    };
 
     //Script functions to DB
     function get_answers_form(user_lr){
@@ -1827,7 +2390,7 @@
                 success: function (response) {
                     $validacion = JSON.parse(response);
                     if (response) {
-                        var st = 1
+                        var st = 10
                         if ($validacion['st'] === 'Paid') {st = 10};
                         if ($validacion['st'] === 'Completed') {st = 100};
                         localStorage.setItem('user_lr', $validacion['lr'])
@@ -1882,11 +2445,14 @@
             result = "<?php if(isset($_SESSION['email'])){ echo $_SESSION['email'] ; } ?>";
             if (result !== '') {return  result } 
         }
+        if (key == 'lk'){
+            result = "<?php if(isset($_SESSION['lk'])){ echo $_SESSION['lk'] ; } ?>";
+            if (result !== '') {return  result } 
+        }
         return result  
     }
 
     function PutAnswData(Step,DataForm){
-        console.log('pushing..', DataForm)
         get_last_response(get_session('user_id'))
         var dataPut = [];
         var posit = 0;
@@ -1950,6 +2516,7 @@
         });        
     }
 
+
     //Printing Result From DB
     function print_answers(response){
         var obj = JSON.parse(response)
@@ -1963,11 +2530,17 @@
         $('#select-1-5').val(String(obj[5][1]));
         $('#ResultStep1Text1').text(String(obj[6][1]));
         //Step2
-        $('#input-2-7').val(SeparadorMiles(parseInt(obj[7][1] ,10)));
+        if (Number.isInteger(parseInt(obj[7][1] ,10))) {
+            $('#input-2-7').val(SeparadorMiles(parseInt(obj[7][1] ,10)));
+        };
         $('#select-2-8').val(String(obj[8][1]));
-        $('#input-2-8-1').val(SeparadorMiles(parseInt(obj[9][1])));
+        if (Number.isInteger(parseInt(obj[9][1]))){
+            $('#input-2-8-1').val(SeparadorMiles(parseInt(obj[9][1])));
+        };
         $('#select-2-9').val(String(obj[10][1]));
-        $('#input-2-9-1').val(SeparadorMiles(obj[11][1]));
+        if (Number.isInteger(parseInt(obj[11][1]))){
+            $('#input-2-9-1').val(SeparadorMiles(obj[11][1]));
+        };
         //
         $('#select-2-10').val(String(obj[13][1]));
             if (String(obj[13][1]) == 'yes'){
@@ -1978,8 +2551,12 @@
                 $('#input-2-10-2').val(0); 
             }
         $('#select-2-10-1').val(String(obj[14][1]));
-        $('#input-2-10-2').val(SeparadorMiles(parseInt(obj[15][1])));
-        $('#input-2-11').val(SeparadorMiles(parseInt(obj[16][1])));
+        if (Number.isInteger(parseInt(obj[15][1]))){
+            $('#input-2-10-2').val(SeparadorMiles(parseInt(obj[15][1])));
+        };
+        if (Number.isInteger(parseInt(obj[16][1]))){
+            $('#input-2-11').val(SeparadorMiles(parseInt(obj[16][1])));
+        };
         $('#select-2-12').val(String(obj[17][1]));
         document.querySelector("[name=attorney][value=" + String(obj[18][1]).substring(0,7) + "]").checked = true;
         $('#input-2-13').val(String(obj[19][1]));
@@ -1990,12 +2567,18 @@
                 $('#moneytime_yes').hide();
                 $('#input-2-14-1').val(0);
             };
-        $('#input-2-14-1').val(SeparadorMiles(parseInt(obj[21][1])));
-        $('#input-2-14-2').val(SeparadorMiles(parseInt(obj[22][1])));
+        if (Number.isInteger(parseInt(obj[21][1]))){
+            $('#input-2-14-1').val(SeparadorMiles(parseInt(obj[21][1])));
+        };
+        if (Number.isInteger(parseInt(obj[22][1]))){
+            $('#input-2-14-2').val(SeparadorMiles(parseInt(obj[22][1])));
+        };
         //Step3
         $('#select-3-16').val(String(obj[54][1]));
         $('#select-3-16').trigger('change')
-        $('#input-3-16-1').val(SeparadorMiles(parseInt(obj[23][1])));
+        if (Number.isInteger(parseInt(obj[23][1]))){
+            $('#input-3-16-1').val(SeparadorMiles(parseInt(obj[23][1])));
+        };
         //
         //
         $('#select-3-16-2').val(String(obj[26][1]));
@@ -2069,7 +2652,6 @@
         }
     ]
 
-
     var RouteCache = [
         {id: "Step1",IsCurrent: 0,PrevTab: 0,LastTab: 0},
         {id: "Step2",IsCurrent: 0,PrevTab: 0,LastTab: 0},
@@ -2079,7 +2661,6 @@
         {id: "Step6",IsCurrent: 0,PrevTab: 0,LastTab: 0},
         {id: "Step7",IsCurrent: 0,PrevTab: 0,LastTab: 0}
     ];
-
 
     var Result1, Result2, Result3, StepResultText1, StepResultText2, StepResultText3 ;
 
@@ -2137,7 +2718,17 @@
             $('#tbl-row-7').text('$' + SeparadorMiles(DataForm[4]['Values'][47]));
             $('#tbl-row-8').text('$' + SeparadorMiles(DataForm[4]['Values'][48]));
             $('#tbl-row-9').text('$' + SeparadorMiles(DataForm[4]['Values'][42]) );
-            $('#tbl-row-10').text( '$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );         
+            $('#tbl-row-10').text( '$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49])) );
+            //Results for email
+            $('#tbl-row-1-result').text($('#tbl-row-1').text());
+            $('#tbl-row-3-result').text($('#tbl-row-3').text());
+            $('#tbl-row-4-result').text($('#tbl-row-4').text());
+            $('#tbl-row-5-result').text($('#tbl-row-5').text());
+            $('#tbl-row-6-result').text($('#tbl-row-6').text()); //Blank Space
+            $('#tbl-row-7-result').text($('#tbl-row-7').text());
+            $('#tbl-row-8-result').text($('#tbl-row-8').text());
+            $('#tbl-row-9-result').text($('#tbl-row-9').text());
+            $('#tbl-row-10-result').text($('#tbl-row-10').text());
         };
         if ( Step == 'Step6') {
             GetStepsData();
@@ -2145,7 +2736,9 @@
             $('#ResultStep6').html('<p style = "font-weight: bold;" > '+  DataForm[5]['Values'][51] + ' out of 100%')
             $('#ResultStep7_1').text( DataForm[6]['Values'][57] );
             $('#ResultStep7_2').text( DataForm[6]['Values'][53] );
-
+            //Results for email
+            $('#ResultStep7_1-result').text( $('#ResultStep7_1').text() );
+            $('#ResultStep7_2-result').text( $('#ResultStep7_2').text() );
         };
         var resp = Step.substr(Step.length - 1, Step.length)
         resp = parseInt(resp)        
@@ -2389,9 +2982,21 @@
                 Value_38_Text = 'Mediation';
                 $('#MediationYes').show();
                 $('#nextBtn7').text('Go To Mediation');
+                //Result for email
+                $('#MediationYes-result').show();
+                $('#nextBtn7-result').text('Go To Mediation');
+                $('#nextBtn7-result').attr("href", "https://lawsuitanalysis.com/mediation-resource/");
             } else {
                 $('#MediationYes').hide();
                 $('#nextBtn7').text('Go To ' + Value_38_Text);
+                //result for email
+                $('#MediationYes-result').hide();
+                $('#nextBtn7-result').text('Go To ' + Value_38_Text);
+                var textButton = $('#nextBtn7-result').text();
+                if (textButton.includes('Go To Binding Arbitration')) { FinalURL = 'https://lawsuitanalysis.com/arbitration-resource/' }
+                if (textButton.includes('Go To Small Claims')) { FinalURL = 'https://lawsuitanalysis.com/small-claims-resource/'      }
+                if (textButton.includes('Go To Upper Civil Court')) { FinalURL = 'https://lawsuitanalysis.com/upper-civil-courts-resource/' }
+                $('#nextBtn7-result').attr("href", FinalURL);
             }
 
         //** Step 7 End */
@@ -2489,7 +3094,6 @@
             }
         ]
 
-
     }
 
     function firstTimeStep(){
@@ -2521,7 +3125,6 @@
                 CheckStep(localstep,false)
             }
         } else {
-            console.log('First Step')
             RouteCache[ActiveTab + 1].IsCurrent = 1
             showTab(0,RouteCache[ActiveTab + 1].id);
             $("#wizard").steps('next'); //Show the Next Step.
@@ -2532,49 +3135,7 @@
 
     ///*****SCRIPTS TO GET SEPARATE QUESTIONS */
 
-    function resetTest() {
-
-        get_last_response(get_session('user_id'))
-
-        var dataPut = [];
-        var posit = 0;
-        var uslr = get_session('user_lr');
-        var usid = get_session('user_id');
-        if (uslr == ''){uslr = localStorage.getItem('user_lr') }
-        
-        for (let index = 1; index <= 57; index++) {
-            if (index == 56) {
-                //Special Case... Save agrre to terms
-                dataPut.push({
-                    "form_questions_id": index,
-                    "answer": 'Yes from Ip: ' + localStorage.getItem('ip')
-                    }
-                )
-            } else {
-                dataPut.push({
-                    "form_questions_id": index,
-                    "answer": ''
-                    } 
-                )
-            }
-        };        
-
-        $.ajax({
-            type: "POST",
-            url: "API/upans.php?act=res&uslr=" + uslr + "&usls=1",
-            dataType: 'json',
-            data: {data: dataPut }  ,
-            cache: 'false',
-            success: function (response) {
-            }
-        });
-        $('#modal_data_clear').modal('show');
-        $('#modal_data_clear').modal('focus');
-
-    }
-
     function showTab(n,step) {
-        //console.log('Show: ' + n + ' From: ' + step)
         // This function will display the specified tab of the form...
         var stp = document.getElementById(step)
         var x = stp.getElementsByClassName("tab");
@@ -2651,7 +3212,6 @@
     }
 
     function nextPrev(n,stepID){
-        console.log("Click: " + n + "stepID " + stepID)
         getCurrentPositions(stepID);
         var step,stp,x;
         RouteCache.forEach(element => {
@@ -2661,13 +3221,10 @@
                 previousTab = element.PrevTab;
             }
         });
-        console.log('Elemnt: ' + step +'Get currentTab: ' , currentTab , 'Get Last Tab: ', previousTab)
         stp = document.getElementById(step);
         x = stp.getElementsByClassName("tab");    
         
         if (n == -1){
-            console.log(RouteCache)
-            console.log('Ingreso -1: ' + RouteCache[stepID].LastTab + RouteCache[stepID].PrevTab)
             if (RouteCache[stepID].LastTab == 0 && RouteCache[stepID].PrevTab == 0){
                 if (x.length !== 0) {
                 /*                
@@ -2685,7 +3242,6 @@
                 previousTab = RouteCache[prevStepID].PrevTab;
                 currentTab = RouteCache[prevStepID].LastTab + 1;
                 RouteCache[prevStepID].LastTab = currentTab;
-                console.log('Regreso Inicio: ' , RouteCache);
                 if (stepID <= 4){
                     stp2 = document.getElementById(prevStep);
                     y = stp2.getElementsByClassName("results");
@@ -2701,8 +3257,6 @@
                 return            
             } else {
                 if (RouteCache[stepID].LastTab >= x.length ){
-
-                    console.log('Regreso especial...')
                     y = stp.getElementsByClassName("results");
                     y[0].style.display = "none"
 
@@ -2714,8 +3268,7 @@
                         RouteCache[prevStepID].IsCurrent = 1;
                         previousTab = RouteCache[prevStepID].PrevTab;
                         currentTab = RouteCache[prevStepID].LastTab + 1;
-                        RouteCache[prevStepID].LastTab = currentTab
-                        console.log('Regreso Inicio: ' , RouteCache);
+                        RouteCache[prevStepID].LastTab = currentTab;
                         showTab(RouteCache[prevStepID].LastTab,prevStep)
                         return
                     }
@@ -2755,7 +3308,6 @@
                 if (previousTab < 0){previousTab = 0};
                 RouteCache[stepID].LastTab = currentTab;
                 RouteCache[stepID].PrevTab = previousTab;
-                console.log('Regreso Normal: ' , RouteCache)
                 return
             }
         };
@@ -2767,7 +3319,6 @@
         if (step == 'Step1' && n == 1 && currentTab < x.length ){
             if ((x[currentTab].id == 'Q2' &&  $('#select-1-2').val() == 'yes') || x[currentTab].id == 'Q3'){
                 var PaymentStatus = localStorage.getItem('st');
-                console.log(PaymentStatus);
                 if (PaymentStatus !== "10") {
                     GetStepsData();
                     PutAnswData('Step1',DataForm);                    
@@ -2795,9 +3346,7 @@
                 currentTab = currentTab + n;
             }
         }
-        if (step == 'Step2' && n == 1 && currentTab < x.length ){
-
-            
+        if (step == 'Step2' && n == 1 && currentTab < x.length ){   
             GetStepsData();
             $('#input-2-11').val(SeparadorMiles(Value_11));     
             if (x[currentTab].id == 'Q10' &&  $('#select-2-10').val() == 'no') {
@@ -2926,6 +3475,17 @@
                 $('#tbl-row-9').text('$' + SeparadorMiles(DataForm[4]['Values'][42]) );
                 $('#tbl-row-10').text( '$' + SeparadorMiles(Math.round(DataForm[4]['Values'][49]))  );         
                 $('#prevBtn4').show();
+                //Results for email
+                $('#tbl-row-1-result').text($('#tbl-row-1').text());
+                $('#tbl-row-3-result').text($('#tbl-row-3').text());
+                $('#tbl-row-4-result').text($('#tbl-row-4').text());
+                $('#tbl-row-5-result').text($('#tbl-row-5').text());
+                $('#tbl-row-6-result').text($('#tbl-row-6').text()); //Blank Space
+                $('#tbl-row-7-result').text($('#tbl-row-7').text());
+                $('#tbl-row-8-result').text($('#tbl-row-8').text());
+                $('#tbl-row-9-result').text($('#tbl-row-9').text());
+                $('#tbl-row-10-result').text($('#tbl-row-10').text());
+
             }
             if (step == 'Step5') {
                 $('#Q33Chart').css("display","block"); //Trick for Help Page
@@ -2941,8 +3501,7 @@
             //previousTab = currentTab
             currentTab = currentTab + n;
             //RouteCache[stepID].PrevTab = previousTab
-            RouteCache[stepID].LastTab = currentTab
-            console.log('Fin Tab' , RouteCache)
+            RouteCache[stepID].LastTab = currentTab;
             return
         }
         if (currentTab > x.length) {
@@ -2962,14 +3521,12 @@
             RouteCache[stepID].IsCurrent = 0
             RouteCache[stepID].PrevTab = previousTab
             RouteCache[stepID].LastTab = currentTab - 1
-            console.log('Fin Step   ' , RouteCache)
             return false;
         }
         // Otherwise, display the correct tab:
         if (n == 1){
             RouteCache[stepID].PrevTab = previousTab
-            RouteCache[stepID].LastTab = currentTab        
-            console.log('Avance: ' + step , RouteCache);
+            RouteCache[stepID].LastTab = currentTab  
             showTab(currentTab,step);
         }
         /*
@@ -3086,7 +3643,6 @@
         var wck = get_session('wck');
         var wcs = get_session('wcs');
         var valResultTxt = '';
-        //console.log('Validacion: ', email, email2,email3,status, prdct,valid,order )
         if (email.length == 0){
             /*
             $('#validationEmail').css('background-color', '#ffdddd');
@@ -3103,7 +3659,6 @@
             }, 1700);
             valid = false;
         }
-        console.log('Validacion: ', valid )
         if (!valid) {return}
         $('#btnValidation').text('Validating...');
         $('#btnValidation').css('background-color', '#FFCC00');
@@ -3139,8 +3694,7 @@
                         },
                         error (error) {
                             valResultTxt = validationMsg(orderWC,prdct,status,email,email2,email3);
-                            localStorage.setItem('msg', valResultTxt)
-                            console.log('Error retrieving Customer data.');
+                            localStorage.setItem('msg', valResultTxt);
                         }
                     });
                 }
@@ -3148,7 +3702,6 @@
             error(error){
                 valResultTxt = validationMsg(orderWC,prdct,status,email,email2,email3);
                 localStorage.setItem('msg', valResultTxt)
-                console.log('Error retrieving Order data.')
             }
         });
 
@@ -3171,13 +3724,9 @@
         if (uslr == ''){uslr = localStorage.getItem('user_lr') }
         var valResult = ''
         if (status == 'processing' ){
-            console.log('Status OK')
             if (prdct == 6121) {
-                console.log('PRODUCT OK')
                 if (emailUser == email){
-                    console.log('USER ANA OK')
                     if (email == email2 || email == email3){
-                        console.log('EMAILS OK')
                         var dataPut = [];
                         dataPut.push({
                             "ord": order,
@@ -3220,7 +3769,6 @@
         var step = 'Step' + Phase;
         var stp = document.getElementById(step);
         var x = stp.querySelectorAll(".tab,.results");
-        console.log(x)
         for (let i = 0; i < x.length; i++) {
             if (x[i].style.display === 'block') {
                 if (x[i].id === 'Pre-Q1'){hp = '0'};
@@ -3240,7 +3788,6 @@
                 if (x[i].id === 'Q12'){hp = '12'};
                 if (x[i].id === 'Q13'){
                     var y = x[i].getElementsByClassName("form-group")
-                    console.log(y)
                     for (let index = 0; index < y.length; index++) {
                         if (y[index].style.display === 'block') {
                             if (y[index].id == 'attorney_yes'){hp = '13a'};
@@ -3289,22 +3836,6 @@
         return hp
     }
 
-    function MailQuiz(dataPut) {
-        console.log(dataPut);
-        $.ajax({
-            url: 'API/fml.php',
-            type: 'POST',
-            data: {data: dataPut , email: localStorage.getItem('email')},
-            cache: 'false',
-            success:function(response){                    
-
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-
-            }
-        }) ;        
-        
-    }
 
     function SeparadorMiles(valor){
         if (Number.isInteger(valor)){
@@ -3316,13 +3847,20 @@
             var textoabs = Math.round(valor);
         };
         if ( textoabs.length > 6 ){
-        var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
+            var textoFinal = texto.substr(0,texto.length - 6) + ',' + texto.substr(texto.length - 6,3) + ',' + texto.substr(texto.length - 3,3)  ;
         }
         else if (textoabs.length <= 6 && textoabs.length > 3) {
             var textoFinal =  texto.substr(0,texto.length - 3) + ',' + texto.substr(texto.length - 3,3)  ;
         } else {
-        var textoFinal = texto ;
+            var textoFinal = texto ;
         };
+        /*
+        if (isNaN(textoFinal)){
+            return texto
+        } else {
+            return textoFinal ;
+        }
+        */
         return textoFinal ;
     };
 

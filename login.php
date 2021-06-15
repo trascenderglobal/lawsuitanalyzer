@@ -144,7 +144,6 @@
                     <div class="col-lg-4 sm-12">
                         <div class="row boxed">
                             <div class="container">
-                                <p style="text-align: right;" ><a data-toggle="collapse" href="#loginForm">Login</a>  / <a data-toggle="collapse" href="#registerForm">Register</a> </p>                                                                       
                                 <div id="loginForm" class = "collapse show">
                                     <form action="" id = "formlogin" method="post">
                                         <label for="usuariolg"><b>Email</b></label>

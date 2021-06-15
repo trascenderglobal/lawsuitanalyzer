@@ -26,7 +26,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
                 $data = $resultado->fetch_all();
                 for ($i=0; $i < $num_rows; $i++) { 
                     # code...
-                    if ( password_verify($pass,$data[$i][2])){
+                    if ( password_verify($pass,$data[$i][2]) && $data[$i][8] == "admin"  ){
                         $_SESSION['user_id'] = $data[$i][0];
                         $_SESSION['user'] = $data[$i][3];
                         $_SESSION['email'] = $data[$i][4];

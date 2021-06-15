@@ -18,9 +18,10 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
         $user_id = $mysqli->real_escape_string($_GET['user_id']);
         $status = $mysqli->real_escape_string('In Process');
         $status2 = $mysqli->real_escape_string('Paid');
+        $status3 = $mysqli->real_escape_string('Completed');
         
-        if($PreResultado = $mysqli->prepare("SELECT * FROM form_responses where users_id = ? and (status = ? OR status = ?) ORDER BY start_date DESC")){
-            $PreResultado->bind_param('iss', $user_id, $status,$status2);
+        if($PreResultado = $mysqli->prepare("SELECT * FROM form_responses where users_id = ? and (status = ? OR status = ? OR status = ?) ORDER BY start_date DESC")){
+            $PreResultado->bind_param('isss', $user_id, $status,$status2,$status3);
             $PreResultado->execute();
             $resultado = $PreResultado->get_result();
             $num_rows = mysqli_num_rows($resultado);
